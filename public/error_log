@@ -18,3 +18,6 @@ Stack trace:
 #0 {main}
   thrown in /home/fuedusd/public_html/repositories/onecampus/public/index.php on line 13
 [31-Dec-2024 19:40:21 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.3.33. in /home/fuedusd/public_html/repositories/onecampus/vendor/composer/platform_check.php on line 24
+[31-Dec-2024 19:47:56 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.3.33. in /home/fuedusd/public_html/repositories/onecampus/vendor/composer/platform_check.php on line 24
+[31-Dec-2024 19:48:13 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.3.33. in /home/fuedusd/public_html/repositories/onecampus/vendor/composer/platform_check.php on line 24
+[31-Dec-2024 19:48:14 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.3.33. in /home/fuedusd/public_html/repositories/onecampus/vendor/composer/platform_check.php on line 24
