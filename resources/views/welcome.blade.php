@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>One Campus</title>
 
-        <link href="https://laravel.com/assets/img/welcome/background.svg" rel="shortcut icon" />
+        <link href="https://fu.edu.sd/public/client/img/fu_logo.png" rel="shortcut icon" />
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
