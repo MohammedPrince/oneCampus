@@ -14,6 +14,6 @@ class TestRepository
     {
        //Do all your database oprations here
 
-       return $param1;
+       return $param2;
     }
 }

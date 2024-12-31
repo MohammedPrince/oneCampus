@@ -23,7 +23,6 @@ class TestController extends Controller
 
         $result = $this->testService->testFuncation($param1, $param2);
 
-        dd($result);
     }
 
 }
