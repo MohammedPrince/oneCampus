@@ -1,0 +1,20 @@
+[31-Dec-2024 16:20:36 UTC] PHP Warning:  require(/home/fuedusd/public_html/repositories/onecampus/public/../vendor/autoload.php): failed to open stream: No such file or directory in /home/fuedusd/public_html/repositories/onecampus/public/index.php on line 14
+[31-Dec-2024 16:20:36 UTC] PHP Fatal error:  require(): Failed opening required '/home/fuedusd/public_html/repositories/onecampus/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/fuedusd/public_html/repositories/onecampus/public/index.php on line 14
+[31-Dec-2024 16:20:48 UTC] PHP Warning:  require(/home/fuedusd/public_html/repositories/onecampus/public/../vendor/autoload.php): failed to open stream: No such file or directory in /home/fuedusd/public_html/repositories/onecampus/public/index.php on line 14
+[31-Dec-2024 16:20:48 UTC] PHP Fatal error:  require(): Failed opening required '/home/fuedusd/public_html/repositories/onecampus/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/fuedusd/public_html/repositories/onecampus/public/index.php on line 14
+[31-Dec-2024 16:54:40 UTC] PHP Warning:  require(/home/fuedusd/public_html/repositories/onecampus/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/fuedusd/public_html/repositories/onecampus/public/index.php on line 13
+[31-Dec-2024 16:54:40 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/fuedusd/public_html/repositories/onecampus/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/fuedusd/public_html/repositories/onecampus/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/public/index.php on line 13
+[31-Dec-2024 16:55:08 UTC] PHP Warning:  require(/home/fuedusd/public_html/repositories/onecampus/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/fuedusd/public_html/repositories/onecampus/public/index.php on line 13
+[31-Dec-2024 16:55:08 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/fuedusd/public_html/repositories/onecampus/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/fuedusd/public_html/repositories/onecampus/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/public/index.php on line 13
+[31-Dec-2024 16:55:12 UTC] PHP Warning:  require(/home/fuedusd/public_html/repositories/onecampus/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/fuedusd/public_html/repositories/onecampus/public/index.php on line 13
+[31-Dec-2024 16:55:12 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/fuedusd/public_html/repositories/onecampus/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/fuedusd/public_html/repositories/onecampus/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/public/index.php on line 13
+[31-Dec-2024 19:40:21 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.3.33. in /home/fuedusd/public_html/repositories/onecampus/vendor/composer/platform_check.php on line 24
