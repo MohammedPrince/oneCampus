@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fu System</title>
+    <title>One Campus::Development Enviromint</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-    <link href="{{ asset('assets/fu_logo.png.png') }}" rel="shortcut icon" />
+    <link href="{{ asset('assets/fu_logo.png') }}" rel="shortcut icon" />
     
     <style>
         body {
@@ -82,7 +82,7 @@
     </picture>
     <picture>
         <source srcset="{{ asset('assets/topright.svg') }}" type="image/svg+xml">
-        <img src="{{ asset('assets/topright.svg') }}" class="top-right" alt="Top Right">
+        <img src="{{ asset('assets/fu_logo.png') }}" class="top-right" alt="Top Right">
     </picture>
 
     <div class="container">
