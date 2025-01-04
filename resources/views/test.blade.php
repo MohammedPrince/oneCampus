@@ -80,14 +80,9 @@
         <source srcset="{{ asset('assets/bottomleft.svg') }}" type="image/svg+xml">
         <img src="{{ asset('assets/bottomleft.svg') }}" class="bottom-left" alt="Bottom Left">
     </picture>
-    {{-- <picture>
+    <picture>
         <source srcset="{{ asset('assets/topright.svg') }}" type="image/svg+xml">
         <img src="{{ asset('assets/topright.svg') }}" class="top-right" alt="Top Right">
-    </picture> --}}
-
-    <picture>
-        <source srcset="{{ asset('assets/fu_logo.png') }}">
-        <img src="{{ asset('assets/fu_logo.png') }}" class="top-right" alt="Top Right">
     </picture>
 
     <div class="container">

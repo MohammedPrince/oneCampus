@@ -16,13 +16,13 @@ Route::get('/clear-all', function () {
     return 'Caching, routes, and configuration cleared successfully.';
 })->name('clear-all');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', function () {
-    return view('test');
+    return view('welcome');
 });
+
+// Route::get('/', function () {
+//     return view('test');
+// });
 
 
 Route::prefix('test')->group(function () {
