@@ -70,16 +70,16 @@
 
 <body>
     <picture>
-        <source srcset="assets/logowithname.svg" type="image/svg+xml">
-        <img src="assets/logowithname.svg" class="logo" alt="Logo">
+        <source srcset="{{ asset('assets/logowithname.svg') }}" type="image/svg+xml">
+        <img src="{{ asset('assets/logowithname.svg') }}" class="logo" alt="Logo">
     </picture>
     <picture>
-        <source srcset="assets/bottomleft.svg" type="image/svg+xml">
-        <img src="assets/bottomleft.svg" class="bottom-left" alt="Bottom Left">
+        <source srcset="{{ asset('assets/bottomleft.svg') }}" type="image/svg+xml">
+        <img src="{{ asset('assets/bottomleft.svg') }}" class="bottom-left" alt="Bottom Left">
     </picture>
     <picture>
-        <source srcset="assets/topright.svg" type="image/svg+xml">
-        <img src="assets/topright.svg" class="top-right" alt="Top Right">
+        <source srcset="{{ asset('assets/topright.svg') }}" type="image/svg+xml">
+        <img src="{{ asset('assets/topright.svg') }}" class="top-right" alt="Top Right">
     </picture>
 
     <div class="container">
