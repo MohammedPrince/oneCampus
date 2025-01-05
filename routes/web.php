@@ -16,8 +16,12 @@ Route::get('/clear-all', function () {
     return 'Caching, routes, and configuration cleared successfully.';
 })->name('clear-all');
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('test');
 });
 
 

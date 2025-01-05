@@ -1,0 +1,335 @@
+body[lang="ar"] .radio-item {
+  direction: rtl;
+  text-align: right;
+}
+
+body[lang="ar"] .form-check-input {
+  float: right; 
+  margin-left: 8px; 
+}
+
+body[lang="ar"] .radio-dropdown .dropdown-menu {
+  right: 0;
+  left: unset;
+}
+
+body[lang="ar"] .radio-label {
+  padding-right: 30px;
+  padding-left: unset;
+}
+
+body[lang="ar"] .radio-circle {
+  right: 0;
+  left: unset;
+}
+
+body[lang="en"] .radio-item {
+  direction: ltr;
+  text-align: left;
+}
+
+body[lang="en"] .radio-dropdown i {
+  margin-right: 10px;
+}
+
+body[lang="en"] .radio-dropdown .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+body[lang="en"] .radio-label {
+  padding-left: 30px;
+  padding-right: unset;
+}
+
+body[lang="en"] .radio-circle {
+  left: 0;
+  right: unset;
+}
+
+
+body[lang="ar"] {
+  direction: rtl;
+  text-align: right;
+}
+body {
+  overflow: hidden;
+  font-family: 'DM Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+/* ------------------------------------shapes css----------------------------------------- */
+.logo {
+  top: 10px;
+  position: fixed;
+  width: 80px;
+  height: auto;
+  left: 45px;
+}
+
+.top-right {
+  position: fixed;
+  width: 220px;
+  height: auto;
+  top: -80px;
+  right: -5px;
+}
+.bottom-left {
+  height: 500px;
+  position: fixed;
+  width: 350px;
+  bottom: -90px;
+  left: -80px;
+}
+/* ------------------------------------localization radio css----------------------------------------- */
+.radio-dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.radio-dropdown i {
+  font-size: 1.5rem;
+  margin-left: 10px;
+}
+
+.radio-dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.radio-dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.radio-input {
+  display: none;
+}
+
+.radio-label {
+  cursor: pointer;
+  padding-right: 10px;
+  position: relative;
+  display: inline-block;
+  padding-right: 30px;
+}
+
+.radio-circle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.radio-input:checked + .radio-label .radio-circle {
+  background-color: #965a38;
+  border-color: #965a38;
+}
+
+.radio-input:checked + .radio-label .radio-circle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+/* ------------------------------------form css----------------------------------------- */
+.container {
+  position: fixed;
+  height: 500px;
+  width: 340px;
+ left: 160px;
+  padding: 20px;
+  z-index: 1;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  overflow: hidden;
+}
+.form-column {
+  height: 400px;
+}
+.form-label {
+  margin-bottom: 8px;
+}
+
+.form-control {
+  margin-bottom: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.form {
+
+  width: 250px;
+  position: relative;
+  margin: 0px;
+  justify-items: normal;
+  justify-self: normal;
+}
+
+.form-control:focus {
+  border-color: white;
+  box-shadow: 0 0 10px rgba(183, 120, 72, 1);
+}
+.form-check input:focus {
+  border-color: #B77848;
+  box-shadow: 0 0 10px rgba(183, 120, 72, 1);
+}
+.form-check-input:checked {
+  background-color: #b77848;
+  border-color: #b77848;
+}
+
+.form-check-input{
+  margin-right: 8px;
+  border-color: #4e2e159a;
+}
+.btn-custom {
+  color: white;
+  background-color: #B77848;
+  border: 1px solid #B77848;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-custom:hover {
+  color: white;
+  background-color: #736C74;
+  border: 1px solid #B77848;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-custom:active {
+  color: white;
+  background-color: #736C74;
+  border: 1px solid #B77848;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.href.link {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 100%;
+  text-decoration: none;
+}
+.href.link:hover {
+  text-decoration: underline;
+}
+/* ------------------------------------image css----------------------------------------- */
+.img-container {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  position: relative;
+  display: inline-block;
+  top: 0;
+  align-items: center;
+  height: 500px;
+  width: 600px;
+  overflow: hidden;
+  right: -150px;
+}
+.img-container img {
+  background-color: transparent;
+  justify-content: stretch;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.text-overlay {
+  
+  text-align: center;
+  align-self: center;
+  align-content: center;
+  position: relative;
+  top:-250px;
+  right: -300px;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+/* ------------------------------------small sceen css----------------------------------------- */
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    width: 300px;
+    margin: 20px;
+  }
+  .logo {
+    top: 0;
+    position: fixed;
+    width: 80px;
+    height: auto;
+    left: 15px;
+  }
+  .row {
+    margin: 0;
+    width: auto;
+  }
+  .col-5 {
+    margin: 0;
+    flex: 0 0 auto;
+    width: auto;
+    padding: 0;
+  }
+  .col-7 {
+    display: none;
+  }
+  .card-container {
+    width: 300px;
+    height: 400px;
+  }
+  .card {
+    height: 400px;
+    width: auto;
+  }
+  .bottom-left, .top-right {
+    position: absolute;
+    z-index: -1;
+  }
+  .bottom-left {
+    bottom: 0;
+    left: 0;
+    width: 60%;
+    bottom: -101px;
+    left: -50px;
+  }
+  .top-right {
+    top: -101px;
+    right: -5;
+    width: 40%;
+  }
+}

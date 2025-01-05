@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>One Campus</title>
+        <title>One Campus::Development Enviromint</title>
 
         <link href="https://fu.edu.sd/public/client/img/fu_logo.png" rel="shortcut icon" />
 
