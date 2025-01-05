@@ -77,12 +77,12 @@
         <img src="./public/assets/logowithname.svg" class="logo" alt="Logo">
     </picture>
     <picture>
-        <source srcset="{{ asset('assets/bottomleft.svg') }}" type="image/svg+xml">
-        <img src="{{ asset('assets/bottomleft.svg') }}" class="bottom-left" alt="Bottom Left">
+        <source srcset="./public/assets//bottomleft.svg" type="image/svg+xml">
+        <img src="./public/assets/bottomleft.svg" class="bottom-left" alt="Bottom Left">
     </picture>
     <picture>
-        <source srcset="{{ asset('assets/topright.svg') }}" type="image/svg+xml">
-        <img src="{{ asset('assets/topright.svg') }}" class="top-right" alt="Top Right">
+        <source srcset="./public/assets//topright.svg" type="image/svg+xml">
+        <img src="./public/assets//topright.svg" class="top-right" alt="Top Right">
     </picture>
 
     <div class="container">
