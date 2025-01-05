@@ -77,12 +77,12 @@
         <img src="./public/assets/logowithname.svg" class="logo" alt="Logo">
     </picture>
     <picture>
-        <source srcset="./public/assets//bottomleft.svg" type="image/svg+xml">
+        <source srcset="./public/assets/bottomleft.svg" type="image/svg+xml">
         <img src="./public/assets/bottomleft.svg" class="bottom-left" alt="Bottom Left">
     </picture>
     <picture>
-        <source srcset="./public/assets//topright.svg" type="image/svg+xml">
-        <img src="./public/assets//topright.svg" class="top-right" alt="Top Right">
+        <source srcset="./public/assets/topright.svg" type="image/svg+xml">
+        <img src="./public/assets/topright.svg" class="top-right" alt="Top Right">
     </picture>
 
     <div class="container">
@@ -113,7 +113,7 @@
 
                 <div class="img-container position-relative">
                     <h4 class="text-center" style="color:#af4f36;">One Campus</h4>
-                    <img src="assets/paintinglogin2.svg" alt="Login Illustration" style="border-radius:20px;">
+                    <img src="./public/assets/paintinglogin2.svg" alt="Login Illustration" style="border-radius:20px;">
 
                 </div>
             </div>
