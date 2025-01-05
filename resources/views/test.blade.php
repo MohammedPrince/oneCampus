@@ -73,8 +73,8 @@
 
 <body>
     <picture>
-        <source srcset="{{ asset('assets/logowithname.svg') }}" type="image/svg+xml">
-        <img src="{{ asset('assets/logowithname.svg') }}" class="logo" alt="Logo">
+        <source srcset="./public/assets/logowithname.svg" type="image/svg+xml">
+        <img src="./public/assets/logowithname.svg" class="logo" alt="Logo">
     </picture>
     <picture>
         <source srcset="{{ asset('assets/bottomleft.svg') }}" type="image/svg+xml">
