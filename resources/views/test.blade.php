@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One Campus:: TEST Development Enviromint</title>
+    <title>One Campus</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -73,16 +73,16 @@
 
 <body>
     <picture>
-        <source srcset="{{asset('assets/logowithname.svg')}}" type="image/svg+xml">
-        <img src="{{asset('assets/logowithname.svg')}}" class="logo" alt="Logo">
+        <source srcset="./public/assets/logowithname.svg" type="image/svg+xml">
+        <img src="./public/assets/logowithname.svg" class="logo" alt="Logo">
     </picture>
     <picture>
-        <source srcset="{{asset('assets/bottomleft.svg')}}" type="image/svg+xml">
-        <img src="{{asset('assets/bottomleft.svg')}}" class="bottom-left" alt="Bottom Left">
+        <source srcset="./public/assets/bottomleft.svg" type="image/svg+xml">
+        <img src="./public/assets/bottomleft.svg" class="bottom-left" alt="Bottom Left">
     </picture>
     <picture>
-        <source srcset="{{asset('assets/topright.svg')}}" type="image/svg+xml">
-        <img src="{{asset('assets/topright.svg')}}" class="top-right" alt="Top Right">
+        <source srcset="./public/assets/topright.svg" type="image/svg+xml">
+        <img src="./public/assets/topright.svg" class="top-right" alt="Top Right">
     </picture>
 
     <div class="container">
@@ -113,7 +113,7 @@
 
                 <div class="img-container position-relative">
                     <h4 class="text-center" style="color:#af4f36;">One Campus</h4>
-                    <img src="{{asset('assets/paintinglogin2.svg')}}" alt="Login Illustration" style="border-radius:20px;">
+                    <img src="./public/assets/paintinglogin2.svg" alt="Login Illustration" style="border-radius:20px;">
 
                 </div>
             </div>
