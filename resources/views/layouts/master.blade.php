@@ -16,62 +16,6 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="./public/css/systemlogin.css">
     <style>
-        body {
-            font-family: 'DM Sans', sans-serif;
-        }
-
-        .logo {
-            max-width: 100px;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-
-        .bottom-left {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            max-width: 80px;
-        }
-
-        .top-right {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            max-width: 80px;
-        }
-
-        .form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .img-container img {
-            width: 100%;
-            height: auto;
-        }
-
-        .text-overlay {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: white;
-            font-size: 1.5rem;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        @media (max-width: 767.98px) {
-
-            .logo,
-            .bottom-left,
-            .top-right {
-                max-width: 60px;
-            }
-
-            .text-overlay {
-                font-size: 1rem;
-            }
-        }
     </style>
 </head>
 
