@@ -88,7 +88,7 @@
     <div class="container">
         <div class="row align-items-center min-vh-100" style="justify-content:center;">
             <div class="col-lg-12">
-                <!-- <form class="form text-center">
+                <form class="form text-center">
           <h2 class="text-center" style="color: #6C3A30;">Welcome Back</h2>
           <div class="mb-3">
             <label for="staffemail" class="form-label" style="color: #B77848;">Username</label>
@@ -106,7 +106,7 @@
             </label>
           </div>
           <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form> -->
+        </form> 
             </div>
 
             <div class="col-md-6 d-none d-md-block">
