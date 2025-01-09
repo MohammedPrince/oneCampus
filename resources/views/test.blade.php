@@ -73,22 +73,22 @@
 
 <body>
     <picture>
-        <source srcset="{{asset('assets/logowithname.svg')}}" type="image/svg+xml">
-        <img src="{{asset('assets/logowithname.svg')}}" class="logo" alt="Logo">
+        <source srcset="./public/assets/logowithname.svg" type="image/svg+xml">
+        <img src="./public/assets/logowithname.svg" class="logo" alt="Logo">
     </picture>
     <picture>
-        <source srcset="{{asset('assets/bottomleft.svg')}}" type="image/svg+xml">
-        <img src="{{asset('assets/bottomleft.svg')}}" class="bottom-left" alt="Bottom Left">
+        <source srcset="./public/assets/bottomleft.svg" type="image/svg+xml">
+        <img src="./public/assets/bottomleft.svg" class="bottom-left" alt="Bottom Left">
     </picture>
     <picture>
-        <source srcset="{{asset('assets/topright.svg')}}" type="image/svg+xml">
-        <img src="{{asset('assets/topright.svg')}}" class="top-right" alt="Top Right">
+        <source srcset="./public/assets/topright.svg" type="image/svg+xml">
+        <img src="./public/assets/topright.svg" class="top-right" alt="Top Right">
     </picture>
 
     <div class="container">
         <div class="row align-items-center min-vh-100" style="justify-content:center;">
             <div class="col-lg-12">
-                <!-- <form class="form text-center">
+                <form class="form text-center">
           <h2 class="text-center" style="color: #6C3A30;">Welcome Back</h2>
           <div class="mb-3">
             <label for="staffemail" class="form-label" style="color: #B77848;">Username</label>
@@ -106,14 +106,14 @@
             </label>
           </div>
           <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form> -->
+        </form> 
             </div>
 
             <div class="col-md-6 d-none d-md-block">
 
                 <div class="img-container position-relative">
                     <h4 class="text-center" style="color:#af4f36;">One Campus</h4>
-                    <img src="{{asset('assets/paintinglogin2.svg')}}" alt="Login Illustration" style="border-radius:20px;">
+                    <img src="./public/assets/paintinglogin2.svg" alt="Login Illustration" style="border-radius:20px;">
 
                 </div>
             </div>
