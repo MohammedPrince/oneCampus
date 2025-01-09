@@ -86,10 +86,9 @@
     </div>
 
     <div class="img-container col-7 g-0 g-0 d-none d-md-block">
-        <img src="assets/paintinglogin2.svg" alt="..."draggable="false">
+        <img src="./public/assets/paintinglogin2.svg" alt="..."draggable="false">
         <h2 class="text-overlay" data-i18n="system">Future University's System</h2>
     </div>
-
 
 
 
