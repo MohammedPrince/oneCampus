@@ -17,4 +17,9 @@ class TestService
     {
         return $this->testRepository->testFuncation($param1,$param2);
     }
+
+    public function addLanguage($data)
+    {
+        return $this->testRepository->addLanguage($data);
+    }
 }
