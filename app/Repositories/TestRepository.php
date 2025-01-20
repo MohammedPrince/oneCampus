@@ -16,4 +16,22 @@ class TestRepository
 
        return $param2;
     }
+
+
+    public function addLanguage($data)
+    {
+        $language = Language::where('status', 'active')->where('label', $data['label'])->get();
+
+        if ($language->isEmpty()) {
+            if ($language = Language::create($data)) {
+                return ['success' => true, 'status' => 'Inserted', 'message' => 'Inserted successfully'];
+            } else {
+                return ['success' => false, 'status' => 'Error', 'message' => __('v.language_error')];
+            }
+        } else {
+            return ['success' => false, 'status' => 'Exists', 'message' => __('v.language_exist')];
+        }
+    }
+
+
 }
