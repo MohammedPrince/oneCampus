@@ -33,8 +33,10 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+      
         if(Auth::attempt(['name'=>$request->name,'password'=>$request->password],true)){
             if(Auth::user()->role_id == 1){
+              dd(Auth::user()->name);
                return redirect()->intended('admin/dashboard');
             }elseif(Auth::user()->role_id == 2 ){
               return redirect()->intended('/student');
