@@ -34,8 +34,9 @@ class AuthController extends Controller
     public function login(Request $request)
     {
       
-        if(Auth::attempt(['name'=>$request->name,'password'=>$request->password],true)){
-            if(Auth::user()->role_id == 1){
+        if(Auth::attempt(['name'=> $request->name ,'password'=>$request->password ],true)){
+          //  dd(Auth::user()->name);
+          if(Auth::user()->role_id == 1){
               dd(Auth::user()->name);
                return redirect()->intended('admin/dashboard');
             }elseif(Auth::user()->role_id == 2 ){
@@ -71,7 +72,8 @@ class AuthController extends Controller
               return redirect('/login')->with('error','not avaliable name');
             }    }
             else{
-                return redirect('/')->with('error','Please Enter The Correct Credentials');
+              // return redirect()->intended('/finance');
+              return redirect('/')->with('error','Please Enter The Correct Credentials');
               }}
       public function logout(Request $request){
         Auth::logout();

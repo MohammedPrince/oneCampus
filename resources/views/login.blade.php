@@ -55,12 +55,12 @@
             <label for="exampleFormControlInput1" class="form-label"
               style="color: #B77848;user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;"
               data-i18n="username">Username</label>
-            <input type="text" class="form-control form-control-sm" id="staffemail" placeholder="" required>
+            <input type="text" name="name" class="form-control form-control-sm" id="staffemail" placeholder="" required>
 
             <label for="inputPassword5" class="form-label"
               style="color: #B77848;user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;"
               data-i18n="password">Password</label>
-            <input type="password" id="staffpassword" class="form-control form-control-sm"
+            <input type="password" name="password" id="staffpassword" class="form-control form-control-sm"
               aria-describedby="passwordHelpBlock" required>
 
               <a href="#" class="forgot-password-link" data-i18n="forgot" style="justify-self: end;">Forgot
