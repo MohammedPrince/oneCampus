@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
-use App\Models\User;
-use App\Services\User\UserInterface;
+
 use App\Services\User\UserServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+
 
 class AuthController extends Controller
 {
@@ -33,11 +31,20 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-      
-        if(Auth::attempt(['name'=> $request->name ,'password'=>$request->password ],true)){
-          //  dd(Auth::user()->name);
+      $credentials = [
+        'name' => $request->input('name'),
+        'password' => $request->input('password'),
+    ];
+      $request->validate([
+        "name" => "required",
+        "password" => "required",
+       
+    ]);
+
+    if (Auth::attempt($credentials)) {
+        //  dd(Auth::user()->name);
           if(Auth::user()->role_id == 1){
-              dd(Auth::user()->name);
+              // dd(Auth::user()->name);
                return redirect()->intended('admin/dashboard');
             }elseif(Auth::user()->role_id == 2 ){
               return redirect()->intended('/student');
