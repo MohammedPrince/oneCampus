@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Major extends Model
 {
     use SoftDeletes;
+    public $timestamps = true;
+
 
     protected $fillable = [
         'major_name',

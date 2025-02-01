@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('program_duration');
             $table->integer('number_of_sem');
             $table->integer('credits_required');
-            $table->foreignId('faculty_id')->constrained('tbl_faculty');
+            $table->foreignId('faculty_id');
             $table->tinyInteger('status')->default(1);
             $table->string('major_name_ar');
             $table->string('major_ministry_code');

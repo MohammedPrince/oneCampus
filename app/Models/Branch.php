@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Branch extends Model
 {
     use SoftDeletes;
-    public $timestamps = false;
+    public $timestamps = true;
+
 
     protected $fillable = [
         'branch_name',

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class BatchControl extends Model
 {
     use SoftDeletes;
+    public $timestamps = true;
 
     protected $fillable = [
         'batch_id',
