@@ -13,7 +13,7 @@ class Faculty extends Model
     protected $fillable = [
         'faculty_name',
         'abbreviation',
-        'faulty_name_ar',
+        'faculty_name_ar',
         'branch_id',
         'is_active',
     ];

@@ -20,7 +20,7 @@ class Major extends Model
         'number_of_sem',
         'credits_required',
         'faculty_id',
-        'is_active',
+        'status',
         'major_name_ar',
         'major_ministry_code',
         'major_mode',

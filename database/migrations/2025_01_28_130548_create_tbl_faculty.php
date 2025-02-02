@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('faculty_id');
             $table->string('faculty_name', 100);
             $table->string('abbreviation', 10);
-            $table->string('faulty_name_ar',100 );
+            $table->string('faculty_name_ar',100 );
             $table->foreignId('branch_id');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
