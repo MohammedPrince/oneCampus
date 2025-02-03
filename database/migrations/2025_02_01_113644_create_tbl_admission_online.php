@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_admission_oline', function (Blueprint $table) {
+        Schema::create('tbl_admission_online', function (Blueprint $table) {
             $table->id('admission_id');  // Only one auto increment field, this is the primary key
         
             // $table->unique('university_id');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('application_level', ['Undergraduate', 'Postgraduate'])
                 ->nullable()->default('Undergraduate');
         
-            $table->enum('admission_Status', ['Pending', 'Approved', 'Rejected'])
+            $table->enum('admission_status', ['Pending', 'Approved', 'Rejected'])
                 ->nullable()
                 ->default('Pending');
         
@@ -48,19 +48,17 @@ return new class extends Migration
                 ->default('physical');
         
             $table->integer('gender');              // Removed auto_increment
-            $table->enum('blood_group', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
-                ->nullable()
-                ->default('O+');
+            $table->enum('blood_group', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']);
             $table->integer('military_code');      // Removed auto_increment
             $table->date('date_of_birth');
             $table->string('nationality', 11);
             $table->string('nationality_2', 11)->nullable();
             $table->string('student_address', 255);
             $table->string('student_town', 100);
-            $table->string('student_State', 100);
+            $table->string('student_state', 100);
             $table->string('student_country', 100);
-            $table->string('phone_number', 20);
             $table->string('student_email', 100)->nullable();
+            $table->string('phone_number', 20);
             $table->string('whatsapp_number', 20)->nullable();
             $table->string('facebook_link', 255)->nullable();
             $table->string('twitter_id', 255)->nullable();
@@ -70,10 +68,10 @@ return new class extends Migration
                 ->default('National ID');
         
             $table->string('identification_id', 50);
-            $table->date('identification_id_issuedate');
-            $table->date('identification_id_expireddate');
+            $table->date('identification_id_issue_date');
+            $table->date('identification_id_expired_date');
             $table->string('identification_id_issue_place', 100);
-            $table->string('identification_id_issue_upload', 100);
+            $table->string('identification_id_upload', 100);
             $table->string('place_of_residence', 100);
         
             $table->string('visa_id', 100)->nullable();
@@ -82,11 +80,11 @@ return new class extends Migration
                 ->default('student');
             $table->date('visa_expired_date');
         
-            $table->enum('religion', ['Islam', 'Christianity', 'Judaism', 'Hinduism', 'Buddhism', 'Sikhism', 'Other'])
+            $table->enum('religious', ['Islam', 'Christianity', 'Judaism', 'Hinduism', 'Buddhism', 'Sikhism', 'Other'])
                 ->nullable()
                 ->default('Islam');
         
-            $table->tinyInteger('sibling')->nullable();  // Removed auto_increment
+            $table->tinyInteger('sibling')->nullable();
             $table->string('guardian_name')->nullable();
             $table->enum('guardian_relationship', ['Father', 'Mother', 'Uncle', 'Aunt', 'Grandfather', 'Grandmother', 'Other'])
                 ->nullable()
