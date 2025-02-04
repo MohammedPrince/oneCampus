@@ -1,18 +1,37 @@
-@extends('layouts.master')
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneCampus</title>
+ 
+
+  <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{asset('css/main.css')}}">
+  <link rel="stylesheet" href="{{asset('css/campuslogin.css')}}">
+  <link href="{{asset('css/bootstrap-icons.css')}}" rel="stylesheet">
+  <style>
+   
+
+  </style>
+</head>
+
 <body>
     <picture>
-      <source srcset="assets/logowithname.svg" type="image/svg+xml">
-      <img src="assets/logowithname.svg" class="logo" alt="logo" draggable="false">
+      <source srcset="{{asset('assets/logowithname.svg')}}" type="image/svg+xml">
+      <img src="{{asset('assets/logowithname.svg')}}" class="logo" alt="logo" draggable="false">
     </picture>
   
     <!-- Top-left image -->
   
-    <img src="assets/bottomleft.svg" class="bottom-left" alt="bottomleft" draggable="false">
+    <img src="{{asset('assets/bottomleft.svg')}}" class="bottom-left" alt="bottomleft" draggable="false">
   
   
     <!-- Bottom-right image -->
   
-    <img src="assets/topright.svg" class="top-right" alt="topright" draggable="false">
+    <img src="{{asset('assets/topright.svg')}}" class="top-right" alt="topright" draggable="false">
   
     <!-- Form Container -->
   
@@ -55,7 +74,7 @@
             <label for="exampleFormControlInput1" class="form-label"
               style="color: #B77848;user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;"
               data-i18n="username">Username</label>
-            <input type="text" name="name" class="form-control form-control-sm" id="staffemail" placeholder="" required>
+            <input type="text" name="name" class="form-control form-control-sm" id="staffemail" placeholder="" value="{{Auth::user()->name ?? ''}}" required>
 
             <label for="inputPassword5" class="form-label"
               style="color: #B77848;user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;"
@@ -88,11 +107,13 @@
 
 
       <div class="img-container col-8 g-0 d-none d-md-block">
-        <img src="assets/paintinglogin2.svg" alt="..." draggable="false">
+        <img src="{{asset('assets/paintinglogin2.svg')}}" alt="..." draggable="false">
         <h2 class="text-overlay" data-i18n="welcomecampus">Welcome to One Campus</h2>
       </div>
 
     </div>
   </div>
+</body>
+</html>
  
 

@@ -37,11 +37,25 @@ Route::get('register', [AuthController::class, 'showRegister'])->name('admin.reg
 Route::post('authenticate', [AuthController::class, 'register'])->name('admin.authenticate');
 Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
 
+
+
 // Route::get('dashboard', [AuthController::class, 'index'])->name('admin/dashboard');
 
 // Authentication Routes
 Route::prefix('admin')->middleware(CheckRole::class.':admin')->group(function () {
-    Route::get('dashboard', [AuthController::class, 'index'])->name('admin/dashboard');
+Route::get('dashboard', [AuthController::class, 'index'])->name('admin/dashboard');
+Route::get('user/add',[AuthController::class,'addUser'])->name('user.add');
+Route::get('user/list',[AuthController::class,'userList'])->name('user.list');
+Route::get('user/reset',[AuthController::class,'userReset'])->name('user.reset');
+Route::get('/role_manage',[AuthController::class,'adminRole'])->name('admin.role_manage');
+Route::get('/role/list',[AuthController::class,'manageRole'])->name('admin.role.list');
+Route::get('/role/dept',[AuthController::class,'manageDept'])->name('admin.role.dept');
+Route::get('/role/branch',[AuthController::class,'manageBranch'])->name('admin.role.branch');
+Route::get('/role/identity',[AuthController::class,'manageIdentity'])->name('admin.role.identity');
+
+Route::get('/academic/certificate',[AuthController::class,'manageCertificate'])->name('admin.academic.certificate');
+Route::get('/academic/major',[AuthController::class,'manageMajor'])->name('admin.academic.major');
+Route::get('/academic/batch',[AuthController::class,'manageBatch'])->name('admin.academic.batch');
 
 });
 Route::prefix('student')->middleware('role:student')->group(function () {
