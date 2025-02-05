@@ -45,7 +45,7 @@ class AuthController extends Controller
         //  dd(Auth::user()->name);
           if(Auth::user()->role_id == 1){
               // dd(Auth::user()->name);
-               return redirect()->intended('admin/dashboard');
+               return redirect()->intended('admin/user/list');
             }elseif(Auth::user()->role_id == 2 ){
               return redirect()->intended('/student');
             }
@@ -53,7 +53,7 @@ class AuthController extends Controller
                 return redirect()->intended('/parent');
               }
               elseif(Auth::user()->role_id == 4 ){
-                return redirect()->intended('/agent');
+                return view('/agent');
               }
               elseif(Auth::user()->role_id == 5 ){
                 return redirect()->intended('/clinic');
@@ -118,5 +118,38 @@ public function examOfficer(){
 }
 public function finance(){
   return view('finance');
+}
+public function addUser(){
+  return view('admin.user.add_users');
+}
+public function userList(){
+  return view('admin.user.list');
+}
+public function userReset(){
+  return view('admin.user.reset');
+}
+public function adminRole(){
+  return view('admin.role');
+}
+public function manageRole(){
+  return view('admin.roles.admin_role');
+}
+public function manageDept(){
+  return view('admin.roles.department');
+}
+public function manageBranch(){
+  return view('admin.roles.branch');
+}
+public function manageIdentity(){
+  return view('admin.roles.identity');
+}
+public function manageCertificate(){
+  return view('admin.academic.certificates');
+}
+public function manageMajor(){
+  return view('admin.academic.majors');
+}
+public function manageBatch(){
+  return view('admin.academic.batch');
 }
 }
