@@ -6,16 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OneCampus</title>
  
-
   <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
-
-  <link rel="stylesheet" href="{{asset('css/main.css')}}">
   <link rel="stylesheet" href="{{asset('css/campuslogin.css')}}">
-  <link href="{{asset('css/bootstrap-icons.css')}}" rel="stylesheet">
-  <style>
-   
 
-  </style>
 </head>
 
 <body>
@@ -27,7 +20,6 @@
     <!-- Top-left image -->
   
     <img src="{{asset('assets/bottomleft.svg')}}" class="bottom-left" alt="bottomleft" draggable="false">
-  
   
     <!-- Bottom-right image -->
   
