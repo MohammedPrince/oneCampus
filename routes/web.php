@@ -47,11 +47,11 @@ Route::get('dashboard', [AuthController::class, 'index'])->name('admin/dashboard
 Route::get('user/add',[AuthController::class,'addUser'])->name('user.add');
 Route::get('user/list',[AuthController::class,'userList'])->name('user.list');
 Route::get('user/reset',[AuthController::class,'userReset'])->name('user.reset');
-Route::get('/role_manage',[AuthController::class,'adminRole'])->name('admin.role_manage');
-Route::get('/role/list',[AuthController::class,'manageRole'])->name('admin.role.list');
-Route::get('/role/dept',[AuthController::class,'manageDept'])->name('admin.role.dept');
-Route::get('/role/branch',[AuthController::class,'manageBranch'])->name('admin.role.branch');
-Route::get('/role/identity',[AuthController::class,'manageIdentity'])->name('admin.role.identity');
+Route::get('/role',[AuthController::class,'adminRole'])->name('admin.role_manage');
+Route::get('/rule/list',[AuthController::class,'manageRole'])->name('admin.rule.list');
+Route::get('/rule/departments',[AuthController::class,'manageDept'])->name('admin.rule.dept');
+Route::get('/rule/branch',[AuthController::class,'manageBranch'])->name('admin.rule.branch');
+Route::get('/rule/identity',[AuthController::class,'manageIdentity'])->name('admin.rule.identity');
 
 Route::get('/academic/certificate',[AuthController::class,'manageCertificate'])->name('admin.academic.certificate');
 Route::get('/academic/major',[AuthController::class,'manageMajor'])->name('admin.academic.major');

@@ -4,7 +4,7 @@
         <div class="container-fluid">
           <div class="navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav justify-content-center w-100">
-    <a class="nav-link {{ request()->is('admin/academic/certificate') ? 'active' : ''}}" href="{{route('admin.academic.certificate')}}" id="usersLink" aria-current="page">certificate</a>
+    <a class="nav-link {{ request()->is('admin/academic/certificate') ? 'active' : ''}}" href="{{route('admin.academic.certificate')}}" id="usersLink" aria-current="page">Certificate</a>
     <a class="nav-link {{ request()->is('admin/academic/major') ? 'active' : ''}}" href="{{route('admin.academic.major')}}" id="addUsersLink">Majors</a>
     <a class="nav-link {{ request()->is('admin/academic/batch') ? 'active' : ''}}" href="{{route('admin.academic.batch')}}" id="resetPasswordsLink">Batches</a>  
 </div>

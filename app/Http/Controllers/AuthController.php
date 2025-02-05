@@ -132,16 +132,16 @@ public function adminRole(){
   return view('admin.role');
 }
 public function manageRole(){
-  return view('admin.roles.admin_role');
+  return view('admin.rules.admin_role');
 }
 public function manageDept(){
-  return view('admin.roles.department');
+  return view('admin.rules.department');
 }
 public function manageBranch(){
-  return view('admin.roles.branch');
+  return view('admin.rules.branch');
 }
 public function manageIdentity(){
-  return view('admin.roles.identity');
+  return view('admin.rules.identity');
 }
 public function manageCertificate(){
   return view('admin.academic.certificates');
