@@ -1,5 +1,5 @@
 <div class="nav light-mode">
-  <a href="home.html"> <img src="{{asset('assets/logowithname.svg')}}" alt="Logo" draggable="false" class="logo"></a>
+  <a href="#"> <img src="{{asset('assets/logowithname.svg')}}" alt="Logo" draggable="false" class="logo"></a>
   <div class="mb-3" >
    <input
      type="text"
@@ -24,7 +24,7 @@
      />
      <ul class="dropdown-menu dropdown-menu-end shadow">
        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">Profile</a></li>
-       <li><a class="dropdown-item" href="setting.html">Settings</a></li>
+       <li><a class="dropdown-item" href="#">Settings</a></li>
        <li>
          <div class="d-flex align-items-center justify-content-around px-2">
            <!-- Theme Toggle Button -->
