@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OneCampus::In Development</title>
+    <title>OneCampus:: In Development</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/logo.svg') }}">
-    <link href="/public/css/bootstrap.min.css'" rel="stylesheet">
-    <link href="{{ url('css/bootstrap-icons.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url('css/main.css') }}">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 
 <body class="light-mode">
@@ -39,18 +39,18 @@
             });
         }
     </script>
-    <script src="{{ asset('public/js/tablefilter.js') }}"></script>
-    <script src="{{ asset('public/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/tablefilter.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="{{ asset('public/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
 
-    <script src="{{ asset('public/js/navs.js') }}"></script>
-    <script src="{{ asset('public/js/pages.js') }}"></script>
-    <script src="{{ asset('public/js/theme.js') }}"></script>
-    <script src="{{ asset('public/js/formValidation.js') }}"></script>
-    <script src="{{ asset('public/js/formhandler.js') }}"></script>
-    <script src="{{ asset('public/js/jquery-3.5.1.slim.min.js') }}"></script>
-    <script src="{{ asset('public/js/popper.min.js') }}"></script>
+    <script src="{{ asset('js/navs.js') }}"></script>
+    <script src="{{ asset('js/pages.js') }}"></script>
+    <script src="{{ asset('js/theme.js') }}"></script>
+    <script src="{{ asset('js/formValidation.js') }}"></script>
+    <script src="{{ asset('js/formhandler.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.5.1.slim.min.js') }}"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
 
 </body>
 
