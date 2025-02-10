@@ -7,8 +7,8 @@
     <title>OneCampus</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/logo.svg') }}">
     <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/bootstrap-icons.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('public/css/main.css') }}">
+    <link href="{{ url('css/bootstrap-icons.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('css/main.css') }}">
 </head>
 
 <body class="light-mode">
