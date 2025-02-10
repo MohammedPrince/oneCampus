@@ -25,4 +25,19 @@ class TestController extends Controller
 
     }
 
+    public function store(TestRequest $request)
+    {
+        $data = $request->validated();
+
+        $result = $this->testService->addLanguage($data);
+
+        if ($result['success']) {
+            return redirect()->route('languages')->with('Success', $result['message']);
+        } elseif ($result['status'] === 'Exists') {
+            return redirect()->route('languages')->with('Exist', $result['message']);
+        } else {
+            return redirect()->route('languages')->with('Error', $result['message']);
+        }
+    }
+
 }

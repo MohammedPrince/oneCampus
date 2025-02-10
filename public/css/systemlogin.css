@@ -1,16 +1,26 @@
+body[lang="ar"] {
+  direction: rtl;
+  text-align: right;
+}
+
+
+body[lang="ar"] .left-form {
+left: 0;
+direction: ltr;
+  }
+
+body[lang="ar"] .form-check-input {
+  float: right;
+  margin-left: 8px;
+}
+
 body[lang="ar"] .radio-item {
   direction: rtl;
   text-align: right;
 }
 
-body[lang="ar"] .form-check-input {
-  float: right; 
-  margin-left: 8px; 
-}
-
-body[lang="ar"] .radio-dropdown .dropdown-menu {
-  right: 0;
-  left: unset;
+body[lang="ar"].text-overlay {
+  direction: rtl;
 }
 
 body[lang="ar"] .radio-label {
@@ -27,6 +37,7 @@ body[lang="en"] .radio-item {
   direction: ltr;
   text-align: left;
 }
+
 
 body[lang="en"] .radio-dropdown i {
   margin-right: 10px;
@@ -47,12 +58,13 @@ body[lang="en"] .radio-circle {
   right: unset;
 }
 
-
-body[lang="ar"] {
-  direction: rtl;
-  text-align: right;
-}
 body {
+ 
+    display: flex;
+    
+    height: 100vh;          
+                
+
   overflow: hidden;
   font-family: 'DM Sans', sans-serif;
   margin: 0;
@@ -63,29 +75,33 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw;
 }
+
 /* ------------------------------------shapes css----------------------------------------- */
+
 .logo {
-  top: 10px;
+  top: 1vh;
   position: fixed;
-  width: 80px;
+  width: 7vw;
   height: auto;
-  left: 45px;
+  left: 2vw;
 }
 
 .top-right {
   position: fixed;
-  width: 220px;
+  width: 20vw;
   height: auto;
-  top: -80px;
-  right: -5px;
+  top: 0;
+  right: -.1vw;
 }
+
 .bottom-left {
-  height: 500px;
+  height: 65vh;
   position: fixed;
-  width: 350px;
-  bottom: -90px;
-  left: -80px;
+  width: 40vw;
+  bottom: -1.2vh;
+  left: -10vw
 }
 /* ------------------------------------localization radio css----------------------------------------- */
 .radio-dropdown {
@@ -162,25 +178,36 @@ body {
   border-radius: 50%;
   background-color: #fff;
 }
+
+
+
 /* ------------------------------------form css----------------------------------------- */
 .container {
-  position: fixed;
-  height: 500px;
-  width: 340px;
- left: 160px;
-  padding: 20px;
+  flex-direction: row;
+  position: absolute;
+  height: 75vh;
+  width: 80vw;
   z-index: 1;
   background-color: white;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-radius: 10px;
   overflow: hidden;
 }
-.form-column {
-  height: 400px;
+
+.form {
+  position: relative;
+  margin: 20px;
+  justify-items: self-start;
+  justify-self: self-start;
 }
+
+.form-column {
+  height: 40vh;
+
+}
+
 .form-label {
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .form-control {
@@ -188,32 +215,63 @@ body {
   margin-left: 0px;
   margin-right: 0px;
 }
-.form {
-
-  width: 250px;
-  position: relative;
-  margin: 0px;
-  justify-items: normal;
-  justify-self: normal;
-}
 
 .form-control:focus {
   border-color: white;
   box-shadow: 0 0 10px rgba(183, 120, 72, 1);
 }
+
 .form-check input:focus {
   border-color: #B77848;
   box-shadow: 0 0 10px rgba(183, 120, 72, 1);
 }
+
 .form-check-input:checked {
   background-color: #b77848;
   border-color: #b77848;
 }
 
-.form-check-input{
-  margin-right: 8px;
+.form-check-input {
+  margin: 8px;
   border-color: #4e2e159a;
 }
+
+.forgot-password-link {
+  color: #B77848;
+  font-size: 10px;
+  display: block;
+  text-align: left;
+  margin-top: 5px;
+  text-decoration: none;
+}
+
+.forgot-password-link:hover {
+  color: #965a38;
+  text-decoration: underline;
+}
+
+
+.btn {
+  justify-self: center;
+  margin: 0px;
+  width: 150vw;
+  color: #4e2e15;
+  border: 1px solid #4e2e15;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btn:hover {
+  background-color: #965a38;
+  color: white;
+}
+
+.form-label {
+  color: #B77848;
+  align-self: start;
+}
+
 .btn-custom {
   color: white;
   background-color: #B77848;
@@ -232,51 +290,41 @@ body {
   color: white;
   background-color: #736C74;
   border: 1px solid #B77848;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.href.link {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-  height: 100%;
-  text-decoration: none;
-}
-.href.link:hover {
-  text-decoration: underline;
-}
+
 /* ------------------------------------image css----------------------------------------- */
+
+  
 .img-container {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  position: relative;
-  display: inline-block;
-  top: 0;
+  height: 100%; 
+  width: 60.333%; 
+  display: flex;
+  justify-content: center; 
   align-items: center;
-  height: 500px;
-  width: 600px;
-  overflow: hidden;
-  right: -150px;
+  position: relative;
+  direction: ltr;
+
 }
 .img-container img {
-  background-color: transparent;
-  justify-content: stretch;
-  width: 100%;
-  height: 100%;
+  width: 53vw;
+  height: 76vh;
   object-fit: cover;
+  z-index: 1; 
 }
+
 .text-overlay {
-  
-  text-align: center;
-  align-self: center;
-  align-content: center;
-  position: relative;
-  top:-250px;
-  right: -300px;
-  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 25%;
+  position: absolute; /* Overlay the image */
+  z-index: 2; /* Ensure text is above the image */
+  text-align: center; /* Center text within the overlay */
   color: white;
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Make text visible on any background */
+  user-select: none; /* Prevent text selection */
 }
+
+
 /* ------------------------------------small sceen css----------------------------------------- */
 @media (max-width: 768px) {
   .container {

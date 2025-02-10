@@ -35,7 +35,7 @@ function loadLanguage(language) {
     // Apply RTL if the selected language is Arabic
     if (translations.language === 'ar') {
       document.body.setAttribute('lang', 'ar');
-      document.body.style.direction = 'rtl'; // Apply RTL style
+      document.body.style.direction = 'ltr'; // Apply lte style --> to make sure the layout stays the same
     } else {
       document.body.setAttribute('lang', 'en');
       document.body.style.direction = 'ltr'; // Apply LTR style

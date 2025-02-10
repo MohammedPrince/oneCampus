@@ -4,16 +4,22 @@ body[lang="ar"] {
 }
 
 
+body[lang="ar"] .left-form {
+left: 0;
+direction: ltr;
+  }
+
 body[lang="ar"] .form-check-input {
-  float: right; 
-  margin-left: 8px; 
+  float: right;
+  margin-left: 8px;
 }
 
 body[lang="ar"] .radio-item {
   direction: rtl;
   text-align: right;
 }
-body[lang="ar"].text-overlay{
+
+body[lang="ar"].text-overlay {
   direction: rtl;
 }
 
@@ -53,6 +59,8 @@ body[lang="en"] .radio-circle {
 }
 
 body {
+  display: flex;
+  height: 100vh;          
   overflow: hidden;
   font-family: 'DM Sans', sans-serif;
   margin: 0;
@@ -63,33 +71,34 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw;
 }
 
 
 /* ------------------------------------shapes css----------------------------------------- */
 
 .logo {
-  top: 10px;
+  top: 1vh;
   position: fixed;
-  width: 80px;
+  width: 7vw;
   height: auto;
-  left: 45px;
+  left: 2vw;
 }
 
 .top-right {
   position: fixed;
-  width: 220px;
+  width: 20vw;
   height: auto;
-  top: -80px;
-  right: -5px;
+  top: 0;
+  right: -.1vw;
 }
 
 .bottom-left {
-  height: 500px;
+  height: 65vh;
   position: fixed;
-  width: 350px;
-  bottom: -90px;
-  left: -80px;
+  width: 40vw;
+  bottom: -1.2vh;
+  left: -10vw
 }
 
 
@@ -98,15 +107,14 @@ body {
 .card-container {
   perspective: 1000px;
   width: 100%;
-  margin: 0;
   border: none;
-  height: 400px;
+  height: 80vh;
   border-radius: 8px;
 }
 
 .card {
   width: 100%;
-  height: 400px;
+  height: 65vh;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.6s ease-in-out;
@@ -126,8 +134,6 @@ body {
   background-color: white;
   border: none;
   border-radius: 8px;
-  padding-left: 20px;
-  padding-right: 20px;
 
 }
 
@@ -158,8 +164,14 @@ body {
 /* ------------------------------------localization radio css----------------------------------------- */
 .radio-dropdown {
   position: relative;
-  display: inline-block;
+  
   cursor: pointer;
+display: flex;
+flex-direction: row;
+align-self: end;
+justify-self: end;
+justify-content: end;
+ 
 }
 
 .radio-dropdown i {
@@ -214,12 +226,12 @@ body {
   transition: all 0.3s ease;
 }
 
-.radio-input:checked + .radio-label .radio-circle {
+.radio-input:checked+.radio-label .radio-circle {
   background-color: #965a38;
   border-color: #965a38;
 }
 
-.radio-input:checked + .radio-label .radio-circle::after {
+.radio-input:checked+.radio-label .radio-circle::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -233,28 +245,27 @@ body {
 
 /* ------------------------------------form css----------------------------------------- */
 .container {
-  position: fixed;
-  height: 500px;
-  width: 340px;
- left: 160px;
-  padding: 20px;
+  flex-direction: row;
+  position: absolute;
+  height: 75vh;
+  width: 80vw;
   z-index: 1;
   background-color: white;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-radius: 10px;
   overflow: hidden;
-
 }
+
 .form {
   position: relative;
-  margin: 0px;
-  justify-items: normal;
-  justify-self: normal;
+  margin: 20px;
+  justify-items: self-start;
+  justify-self: self-start;
 }
 
 .form-column {
-  height: 400px;
+  height: 40vh;
+
 }
 
 .form-label {
@@ -271,19 +282,22 @@ body {
   border-color: white;
   box-shadow: 0 0 10px rgba(183, 120, 72, 1);
 }
+
 .form-check input:focus {
   border-color: #B77848;
   box-shadow: 0 0 10px rgba(183, 120, 72, 1);
 }
+
 .form-check-input:checked {
   background-color: #b77848;
   border-color: #b77848;
 }
 
-.form-check-input{
+.form-check-input {
   margin: 8px;
   border-color: #4e2e159a;
 }
+
 .forgot-password-link {
   color: #B77848;
   font-size: 10px;
@@ -319,6 +333,7 @@ body {
   color: #B77848;
   align-self: start;
 }
+
 .btn-custom {
   color: white;
   background-color: #B77848;
@@ -341,61 +356,60 @@ body {
 
 /* ------------------------------------image css----------------------------------------- */
 
-
+  
 .img-container {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  height: 100%; 
+  width: 60.333%; 
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
   position: relative;
-  display: inline-block;
-  top: 0;
-  align-items: center;
-  height: 500px;
-  width: 600px;
-  overflow: hidden;
-  right: -150px;
-}
+  direction: ltr;
 
+}
 .img-container img {
-  background-color: transparent;
-  justify-content: stretch;
-  width: 100%;
-  height: 100%;
+  width: 53vw;
+  height: 76vh;
   object-fit: cover;
+  z-index: 1; 
 }
-
-
 
 .text-overlay {
+  top: 50%;
+  left: 25%;
+  position: absolute; 
+  z-index: 2; 
   text-align: center;
-  align-self: center;
-  align-content: center;
-  position: relative;
-  top:-250px;
-  right: -300px;
-  transform: translate(-50%, -50%);
   color: white;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  user-select: none; 
 }
+
 
 /* ------------------------------------small sceen css----------------------------------------- */
 
 @media (max-width: 768px) {
+  .radio-dropdown{
+    right: -53vw;
+    top: 2.5vh;
+  }
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    height: auto;
-    width: 300px;
+    justify-content: center;
+    height: 75vh;
+    width: 70vw;
     margin: 20px;
-  }
 
+  }
   .logo {
-    top: 0;
+    top: 5vh;
     position: fixed;
-    width: 80px;
+    width: 60px;
     height: auto;
-    left: 15px;
+    left: 5vw;
   }
 
   .row {
@@ -415,12 +429,14 @@ body {
   }
 
   .card-container {
-    width: 300px;
-    height: 400px;
+    width: 65vw;
+    height: 60vh;
+    margin: 20px;
+
   }
 
   .card {
-    height: 400px;
+    height:60vh;
     width: auto;
   }
 
@@ -433,13 +449,14 @@ body {
     bottom: 0;
     left: 0;
     width: 60%;
-    bottom: -101px;
-    left: -50px;
+    bottom: -15vh;
+    left: -5vw;
   }
 
   .top-right {
-    top: -101px;
-    right: -5;
+    top: -1vh;
+    right: -1vw;
     width: 40%;
   }
 }
+

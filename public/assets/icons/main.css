@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none; 
+    border:none;
+    text-decoration : none;
+    box-sizing: border-box;
+
+}
+body{
+    background:#6F4E37;
+
+}
+nav{
+    position:absolute;
+    top:0;
+    bottom:0;
+    height:90%;
+    left:0;
+    background :#967969;
+    width:90px;
+    overflow: hidden;
+    transition: width 0.2s linear;
+    box-shadow: 0 20px 35px rgb(0, 0, 0, 0.1);
+
+}
+a{
+    position:relative;
+    color:white;
+    font-size: 14px;
+    display:table;
+    width:300px;
+    padding:10px;
+}
+.fas{
+    position: relative;
+    width: 70px;
+    height: 60px;
+    top: 14px;
+    font-size: 20px;
+    text-align: center;
+}
+.nav-item{
+    position: relative;
+    top: 12px;
+    margin-left: 10px;
+    
+}
