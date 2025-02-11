@@ -22,7 +22,7 @@
     <!-- Bottom-right image -->
     <img src="/public/assets/topright.svg" class="top-right" alt="topright" draggable="false">
     <!-- Form Container -->
-    
+
     <div class="container col-12" style="flex-direction: row;">
         <div class="row g-0 col-12">
             <div class="left-form col-4 p-4 align-content-center">
@@ -86,7 +86,7 @@
                 </form>
             </div>
             <div class="img-container col-8 g-0 d-none d-md-block">
-                <img src="/public/assets/paintinglogin2.svg'" alt="..." draggable="false">
+                <img src="/public/assets/paintinglogin2.svg" alt="..." draggable="false">
                 <h2 class="text-overlay" data-i18n="welcomecampus">Welcome to One Campus</h2>
             </div>
         </div>
