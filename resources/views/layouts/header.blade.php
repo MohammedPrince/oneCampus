@@ -1,5 +1,5 @@
 <div class="nav light-mode">
-  <a href="#"> <img src="{{asset('assets/logowithname.svg')}}" alt="Logo" draggable="false" class="logo"></a>
+  <a href="#"> <img src="/public/assets/logowithname.svg" alt="Logo" draggable="false" class="logo"></a>
   <div class="mb-3" >
    <input
      type="text"
@@ -12,11 +12,11 @@
    />
  </div>
   <div class="nav-icons">
-   <img src="{{asset('assets/icons/bell.svg')}}" alt="Bell Icon">
+   <img src="/public/assets/icons/bell.svg" alt="Bell Icon">
    <!-- Profile Dropdown -->
    <div class="dropdown">
      <img
-       src="{{asset('assets/icons/profile.svg')}}"
+       src="/public/assets/icons/profile.svg"
        alt="Profile Icon"
        id="profileIcon"
        style="cursor: pointer;"
@@ -36,7 +36,7 @@
            <!-- Logout Button -->
            <a href='{{route('logout')}}'>
            <button  type="submit"class="icon-button" style="border: none; background-color: transparent;margin-left: -2vw;">
-             <img src="{{asset('assets/icons/logout.svg')}}" alt="Logout" class="nav-icon" style="width: 20px;" draggable="false">
+             <img src="/public/assets/icons/logout.svg" alt="Logout" class="nav-icon" style="width: 20px;" draggable="false">
            </button>
            </a>
          </div>
@@ -58,7 +58,7 @@
                   <!-- Profile Image -->
                   <div class="mb-3">
                       <div class="row">
-                          <div class="container" style="width: 150px; height: 150px; border-radius: 50%; background-color: white; background-image: url('{{asset('assets/icons/user (1).png')}}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                          <div class="container" style="width: 150px; height: 150px; border-radius: 50%; background-color: white; background-image: url('/public/assets/icons/user (1).png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
                           </div>
                       </div>
                   </div>
@@ -96,7 +96,7 @@
           <div id="resetPasswordForm" class="form-container" style="display: none;">
             <div class="modal-header">
               <button id="back" style="border: none; background-color: transparent; margin-right: 10px;">
-                <img src="{{asset('assets/icons/back.svg')}}" alt="back">
+                <img src="/public/assets/icons/back.svg" alt="back">
               </button>
            
               <h5 class="modal-title" id="profileModalLabel" style="color:#3C2F2F;">Profile</h5>
