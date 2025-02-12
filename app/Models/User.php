@@ -53,18 +53,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    // public function getRoleAttribute()
-    // {
-    //     return $this->attributes['role'];
-    // }
-
-    // public function create($data){
-    //     'name' => $data['name'],
-    //     'email' => $data['email'],
-    //     'password' => Hash::make($data['password']),
-    //     'role_id' => $data['role'],
-    //     'is_active' => '1'
-    // }
+   
     public static function create(array $data )
     {
         $n = new User();
