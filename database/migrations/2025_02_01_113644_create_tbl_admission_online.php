@@ -12,44 +12,34 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tbl_admission_online', function (Blueprint $table) {
-            $table->id('admission_id');  // Only one auto increment field, this is the primary key
-        
-            // $table->unique('university_id');
-            $table->integer('university_id');
-        
-            $table->enum('application_level', ['Undergraduate', 'Postgraduate'])
-                ->nullable()->default('Undergraduate');
-        
-            $table->enum('admission_status', ['Pending', 'Approved', 'Rejected'])
-                ->nullable()
-                ->default('Pending');
-        
-            // Remove 'auto_increment' from the other fields that should not have it
-            $table->string('student_id', 15);
+            $table->id('admission_id');
+            $table->string('university_id')->unique();
+            $table->enum('application_level', ['Undergraduate', 'Postgraduate'])->default('Undergraduate');
+            $table->enum('admission_status', ['Pending', 'Approved', 'Rejected'])->default('Pending');
+
+            $table->string('student_id', 15)->unique();
             $table->string('first_name', 100);
             $table->string('second_name', 100);
             $table->string('third_name', 100);
             $table->string('last_name', 100);
-        
+
             $table->string('first_name_ar', 100);
             $table->string('second_name_ar', 100);
             $table->string('third_name_ar', 100);
             $table->string('last_name_ar', 100);
             $table->string('student_photo', 255);
-        
-            $table->tinyInteger('activity_status');  // Removed auto_increment
+
+            $table->tinyInteger('activity_status');
             $table->string('batch', 20);
-            $table->integer('current_semester' );  // Removed auto_increment
-            $table->integer('branch_id');         // Removed auto_increment
-            $table->integer('faculty_id');        // Removed auto_increment
-            $table->integer('major_id');          // Removed auto_increment
-            $table->enum('student_study_mode', ['Physical', 'Online', 'Mixed'])
-                ->nullable()
-                ->default('physical');
-        
-            $table->integer('gender');              // Removed auto_increment
+            $table->integer('current_semester');
+            $table->integer('branch_id');
+            $table->integer('faculty_id');
+            $table->integer('major_id');
+            $table->enum('student_study_mode', ['Physical', 'Online', 'Mixed'])->default('Physical');
+
+            $table->enum('gender', ['Male', 'Female']);
             $table->enum('blood_group', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']);
-            $table->integer('military_code');      // Removed auto_increment
+            $table->integer('military_code')->nullable();
             $table->date('date_of_birth');
             $table->string('nationality', 11);
             $table->string('nationality_2', 11)->nullable();
@@ -57,73 +47,57 @@ return new class extends Migration
             $table->string('student_town', 100);
             $table->string('student_state', 100);
             $table->string('student_country', 100);
-            $table->string('student_email', 100)->nullable();
-            $table->string('phone_number', 20);
-            $table->string('whatsapp_number', 20)->nullable();
-            $table->string('facebook_link', 255)->nullable();
-            $table->string('twitter_id', 255)->nullable();
-        
-            $table->enum('identification_id_type', ['National ID', 'Passport', 'Driver’s License'])
-                ->nullable()
-                ->default('National ID');
-        
-            $table->string('identification_id', 50);
+
+            // Add ->unique(); to[student_email,phone_number] If the application 
+            //  is filled out by a parent with more than one student at the university
+            $table->string('student_email', 100);
+            $table->string('phone_number', 20); 
+            $table->string('whatsapp_number', 20)->nullable()->unique();
+            $table->string('facebook_link', 255)->nullable()->unique();
+            $table->string('twitter_id', 255)->nullable()->unique();
+
+            $table->enum('identification_id_type', ['National ID', 'Passport', 'Driver’s License'])->default('National ID');
+            $table->string('identification_id', 50)->unique();
             $table->date('identification_id_issue_date');
             $table->date('identification_id_expired_date');
             $table->string('identification_id_issue_place', 100);
             $table->string('identification_id_upload', 100);
             $table->string('place_of_residence', 100);
-        
             $table->string('visa_id', 100)->nullable();
-            $table->enum('visa_type', ['Tourist', 'Business', 'Student', 'Work', 'Transit', 'Other'])
-                ->nullable()
-                ->default('student');
-            $table->date('visa_expired_date');
-        
-            $table->enum('religious', ['Islam', 'Christianity', 'Judaism', 'Hinduism', 'Buddhism', 'Sikhism', 'Other'])
-                ->nullable()
-                ->default('Islam');
-        
+            $table->enum('visa_type', ['Tourist', 'Business', 'Student', 'Work', 'Transit', 'Other'])->nullable()->default('Student');
+            $table->date('visa_expired_date')->nullable();
+
+
+            $table->enum('religious', ['Islam', 'Christianity', 'Judaism', 'Hinduism', 'Buddhism', 'Sikhism', 'Other'])->default('Islam');
             $table->tinyInteger('sibling')->nullable();
             $table->string('guardian_name')->nullable();
-            $table->enum('guardian_relationship', ['Father', 'Mother', 'Uncle', 'Aunt', 'Grandfather', 'Grandmother', 'Other'])
-                ->nullable()
-                ->default('Father');
-            $table->integer('guardian_gender')->nullable();
-            $table->string('ocupation', 100);
-            $table->string('work_location', 255)->nullable();
+            $table->enum('guardian_relationship', ['Father', 'Mother', 'Uncle', 'Aunt', 'Grandfather', 'Grandmother', 'Other'])->default('Father');
+            $table->enum('guardian_gender', ['Male', 'Female'])->nullable();
+            $table->string('occupation', 100)->nullable();;
+            $table->string('work_location', 255)->nullable();;
             $table->string('guardian_address', 255)->nullable();
             $table->string('guardian_email', 255)->nullable();
             $table->string('guardian_phone_number', 255)->nullable();
-        
+
             $table->string('school_name', 100);
             $table->string('school_place', 100);
-            $table->string('certificate_no', 50);
-            $table->date('certicate_issue_date');
+            $table->string('certificate_no', 50)->unique();;
+            $table->date('certificate_issue_date');
+            $table->enum('certificate_type_code', ['Diploma', 'SDN High School', 'Arabic High School', 'IGCSE', 'Other'])->default('SDN High School');
+            $table->enum('certificate_major_code', ['Science', 'Math', 'Arts', 'Engineering', 'Medicine', 'Law', 'Other']);
             $table->decimal('pass_percentage', 5, 2);
-            $table->string('no_of_subjects', 11);
-            $table->string('failed_subjects', 11);
+            $table->integer('no_of_subjects');
+            $table->integer('failed_subjects')->nullable(); //there might not be any failed subjects
             $table->string('student_certificate_upload', 255);
-        
-            $table->enum('certificate_type_code', ['Diploma', 'SDN High School', 'Arabic High School', 'IGCSE', 'Other'])
-                ->default('SDN High School')
-                ->nullable();
-        
-            // Removed auto_increment from certificate_major_code
-            $table->enum('certificate_major_code', ['Science', 'Math', 'Arts', 'Engineering', 'Medicine', 'Law', 'Other'])
-                ->nullable();
-        
+
+
             $table->timestamps();
             $table->softDeletes();
         });
-        
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_admission_oline');
+        Schema::dropIfExists('tbl_admission_online');
     }
 };
