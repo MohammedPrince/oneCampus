@@ -27,7 +27,6 @@ return new class extends Migration
             $table->date('date_of_birth');
 
             $table->string('whatsapp_number', 15)->nullable();
-            $table->string('personal_email', 255)->unique();
             $table->string('facebook_account', 255)->nullable()->unique();
             $table->string('twitter_account', 255)->nullable()->unique();
             $table->string('instgram_account', 255)->nullable()->unique();
@@ -51,13 +50,18 @@ return new class extends Migration
             $table->enum('visa_type', ['Tourist', 'Business', 'Student', 'Work', 'Transit', 'Temp', 'Other'])->default('Work'); //  visa_expired_date to be nullable since visa is optional
             $table->date('visa_expired_date')->nullable();
 
+
+            $table->string('role');
+            $table->string('certificates')->nullable(); // file path
             $table->enum('employment_type', ['Full-Time', 'Part-Time', 'Contract'])->default('Full-Time');
+            $table->string('biometric');
             $table->date('hire_date');
+            
             $table->date('end_date')->nullable()->default(NULL);
             $table->enum('position_level', ['Entry Level', 'Junior', 'Mid Level', 'Senior', 'Lead', 'Manager', 'Director', 'Other'])->default('Entry Level');
             $table->decimal('salary', 10, 2)->unsigned(); // Add validation for salary to prevent negative values
-            $table->enum('military_code', ['Complete', 'Postponed', 'None'])->default('Complete');
 
+            $table->enum('military_code', ['Complete', 'Postponed', 'None'])->default('Complete');
             // Add [marital_status, spouse_nationality mspouse_name] as it's important employee information
             $table->enum('marital_status', ['Single', 'Married', 'Divorced', 'Widowed'])->default('Single');
             $table->enum('employment_status', ['Active', 'Inactive', 'Resigned', 'Retired', 'Terminated', 'Other'])->default('Active');

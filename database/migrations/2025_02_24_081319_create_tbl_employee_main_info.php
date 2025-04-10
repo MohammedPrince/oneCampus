@@ -14,18 +14,28 @@ return new class extends Migration
         Schema::create('tbl_employee_main_info', function (Blueprint $table) {
             $table->id('employee_id');
 
+            
+            $table->string('full_name_en');
             $table->string('first_name', 30);
             $table->string('second_name', 30);
             $table->string('third_name', 30);
             $table->string('last_name', 30);
 
+            $table->string('full_name_ar');
             $table->string('first_name_ar', 30);
             $table->string('second_name_ar', 30);
             $table->string('third_name_ar', 30);
             $table->string('last_name_ar', 30);
 
+
+           
+            $table->string('phone_number');
             $table->string('employee_photo');
             $table->enum('status', ['Active', 'Inactive', 'Resigned'])->default('Active');
+
+
+            $table->string('corporate_email')->unique();
+            $table->string('personal_email', 255)->unique();
 
             $table->foreignId('branch_id');
             $table->integer('department_id');
