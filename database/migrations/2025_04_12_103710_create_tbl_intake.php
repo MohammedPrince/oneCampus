@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lookup_certificate_type', function (Blueprint $table) {
-            $table->id('certificate_type_id');
-            $table->string('certificate_type_name', 25);
-            $table->string('certificate_type_name_ar', 25);
+        Schema::create('tbl_intake', function (Blueprint $table) {
+            $table->id('intake_id');
+            $table->string('intake_name_en', 25);
+            $table->string('intake_name_ar', 25);
+            $table->string('created_by', 2);
+            $table->string('intake_year', 4);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lookup_certificate_type');
+        Schema::dropIfExists('tbl_intake');
     }
 };

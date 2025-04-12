@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('tbl_roles', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->enum('role_name', ['Administrator', 'Lecturer', 'Chairman', 'Manager',
+            'Employee', 'President',' Assistant Dean','Dean',
+            'Secretary', 'VPAA', 'APAA', 'Faculty Registrar', 
+            'Had of Department',  'Assistant Dean', 'Finance Staff',
+            'Librarian', 'Professor'])->default('Employee'); // Add more roles as needed
+            
             $table->string('slug')->unique();
             $table->timestamps();
             $table->softDeletes();
