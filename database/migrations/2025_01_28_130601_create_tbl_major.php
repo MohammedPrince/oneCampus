@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('tbl_major', function (Blueprint $table) {
             $table->id('major_id'); // Primary key
-            $table->string('major_name');
-            $table->string('major_abbreviation');
-            $table->integer('degree_type');
-            $table->integer('program_duration');
-            $table->integer('number_of_sem');
-            $table->integer('credits_required');
-            $table->foreignId('faculty_id');
-            $table->tinyInteger('status')->default(1);
-            $table->string('major_name_ar');
-            $table->string('major_ministry_code');
-            $table->integer('major_mode');
+            $table->string('major_name_en'); //Computer Science
+            $table->string('major_name_ar'); //علوم الحاسوب
+            $table->string('major_abbreviation'); //CS
+            $table->integer('credits_required'); //120
+            $table->string('major_ministry_code'); //12345
+            $table->integer('major_mode'); //02
+            $table->integer('degree_type'); //01
+            $table->foreignId('faculty_id'); //Foreign key referencing tbl_faculty 02
+            $table->integer('number_of_semesters'); //10
+            $table->integer('program_duration'); //24
+            $table->tinyInteger('status')->default(1); //1 = active, 0 = inactive
             $table->timestamps();
             $table->softDeletes();
 

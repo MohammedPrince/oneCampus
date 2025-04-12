@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tbl_employee_main_info', function (Blueprint $table) {
             $table->id('employee_id');
 
-            
+
             $table->string('full_name_en');
             $table->string('first_name', 30);
             $table->string('second_name', 30);
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('last_name_ar', 30);
 
 
-           
+
             $table->string('phone_number');
             $table->string('employee_photo');
             $table->enum('status', ['Active', 'Inactive', 'Resigned'])->default('Active');
@@ -38,9 +38,9 @@ return new class extends Migration
             $table->string('personal_email', 255)->unique();
 
             $table->foreignId('branch_id');
-            $table->integer('department_id');
+            $table->integer('department_id'); // Assuming department_id is a branch table foreign key
             $table->integer('user_id');
-            
+
             $table->timestamps();
             $table->softDeletes();
         });
