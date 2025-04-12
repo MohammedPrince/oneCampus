@@ -32,10 +32,10 @@ return new class extends Migration
 
             $table->string('student_id', 15)->unique();
             
-            $table->string('first_name', 100);
-            $table->string('second_name', 100);
-            $table->string('third_name', 100);
-            $table->string('last_name', 100);
+            $table->string('first_name_en', 100);
+            $table->string('second_name_en', 100);
+            $table->string('third_name_en', 100);
+            $table->string('last_name_en', 100);
 
             $table->string('first_name_ar', 100);
             $table->string('second_name_ar', 100);
@@ -81,7 +81,6 @@ return new class extends Migration
             $table->enum('visa_type', ['Tourist', 'Business', 'Student', 'Work', 'Transit', 'Other'])->nullable()->default('Student');
             $table->date('visa_expired_date')->nullable();
 
-
             $table->enum('religious', ['Islam', 'Christianity', 'Judaism', 'Hinduism', 'Buddhism', 'Sikhism', 'Other'])->default('Islam');
             $table->tinyInteger('sibling')->nullable();
             $table->string('guardian_name')->nullable();
@@ -103,7 +102,6 @@ return new class extends Migration
             $table->integer('no_of_subjects');
             $table->integer('failed_subjects')->nullable(); //there might not be any failed subjects
             $table->string('student_certificate_upload', 255);
-
 
             $table->timestamps();
             $table->softDeletes();

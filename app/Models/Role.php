@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Role extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['role_name', 'slug'];
 
     protected $table = 'tbl_roles';
 

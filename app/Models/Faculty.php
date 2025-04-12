@@ -11,7 +11,7 @@ class Faculty extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'faculty_name',
+        'faculty_name_en',
         'abbreviation',
         'faculty_name_ar',
         'branch_id',

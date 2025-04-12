@@ -12,14 +12,13 @@ class BatchControl extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'batch_id',
+        'branch_id',
         'faculty_id',
         'major_id',
         'batch',
-        'active_sem',
-        'max_sem',
+        'max_semester',
+        'active_semester',
         'graduate_status',
     ];
     protected $table = 'tbl_batch_control';
-
 }

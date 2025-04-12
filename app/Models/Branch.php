@@ -14,10 +14,11 @@ class Branch extends Model
 
 
     protected $fillable = [
-        'branch_name',
-        'branch_address',
+        'branch_name_ar',
+        'branch_name_en',
         'branch_country',
         'branch_city',
+        'branch_address',
     ];
 
     protected $table = 'tbl_branch';

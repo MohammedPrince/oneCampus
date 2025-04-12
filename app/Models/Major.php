@@ -13,17 +13,17 @@ class Major extends Model
 
 
     protected $fillable = [
-        'major_name',
-        'major_abbreviation',
-        'degree_type',
-        'program_duration',
-        'number_of_sem',
-        'credits_required',
-        'faculty_id',
-        'status',
+        'major_name_en',
         'major_name_ar',
+        'major_abbreviation',
+        'credits_required',
         'major_ministry_code',
         'major_mode',
+        'degree_type',
+        'faculty_id',
+        'number_of_semesters',
+        'program_duration',
+        'is_active',
     ];
 
     protected $table = 'tbl_major';

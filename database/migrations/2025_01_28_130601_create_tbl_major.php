@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('faculty_id'); //Foreign key referencing tbl_faculty 02
             $table->integer('number_of_semesters'); //10
             $table->integer('program_duration'); //24
-            $table->tinyInteger('status')->default(1); //1 = active, 0 = inactive
+            $table->tinyInteger('is_active')->default(1); //1 = active, 0 = inactive
             $table->timestamps();
             $table->softDeletes();
 

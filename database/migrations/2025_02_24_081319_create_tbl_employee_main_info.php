@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('tbl_employee_main_info', function (Blueprint $table) {
             $table->id('employee_id');
 
-
             $table->string('full_name_en');
-            $table->string('first_name', 30);
-            $table->string('second_name', 30);
-            $table->string('third_name', 30);
-            $table->string('last_name', 30);
+            $table->string('first_name_en', 30);
+            $table->string('second_name_en', 30);
+            $table->string('third_name_en', 30);
+            $table->string('last_name_en', 30);
 
             $table->string('full_name_ar');
             $table->string('first_name_ar', 30);

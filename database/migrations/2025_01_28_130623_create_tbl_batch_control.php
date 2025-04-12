@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('tbl_batch_control', function (Blueprint $table) {
             $table->id('batch_control_id');
 
-            $table->string('batch', 20);//2016
-            $table->foreignId('branch_id');//khartoum
+            $table->foreignId('branch_id');//2016
             $table->foreignId('faculty_id'); //computer science
             $table->foreignId('major_id');//sci
-            $table->integer('max_sem');//10
-            $table->integer('active_sem');//6
+            $table->string('batch', 20);//16
+            $table->integer('active_semester');//6
+            $table->integer('max_semester');//10
             $table->enum('graduate_status', ['1', '2'])->default('1'); // 1 = not graduated, 2 = graduated
             // $table->tinyInteger('graduate_status')->default(1);
 

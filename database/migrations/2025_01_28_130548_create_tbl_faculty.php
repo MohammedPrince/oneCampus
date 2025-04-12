@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('faculty_name_ar',100 ); // علوم الحاسوب
             $table->string('abbreviation', 10); // CS
             $table->foreignId('branch_id'); // Khartoum
-            $table->tinyInteger('status')->default(1); // 1 for active, 0 for inactive
+            $table->tinyInteger('is_active')->default(1); // 1 for active, 0 for inactive
             $table->timestamps();
             $table->softDeletes();
 
