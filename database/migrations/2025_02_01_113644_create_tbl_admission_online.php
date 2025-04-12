@@ -13,11 +13,25 @@ return new class extends Migration
     {
         Schema::create('tbl_admission_online', function (Blueprint $table) {
             $table->id('admission_id');
+
             $table->string('university_id')->unique();
             $table->enum('application_level', ['Undergraduate', 'Postgraduate'])->default('Undergraduate');
             $table->enum('admission_status', ['Pending', 'Approved', 'Rejected'])->default('Pending');
+            $table->enum('admission_type', ['Online', 'Offline'])->default('Online');
+
+            $table->enum('admission_fee_payment_status', ['Pending', 'Paid', 'Failed'])->default('Pending');
+            $table->enum('admission_fee_payment_method', ['Cash', 'Bank Transfer', 'Credit Card', 'Debit Card', 'Other'])->default('Cash');
+            $table->decimal('admission_fee', 10, 2)->default(0);
+            // $table->decimal('admission_fee_paid', 10, 2)->default(0);
+            // $table->decimal('admission_fee_balance', 10, 2)->default(0);
+            // $table->string('admission_fee_payment_receipt', 255)->nullable();
+            // $table->date('admission_fee_payment_date')->nullable();
+            // $table->string('admission_fee_payment_method_details', 255)->nullable();
+            // $table->string('admission_fee_payment_note_ar', 255)->nullable();
+            // $table->string('admission_fee_payment_note_en', 255)->nullable();
 
             $table->string('student_id', 15)->unique();
+            
             $table->string('first_name', 100);
             $table->string('second_name', 100);
             $table->string('third_name', 100);
