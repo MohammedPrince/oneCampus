@@ -22,13 +22,13 @@ return new class extends Migration
             $table->enum('admission_fee_payment_status', ['Pending', 'Paid', 'Failed'])->default('Pending');
             $table->enum('admission_fee_payment_method', ['Cash', 'Bank Transfer', 'Credit Card', 'Debit Card', 'Other'])->default('Cash');
             $table->decimal('admission_fee', 10, 2)->default(0);
-            // $table->decimal('admission_fee_paid', 10, 2)->default(0);
-            // $table->decimal('admission_fee_balance', 10, 2)->default(0);
-            // $table->string('admission_fee_payment_receipt', 255)->nullable();
-            // $table->date('admission_fee_payment_date')->nullable();
-            // $table->string('admission_fee_payment_method_details', 255)->nullable();
-            // $table->string('admission_fee_payment_note_ar', 255)->nullable();
-            // $table->string('admission_fee_payment_note_en', 255)->nullable();
+            $table->decimal('admission_fee_paid', 10, 2)->default(0);
+            $table->decimal('admission_fee_balance', 10, 2)->default(0);
+            $table->string('admission_fee_payment_receipt', 255)->nullable();
+            $table->date('admission_fee_payment_date')->nullable();
+            $table->string('admission_fee_payment_method_details', 255)->nullable();
+            $table->string('admission_fee_payment_note_ar', 255)->nullable();
+            $table->string('admission_fee_payment_note_en', 255)->nullable();
 
             $table->string('student_id', 15)->unique();
             
