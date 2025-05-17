@@ -142,6 +142,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="branch" class="form-label">Branch</label>
+                            <select class="form-select" id="branch_id" name="branch_id" required style="width: 30vw;">
                             <option value="">Select Branch</option>
                             @php
                                 $branches = App\Models\Branch::all();
