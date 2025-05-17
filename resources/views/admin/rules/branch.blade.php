@@ -184,44 +184,4 @@
 </div>
 
 @endsection
-@section('scripts') 
-<script>
-function editBranch(button) {
-    $('#edit_id').val($(button).data('id'));
-    $('#edit_name_ar').val($(button).data('branch_name_ar'));
-    $('#edit_name_en').val($(button).data('branch_name_en'));
-    $('#edit_country').val($(button).data('branch_country'));
-    $('#edit_city').val($(button).data('branch_city'));
-    $('#edit_address').val($(button).data('branch_address'));
-}
 
-$(document).ready(function () {
-    console.log("Branch form JS loaded ✅"); 
-    $('#addBranchForm').on('submit', function (e) {
-        e.preventDefault();
-        let formData = $(this).serialize();
-        $.post("{{ route('admin.rule.branch.store') }}", formData, function (res) {
-            alert('Branch Added Successfully');
-            location.reload();
-        }).fail(function (xhr) {
-            console.error(xhr.responseText); // Check for validation or server errors
-            alert('Failed to add branch');
-        });
-    });
-
-    $('#editBranchForm').on('submit', function (e) {
-        e.preventDefault();
-        let id = $('#edit_id').val();
-        let formData = $(this).serialize() + '&_method=PUT';
-
-        $.post(`/admin/rule/branch/update/${id}`, formData, function () {
-            alert('Branch Updated Successfully');
-            location.reload();
-        }).fail(function () {
-            alert('Failed to update branch');
-        });
-    });
-});
-
-</script>
-@endsection

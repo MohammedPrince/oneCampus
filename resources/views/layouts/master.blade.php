@@ -78,9 +78,9 @@ $(document).ready(function() {
             });
         }
     </script>
-
-    @yield('scripts')
-
+ @include('layouts.scripts')
+    @yield('script')
+   
 
 </body>
 
