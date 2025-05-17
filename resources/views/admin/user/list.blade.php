@@ -258,6 +258,8 @@
                     <input type="file" class="form-control" id="editCV" name="cv">
                     <p class="mt-2">Current CV: <span id="currentCV"></span></p>
                     </div>
+                     </div>
+                    <div class="row mb-3">
                     <div class="col-md-6">
                     <label for="editCertificate" class="form-label">Certificates</label>
                     <input type="file" class="form-control" id="editCertificate" name="certificates">

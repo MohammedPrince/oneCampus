@@ -142,12 +142,13 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="branch" class="form-label">Branch</label>
+                            <select class="form-select" id="branch_id" name="branch_id" required style="width: 30vw;">
                             <option value="">Select Branch</option>
                             @php
                                 $branches = App\Models\Branch::all();
                             @endphp
                             @foreach($branches as $branch)
-                            <option value="{{ $branch->branch_id }}">{{ $branch->branch_name }}</option>
+                            <option value="{{ $branch->branch_id }}">{{ $branch->branch_name_en }}</option>
                             @endforeach
                         </select>                            
                         <div class="invalid-feedback">Please enter the branch.</div>
