@@ -20,4 +20,13 @@ class StoreFacultyRequest extends FormRequest
             'status'          => 'nullable|boolean',
         ];
     }
+        public function messages()
+    {
+        return [
+            // Custom error messages (optional)
+            'faculty_name_en.required' => 'Faculty name in Arabic is required.',
+            'faculty_name_ar.required' => 'Full name in English is required.',
+            // Add other custom messages here if needed
+        ];
+    }
 }

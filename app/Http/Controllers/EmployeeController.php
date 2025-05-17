@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmpBulk\BulkRequest;
 use App\Http\Requests\Employee\EmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
 
@@ -16,11 +17,9 @@ class EmployeeController extends Controller
     {
         $this->employeeService = $employeeService;
     }    
-  public function uploadEmployees(Request $request)
+  public function uploadEmployees(BulkRequest $request)
 {
-    $request->validate([
-        'bulk_file' => 'required|file|mimes:csv,txt',
-    ]);
+    $validated = $request->validated(); // Optional: Already runs `validate()` implicitly
 
     $result = $this->employeeService->bulkUpload($request->file('bulk_file'));
 

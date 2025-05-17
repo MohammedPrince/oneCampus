@@ -243,6 +243,8 @@
             $.post("{{ route('admin.academic.batch.store') }}", $(this).serialize(), function () {
                 fetchBatches();
                 $('#addBatchForm')[0].reset();
+                 window.location.reload(); // Refresh the page after adding
+
             });
         });
 
