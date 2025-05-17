@@ -196,7 +196,7 @@ function editBranch(button) {
 }
 
 $(document).ready(function () {
-    console.log("Branch form JS loaded ✅"); // Add this for test
+    console.log("Branch form JS loaded ✅"); 
     $('#addBranchForm').on('submit', function (e) {
         e.preventDefault();
         let formData = $(this).serialize();
