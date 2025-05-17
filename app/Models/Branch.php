@@ -11,16 +11,35 @@ class Branch extends Model
 {
     use SoftDeletes;
     public $timestamps = true;
-
+    protected $table = 'tbl_branch';
+    protected $primaryKey = 'branch_id'; // or whatever the actual column name is
 
     protected $fillable = [
-        'branch_name',
+        'branch_name_ar',
+        'branch_name_en',
         'branch_address',
-        'branch_country',
+        'country_id',
         'branch_city',
     ];
+    public function batchControls()
+    {
+        return $this->hasMany(BatchControl::class, 'branch_id');
+    }
+    
 
-    protected $table = 'tbl_branch';
+    public static function createBranch(array $data): self
+    {
+        return self::create($data);
+    }
 
+    public function updateBranch(array $data): bool
+    {
+        return $this->update($data);
+    }
+
+    public function deleteBranch(): bool
+    {
+        return $this->delete();
+    }
 
 }

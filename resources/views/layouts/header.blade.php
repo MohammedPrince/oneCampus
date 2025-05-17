@@ -1,53 +1,55 @@
-<div class="nav light-mode">
-  <a href="#"> <img src="{{asset('assets/logowithname.svg')}}" alt="Logo" draggable="false" class="logo"></a>
-  <div class="mb-3" >
-   <input
-     type="text"
-     id="tableSearch"
-     class="form-control"
-     placeholder="Search..."
-     onkeyup=""
-     style="margin :5px; width : 30vw; height :4vh; margin-top:1vh ; margin-left:-31vw;"
-     
-   />
- </div>
-  <div class="nav-icons">
-   <img src="{{asset('assets/icons/bell.svg')}}" alt="Bell Icon">
-   <!-- Profile Dropdown -->
-   <div class="dropdown">
-     <img
-       src="{{asset('assets/icons/profile.svg')}}"
-       alt="Profile Icon"
-       id="profileIcon"
-       style="cursor: pointer;"
-       data-bs-toggle="dropdown"
-     />
-     <ul class="dropdown-menu dropdown-menu-end shadow">
-       <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">Profile</a></li>
-       <li><a class="dropdown-item" href="#">Settings</a></li>
-       <li>
-         <div class="d-flex align-items-center justify-content-around px-2">
-           <!-- Theme Toggle Button -->
-          
-           
-           <!-- Divider -->
-           
-           
-           <!-- Logout Button -->
-           <a href='{{route('logout')}}'>
-           <button  type="submit"class="icon-button" style="border: none; background-color: transparent;margin-left: -2vw;">
-             <img src="{{asset('assets/icons/logout.svg')}}" alt="Logout" class="nav-icon" style="width: 20px;" draggable="false">
-           </button>
-           </a>
-         </div>
-       </li>
-     </ul>
-   </div>
- </div>
- </div>
- <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-  <div class="modal-dialog w-50">
-      <div class="modal-content">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-md navbar-light " id="top-navbar" style="background-color: white;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="home.html">
+      <img src="{{asset('assets/logo.svg')}}" alt="Logo" class="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <div class="search-container d-flex justify-content-center">
+            
+            <input type="text" class="search-bar form-control" placeholder="Search..">
+          </div>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+       
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            <img src="{{asset('assets/icons/profile.svg')}}" alt="Profile Icon" id="profileIcon" style="cursor: pointer;">
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">Profile</a></li>
+            <li><a class="dropdown-item" href="setting.html">Settings</a></li>
+            <li>
+              <div class="d-flex align-items-center justify-content-around px-2">
+                <!-- Theme Toggle Button -->
+                {{-- <button id="themeToggle" class="icon-button" aria-label="Toggle theme" style="background-color: transparent; border: none; padding: 0;margin-left: -1vw;">
+                  <img id="icon" src="{{asset('assets/icons/moon.svg')}}" alt="Light mode icon" draggable="false" style="width: 25px;">
+                </button> --}}
+                <!-- Divider -->
+                <div class="vertical-divider" style="height: 20px; width: 1px; background-color: #ddd;"></div>
+                <!-- Logout Button -->
+                <a href='{{route('logout')}}'>
+                  <button class="icon-button" style="border: none; background-color: transparent;">
+                    <img src="{{asset('assets/icons/logout.svg')}}" alt="Logout" class="nav-icon" style="width: 20px;" draggable="false">
+                </button>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
           <!-- Profile Form -->
           <div id="profileForm">
               <div class="modal-header">
@@ -70,10 +72,13 @@
                   </div>
 
                   <!-- Email -->
-                  <div class="mb-3">
-                      <label for="profileEmail" class="form-label">Email</label>
-                      <input type="email" class="form-control w-100" id="profileEmail" value="{{Auth::user()->email }}" style="width: 48vw;" />
-                  </div>
+                  @if(Auth::check())
+                  <input type="email" class="form-control w-100" id="profileEmail"
+                         value="{{ Auth::user()->email }}" style="width: 48vw;" />
+                @else
+                  <input type="email" class="form-control w-100" id="profileEmail" value="" style="width: 48vw;" />
+                @endif
+                
 
                   <!-- Phone Number -->
                   <div class="mb-3">

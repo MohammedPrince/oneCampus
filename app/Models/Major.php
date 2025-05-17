@@ -1,32 +1,116 @@
 <?php
-
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Major extends Model
 {
-    use SoftDeletes;
-    public $timestamps = true;
-
-
-    protected $fillable = [
-        'major_name',
-        'major_abbreviation',
-        'degree_type',
-        'program_duration',
-        'number_of_sem',
-        'credits_required',
-        'faculty_id',
-        'status',
-        'major_name_ar',
-        'major_ministry_code',
-        'major_mode',
-    ];
+    use HasFactory, SoftDeletes;
 
     protected $table = 'tbl_major';
+    protected $primaryKey='major_id';
+    protected $fillable = [
+        'major_name_en', 'major_name_ar', 'major_abbreviation', 'credits_required', 
+        'major_ministry_code', 'major_mode','degree_type', 'faculty_id', 
+        'number_of_semesters', 'program_duration', 'status'
+    ];
 
-    
+    public function batchControls()
+{
+    return $this->hasMany(BatchControl::class, 'major_id');
+}
+
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class, 'faculty_id');
+    }
+     /**
+     * Create a new major
+     *
+     * @param array $data
+     * @return Major
+     */
+    public static function createMajor(array $data)
+    {
+        return self::create($data);
+    }
+
+    /**
+     * Find a major by its ID
+     *
+     * @param int $majorId
+     * @return Major
+     */
+    public static function findMajorById($majorId)
+    {
+        return self::findOrFail($majorId);
+    }
+
+    /**
+     * Update the major details
+     *
+     * @param array $data
+     * @return bool
+     */
+    public function updateMajor(array $data)
+    {
+        return $this->update($data);
+    }
+
+    /**
+     * Delete the major
+     *
+     * @return bool|null
+     */
+    public function deleteMajor()
+    {
+        return $this->delete();
+    }
+
+    /**
+     * Get all majors
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getAllMajors()
+    {
+        return self::all();
+    }
+
+    /**
+     * Get majors by faculty ID
+     *
+     * @param int $facultyId
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getMajorsByFaculty($facultyId)
+    {
+        return self::where('faculty_id', $facultyId)->get();
+    }
+
+    /**
+     * Scope to filter majors by status
+     *
+     * @param $query
+     * @param $status
+     * @return mixed
+     */
+    public function scopeFilterByStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
+
+    /**
+     * Scope to filter majors by degree type
+     *
+     * @param $query
+     * @param $degreeType
+     * @return mixed
+     */
+    public function scopeFilterByDegreeType($query, $degreeType)
+    {
+        return $query->where('degree_type', $degreeType);
+    }
 }
