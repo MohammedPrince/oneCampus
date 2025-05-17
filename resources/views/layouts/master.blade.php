@@ -11,28 +11,7 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <style>
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-    padding: 6px 12px;
-    margin: 2px;
-    border-radius: 4px;
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    color: #333 !important;
-    cursor: pointer;
-}
 
-.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background-color: #e2e6ea;
-    color: #000 !important;
-}
-
-.dataTables_wrapper .dataTables_paginate .paginate_button.current {
-    background-color: #0d6efd;
-    color: white !important;
-    border: 1px solid #0d6efd;
-}
-</style>
 
     
 </head>

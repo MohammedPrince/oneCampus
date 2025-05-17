@@ -95,7 +95,7 @@
                                     data-recruitment_date="{{ $employee->profile->hire_date ? \Carbon\Carbon::parse($employee->profile->hire_date)->format('Y-m-d') : '' }}"
                                     data-identification_type="{{ $employee->profile->identification_id_type }}"
                                     data-identification_id="{{ $employee->profile->identification_id }}"
-                                    data-branch="{{ $employee->branch_id }}"
+                                    data-branch="{{ $employee->branch->branch_name_en }}"
                                     data-biometric="{{ $employee->profile->biometric }}"
                                     data-gender="{{ $employee->profile->gender }}"
                                     data-nationality="{{ $employee->profile->nationality }}"
