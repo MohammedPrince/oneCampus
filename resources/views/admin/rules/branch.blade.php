@@ -51,7 +51,7 @@
                         <td style="text-align: center;">{{ $branch->branch_name_en }}</td>
                         <td style="text-align: center;">{{ $branch->branch_address }}</td>
                         <td style="text-align: center;">{{ $branch->branch_city }}</td>
-                        <td style="text-align: center;">{{ $branch->branch_country }}</td>
+                        <td style="text-align: center;">{{ $branch->country->country_name_en }}</td>
        
                         <td style="text-align: center;">
                             <button 

@@ -21,6 +21,12 @@ class Branch extends Model
         'country_id',
         'branch_city',
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id', 'country_id');
+    }
+
     public function batchControls()
     {
         return $this->hasMany(BatchControl::class, 'branch_id');

@@ -9,8 +9,9 @@ class BranchRepository
 {
     public function all()
     {
-        return Branch::all();
+        return Branch::with('country')->get();
     }
+
     public function countryAll(){
         return Country::all();
     }

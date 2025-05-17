@@ -5,7 +5,7 @@
     <h1>Employee Details</h1>
     <a href="{{ url()->previous() }}" class="btn btn-secondary mb-3">Back</a>
 
-    <table class="table table-bordered">
+    <table class="table">
         <tr><th>ID</th><td>{{ $employee->id }}</td></tr>
         <tr><th>Full Name (Arabic)</th><td>{{ $employee->full_name_ar }}</td></tr>
         <tr><th>Full Name (English)</th><td>{{ $employee->full_name_en }}</td></tr>

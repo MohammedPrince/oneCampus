@@ -12,5 +12,9 @@ class Country extends Model
     protected $table = 'tbl_country';
     protected $primaryKey = 'country_id';
 
+public function branches()
+{
+    return $this->hasMany(Branch::class, 'country_id', 'country_id');
+}
 
 }
