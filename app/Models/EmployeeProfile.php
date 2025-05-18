@@ -17,8 +17,8 @@ class EmployeeProfile extends Model
         return $this->belongsTo(EmployeeMainInfo::class, 'employee_id', 'employee_id');
     }
      protected $fillable = [
-        'employee_id','gender', 'nationality',  'religious',
-        'date_of_birth', 'whatsapp_number', 'facebook_account', 'address',  
+        'employee_id','gender', 'nationality',
+        'date_of_birth', 'whatsapp_number', 
         'identification_id_type', 'identification_id',
         'role', 'certificates', 'cv', 'biometric', 'hire_date',
         'end_date'
