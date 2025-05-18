@@ -216,23 +216,6 @@
 @endsection
 @section('scripts')
 <script>
-    // Wait for the DOM to be fully loaded before attaching the event listener
-    document.addEventListener('DOMContentLoaded', function() {
-        // Change the label based on the selected identification type
-        document.getElementById('identification_type').addEventListener('change', function() {
-            var idType = this.value;
-            var label = document.getElementById('identificationLabel');
-            
-            if (idType === 'Passport') {
-                label.innerText = 'Passport Number';
-            } else if (idType === 'National ID') {
-                label.innerText = 'National ID';
-            } else if (idType === 'Driving License') {
-                label.innerText = 'Driving License Number';
-            } else {
-                label.innerText = 'Other ID';
-            }
-        });
-    });
+
 </script>
 @endsection

@@ -283,9 +283,7 @@
       
 
 @endsection
-@section('scripts')
 
-  @endsection
 
 
 
