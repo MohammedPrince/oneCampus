@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lookup_sections', function (Blueprint $table) {
+        Schema::create('tbl_lookup_sections', function (Blueprint $table) {
             $table->id('section_id');
             $table->string('section_name', 25);
             $table->string('section_name_ar', 25);
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lookup_sections');
+        Schema::dropIfExists('tbl_lookup_sections');
     }
 };

@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lookup_certificate_major', function (Blueprint $table) {
-            $table->id('certificate_major_id');
-            $table->string('certificate_major_name', 25);
-            $table->string('certificate_major_name_ar', 25);
+        Schema::create('tbl_lookup_military_code', function (Blueprint $table) {
+            $table->id('military_code_id');
+            $table->string('military_code_name', 25);
+            $table->string('military_code_name_ar', 25);
+            $table->string('description', 255);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lookup_certificate_major');
+        Schema::dropIfExists('tbl_lookup_military_code');
     }
 };

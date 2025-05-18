@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lookup_medical_test_requested', function (Blueprint $table) {
+        Schema::create('tbl_lookup_medical_test_requested', function (Blueprint $table) {
             $table->id('medical_test_id');
             $table->string('test_name', 25);
             $table->string('test_name_ar', 25);
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lookup_medical_test_requested');
+        Schema::dropIfExists('tbl_lookup_medical_test_requested');
     }
 };
