@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+
 <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
   <div class="container-fluid">
     <div class="navbar-collapse" id="navbarNavAltMarkup">
@@ -16,7 +17,6 @@
 <div class="">
   <div class="row">
     <div class="col-4">
-      
       <h2>Faculties:</h2>
     </div>
     <div class="col-4">
@@ -62,7 +62,7 @@
               data-en="{{ $faculty->faculty_name_en }}"
               data-ar="{{ $faculty->faculty_name_ar }}"
               data-abbr="{{ $faculty->abbreviation }}"
-              data-branch="{{ $faculty->branch_id }}"
+              data-branch="{{ $faculty->branch->branch_id }}"
               style="border: none; background-color: transparent;">
               <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
             </button>
@@ -112,7 +112,7 @@
             </div>
             <div class="col-md-6">
               <label class="form-label">Branch</label>
-              <select class="form-select" name="branch_id" required>
+              <select class="form-select" name="branch_id" id="AddFacultyBranch" required>
                 <option value="">Select Branch</option>
                 @foreach($branches as $branch)
                 <option value="{{ $branch->branch_id }}">{{ $branch->branch_name_ar }}</option>
@@ -167,7 +167,7 @@
               <select class="form-select" name="branch_id" id="editFacultyBranch" required>
                 <option value="">Select Branch</option>
                 @foreach($branches as $branch)
-                  <option value="{{ $branch->branch_id }}">{{ $branch->branch_name }}</option>
+                  <option value="{{ $branch->branch_id }}"> {{ $branch->branch_name_ar }} </option>
                 @endforeach
               </select>
             </div>

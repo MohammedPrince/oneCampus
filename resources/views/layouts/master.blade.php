@@ -14,13 +14,16 @@
 </head>
 
 <body class="light-mode">
-
     @include('layouts.header')
+   
     @include('layouts.nav')
+     
     <!-- Bottom Navigation Bar -->
 
     <div id="main-content" class="container-fluid" style="margin-left: 210px; width: calc(100% - 230px);">
         <div id="user-management" class="content-page" style="display: block;">
+        @include('layouts.alert')
+
             @yield('content')
         </div>
 
