@@ -26,14 +26,14 @@
         <div class="tab-pane fade show active" id="single-user" role="tabpanel" aria-labelledby="single-user-tab">
             <div class="container">
                 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                 <h1 class="mb-4">Add New Employee</h1>
                 <form method="POST" action="{{ route('employee.store') }}" class="row needs-validation" enctype="multipart/form-data" novalidate>
                     @csrf
@@ -214,8 +214,4 @@
     
 
 @endsection
-@section('scripts')
-<script>
 
-</script>
-@endsection

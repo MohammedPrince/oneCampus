@@ -3,44 +3,52 @@
 namespace App\Http\Requests\Intake;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateIntakeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return true;  // Modify based on your authorization logic (if needed).
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'intake_name_en' => 'required|string|max:25|unique:tbl_intake,intake_name_en,'.$this->intake->intake_id,
-            'intake_name_ar' => 'required|string|max:25|unique:tbl_intake,intake_name_ar,'.$this->intake->intake_id,
+            'intake_name_en' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('tbl_intake', 'intake_name_en')
+                    ->ignore($this->intake->intake_id, 'intake_id') // Ignore current record
+                    ->whereNull('deleted_at')                      // Only consider non-deleted records
+            ],
+            'intake_name_ar' => [
+                'required',
+                'regex:/^[\p{Arabic}\s]+$/u',
+                'max:255',
+                Rule::unique('tbl_intake', 'intake_name_ar')
+                    ->ignore($this->intake->intake_id, 'intake_id')
+                    ->whereNull('deleted_at')
+            ],
         ];
     }
 
     /**
-     * Get custom messages for validator errors.
-     *
-     * @return array
+     * Custom validation messages.
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'intake_name_en.required' => 'The English intake name is required.',
             'intake_name_ar.required' => 'The Arabic intake name is required.',
-            'intake_year.required' => 'The intake year is required.',
-            'intake_year.digits' => 'The intake year must be a valid 4-digit year.',
+           
         ];
     }
 }

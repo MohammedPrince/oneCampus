@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Http\Requests\Faculty;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateFacultyRequest extends FormRequest
 {
@@ -13,11 +15,40 @@ class UpdateFacultyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'faculty_name_en' => 'required|string|max:100|unique:tbl_faculty,faculty_name_en,'.$this->faculty->faculty_id,
-            'faculty_name_ar' => 'required|regex:/^[\p{Arabic}\s]+$/u|max:255|unique:tbl_faculty,faculty_name_ar,'.$this->faculty->faculty_id,
-            'abbreviation'    => 'required|string|max:10|unique:tbl_faculty,abbreviation,'.$this->faculty->faculty_id,
-            'branch_id'       => 'required|exists:tbl_branch,branch_id',
-            'status'          => 'nullable|boolean',
+            'faculty_name_en' => [
+                'required',
+                'string',
+                'max:100',
+                Rule::unique('tbl_faculty', 'faculty_name_en')
+                    ->ignore($this->faculty->faculty_id, 'faculty_id')
+                    ->whereNull('deleted_at'),
+            ],
+            'faculty_name_ar' => [
+                'required',
+                'regex:/^[\p{Arabic}\s]+$/u',
+                'max:255',
+                Rule::unique('tbl_faculty', 'faculty_name_ar')
+                    ->ignore($this->faculty->faculty_id, 'faculty_id')
+                    ->whereNull('deleted_at'),
+            ],
+            'abbreviation' => [
+                'required',
+                'string',
+                'max:10',
+                Rule::unique('tbl_faculty', 'abbreviation')
+                    ->ignore($this->faculty->faculty_id, 'faculty_id')
+                    ->whereNull('deleted_at'),
+            ],
+            'branch_id' => 'required|exists:tbl_branch,branch_id',
+            'status'    => 'nullable|boolean',
+        ];
+    }
+     public function messages(): array
+    {
+        return [
+            'faculty_name_en.required' => 'Faculty name in English is required.',
+            'faculty_name_ar.required' => 'Faculty name in Arabic is required.',
+            // Add more custom messages if needed
         ];
     }
 }
