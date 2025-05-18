@@ -1,6 +1,37 @@
 @section('script')
 //Admin Site Scripts
 <script>
+  // --------------------------DataTable scripts----------------
+$(document).ready(function() {
+    $('table.table').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5', 'print'
+        ],
+        responsive: true,
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        language: {
+            paginate: {
+                previous: "<i class='fas fa-chevron-left'></i> Prev",
+                next: "Next <i class='fas fa-chevron-right'></i>"
+            }
+        }
+    });
+});
+  
+     // --------------------------<!-- Custom Inline Scripts -->----------------
+        function filterTable() {
+            const searchInput = document.getElementById("tableSearch").value.toLowerCase();
+            const tableRows = document.querySelectorAll("#tableBody tr");
+
+            tableRows.forEach((row) => {
+                const cells = row.querySelectorAll("td");
+                const rowText = Array.from(cells)
+                    .map((cell) => cell.textContent.toLowerCase())
+                    .join(" ");
+                row.style.display = rowText.includes(searchInput) ? "" : "none";
+            });
+        }
   // --------------------------User scripts----------------
 document.addEventListener('DOMContentLoaded', function () {
       var editModal = document.getElementById('editModal');
