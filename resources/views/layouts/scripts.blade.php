@@ -387,7 +387,6 @@ $(document).on('submit', '#addIntakeForm', function(e) {
         data: formData,
         success: function(response) {
             console.log(response);  // Add this line to check the response from the server
-
             if (response.status === 'success') {
                 $('#AddIntakeModal').modal('hide');
                 alert(response.message); // Display success message

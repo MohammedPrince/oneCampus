@@ -45,12 +45,13 @@ class IntakeController extends Controller
     {
         try {
             $validated = $request->validated();  // Use validated data from IntakeRequest
-            $this->intakeService->createIntake($validated);
+            $storeIntake = $this->intakeService->createIntake($validated);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Intake added successfully',
                 'data' => $validated,  // Optionally, send the saved intake data
-            ]);        } catch (\Exception $e) {
+            ]);      
+          } catch (\Exception $e) {
     Log::error('Intake save error: ' . $e->getMessage());
     return back()->with('error', 'An error occurred while saving intake.');
 }
@@ -106,12 +107,9 @@ class IntakeController extends Controller
             // Call the service method to delete the intake
             $deleted = $this->intakeService->deleteIntake($id);
 
-            if ($deleted) {
-                  
+            if ($deleted) {   
                 return back()->with('success', 'Inake deleted successfully.');
-
             }
-
             // If intake not found, redirect with error message
             return response()->json([
                 'status' => 'Error',

@@ -52,7 +52,7 @@
           <td style="text-align: center;">{{ $faculty->faculty_name_en }}</td>
           <td style="text-align: center;">{{ $faculty->faculty_name_ar }}</td>
           <td style="text-align: center;">{{ $faculty->abbreviation }}</td>
-          <td style="text-align: center;">{{ $faculty->branch->branch_name_ar ?? 'All Branches' }}</td>
+          <td style="text-align: center;">{{ $faculty->branch->branch_name_ar ?? 'Null' }}</td>
        
           <td style="text-align: center;">
             <button class="edit-btn"
@@ -62,7 +62,7 @@
               data-en="{{ $faculty->faculty_name_en }}"
               data-ar="{{ $faculty->faculty_name_ar }}"
               data-abbr="{{ $faculty->abbreviation }}"
-              data-branch="{{ $faculty->branch->branch_id }}"
+              data-branch="{{ $faculty->branch->branch_id ?? '' }}"
               style="border: none; background-color: transparent;">
               <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
             </button>
