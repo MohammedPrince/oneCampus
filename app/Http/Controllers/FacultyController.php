@@ -40,11 +40,14 @@ class FacultyController extends Controller
         return back()->with('success', 'Faculty created successfully.');
     }
 
-    public function update(UpdateFacultyRequest $request, $id): RedirectResponse
+    public function update(UpdateFacultyRequest $request, $id)
     {
         $this->facultyService->update($id, $request->validated());
-        return back()->with('success', 'Faculty updated successfully.');
-    }
+       return response()->json([
+                'status' => 'success',
+                'message' => 'faculty Updated  successfully',
+                 // Optionally, send the saved intake data
+            ]);          }
 
     public function destroy($id): RedirectResponse
     {
