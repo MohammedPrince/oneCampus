@@ -134,9 +134,7 @@
                         <div class="col-6">
                             <button type="submit" class="btn btn-outline" style="margin: 1px; width: 15vw;">Update</button>
                         </div>
-                        <div class="col-6">
-                            <button type="button" class="btn btn-outline" style="margin: 1px; width: 15vw;" id="deleteIntakeBtn">Delete</button>
-                        </div>
+                      
                     </div>
                 </form>
             </div>
