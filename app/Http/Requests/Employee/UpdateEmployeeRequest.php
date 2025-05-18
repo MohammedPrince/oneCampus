@@ -14,6 +14,8 @@ class UpdateEmployeeRequest extends FormRequest
 
     public function rules()
     {
+        $employee = \App\Models\EmployeeMainInfo::with('profile')->find($this->route('id'));
+        $profileId = optional($employee->profile)->employee_profile_id;
         return [
             'full_name_ar'     => 'required|regex:/^[\p{Arabic}\s]+$/u|max:255',
             'full_name_en'     => 'required|string|max:255',
@@ -22,16 +24,18 @@ class UpdateEmployeeRequest extends FormRequest
                 'required',
                 'email',
                 Rule::unique('tbl_employee_main_info', 'personal_email')
-                    ->ignore($this->employee->employee_id, 'employee_id')
-                    ->whereNull('deleted_at'),
+                ->ignore($this->route('id'), 'employee_id')
+                ->whereNull('deleted_at'),
+
             ],
 
             'corporate_email'  => [
                 'required',
                 'email',
-                Rule::unique('tbl_employee_main_info', 'corporate_email')
-                    ->ignore($this->employee->employee_id, 'employee_id')
-                    ->whereNull('deleted_at'),
+              Rule::unique('tbl_employee_main_info', 'corporate_email')
+             ->ignore($this->route('id'), 'employee_id')
+             ->whereNull('deleted_at'),
+
             ],
 
             'phone_number'     => 'required|string|max:15',
@@ -45,7 +49,13 @@ class UpdateEmployeeRequest extends FormRequest
             'gender'           => 'required|string|max:10',
             'nationality'      => 'required|string|max:255',
             'identification_type' => 'required|in:National ID,Passport,Driving License,Other',
-            'identification_id'   => 'required|string|max:255',
+             'identification_id'  => [
+                'required',
+                'string',
+                Rule::unique('tbl_employee_profile', 'identification_id')
+                ->ignore($profileId, 'employee_profile_id')
+                ->whereNull('deleted_at'),
+            ],
             'cv'              => 'nullable|file|mimes:pdf,doc,docx',
             'certificates'    => 'nullable|file|mimes:pdf,doc,docx',
         ];

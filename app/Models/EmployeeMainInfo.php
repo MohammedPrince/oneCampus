@@ -17,7 +17,7 @@ class EmployeeMainInfo extends Model
     protected $fillable = [
         'full_name_ar', 'full_name_en', 'phone_number', 
         'personal_email', 'corporate_email', 'branch_id', 
-        'department_id', 'user_id', 'biometric','gender',
+        'department_id', 'user_id', 
     ];
 
     public function branch()

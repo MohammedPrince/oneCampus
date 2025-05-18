@@ -38,7 +38,12 @@ class EmployeeRequest extends FormRequest
             'gender'           => 'required|string|max:10',
             'nationality'      => 'required|string|max:255',
             'identification_type' => 'required|in:National ID,Passport,Driving License,Other',
-            'identification_id'   => 'required|string|max:255',
+              'identification_id'  => [
+                'required',
+                'string',
+                Rule::unique('tbl_employee_profile', 'identification_id')->whereNull('deleted_at'),
+            ],
+           
             'cv'              => 'nullable|file|mimes:pdf,doc,docx',
             'certificates'    => 'nullable|file|mimes:pdf,doc,docx',
         ];
