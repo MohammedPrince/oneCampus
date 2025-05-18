@@ -80,7 +80,7 @@
                         <div class="col-md-6">
                             <label for="department" class="form-label">Department</label>
                             <select class="form-select" id="dep" name="department_id" required style="width: 30vw;">
-                                <option value="">Select your role</option>
+                                <option value="">Select your Department</option>
                                 @php
                                     $faculties = App\Models\Faculty::all();
                                 @endphp

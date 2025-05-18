@@ -89,13 +89,13 @@
                                     data-corporate_email="{{ $employee->corporate_email }}"
                                     data-phone_number="{{ $employee->phone_number }}"
                                     data-whatsapp_number="{{ $employee->profile->whatsapp_number }}"
-                                    data-department="{{ $employee->department_id }}"
+                                    data-department_id="{{ $employee->department->faculty_id }}"
                                     data-role="{{ $employee->profile->role }}"
                                     data-birth_date="{{ $employee->profile->date_of_birth ? \Carbon\Carbon::parse($employee->profile->date_of_birth)->format('Y-m-d') : '' }}"
                                     data-recruitment_date="{{ $employee->profile->hire_date ? \Carbon\Carbon::parse($employee->profile->hire_date)->format('Y-m-d') : '' }}"
                                     data-identification_type="{{ $employee->profile->identification_id_type }}"
                                     data-identification_id="{{ $employee->profile->identification_id }}"
-                                    data-branch="{{ $employee->branch->branch_name_en }}"
+                                    data-branch_id="{{ $employee->branch->branch_id }}"
                                     data-biometric="{{ $employee->profile->biometric }}"
                                     data-gender="{{ $employee->profile->gender }}"
                                     data-nationality="{{ $employee->profile->nationality }}"
@@ -180,7 +180,15 @@
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <label for="editDepartment" class="form-label">Department</label>
-                    <input type="text" class="form-control" id="editDepartment" name="department_id" required>
+                   <select class="form-select" id="editDepartment" name="department_id" required>
+                                @php
+                                    $faculties = App\Models\Faculty::all();
+                                @endphp
+                                @foreach ($faculties as $data )
+                                <option value="{{$data->faculty_id}}">{{$data->faculty_name_en}}</option>
+                                @endforeach
+                          
+                            </select>
                   </div>
                   <div class="col-md-6">
                     <label for="editRole" class="form-label">Role</label>

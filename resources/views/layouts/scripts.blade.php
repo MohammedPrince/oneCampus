@@ -66,13 +66,13 @@ document.addEventListener('DOMContentLoaded', function () {
           var corporateEmail = button.getAttribute('data-corporate_email');
           var phoneNumber = button.getAttribute('data-phone_number');
           var whatsappNumber = button.getAttribute('data-whatsapp_number');
-          var department = button.getAttribute('data-department');
+          var department = button.getAttribute('data-department_id');
           var role = button.getAttribute('data-role');
           var birthDate = button.getAttribute('data-birth_date');
           var recruitmentDate = button.getAttribute('data-recruitment_date');
           var identificationType = button.getAttribute('data-identification_type');
           var identificationId = button.getAttribute('data-identification_id');
-          var branch = button.getAttribute('data-branch');
+          var branch = button.getAttribute('data-branch_id');
           var biometric = button.getAttribute('data-biometric');
           var gender = button.getAttribute('data-gender');
           var Nationality = button.getAttribute('data-nationality');
