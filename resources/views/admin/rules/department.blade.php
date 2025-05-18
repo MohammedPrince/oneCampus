@@ -16,6 +16,7 @@
 <div class="">
   <div class="row">
     <div class="col-4">
+      
       <h2>Faculties:</h2>
     </div>
     <div class="col-4">
@@ -29,7 +30,7 @@
   <div class="mb-3">
     <input type="text" id="tableSearch" class="form-control" placeholder="Search..." onkeyup="filterTable()" style="width: 30vw;" />
   </div>
-
+   
   {{-- Faculty Table --}}
   <div class="table-responsive">
     <table class="table">
@@ -52,12 +53,7 @@
           <td style="text-align: center;">{{ $faculty->faculty_name_ar }}</td>
           <td style="text-align: center;">{{ $faculty->abbreviation }}</td>
           <td style="text-align: center;">{{ $faculty->branch->branch_name_ar ?? 'All Branches' }}</td>
-          {{-- <td style="text-align: center;">
-            <div class="switchToggle">
-              <input type="checkbox" id="switch{{ $faculty->faculty_id }}" {{ $faculty->status ? 'checked' : '' }}>
-              <label for="switch{{ $faculty->faculty_id }}">Toggle</label>
-            </div>
-          </td> --}}
+       
           <td style="text-align: center;">
             <button class="edit-btn"
               data-bs-toggle="modal"

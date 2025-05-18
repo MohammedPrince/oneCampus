@@ -173,6 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
         error: function (xhr) {
           console.error(xhr);
           alert('Error updating faculty.');
+          location.reload();
         }
       });
     });
@@ -199,6 +200,7 @@ $(document).ready(function () {
         }).fail(function (xhr) {
             console.error(xhr.responseText); // Check for validation or server errors
             alert('Failed to add branch');
+              location.reload();
         });
     });
 
@@ -212,6 +214,8 @@ $(document).ready(function () {
             location.reload();
         }).fail(function () {
             alert('Failed to update branch');
+            location.reload();
+
         });
     });
 });
@@ -294,6 +298,8 @@ $(document).ready(function () {
         $('#Editbatch').modal('show');
     }).fail(function() {
         alert('Error fetching batch data.');
+         window.location.reload(); // Refresh the page after adding
+
     });
 });
 
@@ -388,11 +394,14 @@ $(document).on('submit', '#addIntakeForm', function(e) {
                 window.location.reload(); // Refresh the page after adding
             } else {
                 alert('Error adding intake');
+                 window.location.reload(); // Refresh the page 
+
             }
         },
         error: function(xhr, status, error) {
             console.error(xhr.responseText);  // Log the error response for debugging
-            alert('Error adding intake');
+            window.location.reload(); // Refresh the page after adding
+
         }
     });
 });
@@ -408,6 +417,8 @@ $(document).on('submit', '#addIntakeForm', function(e) {
             $('#EditIntakeModal').modal('show');
         }).fail(function() {
             alert('Error fetching intake data.');
+            window.location.reload(); // Refresh the page after adding
+
         });
     });
 
@@ -428,10 +439,14 @@ $(document).on('submit', '#addIntakeForm', function(e) {
                     location.reload(); // Reload the page after update
                 } else {
                     alert('Error updating intake');
+                    window.location.reload(); // Refresh the page after adding
+
                 }
             },
             error: function() {
                 alert('Error updating intake');
+                window.location.reload(); // Refresh the page after adding
+
             }
         });
     });
@@ -455,10 +470,14 @@ $(document).on('submit', '#addIntakeForm', function(e) {
                         location.reload(); // Reload the page after update
                     } else {
                         alert('Error deleting intake');
+                        window.location.reload(); // Refresh the page after adding
+
                     }
                 },
                 error: function() {
                     alert('Error deleting intake');
+                    window.location.reload(); // Refresh the page after adding
+
                 }
             });
         }
@@ -497,6 +516,8 @@ $(document).on('submit', '#addIntakeForm', function(e) {
                 },
                 error: function(xhr) {
                     alert('Error: ' + xhr.responseText);
+                    window.location.reload(); // Refresh the page after adding
+
                 }
             });
         });
@@ -546,10 +567,14 @@ $(document).on('submit', '#addIntakeForm', function(e) {
                 });
             } else {
                 console.error("Error: Majors data is missing or undefined in the response.");
+                window.location.reload(); // Refresh the page after adding
+
             }
         },
         error: function(xhr) {
             alert('Error: ' + xhr.responseText);
+            window.location.reload(); // Refresh the page after adding
+
         }
     });
 }
@@ -579,10 +604,12 @@ $(document).on('submit', '#addIntakeForm', function(e) {
                 },
                 error: function(xhr) {
                     alert('Error: ' + xhr.responseText);
+                     window.location.reload(); // Refresh the page after adding
+
                 }
             });
         }
-        $(document).on('click', '.delete-major', function () {
+  $(document).on('click', '.delete-major', function () {
     const majorId = $(this).data('id');
     if (confirm('Are you sure you want to delete this major?')) {
         $.ajax({
@@ -597,6 +624,8 @@ $(document).on('submit', '#addIntakeForm', function(e) {
             },
             error: function (xhr) {
                 alert('Failed to delete major.');
+                window.location.reload(); // Refresh the page after adding
+
             }
         });
     }
