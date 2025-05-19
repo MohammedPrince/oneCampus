@@ -49,10 +49,8 @@
                         <select class="form-select" name="branch_id" aria-label="Default select example">
 
                             <option value="1">Please Select a Branch</option>
-                            @php
-                                $branch = App\Models\Branch::all();
-                            @endphp
-                            @foreach ($branch as $data)
+                          
+                            @foreach ($branches as $data)
                             <option value="{{$data->branch_id}}">{{$data->branch_name_en}}</option>
                             @endforeach
                         </select>
@@ -66,9 +64,7 @@
                         <label for="department" class="form-label">Faculty</label>
                         <select class="form-select" name="faculty_id" id="facultySelect" required>
                             <option value="">Select Faculty</option>
-                            @php
-                                $faculties = App\Models\Faculty::all();
-                            @endphp
+                           
                             @foreach($faculties as $faculty)
                                 <option value="{{ $faculty->faculty_id }}">{{ $faculty->faculty_name_en }}</option>
                             @endforeach
@@ -159,10 +155,8 @@
                         <div class="col-md-6">
                             <label for="fullNameArabicStatus" class="form-label">Branch</label>
                             <select class="form-select" id="edit_branch_id" name="branch_id" aria-label="Default select example">
-                                @php
-                                $branch = App\Models\Branch::all();
-                            @endphp
-                            @foreach ($branch as $data)
+                           
+                            @foreach ($branches as $data)
                             <option value="{{$data->branch_id}}">{{$data->branch_name_en}}</option>
                             @endforeach
                             </select>

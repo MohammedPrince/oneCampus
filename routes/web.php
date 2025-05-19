@@ -120,6 +120,9 @@ Route::get('/academic/certificate',action: [AuthController::class,'manageCertifi
 Route::get('/academic/batch',[AuthController::class,'manageBatch'])->name('admin.academic.batch');
 // Route::get('/academic/intake',[AuthController::class,'manageIntake'])->name('admin.academic.intake');
 Route::resource('employee', controller: EmployeeController::class);
+//get branch 
+Route::get('/academic/batch', [BatchController::class, 'getData'])->name('admin.academic.batch');
+
 
 });
 

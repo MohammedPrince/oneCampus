@@ -16,6 +16,12 @@ class BatchController extends Controller
         $this->batchService = $batchService;
     }
 
+    public function getData(){
+    $branches = $this->batchService->getAllBranch(); // Assuming this method exists in your BatchService
+    $faculties = $this->batchService->getAllFaculty();
+
+    return view('admin.academic.batch',compact('branches','faculties'));
+    }
     public function index(): JsonResponse
     {
         return response()->json($this->batchService->getAllBatches());

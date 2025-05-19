@@ -12,10 +12,8 @@ class Employee extends Model
 {
     use HasFactory;
 
-protected $table ='tbl_employee_main_info';
-    // Fillable fields for employee_main_info table
+    protected $table ='tbl_employee_main_info';
    
-
     protected $casts = [
         'birth_date' => 'date',
         'recruitment_date' => 'date',

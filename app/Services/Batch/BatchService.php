@@ -37,7 +37,12 @@ class BatchService
     {
         return $this->batchRepository->getAll();
     }
-
+   public function getAllBranch(){
+    return $this->batchRepository->getAllBranch();
+   }
+   public function getAllFaculty(){
+    return $this->batchRepository->getAllFaculty();
+   }
     public function createBatch(array $data)
     {
         return $this->batchRepository->create($data);
