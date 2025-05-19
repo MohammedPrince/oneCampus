@@ -41,50 +41,48 @@ class AuthController extends Controller
        
     ]);
 
-    if (Auth::attempt($credentials)) {
-        //  dd(Auth::user()->name);
-          if(Auth::user()->role_id == 1){
-              // dd(Auth::user()->name);
-               return redirect()->intended('admin/user/list');
-            }elseif(Auth::user()->role_id == 2 ){
-              return redirect()->intended('/student');
-            }
-            elseif(Auth::user()->role_id == 3 ){
-                return redirect()->intended('/parent');
-              }
-              elseif(Auth::user()->role_id == 4 ){
-                return view('/agent');
-              }
-              elseif(Auth::user()->role_id == 5 ){
-                return redirect()->intended('/clinic');
-              }
-              elseif(Auth::user()->role_id == 6 ){
-                return redirect()->intended('/dean');
-              }
-              elseif(Auth::user()->role_id == 7 ){
-                return redirect()->intended('/admission-user');
-              }
-              elseif(Auth::user()->role_id == 8 ){
-                return redirect()->intended('/admission-admin');
-              }
-              elseif(Auth::user()->role_id == 9 ){
-                return redirect()->intended('/registrar');
-              }
-              elseif(Auth::user()->role_id == 10 ){
-                return redirect()->intended('/exam-officer');
-              }
-              elseif(Auth::user()->role_id == 11 ){
-                return redirect()->intended('/finance');
-              }else{
-              return redirect('/login')->with('error','not avaliable name');
-            }    }
-            else{
-              // return redirect()->intended('/finance');
-              return redirect('/')->with('error','Please Enter The Correct Credentials');
-              }}
-      public function logout(Request $request){
-        Auth::logout();
-    return redirect('/login');
+  if (Auth::attempt($credentials)) {
+  if(Auth::user()->role_id == 1){
+        return redirect()->intended('admin/user/list');
+    }elseif(Auth::user()->role_id == 2 ){
+      return redirect()->intended('/student');
+    }
+    elseif(Auth::user()->role_id == 3 ){
+        return redirect()->intended('/parent');
+      }
+      elseif(Auth::user()->role_id == 4 ){
+        return view('/agent');
+      }
+      elseif(Auth::user()->role_id == 5 ){
+        return redirect()->intended('/clinic');
+      }
+      elseif(Auth::user()->role_id == 6 ){
+        return redirect()->intended('/dean');
+      }
+      elseif(Auth::user()->role_id == 7 ){
+        return redirect()->intended('/admission-user');
+      }
+      elseif(Auth::user()->role_id == 8 ){
+        return redirect()->intended('/admission-admin');
+      }
+      elseif(Auth::user()->role_id == 9 ){
+        return redirect()->intended('/registrar');
+      }
+      elseif(Auth::user()->role_id == 10 ){
+        return redirect()->intended('/exam-officer');
+      }
+      elseif(Auth::user()->role_id == 11 ){
+        return redirect()->intended('/finance');
+      }else{
+      return redirect('/login')->with('error','not avaliable name');
+    }    }
+    else{
+      // return redirect()->intended('/finance');
+      return redirect('/')->with('error','Please Enter The Correct Credentials');
+      }}
+  public function logout(Request $request){
+    Auth::logout();
+   return redirect('/login');
     }
     public function index(){
         return view('dashboard');

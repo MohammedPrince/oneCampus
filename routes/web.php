@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\BranchController;
-use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\Admin\BranchController;
+use App\Http\Controllers\Admin\FacultyController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BatchController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\IntakeController;
-use App\Http\Controllers\MajorController;
+use App\Http\Controllers\Admin\BatchController;
+use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\IntakeController;
+use App\Http\Controllers\Admin\MajorController;
 use App\Http\Controllers\Admin\PasswordResetController;
 use App\Http\Controllers\TestController;
 
