@@ -514,7 +514,7 @@ $(document).on('submit', '#addIntakeForm', function(e) {
                     loadMajors(); // Reload table with new data
                 },
                 error: function(xhr) {
-                    alert('Error: ' + xhr.responseText);
+                    alert('Please Fill Required Fields ');
                     window.location.reload(); // Refresh the page after adding
 
                 }
