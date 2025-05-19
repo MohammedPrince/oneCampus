@@ -2,10 +2,12 @@
 
 namespace App\Repositories\Employee;
 
+use App\Models\Branch;
 use App\Models\Employee;
 use App\Models\Role;
 use App\Models\EmployeeMainInfo;
 use App\Models\EmployeeProfile;
+use App\Models\Faculty;
 
 class EmployeeRepository 
 {
@@ -16,7 +18,12 @@ class EmployeeRepository
     ->get();
   return $employees;
     }
-
+    public function getFaculty(){
+        return Faculty::all();
+    }
+    public function getAllBranch(){
+        return Branch::all();
+    }
     public function findById($id)
     {
         return EmployeeMainInfo::with('profile')->findOrFail($id);

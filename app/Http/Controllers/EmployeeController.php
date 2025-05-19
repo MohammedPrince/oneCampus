@@ -17,15 +17,21 @@ class EmployeeController extends Controller
     {
         $this->employeeService = $employeeService;
     }    
-  public function uploadEmployees(BulkRequest $request)
-{
-    $validated = $request->validated(); // Optional: Already runs `validate()` implicitly
+    public function uploadEmployees(BulkRequest $request)
+    {
+        $validated = $request->validated(); // Optional: Already runs `validate()` implicitly
 
-    $result = $this->employeeService->bulkUpload($request->file('bulk_file'));
+        $result = $this->employeeService->bulkUpload($request->file('bulk_file'));
 
-    return back()->with('message', "{$result['success']} users uploaded successfully, {$result['error']} failed.");
-}
+        return back()->with('message', "{$result['success']} users uploaded successfully, {$result['error']} failed.");
+    }
+    public function getUserData(){
+     $faculties = $this->employeeService->getFaculty();   
+     $roles = $this->employeeService->getRoles();
+     $branches = $this->employeeService->getAllBranch(); // Assuming this method exists in your BatchService
 
+     return view('admin.user.add_users',compact('faculties','roles','branches'));
+    }
     public function index()
     {
         $employees = $this->employeeService->listEmployees();

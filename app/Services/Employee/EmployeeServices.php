@@ -14,7 +14,12 @@ class EmployeeServices
     {
         $this->employeeRepo = $employeeRepo;
     }
-
+   public function getFaculty(){
+    return $this->employeeRepo->getFaculty();
+   }
+   public function getAllBranch(){
+    return $this->employeeRepo->getAllBranch();
+   }
     public function listEmployees()
     {
         return $this->employeeRepo->getAll();

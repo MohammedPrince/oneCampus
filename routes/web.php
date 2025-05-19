@@ -122,7 +122,8 @@ Route::get('/academic/batch',[AuthController::class,'manageBatch'])->name('admin
 Route::resource('employee', controller: EmployeeController::class);
 //get branch 
 Route::get('/academic/batch', [BatchController::class, 'getData'])->name('admin.academic.batch');
-
+//getuserdata
+Route::get('/user/add', [EmployeeController::class, 'getUserData'])->name('user.add');
 
 });
 

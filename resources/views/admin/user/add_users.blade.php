@@ -81,9 +81,7 @@
                             <label for="department" class="form-label">Department</label>
                             <select class="form-select" id="dep" name="department_id" required style="width: 30vw;">
                                 <option value="">Select your Department</option>
-                                @php
-                                    $faculties = App\Models\Faculty::all();
-                                @endphp
+                              
                                 @foreach ($faculties as $data )
                                 <option value="{{$data->faculty_id}}">{{$data->faculty_name_en}}</option>
    
@@ -94,9 +92,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="role" class="form-label">Role</label>
-                            @php
-                                $roles = App\Models\Role::all();
-                            @endphp 
+                           
                             <select class="form-select" id="role" name="role" required style="width: 30vw;">
                                 <option value="">Select your role</option>
                                 @if(isset($roles) && $roles->isNotEmpty())
@@ -144,9 +140,7 @@
                             <label for="branch" class="form-label">Branch</label>
                             <select class="form-select" id="branch_id" name="branch_id" required style="width: 30vw;">
                             <option value="">Select Branch</option>
-                            @php
-                                $branches = App\Models\Branch::all();
-                            @endphp
+                          
                             @foreach($branches as $branch)
                             <option value="{{ $branch->branch_id }}">{{ $branch->branch_name_en }}</option>
                             @endforeach
