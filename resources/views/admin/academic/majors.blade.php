@@ -124,7 +124,6 @@
                                 <th style="text-align: center;">Faculty</th>
                                 <th style="text-align: center;">Number Of Semesters</th>
                                 <th style="text-align: center;">Program Duration</th>
-                                <th style="text-align: center;">Status</th>
                                 <th style="text-align: center;">edit</th>
                                 <th style="text-align: center;">delete</th>
 

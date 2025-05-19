@@ -1,4 +1,4 @@
-@section('script')
+
 <script>
   // --------------------------DataTable scripts----------------
 $(document).ready(function() {
@@ -510,7 +510,8 @@ $(document).on('submit', '#addIntakeForm', function(e) {
                 success: function(response) {
                     // Handle success (e.g., refresh the major list)
                     alert('Major Added!');
-                    loadMajors(); // Reload table with new data
+                    loadMajors(); 
+                     window.location.reload(); // Reload table with new data
                 },
                 error: function(xhr) {
                     alert('Please Fill Required Fields ');
@@ -544,14 +545,6 @@ $(document).on('submit', '#addIntakeForm', function(e) {
                             <td style="text-align: center;">${major.faculty.faculty_name_en}</td>
                             <td style="text-align: center;">${major.number_of_semesters}</td>
                             <td style="text-align: center;">${major.program_duration}</td>
-                            <td style="text-align: center;">
-                                <div class="outerDivFull">
-                                    <div class="switchToggle">
-                                        <input type="checkbox" id="switch${major.major_id}" style="width: 30vw;">
-                                        <label for="switch${major.major_id}">Toggle</label>
-                                    </div>
-                                </div>
-                            </td>
                             <td style="text-align: center;">
                                 <button onclick="editMajor(${major.major_id})" style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#Editprogram">
                                     <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
@@ -639,4 +632,3 @@ $(document).ready(function() {
     console.log('parent dashboard loaded');
 });
   </script>
-  @endsection
