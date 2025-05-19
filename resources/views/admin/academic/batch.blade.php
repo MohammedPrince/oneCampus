@@ -49,12 +49,14 @@
                         <select class="form-select" name="branch_id" aria-label="Default select example">
 
                             <option value="1">Please Select a Branch</option>
-                          
+                             @if(isset($branches) && $branches->isNotEmpty())
                             @foreach ($branches as $data)
                             <option value="{{$data->branch_id}}">{{$data->branch_name_en}}</option>
                             @endforeach
+                           @else
+                           <option>No Branch available</option>
+                          @endif  
                         </select>
-
                         <div class="invalid-feedback">Please select the branch .</div>
                     </div>
                 </div>
@@ -64,10 +66,13 @@
                         <label for="department" class="form-label">Faculty</label>
                         <select class="form-select" name="faculty_id" id="facultySelect" required>
                             <option value="">Select Faculty</option>
-                           
+                            @if(isset($faculties) && $faculties->isNotEmpty())
                             @foreach($faculties as $faculty)
                                 <option value="{{ $faculty->faculty_id }}">{{ $faculty->faculty_name_en }}</option>
                             @endforeach
+                           @else
+                           <option>No Faculty available</option>
+                           @endif  
                         </select>
                         <div class="invalid-feedback">Please select a Faculty.</div>
                     </div>

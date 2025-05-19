@@ -160,9 +160,13 @@
                     <label class="form-label">Country</label>
                     <select class="form-select" name="country_id" id="edit_country" required>
                         <option value="">Select Country</option>
+                        @if(isset($country) && $country->isNotEmpty())
                         @foreach($country as $data)
                         <option value="{{ $data->country_id }}">{{ $data->country_name_ar }}</option>
                         @endforeach
+                          @else
+                            <option>No Country available</option>
+                         @endif     
                         </select>
                         </div>
                         <div class="col-md-6">

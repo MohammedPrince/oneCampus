@@ -81,18 +81,18 @@
                             <label for="department" class="form-label">Department</label>
                             <select class="form-select" id="dep" name="department_id" required style="width: 30vw;">
                                 <option value="">Select your Department</option>
-                              
+                                 @if(isset($faculties) && $faculties->isNotEmpty())
                                 @foreach ($faculties as $data )
                                 <option value="{{$data->faculty_id}}">{{$data->faculty_name_en}}</option>
-   
                                 @endforeach
-                          
+                                @else
+                                    <option>No Faculty available</option>
+                                @endif       
                             </select>
                             <div class="invalid-feedback">Please select a department.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="role" class="form-label">Role</label>
-                           
                             <select class="form-select" id="role" name="role" required style="width: 30vw;">
                                 <option value="">Select your role</option>
                                 @if(isset($roles) && $roles->isNotEmpty())
@@ -140,10 +140,13 @@
                             <label for="branch" class="form-label">Branch</label>
                             <select class="form-select" id="branch_id" name="branch_id" required style="width: 30vw;">
                             <option value="">Select Branch</option>
-                          
+                           @if(isset($branches) && $branches->isNotEmpty())
                             @foreach($branches as $branch)
                             <option value="{{ $branch->branch_id }}">{{ $branch->branch_name_en }}</option>
                             @endforeach
+                            @else
+                                <option>No Branch available</option>
+                            @endif       
                         </select>                            
                         <div class="invalid-feedback">Please enter the branch.</div>
                         </div>

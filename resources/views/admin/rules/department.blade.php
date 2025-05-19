@@ -114,9 +114,13 @@
               <label class="form-label">Branch</label>
               <select class="form-select" name="branch_id" id="AddFacultyBranch" required>
                 <option value="">Select Branch</option>
+                 @if(isset($branches) && $branches->isNotEmpty())
                 @foreach($branches as $branch)
                 <option value="{{ $branch->branch_id }}">{{ $branch->branch_name_ar }}</option>
                 @endforeach
+                   @else
+                  <option>No Branch available</option>
+                @endif     
               </select>
             </div>
           </div>

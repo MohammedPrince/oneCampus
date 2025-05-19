@@ -9,7 +9,7 @@ use App\Http\Controllers\BatchController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\IntakeController;
 use App\Http\Controllers\MajorController;
-use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\Admin\PasswordResetController;
 use App\Http\Controllers\TestController;
 
 use App\Http\Middleware\CheckRole;

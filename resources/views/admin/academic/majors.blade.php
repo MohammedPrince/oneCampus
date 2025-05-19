@@ -73,9 +73,13 @@
                             <label for="faculty" class="form-label">Faculty </label>
                             <select class="form-select" id="faculty_id" name="faculty_id" required style="width: 30vw;">
                                 <option value="">Select Faculty </option>
+                                 @if(isset($faculty) && $faculty->isNotEmpty())
                                 @foreach ($faculty as $data )
                                 <option value="{{$data->faculty_id}}">{{$data->faculty_name_en}}</option>
                                 @endforeach
+                                @else
+                               <option>No Faculty available</option>
+                                @endif  
                             </select>
                             <div class="invalid-feedback">Please select a Faculty.</div>
                         </div>
