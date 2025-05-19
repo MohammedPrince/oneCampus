@@ -628,5 +628,15 @@ $(document).on('submit', '#addIntakeForm', function(e) {
         });
     }
 });
+//-----------------------student scripts-----------
+$(document).ready(function() {
+    // Initialization code here
+    console.log('Student dashboard loaded');
+});
+//-----------------------student scripts-----------
+$(document).ready(function() {
+    // Initialization code here
+    console.log('parent dashboard loaded');
+});
   </script>
   @endsection

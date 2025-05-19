@@ -41,7 +41,7 @@
     <script src="{{ asset('js/formValidation.js') }}"></script>
     <script src="{{ asset('js/formhandler.js') }}"></script>
     @include('layouts.scripts')
-    @yield('script')
+   
 </body>
 
 </html>
