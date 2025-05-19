@@ -1,5 +1,4 @@
 @section('script')
-//Admin Site Scripts
 <script>
   // --------------------------DataTable scripts----------------
 $(document).ready(function() {

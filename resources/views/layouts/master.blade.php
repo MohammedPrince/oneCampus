@@ -23,7 +23,6 @@
     <div id="main-content" class="container-fluid" style="margin-left: 210px; width: calc(100% - 230px);">
         <div id="user-management" class="content-page" style="display: block;">
         @include('layouts.alert')
-
             @yield('content')
         </div>
 
@@ -41,7 +40,7 @@
     <script src="{{ asset('js/theme.js') }}"></script>
     <script src="{{ asset('js/formValidation.js') }}"></script>
     <script src="{{ asset('js/formhandler.js') }}"></script>
- @include('layouts.scripts')
+    @include('layouts.scripts')
     @yield('script')
 </body>
 
