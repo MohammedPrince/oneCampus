@@ -1,25 +1,25 @@
 @extends('layouts.master')
 
 @section('content')
-{{-- <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
+<nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
   <div class="container-fluid">
     <div class="navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav justify-content-end w100">
-          {{-- <a class="nav-link {{ request()->is('admin/user/list') ? 'active' : ''}}" href="{{route('user.list')}}" id="usersLink" aria-current="page">Users</a> --}}
-          {{-- <a class="nav-link {{ request()->is('admin/user/add') ? 'active' : ''}}" href="{{route('user.add')}}" id="addUsersLink">Add Users</a>
+          <a class="nav-link {{ request()->is('admin/user/list') ? 'active' : ''}}" href="{{route('user.list')}}" id="usersLink" aria-current="page">Users</a>
+           <a class="nav-link {{ request()->is('admin/user/add') ? 'active' : ''}}" href="{{route('user.add')}}" id="addUsersLink">Add Users</a>
           <a class="nav-link {{ request()->is('admin/user/reset') ? 'active' : ''}}" href="{{route('user.reset')}}" id="resetPasswordsLink">Reset Passwords</a>
       </div>
     </div>
-  </div>  --}}
+  </div> 
  
 
-<div class="row nav-tabs d-flex justify-content-end" id="userOptionsTab" role="tablist" style="border: none; width: 30vw;">
+{{-- <div class="row nav-tabs d-flex justify-content-end" id="userOptionsTab" role="tablist" style="border: none; width: 30vw;">
   <a class="nav-links active" id="single-user-tab" href="{{ route('user.add') }}" role="tab"
     aria-controls="single-user" aria-selected="true">Add Users</a>
 
   <a class="nav-links" id="bulk-user-tab" href="{{ route('user.reset') }}" role="tab"
     aria-controls="bulk-user" aria-selected="false">Reset Passwords</a>
-</div>
+</div> --}}
 
 <style>
 @media screen and (min-width: 768px) {
@@ -45,24 +45,24 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Full Name - الاسم كامل</th>
-                    {{-- <th>Name</th> --}}
-                    {{-- <th>Personal Email</th> --}}
-                    <th>Email</th>
-                    <th>Phone</th>
-                    {{-- <th>WhatsApp Number</th> --}}
+                    <th>Full Name (English)</th>
+                    <th>Full Name (Arabic)</th>
+                    <th>Personal Email</th>
+                    <th>Corporate Email</th>
+                    <th>Phone Number</th>
+                    <th>WhatsApp Number</th>
                     <th>Department</th>
                     <th>Role</th>
-                    {{-- <th>CV</th> --}}
+                    <th>CV</th>
                     <th>Certificate</th>
-                    {{-- <th>Birth Date</th> --}}
-                    <th>R-Date</th>
-                    {{-- <th>Passport Number</th> --}}
-                    {{-- <th>National ID</th> --}}
+                    <th>Birth Date</th>
+                    <th>Hire Date</th>
+                    <th>Passport Number</th>
+                    <th>National ID</th>
                     <th>Branch</th>
-                    {{-- <th>Biometric</th> --}}
-                    {{-- <th>Gender</th> --}}
-                    {{-- <th>Nationality</th> --}}
+                    <th>Biometric</th>
+                    <th>Gender</th>
+                    <th>Nationality</th>
                     <th>Actions</th>
                 </tr>
             </thead>

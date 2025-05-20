@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    {{-- <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
+     <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
         <div class="container-fluid">
           <div class="navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav justify-content-center w-100">
@@ -11,7 +11,7 @@
             </div>
           </div>
         </div>
-    </nav>  --}}
+    </nav>  
 
     {{-- <div class="row nav-tabs d-flex justify-content-end" id="userOptionsTab" role="tablist" style="border: none; width: 30vw;">
         <a class="nav-links active" id="single-user-tab" href="{{ route('user.add') }}" role="tab"
@@ -21,7 +21,7 @@
           aria-controls="bulk-user" aria-selected="false">Reset Passwords</a>
       </div> --}}
       
-      <style>
+      {{-- <style>
       @media screen and (min-width: 768px) {
         #userOptionsTab {
           margin-left: auto;
@@ -36,7 +36,7 @@
           justify-content: center !important;
         }
       }
-      </style>
+      </style> --}}
 
     
     <div class="row nav-tabs" id="userOptionsTab" role="tablist" style="border: none; width: 30vw;">

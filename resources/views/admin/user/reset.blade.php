@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-{{-- <nav class="navbar navbar-expand justify-content-center"
+ <nav class="navbar navbar-expand justify-content-center"
     style="background-color: transparent;">
     <div class="container-fluid">
         <div class="navbar-collapse"
@@ -19,9 +19,9 @@
             </div>
         </div>
     </div>
-</nav> --}}
+</nav> 
 
-<div class="row nav-tabs d-flex justify-content-end"
+{{-- <div class="row nav-tabs d-flex justify-content-end"
     id="userOptionsTab"
     role="tablist"
     style="border: none; width: 30vw; margin-bottom: 30px">
@@ -55,7 +55,7 @@
             justify-content: center !important;
         }
     }
-</style>
+</style> --}}
 
 
 <div class="form-container"
