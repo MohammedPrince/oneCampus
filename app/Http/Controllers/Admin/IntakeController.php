@@ -47,6 +47,8 @@ class IntakeController extends Controller
         try {
             $validated = $request->validated();  // Use validated data from IntakeRequest
             $storeIntake = $this->intakeService->createIntake($validated);
+            // return back()->with('success', 'Intake added successfully');
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Intake added successfully',

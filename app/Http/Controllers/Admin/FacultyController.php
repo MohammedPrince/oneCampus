@@ -44,11 +44,10 @@ class FacultyController extends Controller
     public function update(UpdateFacultyRequest $request, $id)
     {
         $this->facultyService->update($id, $request->validated());
-       return response()->json([
-                'status' => 'success',
-                'message' => 'faculty Updated  successfully',
-                 // Optionally, send the saved intake data
-            ]);          }
+        
+        return back()->with('success', 'Faculty Updated successfully.');
+          
+     }
 
     public function destroy($id): RedirectResponse
     {
