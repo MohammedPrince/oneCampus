@@ -14,8 +14,8 @@ class EmployeeRepository
     public function getAll()
     {
   $employees = EmployeeMainInfo::with(['branch', 'department', 'profile.roleInfo'])
-    ->whereHas('department')
     ->get();
+   
   return $employees;
     }
     public function getFaculty(){

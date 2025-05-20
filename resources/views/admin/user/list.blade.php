@@ -77,7 +77,7 @@
                         <td>{{ $employee->corporate_email }}</td>
                         <td>{{ $employee->phone_number }}</td>
                         <td>{{ $employee->profile->whatsapp_number }}</td>
-                        <td>{{ $employee->department->faculty_name_en }}</td>
+                        <td>{{ $employee->department->faculty_name_en ?? 'null' }}</td>
                         <td>
                           @if ($employee->profile && $employee->profile->roleInfo)
                               {{ $employee->profile->roleInfo->name }}
@@ -102,7 +102,7 @@
                         <td>{{ $employee->profile->hire_date }}</td>
                         <td>{{ $employee->profile->identification_id }}</td>
                         <td>{{ $employee->profile->identification_id_type  }}</td>
-                        <td>{{ $employee->branch->branch_name_en }}</td>
+                        <td>{{ $employee->branch->branch_name_en ?? 'null' }}</td>
                         <td>{{ $employee->profile->biometric }}</td>
                         <td>{{ $employee->profile->gender }}</td>
                         <td>{{ $employee->profile->nationality }}</td>
@@ -115,13 +115,13 @@
                                     data-corporate_email="{{ $employee->corporate_email }}"
                                     data-phone_number="{{ $employee->phone_number }}"
                                     data-whatsapp_number="{{ $employee->profile->whatsapp_number }}"
-                                    data-department_id="{{ $employee->department->faculty_id }}"
+                                    data-department_id="{{ $employee->department->faculty_id ?? 'null'}}"
                                     data-role="{{ $employee->profile->role }}"
                                     data-birth_date="{{ $employee->profile->date_of_birth ? \Carbon\Carbon::parse($employee->profile->date_of_birth)->format('Y-m-d') : '' }}"
                                     data-recruitment_date="{{ $employee->profile->hire_date ? \Carbon\Carbon::parse($employee->profile->hire_date)->format('Y-m-d') : '' }}"
                                     data-identification_type="{{ $employee->profile->identification_id_type }}"
                                     data-identification_id="{{ $employee->profile->identification_id }}"
-                                    data-branch_id="{{ $employee->branch->branch_id }}"
+                                    data-branch_id="{{ $employee->branch->branch_id ?? 'null'}}"
                                     data-biometric="{{ $employee->profile->biometric }}"
                                     data-gender="{{ $employee->profile->gender }}"
                                     data-nationality="{{ $employee->profile->nationality }}"
