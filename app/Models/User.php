@@ -54,17 +54,17 @@ class User extends Authenticatable
         ];
     }
    
-    public static function create(array $data )
-    {
-        $n = new User();
-        $n->name = $data['name'] ?? null; ;
-        $n->email = $data['email'] ?? null; ;
-        $n->password = $data['password'] ?? null;
-        $n->role_id = $data['role'] ?? null;
-        $n->is_active = '1';
-        $n->save();
-        return $n;
-    }
+    // public static function create(array $data )
+    // {
+    //     $n = new User();
+    //     $n->name = $data['name'] ?? null; ;
+    //     $n->email = $data['email'] ?? null; ;
+    //     $n->password = $data['password'] ?? null;
+    //     $n->role_id = $data['role'] ?? null;
+    //     $n->is_active = '1';
+    //     $n->save();
+    //     return $n;
+    // }
 
     public function role()
     {

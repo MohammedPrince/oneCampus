@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-  public $test;
-  public function __construct(UserServices $interface)
-  {
-      $this->test = $interface;
-  }
+   protected $test;
+
+    public function __construct(UserServices $test)
+    {
+        $this->test = $test;
+    }
     public function showLogin(Request $request){
         return view('login');
     }
@@ -23,11 +24,29 @@ class AuthController extends Controller
         $role = $this->test->showRole();
         return view('register',compact('role'));
     }
-    public function register( Request $request){
-        
-       $this->test->store($request->all());   
-        return redirect('/login');
+  public function register(Request $request)
+{
+    // Validate the request
+    $validated = $request->validate([
+        'name' => 'required|string|max:255|unique:users,name',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:6|confirmed',
+        'role' => 'required|exists:tbl_roles,id',
+    ]);
+
+    // Attempt to register the user via service
+    $result = $this->test->store($validated);
+
+    if (!$result['success']) {
+        return redirect()->back()
+            ->withInput()
+            ->withErrors(['error' => $result['message']]);
     }
+
+    return redirect('/login')
+        ->with('success', 'Registration successful! Please login.');
+}
+
 
     public function login(Request $request)
     {
