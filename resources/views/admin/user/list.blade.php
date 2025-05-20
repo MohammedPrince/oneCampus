@@ -1,36 +1,62 @@
 @extends('layouts.master')
 
 @section('content')
-<nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
+{{-- <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
   <div class="container-fluid">
     <div class="navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav justify-content-end w100">
           {{-- <a class="nav-link {{ request()->is('admin/user/list') ? 'active' : ''}}" href="{{route('user.list')}}" id="usersLink" aria-current="page">Users</a> --}}
-          <a class="nav-link {{ request()->is('admin/user/add') ? 'active' : ''}}" href="{{route('user.add')}}" id="addUsersLink">Add Users</a>
+          {{-- <a class="nav-link {{ request()->is('admin/user/add') ? 'active' : ''}}" href="{{route('user.add')}}" id="addUsersLink">Add Users</a>
           <a class="nav-link {{ request()->is('admin/user/reset') ? 'active' : ''}}" href="{{route('user.reset')}}" id="resetPasswordsLink">Reset Passwords</a>
       </div>
     </div>
-  </div>
+  </div>  --}}
+ 
+
+<div class="row nav-tabs d-flex justify-content-end" id="userOptionsTab" role="tablist" style="border: none; width: 30vw;">
+  <a class="nav-links active" id="single-user-tab" href="{{ route('user.add') }}" role="tab"
+    aria-controls="single-user" aria-selected="true">Add Users</a>
+
+  <a class="nav-links" id="bulk-user-tab" href="{{ route('user.reset') }}" role="tab"
+    aria-controls="bulk-user" aria-selected="false">Reset Passwords</a>
+</div>
+
+<style>
+@media screen and (min-width: 768px) {
+  #userOptionsTab {
+    margin-left: auto;
+    margin-right: 20px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #userOptionsTab {
+    width: 100% !important;
+    margin: 10px 0;
+    justify-content: center !important;
+  }
+}
+</style>
+
 </nav> 
-    <div class="container mt-4">
-        <h5>Employee List</h5>
+        <h5 style="margin-top: 40px; margin-left:20px">Employee List</h5>
         <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name(Arabic)</th>
-                    <th>Name(English)</th>
+                    <th>Full Name - الاسم كامل</th>
+                    {{-- <th>Name</th> --}}
                     {{-- <th>Personal Email</th> --}}
-                    <th>Corporate Email</th>
-                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Phone</th>
                     {{-- <th>WhatsApp Number</th> --}}
                     <th>Department</th>
                     <th>Role</th>
-                    <th>CV</th>
+                    {{-- <th>CV</th> --}}
                     <th>Certificate</th>
                     {{-- <th>Birth Date</th> --}}
-                    <th>Recruitment Date</th>
+                    <th>R-Date</th>
                     {{-- <th>Passport Number</th> --}}
                     {{-- <th>National ID</th> --}}
                     <th>Branch</th>

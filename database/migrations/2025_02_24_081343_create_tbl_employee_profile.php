@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,7 +17,7 @@ return new class extends Migration
             // - onDelete('restrict') prevents deletion of referenced records
             // - onUpdate('cascade') automatically updates references when parent record is updated
             // $table->foreignId('employee_id')->constrained('tbl_employee_main_info', 'employee_id')->onDelete('cascade')->onUpdate('cascade');
-                      $table->foreignId('employee_id');
+            $table->foreignId('employee_id');
 
             $table->enum('gender', ['Male', 'Female']);
             $table->enum('blood_group', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']);
@@ -59,7 +58,7 @@ return new class extends Migration
             $table->enum('employment_type', ['Full-Time', 'Part-Time', 'Contract'])->default('Full-Time');
             $table->string('biometric');
             $table->date('hire_date');
-            
+
             $table->date('end_date')->nullable()->default(NULL);
             $table->enum('position_level', ['Entry Level', 'Junior', 'Mid Level', 'Senior', 'Lead', 'Manager', 'Director', 'Other'])->default('Entry Level');
             $table->decimal('salary', 10, 2)->unsigned(); // Add validation for salary to prevent negative values

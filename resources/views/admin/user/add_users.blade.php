@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
+    {{-- <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
         <div class="container-fluid">
           <div class="navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav justify-content-center w-100">
@@ -11,8 +11,34 @@
             </div>
           </div>
         </div>
-    </nav> 
+    </nav>  --}}
 
+    {{-- <div class="row nav-tabs d-flex justify-content-end" id="userOptionsTab" role="tablist" style="border: none; width: 30vw;">
+        <a class="nav-links active" id="single-user-tab" href="{{ route('user.add') }}" role="tab"
+          aria-controls="single-user" aria-selected="true">Add Users</a>
+      
+        <a class="nav-links" id="bulk-user-tab" href="{{ route('user.reset') }}" role="tab"
+          aria-controls="bulk-user" aria-selected="false">Reset Passwords</a>
+      </div> --}}
+      
+      <style>
+      @media screen and (min-width: 768px) {
+        #userOptionsTab {
+          margin-left: auto;
+          margin-right: 20px;
+        }
+      }
+      
+      @media screen and (max-width: 767px) {
+        #userOptionsTab {
+          width: 100% !important;
+          margin: 10px 0;
+          justify-content: center !important;
+        }
+      }
+      </style>
+
+    
     <div class="row nav-tabs" id="userOptionsTab" role="tablist" style="border: none; width: 30vw;">
         <a class="nav-links active" id="single-user-tab" data-bs-toggle="tab" href="#single-user" role="tab"
           aria-controls="single-user" aria-selected="true">Single User</a>
@@ -34,7 +60,7 @@
                     </ul>
                 </div>
             @endif
-                <h1 class="mb-4">Add New Employee</h1>
+                <h3 class="mb-4">Add New Employee</h3>
                 <form method="POST" action="{{ route('employee.store') }}" class="row needs-validation" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="row mb-3">
@@ -193,12 +219,12 @@
         <!-- Bulk User Form -->
         <div class="tab-pane fade" id="bulk-user" role="tabpanel" aria-labelledby="bulk-user-tab">
             <div class="container">
-                <h1 class="mb-4">Bulk User Upload</h1>
+                <h3 class="mb-4">Bulk User Upload</h3>
                 <!-- Bulk Upload Form -->
                 <form action="{{ route('employees.upload') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="bulkUploadFile" class="form-label">Upload CSV</label>
+                        <label for="bulkUploadFile" class="form-label">Upload your CSV here...</label>
                         <input type="file" class="form-control w-50" id="bulkUploadFile" name="bulk_file" style="text-align: center; vertical-align: middle; padding-bottom: 4vh;" required>
                         <div class="invalid-feedback">Please upload a CSV file.</div>
                     </div>

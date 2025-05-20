@@ -1,4 +1,4 @@
-<!-- Navbar -->
+
 <nav class="navbar navbar-expand-md navbar-light " id="top-navbar" style="background-color: white;">
   <div class="container-fluid">
     <a class="navbar-brand" href="home.html">
@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <div class="search-container d-flex justify-content-center">
+          <div class="search-container d-flex justify-content-center" style="margin-left: 110px;">
             
             <input type="text" class="search-bar form-control" placeholder="Search..">
           </div>
