@@ -76,7 +76,7 @@
                         <td>{{ $employee->profile->hire_date }}</td>
                         <td>{{ $employee->profile->identification_id }}</td>
                         <td>{{ $employee->profile->identification_id_type  }}</td>
-                        <td>{{ $employee->branch->branch_name_en }}</td>
+                        <td>{{ $employee->branch->branch_name_en ?? 'null' }}</td>
                         <td>{{ $employee->profile->biometric }}</td>
                         <td>{{ $employee->profile->gender }}</td>
                         <td>{{ $employee->profile->nationality }}</td>
@@ -95,7 +95,7 @@
                                     data-recruitment_date="{{ $employee->profile->hire_date ? \Carbon\Carbon::parse($employee->profile->hire_date)->format('Y-m-d') : '' }}"
                                     data-identification_type="{{ $employee->profile->identification_id_type }}"
                                     data-identification_id="{{ $employee->profile->identification_id }}"
-                                    data-branch_id="{{ $employee->branch->branch_id }}"
+                                    data-branch_id="{{ $employee->branch->branch_id ?? 'null'}}"
                                     data-biometric="{{ $employee->profile->biometric }}"
                                     data-gender="{{ $employee->profile->gender }}"
                                     data-nationality="{{ $employee->profile->nationality }}"
