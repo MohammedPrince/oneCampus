@@ -18,7 +18,7 @@ return new class extends Migration
             // - onDelete('restrict') prevents deletion of referenced records
             // - onUpdate('cascade') automatically updates references when parent record is updated
             // $table->foreignId('employee_id')->constrained('tbl_employee_main_info', 'employee_id')->onDelete('cascade')->onUpdate('cascade');
-                      $table->foreignId('employee_id')->constrained('tbl_employee_main_info');
+                      $table->foreignId('employee_id');
 
             $table->enum('gender', ['Male', 'Female']);
             $table->enum('blood_group', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']);
