@@ -1,7 +1,14 @@
 <div id="nav-bar">
     <input id="nav-toggle" type="checkbox" />
     <div id="nav-header">
-        <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
+        <label for="nav-toggle" style="cursor:pointer;">
+            <!-- Hamburger SVG icon -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <rect y="4" width="24" height="2" rx="1" fill="#333"/>
+                <rect y="11" width="24" height="2" rx="1" fill="#333"/>
+                <rect y="18" width="24" height="2" rx="1" fill="#333"/>
+            </svg>
+        </label>
     </div>
 
     <div id="nav-content">
