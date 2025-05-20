@@ -51,7 +51,7 @@
                         <td>{{ $employee->corporate_email }}</td>
                         <td>{{ $employee->phone_number }}</td>
                         <td>{{ $employee->profile->whatsapp_number }}</td>
-                        <td>{{ $employee->department->faculty_name_en }}</td>
+                        <td>{{ $employee->department->faculty_name_en ?? 'null' }}</td>
                         <td>
                           @if ($employee->profile && $employee->profile->roleInfo)
                               {{ $employee->profile->roleInfo->name }}
@@ -89,7 +89,7 @@
                                     data-corporate_email="{{ $employee->corporate_email }}"
                                     data-phone_number="{{ $employee->phone_number }}"
                                     data-whatsapp_number="{{ $employee->profile->whatsapp_number }}"
-                                    data-department_id="{{ $employee->department->faculty_id }}"
+                                    data-department_id="{{ $employee->department->faculty_id ?? 'null'}}"
                                     data-role="{{ $employee->profile->role }}"
                                     data-birth_date="{{ $employee->profile->date_of_birth ? \Carbon\Carbon::parse($employee->profile->date_of_birth)->format('Y-m-d') : '' }}"
                                     data-recruitment_date="{{ $employee->profile->hire_date ? \Carbon\Carbon::parse($employee->profile->hire_date)->format('Y-m-d') : '' }}"

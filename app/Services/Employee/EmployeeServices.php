@@ -120,6 +120,7 @@ class EmployeeServices
                     'date_of_birth'             => $data['date_of_birth'] ?? null,
                     'whatsapp_number'           => $data['whatsapp_number'] ?? null,
                     'role'                      => $data['role'] ?? null,
+                    'biometric'                 => $data['biometric']?? null,
                     'hire_date'                 => $data['hire_date'] ?? null,
                     'identification_id_type'    => $data['identification_id_type'] ?? null,
                     'identification_id'         => $data['identification_id'] ?? null,
