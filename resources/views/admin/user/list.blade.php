@@ -4,8 +4,8 @@
 <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
   <div class="container-fluid">
     <div class="navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav justify-content-center w-100">
-          <a class="nav-link {{ request()->is('admin/user/list') ? 'active' : ''}}" href="{{route('user.list')}}" id="usersLink" aria-current="page">Users</a>
+      <div class="navbar-nav justify-content-end w100">
+          {{-- <a class="nav-link {{ request()->is('admin/user/list') ? 'active' : ''}}" href="{{route('user.list')}}" id="usersLink" aria-current="page">Users</a> --}}
           <a class="nav-link {{ request()->is('admin/user/add') ? 'active' : ''}}" href="{{route('user.add')}}" id="addUsersLink">Add Users</a>
           <a class="nav-link {{ request()->is('admin/user/reset') ? 'active' : ''}}" href="{{route('user.reset')}}" id="resetPasswordsLink">Reset Passwords</a>
       </div>
@@ -13,30 +13,30 @@
   </div>
 </nav> 
     <div class="container mt-4">
-        <h1>Employee List</h1>
+        <h5>Employee List</h5>
         <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Full Name (Arabic)</th>
-                    <th>Full Name (English)</th>
-                    <th>Personal Email</th>
+                    <th>Name(Arabic)</th>
+                    <th>Name(English)</th>
+                    {{-- <th>Personal Email</th> --}}
                     <th>Corporate Email</th>
                     <th>Phone Number</th>
-                    <th>WhatsApp Number</th>
+                    {{-- <th>WhatsApp Number</th> --}}
                     <th>Department</th>
                     <th>Role</th>
                     <th>CV</th>
                     <th>Certificate</th>
-                    <th>Birth Date</th>
+                    {{-- <th>Birth Date</th> --}}
                     <th>Recruitment Date</th>
-                    <th>Passport Number</th>
-                    <th>National ID</th>
+                    {{-- <th>Passport Number</th> --}}
+                    {{-- <th>National ID</th> --}}
                     <th>Branch</th>
-                    <th>Biometric</th>
-                    <th>Gender</th>
-                    <th>Nationality</th>
+                    {{-- <th>Biometric</th> --}}
+                    {{-- <th>Gender</th> --}}
+                    {{-- <th>Nationality</th> --}}
                     <th>Actions</th>
                 </tr>
             </thead>
