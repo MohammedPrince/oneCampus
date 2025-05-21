@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-md navbar-light " id="top-navbar" style="background-color: white;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="home.html">
+    <a class="navbar-brand" href="#">
       <img src="{{asset('assets/logo.svg')}}" alt="Logo" class="logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
