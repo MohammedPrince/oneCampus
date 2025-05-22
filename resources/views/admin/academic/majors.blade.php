@@ -26,7 +26,7 @@
         <!-- Add Major Form -->
         <div id="batch" class="tab-pane fade show active">
             <div class="container mt-5">
-                <h1 class="mb-4">Add New Program</h1>
+                <h4 class="mb-4">Add New Program</h4>
             
                 <div id="alertArea" class="my-2"></div>
                 <form id="add-major-form" class="row needs-validation" novalidate>
@@ -108,7 +108,10 @@
                             <div class="invalid-feedback">Please enter the program duration.</div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline w-100">Submit</button>
+                    <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-outline w-25">Submit</button>
+                            </div>
+                    
                 </form>
             </div>
         </div>
