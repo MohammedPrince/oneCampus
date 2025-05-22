@@ -51,7 +51,10 @@
   <div class="container col-12"
     style="flex-direction: row;">
     <div class="row g-0 col-12">
-   <div class="col-12">
+  
+
+      <div class="left-form col-4 p-4 align-content-center">
+         <div class="col-12">
     @if(session('success'))
         <div class="alert alert-success alert-dismissible py-1 px-2 mb-2 fade show d-flex align-items-center" role="alert" style="font-size: 0.8rem;">
             <span>{{ session('success') }}</span>
@@ -75,8 +78,6 @@
         </div>
     @endif
 </div>
-
-      <div class="left-form col-4 p-4 align-content-center">
         <div class="row"
           style="justify-content: end;align-items: end;align-self: flex-end;">
           <div class="radio-dropdown">
