@@ -27,9 +27,11 @@
             <th>CV</th>
             <td>
                 @if($employee->profile->cv)
-                    <a href="{{ asset('storage/' . $employee->profile->cv) }}" target="_blank">View CV</a>
+                    <a href="{{ Storage::url($employee->profile->cv) }}" target="_blank" class="btn btn-primary btn-sm">
+                        <i class="fas fa-file-pdf"></i> View CV
+                    </a>
                 @else
-                    No CV uploaded
+                    <span class="text-muted">No CV uploaded</span>
                 @endif
             </td>
         </tr>
@@ -37,9 +39,11 @@
             <th>Certificate</th>
             <td>
                 @if($employee->profile->certificates)
-                    <a href="{{ asset('storage/' . $employee->profile->certificates) }}" target="_blank">View Certificate</a>
+                    <a href="{{ Storage::url($employee->profile->certificates) }}" target="_blank" class="btn btn-primary btn-sm">
+                        <i class="fas fa-file-pdf"></i> View Certificate
+                    </a>
                 @else
-                    No Certificate uploaded
+                    <span class="text-muted">No Certificate uploaded</span>
                 @endif
             </td>
         </tr>

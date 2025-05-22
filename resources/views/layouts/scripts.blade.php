@@ -51,6 +51,48 @@
                 label.innerText = 'Other ID';
             }
         });
+
+        // Handle employee update form submission
+        const editEmployeeForm = document.getElementById('editEmployeeForm');
+        if (editEmployeeForm) {
+            editEmployeeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        $('#editModal').modal('hide');
+                        showAlert('Employee updated successfully!', 'success');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1500);
+                    },
+                    error: function(xhr) {
+                        console.error(xhr);
+                        if (xhr.status === 422) {
+                            // Laravel validation error
+                            const errors = xhr.responseJSON.errors;
+                            let errorMsg = 'Validation Error:\n';
+                            $.each(errors, function(key, messages) {
+                                errorMsg += `- ${messages[0]}\n`;
+                            });
+                            showAlert(errorMsg, 'danger');
+                        } else {
+                            showAlert('Error updating employee.', 'danger');
+                        }
+                    }
+                });
+            });
+        }
     });
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -249,13 +291,27 @@ $('#addFacultyForm').submit(function (e) {
     // ========================
     // Show alert
     // ========================
-    function showAlert(message, type = 'success') {
-        $('#alertArea').html(`
-            <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+    function showAlert(message, type = 'success', target = '#alertArea') {
+        const allowedTypes = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+        const alertType = allowedTypes.includes(type) ? type : 'success';
+
+        if (alertTimeout) {
+            clearTimeout(alertTimeout);
+            alertTimeout = null;
+        }
+
+        const alertHtml = `
+            <div class="alert alert-${alertType} alert-dismissible fade show shadow" role="alert">
                 ${message}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        `);
+            </div>`;
+        
+        $(target).html(alertHtml);
+
+        // Auto-dismiss after 5 seconds
+        alertTimeout = setTimeout(() => {
+            $(target).find('.alert').alert('close');
+        }, 5000);
     }
 });
 
@@ -376,10 +432,10 @@ function showAlert(message, type = 'success', target = '#alertArea') {
     
     $(target).html(alertHtml);
 
-    // Optional: auto-dismiss after a longer time
-    // alertTimeout = setTimeout(() => {
-    //     $(target).find('.alert').alert('close');
-    // }, 10000);
+    // Auto-dismiss after 5 seconds
+    alertTimeout = setTimeout(() => {
+        $(target).find('.alert').alert('close');
+    }, 5000);
 }
 
 
@@ -561,14 +617,6 @@ function showAlert(message, type = 'success', target = '#alertArea') {
 
     $(document).on('submit', '#addIntakeForm', function(e) {
         e.preventDefault();
-
-        var intakeNameAr = $('#intakeNameAr').val();
-        var arabicRegex = /^[\u0600-\u06FF\s]+$/; // Regex for Arabic characters and spaces
-
-        if (!arabicRegex.test(intakeNameAr)) {
-            alert('Intake name in Arabic should only contain Arabic characters.','warning');
-            return; // Prevent form submission if the input is invalid
-        }
         var formData = $(this).serialize();
 
         $.ajax({
@@ -576,20 +624,20 @@ function showAlert(message, type = 'success', target = '#alertArea') {
             method: 'POST',
             data: formData,
             success: function(response) {
-                console.log(response); // Add this line to check the response from the server
+                console.log(response);
                 if (response.status === 'success') {
                     $('#AddIntakeModal').modal('hide');
-                    showAlert(response.message); // Display success message
-                    window.location.reload(); // Refresh the page after adding
+                    showAlert(response.message);
+                    delayedRedirect(window.location.href); // Use delayed redirect
                 } else {
                     showAlert('Error adding intake','danger');
-                    window.location.reload(); // Refresh the page 
-
+                    delayedRedirect(window.location.href);
                 }
             },
             error: function(xhr, status, error) {
-                console.error(xhr.responseText); // Log the error response for debugging
-
+                console.error(xhr.responseText);
+                showAlert('Error adding intake','danger');
+                delayedRedirect(window.location.href);
             }
         });
     });
@@ -622,18 +670,16 @@ function showAlert(message, type = 'success', target = '#alertArea') {
             success: function(response) {
                 if (response.status === 'success') {
                     $('#EditIntakeModal').modal('hide');
-                    showAlert(response.message); // Display the error message sent by the server
-                    location.reload(); // Reload the page after update
+                    showAlert(response.message);
+                    delayedRedirect(window.location.href);
                 } else {
                     showAlert('Error updating intake','danger');
-                    window.location.reload(); // Refresh the page after adding
-
+                    delayedRedirect(window.location.href);
                 }
             },
             error: function() {
                 showAlert('Error updating intake','warning');
-                window.location.reload(); // Refresh the page after adding
-
+                delayedRedirect(window.location.href);
             }
         });
     });
@@ -654,16 +700,16 @@ function showAlert(message, type = 'success', target = '#alertArea') {
             success: function(response) {
                 if (response.status === 'success') {
                     $('#intakeRow-' + intakeId).remove();
-                    showAlert(response.message,'success'); // Show success message
+                    showAlert(response.message,'success');
+                    delayedRedirect(window.location.href);
                 } else {
                     showAlert('Intake Data Not Found','warning');
-                    location.reload();
+                    delayedRedirect(window.location.href);
                 }
-
             },
             error: function(xhr) {
                 showAlert('An error occurred while deleting the intake.','warning');
-                 location.reload();
+                delayedRedirect(window.location.href);
             }
         });
     }
@@ -673,38 +719,152 @@ function showAlert(message, type = 'success', target = '#alertArea') {
     // Handle the Add Major Form
     $('#add-major-form').on('submit', function(event) {
         event.preventDefault();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        
+        // Validate form fields
+        let isValid = true;
+        let errorFields = [];
+        
+        // Check each required field
+        $('#add-major-form [required]').each(function() {
+            if (!$(this).val()) {
+                isValid = false;
+                errorFields.push($(this).attr('name'));
+                $(this).addClass('is-invalid');
+            } else {
+                $(this).removeClass('is-invalid');
             }
         });
-        let majorData = {
-            _token: $('meta[name="csrf-token"]').attr('content'), // ✅ This line is key!
-            major_name_en: $('#major_name_en').val(),
-            major_name_ar: $('#major_name_ar').val(),
-            major_abbreviation: $('#major_abbreviation').val(),
-            credits_required: $('#credits_required').val(),
-            major_ministry_code: $('#major_ministry_code').val(),
-            major_mode: $('#major_mode').val(),
-            degree_type: $('#degree_type').val(),
-            faculty_id: $('#faculty_id').val(),
-            number_of_semesters: $('#number_of_semesters').val(),
-            program_duration: $('#program_duration').val(),
-        };
 
+        if (!isValid) {
+            let errorMessage = 'Please fill in the following required fields:\n';
+            errorFields.forEach(field => {
+                errorMessage += `- ${field.replace(/_/g, ' ').toUpperCase()}\n`;
+            });
+            showAlert(errorMessage, 'warning');
+            return;
+        }
+
+        // Prepare form data
+        let formData = new FormData(this);
+        formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+        // Send AJAX request
         $.ajax({
-            url: '{{ route('admin.academic.major.store') }}', // Update route accordingly
+            url: '{{ route('admin.academic.major.store') }}',
             method: 'POST',
-            data: majorData,
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             success: function(response) {
-                // Handle success (e.g., refresh the major list)
-               showAlert('Major added successfully!', 'success');
+                // Reset form and remove validation classes
+                $('#add-major-form')[0].reset();
+                $('#add-major-form .is-invalid').removeClass('is-invalid');
+                $('#add-major-form .invalid-feedback').hide();
+                
+                showAlert('Major added successfully!', 'success');
                 loadMajors();
-                // window.location.reload(); // Reload table with new data
+
+                // Reload page after 2 seconds
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             },
             error: function(xhr) {
-                showAlert('Please Fill Required Fields','warning');
+                console.error('Error:', xhr);
+                if (xhr.status === 422) {
+                    // Validation errors from server
+                    const errors = xhr.responseJSON.errors;
+                    let errorMsg = 'Validation Errors:\n';
+                    Object.keys(errors).forEach(key => {
+                        errorMsg += `- ${errors[key][0]}\n`;
+                        // Add invalid class to the corresponding input
+                        $(`#${key}`).addClass('is-invalid');
+                    });
+                    showAlert(errorMsg, 'danger');
+                } else {
+                    showAlert('Error: ' + (xhr.responseJSON?.message || 'Failed to add major'), 'danger');
+                }
+            }
+        });
+    });
 
+    // Handle Edit Major Form Submission
+    $('#edit-major-form').on('submit', function(event) {
+        event.preventDefault();
+        const majorId = $('#edit_major_id').val();
+
+        // Validate form fields
+        let isValid = true;
+        let errorFields = [];
+        
+        // Check each required field
+        $('#edit-major-form [required]').each(function() {
+            if (!$(this).val()) {
+                isValid = false;
+                errorFields.push($(this).attr('name'));
+                $(this).addClass('is-invalid');
+            } else {
+                $(this).removeClass('is-invalid');
+            }
+        });
+
+        if (!isValid) {
+            let errorMessage = 'Please fill in the following required fields:\n';
+            errorFields.forEach(field => {
+                errorMessage += `- ${field.replace(/_/g, ' ').toUpperCase()}\n`;
+            });
+            showAlert(errorMessage, 'warning', '#alertAreaMajors');
+            return;
+        }
+
+        // Prepare form data
+        let formData = new FormData(this);
+        formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+        formData.append('_method', 'PUT');
+
+        // Send AJAX request
+        $.ajax({
+            url: `/admin/academic/major/update/${majorId}`,
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                // Reset form and remove validation classes
+                $('#edit-major-form')[0].reset();
+                $('#edit-major-form .is-invalid').removeClass('is-invalid');
+                $('#edit-major-form .invalid-feedback').hide();
+                
+                $('#Editprogram').modal('hide');
+                showAlert('Major updated successfully!', 'success', '#alertAreaMajors');
+                loadMajors();
+
+                // Reload page after 2 seconds
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            },
+            error: function(xhr) {
+                console.error('Error:', xhr);
+                if (xhr.status === 422) {
+                    // Validation errors from server
+                    const errors = xhr.responseJSON.errors;
+                    let errorMsg = 'Validation Errors:\n';
+                    Object.keys(errors).forEach(key => {
+                        errorMsg += `- ${errors[key][0]}\n`;
+                        // Add invalid class to the corresponding input
+                        $(`#edit_${key}`).addClass('is-invalid');
+                    });
+                    showAlert(errorMsg, 'danger', '#alertAreaMajors');
+                } else {
+                    showAlert('Error: ' + (xhr.responseJSON?.message || 'Failed to update major'), 'danger', '#alertAreaMajors');
+                }
             }
         });
     });

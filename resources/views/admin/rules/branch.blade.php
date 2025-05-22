@@ -145,6 +145,8 @@
                 <h5 class="modal-title">Add Branch</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+
+            
             <div class="modal-body">
                 <form id="addBranchForm" class="row needs-validation" novalidate>
                     @csrf
@@ -193,7 +195,7 @@
                         </div>
                     </div>
                      <center>
-                    <button type="submit" class="btn btn-outline w-50">Add</button>
+                    <button type="submit" class="btn btn-outline w-50">Submit</button>
                      </center>
                 </form>
             </div>

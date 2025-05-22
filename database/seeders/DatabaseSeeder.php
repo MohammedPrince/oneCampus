@@ -24,6 +24,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleTableSeeder::class,
             CountrySeeder::class,
+            FacultySeeder::class,
+            IntakeSeeder::class,
+            MajorSeeder::class,
+            BranchSeeder::class,
+            BatchSeeder::class
+
           
 
         ]);

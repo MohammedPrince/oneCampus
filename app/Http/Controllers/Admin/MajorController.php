@@ -25,7 +25,6 @@ class MajorController extends Controller
         $faculty = $this->majorService->getAllFaculty();
         
          return view('admin.academic.majors', compact('majors','faculty'));
-         
     }
     public function getMajorData()
     {
@@ -41,13 +40,19 @@ class MajorController extends Controller
     // Store a new major
     public function store(StoreMajorRequest $request)
     {
-        // Call the service method to create the major
-        $major = $this->majorService->createMajor($request->validated());
+        try {
+            // Call the service method to create the major
+            $major = $this->majorService->createMajor($request->validated());
 
-        return response()->json([
-            'message' => 'Major added successfully!',
-            'major' => $major
-        ], 201);
+            return response()->json([
+                'message' => 'Major added successfully!',
+                'major' => $major
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error creating major: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     // Show the edit form for a specific major

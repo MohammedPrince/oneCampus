@@ -25,7 +25,7 @@
 <div class="tab-content">
     <div class="tab-pane fade show active" id="batch" role="tabpanel" aria-labelledby="batch-tab">
         <div class="container mt-5">
-            <h1 class="mb-4">Add New Batch</h1>
+            <h4 class="mb-4">Add New Batch</h4>
             <div id="alertArea" class="my-2"></div>
             <form id="addBatchForm">
                 @csrf
