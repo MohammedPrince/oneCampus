@@ -170,12 +170,12 @@
                     'X-HTTP-Method-Override': 'PUT'
                 },
                 success: function(response) {
-                    alert('Faculty updated successfully!');
+                    showAlert('Faculty updated successfully!');
                     location.reload(); // Or just update table row
                 },
                 error: function(xhr) {
                     console.error(xhr);
-                    alert('Error updating faculty.');
+                    showAlert('Error updating faculty.','danger');
                     location.reload();
                 }
             });
@@ -183,6 +183,49 @@
     });
 
     // --------------------------Branch Scripts----------------
+
+document.addEventListener("DOMContentLoaded", function () {
+    // DELETE handler
+    document.querySelectorAll('.delete-branch-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const branchId = this.getAttribute('data-id');
+
+            if (!confirm('Are you sure you want to delete this branch?')) return;
+
+            fetch(`/admin/rule/branch/${branchId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Remove row from DOM
+                    this.closest('tr').remove();
+
+                    // Show success alert
+                    document.getElementById('alertArea').innerHTML = `
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            ${data.message}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                } else {
+                    showAlert( 'Failed to delete branch.','danger');
+                }
+            })
+            .catch(error => {
+                console.error('Delete failed:', error);
+                showAlert('Something went wrong. Check console.','warning');
+            });
+        });
+    });
+});
+
+
     function editBranch(button) {
         $('#edit_id').val($(button).data('id'));
         $('#edit_name_ar').val($(button).data('branch_name_ar'));
@@ -198,12 +241,11 @@
             e.preventDefault();
             let formData = $(this).serialize();
             $.post("{{ route('admin.rule.branch.store') }}", formData, function(res) {
-                alert('Branch Added Successfully');
+                showAlert('Branch Added Successfully');
                 location.reload();
             }).fail(function(xhr) {
                 console.error(xhr.responseText); // Check for validation or server errors
-                alert('Failed to add branch');
-                location.reload();
+                showAlert('Failed to add branch','danger');
             });
         });
 
@@ -213,49 +255,99 @@
             let formData = $(this).serialize() + '&_method=PUT';
 
             $.post(`/admin/rule/branch/update/${id}`, formData, function() {
-                alert('Branch Updated Successfully');
+                showAlert('Branch Updated Successfully');
                 location.reload();
             }).fail(function() {
-                alert('Failed to update branch');
+                showAlert('Failed to update branch','danger');
                 location.reload();
 
             });
         });
     });
+        // --------------------------Alert Function----------------
+// function showAlert(message, type = 'success', timeout = 5000) {
+//     const alertHTML = `
+//         <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+//             ${message}
+//             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+//         </div>
+//     `;
+
+//     // Insert the alert into the alert area
+//     $('#alertArea').html(alertHTML);
+
+//     // Auto-dismiss after timeout (if > 0)
+//     if (timeout && timeout > 0) {
+//         setTimeout(() => {
+//             $('.alert').alert('close');
+//         }, timeout);
+//     }
+// }
+function showAlert(message, type = 'success', target = '#alertArea') {
+    const allowedTypes = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+    const alertType = allowedTypes.includes(type) ? type : 'success';
+
+    const alertHtml = `
+        <div class="alert alert-${alertType} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`;
+        
+    $(target).html(alertHtml);
+}
 
     // --------------------------Batch Scripts----------------
     $(document).ready(function() {
         fetchBatches();
 
-        function fetchBatches() {
-            $.get("{{ route('admin.academic.batch.fetch') }}", function(data) {
-                let tbody = '';
-                $.each(data, function(i, batch) {
+       function fetchBatches() {
+    $.get("{{ route('admin.academic.batch.fetch') }}", function(data) {
+        let tbody = '';
+        $.each(data, function(i, batch) {
+            // Map graduate_status numeric value to text
+            let graduateStatusText = '';
+            if (batch.graduate_status == 1) {
+                graduateStatusText = 'Graduated';
+            } else if (batch.graduate_status == 2) {
+                graduateStatusText = 'Undergraduated';
+            } else {
+                graduateStatusText = 'Unknown';
+            }
 
-                    tbody += `
-                        <tr>
-                            <td style="text-align: center;"><input type="checkbox" class="batchCheckbox"></td>
-                            <td style="text-align: center;">${batch.batch}</td>
-                            <td style="text-align: center;">${batch.faculty ? batch.faculty.faculty_name_en : 'Faculty data is soft deleted.'}</td>
-                            <td style="text-align: center;">${batch.major ? batch.major.major_name_en : 'Major data is soft deleted.'}</td>
-                            <td style="text-align: center;">${batch.branch ? batch.branch.branch_name_en : 'Branch data is soft deleted.'}</td>
-                            <td style="text-align: center;">${batch.active_sem}</td>
-                            <td style="text-align: center;">${batch.max_sem}</td>
-                            <td style="text-align: center;">${batch.graduate_status}</td>
-                            <td style="text-align: center;"><button class="btn btn-sm  editBatchBtn" data-id="${batch.batch_control_id}"><img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit"></button></td>
-                            <td style="text-align: center;"><button class="btn btn-sm  deleteBatchBtn" data-id="${batch.batch_control_id}"><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="delete"></button></td>
-                        </tr>
-                    `;
-                });
-                $('#batchTableBody').html(tbody);
-            });
-        }
+            tbody += `
+                <tr>
+                    <td style="text-align: center;"><input type="checkbox" class="batchCheckbox"></td>
+                    <td style="text-align: center;">${batch.batch}</td>
+                    <td style="text-align: center;">${batch.faculty ? batch.faculty.faculty_name_en : 'Faculty data is soft deleted.'}</td>
+                    <td style="text-align: center;">${batch.major ? batch.major.major_name_en : 'Major data is soft deleted.'}</td>
+                    <td style="text-align: center;">${batch.branch ? batch.branch.branch_name_en : 'Branch data is soft deleted.'}</td>
+                    <td style="text-align: center;">${batch.active_sem}</td>
+                    <td style="text-align: center;">${batch.max_sem}</td>
+                    <td style="text-align: center;">${graduateStatusText}</td>
+                    <td>
+                    <div class="d-flex gap-1">
+                        <button class="btn btn-sm editBatchBtn" data-id="${batch.batch_control_id}">
+                        <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
+                        </button>
+                        <button class="btn btn-sm deleteBatchBtn" data-id="${batch.batch_control_id}">
+                        <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="delete">
+                        </button>
+                    </div>
+                    </td>
+
+                </tr>
+            `;
+        });
+        $('#batchTableBody').html(tbody);
+    });
+}
 
         $('#addBatchForm').submit(function(e) {
             e.preventDefault();
             $.post("{{ route('admin.academic.batch.store') }}", $(this).serialize(), function() {
                 fetchBatches();
                 $('#addBatchForm')[0].reset();
+                showAlert('Batch Added Successfully','success');
                 window.location.reload(); // Refresh the page after adding
 
             });
@@ -305,7 +397,7 @@
                 // Show the modal
                 $('#Editbatch').modal('show');
             }).fail(function() {
-                alert('Error fetching batch data.');
+                showAlert('Error fetching batch data.','warning','#alertAreaBatches');
                 window.location.reload(); // Refresh the page after adding
 
             });
@@ -320,7 +412,8 @@
                 data: $(this).serialize(),
                 success: function() {
                     $('#Editbatch').modal('hide');
-                    alert('Batch Updated Successfully');
+
+                    showAlert('Batch Updated Successfully','success','#alertAreaBatches');
                     fetchBatches();
                 }
             });
@@ -336,7 +429,7 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function() {
-                        alert('Batch Deleted Successfully');
+                        showAlert('Batch Deleted Successfully' ,'success' ,'#alertAreaBatches');
                         fetchBatches();
                     }
                 });
@@ -364,6 +457,7 @@
             }
         });
     });
+   
     $(document).ready(function() {
         // Activate Bootstrap 5 tabs automatically
         var triggerTabList = [].slice.call(document.querySelectorAll('#batch-tab, #control-batch-tab'))
@@ -385,7 +479,7 @@
         var arabicRegex = /^[\u0600-\u06FF\s]+$/; // Regex for Arabic characters and spaces
 
         if (!arabicRegex.test(intakeNameAr)) {
-            alert('Intake name in Arabic should only contain Arabic characters.');
+            alert('Intake name in Arabic should only contain Arabic characters.','warning');
             return; // Prevent form submission if the input is invalid
         }
         var formData = $(this).serialize();
@@ -398,17 +492,16 @@
                 console.log(response); // Add this line to check the response from the server
                 if (response.status === 'success') {
                     $('#AddIntakeModal').modal('hide');
-                    alert(response.message); // Display success message
+                    showAlert(response.message); // Display success message
                     window.location.reload(); // Refresh the page after adding
                 } else {
-                    alert('Error adding intake');
+                    showAlert('Error adding intake','danger');
                     window.location.reload(); // Refresh the page 
 
                 }
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText); // Log the error response for debugging
-                window.location.reload(); // Refresh the page after adding
 
             }
         });
@@ -424,8 +517,7 @@
             $('#editintakeNameAr').val(data.intake_name_ar);
             $('#EditIntakeModal').modal('show');
         }).fail(function() {
-            alert('Error fetching intake data.');
-            window.location.reload(); // Refresh the page after adding
+            showAlert('Error fetching intake data.','warning');
 
         });
     });
@@ -443,16 +535,16 @@
             success: function(response) {
                 if (response.status === 'success') {
                     $('#EditIntakeModal').modal('hide');
-                    alert(response.message); // Display the error message sent by the server
+                    showAlert(response.message); // Display the error message sent by the server
                     location.reload(); // Reload the page after update
                 } else {
-                    alert('Error updating intake');
+                    showAlert('Error updating intake','danger');
                     window.location.reload(); // Refresh the page after adding
 
                 }
             },
             error: function() {
-                alert('Error updating intake');
+                showAlert('Error updating intake','warning');
                 window.location.reload(); // Refresh the page after adding
 
             }
@@ -460,36 +552,36 @@
     });
 
     // Handle Delete Intake
-    $(document).on('click', '#deleteIntakeBtn', function() {
-        var intakeId = $('#editintakeId').val();
-        var confirmation = confirm('Are you sure you want to delete this intake?');
+ $(document).on('click', '.deleteIntakeBtn', function(e) {
+    e.preventDefault();
+    var intakeId = $(this).data('id');
+    var confirmation = confirm('Are you sure you want to delete this intake?');
 
-        if (confirmation) {
-            $.ajax({
-                url: '/admin/academic/intake/delete/' + intakeId,
-                method: 'DELETE',
-                data: {
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    if (response.status === 'success') {
-                        $('#intakeRow-' + intakeId).remove();
-                        alert(response.message); // Display the error message sent by the server
-                        location.reload(); // Reload the page after update
-                    } else {
-                        alert('Error deleting intake');
-                        window.location.reload(); // Refresh the page after adding
-
-                    }
-                },
-                error: function() {
-                    alert('Error deleting intake');
-                    window.location.reload(); // Refresh the page after adding
-
+    if (confirmation) {
+        $.ajax({
+            url: '/admin/academic/intake/' + intakeId,
+            method: 'DELETE',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    $('#intakeRow-' + intakeId).remove();
+                    showAlert(response.message,'success'); // Show success message
+                } else {
+                    showAlert('Intake Data Not Found','warning');
+                    location.reload();
                 }
-            });
-        }
-    });
+
+            },
+            error: function(xhr) {
+                showAlert('An error occurred while deleting the intake.','warning');
+                 location.reload();
+            }
+        });
+    }
+});
+
     // --------------------------major scripts----------------
     // Handle the Add Major Form
     $('#add-major-form').on('submit', function(event) {
@@ -519,13 +611,12 @@
             data: majorData,
             success: function(response) {
                 // Handle success (e.g., refresh the major list)
-                alert('Major Added!');
+               showAlert('Major added successfully!', 'success');
                 loadMajors();
-                window.location.reload(); // Reload table with new data
+                // window.location.reload(); // Reload table with new data
             },
             error: function(xhr) {
-                alert('Please Fill Required Fields ');
-                window.location.reload(); // Refresh the page after adding
+                showAlert('Please Fill Required Fields','warning');
 
             }
         });
@@ -556,13 +647,15 @@
                             <td style="text-align: center;">${major.number_of_semesters}</td>
                             <td style="text-align: center;">${major.program_duration}</td>
                             <td style="text-align: center;">
+                                 <div class="d-flex gap-1">
                                 <button onclick="editMajor(${major.major_id})" style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#Editprogram">
                                     <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
                                 </button>
-                            </td>
-                            <td style="text-align: center;">
+                           
+                          
                             <button class="btn  btn-sm delete-major" data-id="${major.major_id}"> <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="Delete" /></button>
-                        </td>
+                       </div>
+                            </td>
                         </tr>
                     `);
                     });
@@ -573,7 +666,7 @@
                 }
             },
             error: function(xhr) {
-                alert('Error: ' + xhr.responseText);
+                showAlert('Error fetching major data','warning');
                 window.location.reload(); // Refresh the page after adding
 
             }
@@ -604,7 +697,7 @@
 
             },
             error: function(xhr) {
-                alert('Error: ' + xhr.responseText);
+                showAlert('Error fetching form edit data','warning');
                 window.location.reload(); // Refresh the page after adding
 
             }
@@ -620,11 +713,11 @@
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    alert('Major deleted successfully!');
+                  showAlert('Major deleted successfully!', 'success', '#alertAreaMajors');
                     loadMajors(); // Refresh the list
                 },
                 error: function(xhr) {
-                    alert('Failed to delete major.');
+                   showAlert('failed to delte major!', 'danger', '#alertAreaMajors');
                     window.location.reload(); // Refresh the page after adding
 
                 }
@@ -636,9 +729,5 @@
         // Initialization code here
         console.log('Student dashboard loaded');
     });
-    //-----------------------student scripts-----------
-    $(document).ready(function() {
-        // Initialization code here
-        console.log('parent dashboard loaded');
-    });
+ 
 </script>

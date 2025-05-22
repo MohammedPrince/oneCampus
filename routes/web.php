@@ -39,7 +39,7 @@ Route::get('/', function () {
 Route::prefix('test')->group(function () {
     Route::get('/', [TestController::class, 'index'])->name('test');
 });
-Route::get('login', [AuthController::class, 'showLogin'])->name('login');
+Route::get('login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest')->name('login');;
 Route::post('login', [AuthController::class, 'login'])->name('admin.role');
 Route::get('register', [AuthController::class, 'showRegister'])->name('admin.register');
 Route::post('authenticate', [AuthController::class, 'register'])->name('admin.authenticate');
@@ -77,7 +77,8 @@ Route::get('/rule/branch', [BranchController::class, 'index'])->name('admin.rule
 Route::get('/rule/branch/{id}', [BranchController::class, 'edit'])->name('admin.rule.branch.edit');
 Route::post('/rule/branch/store', [BranchController::class, 'store'])->name('admin.rule.branch.store');
 Route::put('/rule/branch/update/{id}', [BranchController::class, 'update'])->name('admin.rule.branch.update');
-Route::delete('/rule/branch/destroy/{id}', [BranchController::class, 'destroy'])->name('admin.rule.branch.destroy');
+Route::delete('/rule/branch/{id}', [BranchController::class, 'destroy'])
+    ->name('admin.rule.branch.destroy');
 
   // Display majors page
   Route::get('academic/major', [MajorController::class, 'index'])->name('admin.academic.major');
@@ -113,7 +114,7 @@ Route::delete('/rule/branch/destroy/{id}', [BranchController::class, 'destroy'])
   Route::post('academic/intake/store', [IntakeController::class, 'store'])->name('admin.academic.intake.store');
   Route::get('academic/intake/{id}/edit', [IntakeController::class, 'edit'])->name('admin.academic.intake.edit');
   Route::put('academic/intake/update/{id}', [IntakeController::class, 'update'])->name('admin.academic.intake.update');
-  Route::delete('academic/intake/delete/{id}', [IntakeController::class, 'destroy'])->name('admin.academic.intake.destroy');
+  Route::delete('academic/intake/{id}', [IntakeController::class, 'destroy'])->name('admin.academic.intake.destroy');
 //   Route::get('/rules/identity',action: [AuthController::class,'manageIdentity'])->name('admin.rule.identity');
 Route::get('/academic/certificate',action: [AuthController::class,'manageCertificate'])->name('admin.academic.certificate');
 //  Route::get('/academic/major',[AuthController::class,'manageMajor'])->name('admin.academic.major');

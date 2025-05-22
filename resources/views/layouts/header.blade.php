@@ -87,12 +87,16 @@
                   </div>
 
                   <div class="row">
-                      <div class="col-6">
+                      {{-- <div class="col-6">
                           <button type="button" class="btn btn-outline" style="margin: 1px; width: 20vw;">Save Changes</button>
-                      </div>
+                      </div> --}}
+                      <a href="{{route('user.reset')}}">
                       <div class="col-6">
+                        
                           <button type="button" id="resetPasswordButton" class="btn btn-outline" style="margin: 1px; width: 20vw;">Reset Password</button>
-                      </div>
+                      
+                        </div>
+                    </a>
                   </div>
               </div>
           </div>

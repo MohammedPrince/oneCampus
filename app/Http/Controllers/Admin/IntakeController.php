@@ -111,8 +111,11 @@ class IntakeController extends Controller
             $deleted = $this->intakeService->deleteIntake($id);
 
             if ($deleted) {   
-                return back()->with('success', 'Inake deleted successfully.');
-            }
+           return response()->json([
+                'status' => 'success',
+                'message' => 'Intake Deleted Successfully',
+                'data' => $deleted,  // Optionally, send the saved intake data
+            ]);              }
             // If intake not found, redirect with error message
             return response()->json([
                 'status' => 'Error',
@@ -120,7 +123,9 @@ class IntakeController extends Controller
                 'data' => $deleted,  // Optionally, send the saved intake data
             ]);           } catch (\Exception $e) {
             // Handle errors during the deletion process
-            return back()->with('error', 'Failed to delete intake.');
-        }
+            return response()->json([
+                    'status' => 'error',
+                    'message' => 'Failed to delete intake.',
+                ]);        }
     }
 }

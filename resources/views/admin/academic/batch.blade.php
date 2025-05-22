@@ -8,6 +8,8 @@
                 <a class="nav-link {{ request()->is('admin/academic/major') ? 'active' : '' }}" href="{{ route('admin.academic.major') }}">Majors</a>
                 <a class="nav-link {{ request()->is('admin/academic/batch') ? 'active' : '' }}" href="{{ route('admin.academic.batch') }}">Batches</a>
                 <a class="nav-link {{ request()->is('admin/academic/intake') ? 'active' : '' }}" href="{{ route('admin.academic.intake') }}">Intake</a>
+              <a class="nav-link {{ request()->is('admin/rule/departments') ? 'active' : ''}}" href="{{route('admin.rule.dept')}}" data-page="department">Faculty</a>
+              <a class="nav-link {{ request()->is('admin/rule/branch') ? 'active' : ''}}" href="{{route('admin.rule.branch')}}" data-page="branches">Branches</a>
             </div>
         </div>
     </div>
@@ -24,6 +26,7 @@
     <div class="tab-pane fade show active" id="batch" role="tabpanel" aria-labelledby="batch-tab">
         <div class="container mt-5">
             <h1 class="mb-4">Add New Batch</h1>
+            <div id="alertArea" class="my-2"></div>
             <form id="addBatchForm">
                 @csrf
                 <!-- Form Inputs -->
@@ -35,7 +38,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="fullNameArabicStatus" class="form-label">Status</label>
-                        <select class="form-select" name="graduate_status" aria-label="Default select example ">
+                        <select class="form-select" name="graduate_status" aria-label="Default select example " required>
 
                             <option value="1">Graduated</option>
                             <option value="2">Undergraduated</option>
@@ -107,6 +110,8 @@
     <div class="tab-pane fade" id="batchcontrol" role="tabpanel" aria-labelledby="control-batch-tab">
         <h4>Batches</h4>
         <div class="container my-4">
+        <div id="alertAreaBatches" class="my-2"></div> <!-- <- ADD THIS -->
+
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -119,8 +124,8 @@
                             <th>Active Semester</th>
                             <th>Max Semester</th>
                             <th>status</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Actions</th>
+                       
                         </tr>
                     </thead>
                     <tbody id="batchTableBody"></tbody>

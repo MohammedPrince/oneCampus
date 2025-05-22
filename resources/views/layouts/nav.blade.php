@@ -18,20 +18,20 @@
                 <span>User Management</span>
             </a>
 
-            <a href="{{ route('admin.role_manage') }}"
+            {{-- <a href="{{ route('admin.role_manage') }}"
                 class="nav-button {{ request()->routeIs('admin.role_manage') ? 'selected' : '' }}">
                 <img src="{{ asset('assets/icons/role.svg') }}" alt="" draggable="false">
                 <span>Role Management</span>
-            </a>
+            </a> --}}
 
-            <a href="{{ route('admin.rule.list') }}"
+            {{-- <a href="{{ route('admin.rule.list') }}"
                 class="nav-button {{ request()->routeIs('admin.rule.list') || request()->routeIs('admin.rule.dept') || request()->routeIs('admin.rule.branch') || request()->routeIs('admin.identity.index') ? 'selected' : '' }}">
                 <img src="{{ asset('assets/icons/admin.svg') }}" alt="" draggable="false">
                 <span>Admin Rules</span>
-            </a>
+            </a> --}}
           
             <a href="{{ route('admin.academic.certificate') }}"
-                class="nav-button {{ request()->routeIs('admin.academic.certificate') || request()->routeIs('admin.academic.major') || request()->routeIs('admin.academic.batch') || request()->routeIs('admin.academic.intake') ? 'selected' : '' }}">
+                class="nav-button {{ request()->routeIs('admin.academic.certificate') || request()->routeIs('admin.academic.major') || request()->routeIs('admin.academic.batch')|| request()->routeIs('admin.rule.dept') || request()->routeIs('admin.rule.branch')  || request()->routeIs('admin.academic.intake') ? 'selected' : '' }}">
                 <img src="{{ asset('assets/icons/acad.svg') }}" alt="" draggable="false">
                 <span>Academic Rules</span>
             </a> 

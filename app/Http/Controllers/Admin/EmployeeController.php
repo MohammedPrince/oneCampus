@@ -24,7 +24,7 @@ class EmployeeController extends Controller
 
         $result = $this->employeeService->bulkUpload($request->file('bulk_file'));
 
-        return back()->with('message', "{$result['success']} users uploaded successfully, {$result['error']} failed.");
+        return redirect()->route('user.list')->with('success', 'File Uploaded successfully!');
     }
     public function getUserData(){
      $faculties = $this->employeeService->getFaculty();   
@@ -44,7 +44,7 @@ class EmployeeController extends Controller
     {
         $data = $request->validated();
         $this->employeeService->createEmployee($data);
-        return redirect()->route('user.add')->with('success', 'Employee added successfully!');
+        return redirect()->route('user.list')->with('success', 'Employee added successfully!');
     }
 
     public function edit($id)

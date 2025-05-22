@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
     <div class="container-fluid">
@@ -10,6 +11,8 @@
                 <a class="nav-link {{ request()->is('admin/academic/major') ? 'active' : ''}}" href="{{route('admin.academic.major')}}">Majors</a>
                 <a class="nav-link {{ request()->is('admin/academic/batch') ? 'active' : ''}}" href="{{route('admin.academic.batch')}}">Batches</a>  
                 <a class="nav-link {{ request()->is('admin/academic/intake') ? 'active' : ''}}" href="{{route('admin.academic.intake')}}">Intake</a>  
+               <a class="nav-link {{ request()->is('admin/rule/departments') ? 'active' : ''}}" href="{{route('admin.rule.dept')}}" data-page="department">Faculty</a>
+              <a class="nav-link {{ request()->is('admin/rule/branch') ? 'active' : ''}}" href="{{route('admin.rule.branch')}}" data-page="branches">Branches</a>
             </div>
         </div>
     </div>
@@ -27,10 +30,7 @@
 </div>
 
 <div class="container my-4">
-    <!-- Search bar -->
-    <div class="mb-3">
-        <input type="text" id="tableSearch" class="form-control" placeholder="Search..." onkeyup="filterTable()" style="width: 30vw;">
-    </div>
+            <div id="alertArea" class="my-2"></div>
 
     <!-- Table for displaying intakes -->
     <div class="table-responsive">
@@ -55,13 +55,12 @@
                             <button type="button" class="editIntake" data-id="{{ $intake->intake_id }}" style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#EditIntakeModal">
                                 <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
                             </button>
-                            <form action="{{ route('admin.academic.intake.destroy', $intake->intake_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this intake?');" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" style="border: none; background-color: transparent;">
-                                  <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="Delete" />
-                                </button>
-                              </form>
+                          
+                             <button class="deleteIntakeBtn" data-id="{{ $intake->intake_id }}" style="border: none; background-color: transparent;">
+                            <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="Delete" />
+                            </button>
+
+                            </form>
                         </td>
                      
                     </tr>
@@ -79,6 +78,7 @@
                 <h5 class="modal-title" id="addModalLabel">Add Intake</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
             <div class="modal-body">
                 <form class="row needs-validation" novalidate id="addIntakeForm">
                   @csrf

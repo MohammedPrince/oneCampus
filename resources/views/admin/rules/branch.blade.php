@@ -5,9 +5,12 @@
     <div class="container-fluid">
         <div class="navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav justify-content-center w-100">
-                <a class="nav-link {{ request()->is('admin/rule/list') ? 'active' : ''}}" href="{{route('admin.rule.list')}}" data-page="roles">Rules</a>
-                <a class="nav-link {{ request()->is('admin/rule/departments') ? 'active' : ''}}" href="{{route('admin.rule.dept')}}" data-page="department">Departments</a>
-                <a class="nav-link {{ request()->is('admin/rule/branch') ? 'active' : ''}}" href="{{route('admin.rule.branch')}}" data-page="branches">Branches</a>
+              <a class="nav-link {{ request()->is('admin/academic/certificate') ? 'active' : '' }}" href="{{ route('admin.academic.certificate') }}">Certificate</a>
+                <a class="nav-link {{ request()->is('admin/academic/major') ? 'active' : '' }}" href="{{ route('admin.academic.major') }}">Majors</a>
+                <a class="nav-link {{ request()->is('admin/academic/batch') ? 'active' : '' }}" href="{{ route('admin.academic.batch') }}">Batches</a>
+                <a class="nav-link {{ request()->is('admin/academic/intake') ? 'active' : '' }}" href="{{ route('admin.academic.intake') }}">Intake</a>
+              <a class="nav-link {{ request()->is('admin/rule/departments') ? 'active' : ''}}" href="{{route('admin.rule.dept')}}" data-page="department">Faculty</a>
+              <a class="nav-link {{ request()->is('admin/rule/branch') ? 'active' : ''}}" href="{{route('admin.rule.branch')}}" data-page="branches">Branches</a>
             </div>
         </div>
     </div>
@@ -25,10 +28,7 @@
         </div>
     </div>
 
-    <div class="">
-        <div class="mb-3">
-            <input type="text" id="tableSearch" class="form-control" placeholder="Search..." onkeyup="filterTable()" style="width: 30vw;" />
-        </div>
+<div id="alertArea" class="my-2"></div>
 
         <div class="table-responsive">
             <table class="table">
@@ -68,13 +68,13 @@
                             <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
                         </button>
 
-                            <form action="{{ route('admin.rule.branch.destroy', $branch->branch_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this branch?');" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" style="border: none; background-color: transparent;">
-                                  <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="Delete" />
-                                </button>
-                              </form>
+                        <button 
+                        class="delete-branch-btn" 
+                        data-id="{{ $branch->branch_id }}" 
+                        style="border: none; background-color: transparent;">
+                        <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="Delete" />
+                    </button>
+
                         </td>
                     </tr>
                     @endforeach
@@ -149,10 +149,13 @@
                         <div class="col-md-6">
                             <label class="form-label">Branch Name (Arabic)</label>
                             <input type="text" name="branch_name_ar" class="form-control" required>
+                            <div class="invalid-feedback">Please enter the Branch (Arabic).</div>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Branch Name (English)</label>
                             <input type="text" name="branch_name_en" class="form-control" id="edit_name_en" required>
+                            <div class="invalid-feedback">Please enter the Branch (English).</div>
+
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -168,16 +171,22 @@
                             <option>No Country available</option>
                          @endif     
                         </select>
+                      <div class="invalid-feedback">Please Select Country</div>
+
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">City</label>
                             <input type="text" name="branch_city" class="form-control" required>
+                            <div class="invalid-feedback">Please enter the City Name</div>
+
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <label class="form-label">Address</label>
                             <input type="text" name="branch_address" class="form-control" required>
+                            <div class="invalid-feedback">Please enter the Address</div>
+
                         </div>
                     </div>
                     <button type="submit" class="btn btn-outline w-100">Add</button>

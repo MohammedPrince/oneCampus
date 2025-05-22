@@ -26,10 +26,10 @@ return new class extends Migration {
             $table->enum('religious', ['Islam', 'Christianity', 'Judaism', 'Hinduism', 'Buddhism', 'Sikhism', 'Other'])->default('Islam');
             $table->date('date_of_birth');
 
-            $table->string('whatsapp_number', 15)->nullable();
-            $table->string('facebook_account', 191)->nullable()->unique();
-            $table->string('twitter_account', 191)->nullable()->unique();
-            $table->string('instgram_account', 191)->nullable()->unique();
+            $table->integer('whatsapp_number', 15)->nullable();
+            $table->string('facebook_account', 191)->nullable();
+            $table->string('twitter_account', 191)->nullable();
+            $table->string('instgram_account', 191)->nullable();
             $table->string('address', 191);
             $table->string('town', length: 100);
             $table->string('state', 100);

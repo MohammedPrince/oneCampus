@@ -1,14 +1,16 @@
 @extends('layouts.master')
 
 @section('content')
-
 <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
   <div class="container-fluid">
     <div class="navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav justify-content-center w-100">
-        <a class="nav-link {{ request()->is('admin/rule/list') ? 'active' : ''}}" href="{{ route('admin.rule.list') }}">Rules</a>
-        <a class="nav-link {{ request()->is('admin/rule/departments') ? 'active' : ''}}" href="{{ route('admin.rule.dept') }}">Departments</a>
-        <a class="nav-link {{ request()->is('admin/rule/branch') ? 'active' : ''}}" href="{{ route('admin.rule.branch') }}">Branches</a>
+         <a class="nav-link {{ request()->is('admin/academic/certificate') ? 'active' : '' }}" href="{{ route('admin.academic.certificate') }}">Certificate</a>
+                <a class="nav-link {{ request()->is('admin/academic/major') ? 'active' : '' }}" href="{{ route('admin.academic.major') }}">Majors</a>
+                <a class="nav-link {{ request()->is('admin/academic/batch') ? 'active' : '' }}" href="{{ route('admin.academic.batch') }}">Batches</a>
+                <a class="nav-link {{ request()->is('admin/academic/intake') ? 'active' : '' }}" href="{{ route('admin.academic.intake') }}">Intake</a>
+              <a class="nav-link {{ request()->is('admin/rule/departments') ? 'active' : ''}}" href="{{route('admin.rule.dept')}}" data-page="department">Faculty</a>
+              <a class="nav-link {{ request()->is('admin/rule/branch') ? 'active' : ''}}" href="{{route('admin.rule.branch')}}" data-page="branches">Branches</a>
       </div>
     </div>
   </div>
@@ -26,10 +28,8 @@
     </div>
   </div>
 
-  {{-- Search Bar --}}
-  <div class="mb-3">
-    <input type="text" id="tableSearch" class="form-control" placeholder="Search..." onkeyup="filterTable()" style="width: 30vw;" />
-  </div>
+<div id="alertArea" class="my-2"></div>
+@include('layouts.alert')
    
   {{-- Faculty Table --}}
   <div class="table-responsive">
@@ -99,16 +99,20 @@
             <div class="col-md-6">
               <label class="form-label">Faculty Name (English)</label>
               <input type="text" class="form-control" name="faculty_name_en" required>
+              <div class="invalid-feedback">Please enter the Faculty (English).</div>
             </div>
             <div class="col-md-6">
               <label class="form-label">Faculty Name (Arabic)</label>
               <input type="text" class="form-control" name="faculty_name_ar" required>
+             <div class="invalid-feedback">Please enter the Faculty (Arabic).</div>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col-md-6">
               <label class="form-label">Abbreviation</label>
               <input type="text" class="form-control" name="abbreviation" required>
+              <div class="invalid-feedback">Please enter the Abbreviation.</div>
+
             </div>
             <div class="col-md-6">
               <label class="form-label">Branch</label>
@@ -122,6 +126,7 @@
                   <option>No Branch available</option>
                 @endif     
               </select>
+             <div class="invalid-feedback">Please Select Branch</div>
             </div>
           </div>
           <div class="row justify-content-center">

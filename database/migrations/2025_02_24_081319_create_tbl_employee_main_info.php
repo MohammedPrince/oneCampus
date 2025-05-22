@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('second_name_ar', 30);
             $table->string('third_name_ar', 30);
             $table->string('last_name_ar', 30);
-            $table->string('phone_number');
+            $table->integer('phone_number');
             $table->string('employee_photo');
             $table->enum('status', ['Active', 'Inactive', 'Resigned'])->default('Active');
             $table->string('corporate_email')->unique();

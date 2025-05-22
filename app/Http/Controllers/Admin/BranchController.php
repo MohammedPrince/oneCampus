@@ -42,9 +42,18 @@ class BranchController extends Controller
         return redirect()->back()->with('success', 'Branch updated successfully.');
     }
 
-    public function destroy($id)
-    {
-        $this->branchService->delete($id);
-        return redirect()->back()->with('success', 'Branch deleted successfully.');
+  public function destroy($id)
+{
+    $this->branchService->delete($id);
+
+    if (request()->expectsJson()) {
+        return response()->json([
+            'success' => true,
+            'message' => 'Branch deleted successfully.'
+        ]);
     }
+
+    return redirect()->back()->with('success', 'Branch deleted successfully.');
+}
+
 }

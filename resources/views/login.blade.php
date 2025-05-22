@@ -51,6 +51,31 @@
   <div class="container col-12"
     style="flex-direction: row;">
     <div class="row g-0 col-12">
+   <div class="col-12">
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible py-1 px-2 mb-2 fade show d-flex align-items-center" role="alert" style="font-size: 0.8rem;">
+            <span>{{ session('success') }}</span>
+            <button type="button" class="btn-close ms-auto p-1" data-bs-dismiss="alert" aria-label="Close" style="font-size: 0.6rem;"></button>
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible py-1 px-2 mb-2 fade show d-flex align-items-center" role="alert" style="font-size: 0.8rem;">
+            <span>{{ session('error') }}</span>
+            <button type="button" class="btn-close ms-auto p-1" data-bs-dismiss="alert" aria-label="Close" style="font-size: 0.6rem;"></button>
+        </div>
+    @endif
+    @if($errors->any())
+        <div class="alert alert-danger alert-dismissible py-1 px-2 mb-2 fade show" role="alert" style="font-size: 0.8rem;">
+            <ul class="mb-1" style="padding-left: 1.2rem;">
+                @foreach($errors->all() as $error)
+                    <li style="font-size: 0.8rem; line-height: 1.2;">{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close p-1" data-bs-dismiss="alert" aria-label="Close" style="font-size: 0.6rem; position: absolute; top: 0.25rem; right: 0.25rem;"></button>
+        </div>
+    @endif
+</div>
+
       <div class="left-form col-4 p-4 align-content-center">
         <div class="row"
           style="justify-content: end;align-items: end;align-self: flex-end;">

@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
+<div id="alertArea" class="my-2"></div>
+
 <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
   <div class="container-fluid">
     <div class="navbar-collapse" id="navbarNavAltMarkup">
@@ -13,33 +15,9 @@
   </div> 
  
 
-{{-- <div class="row nav-tabs d-flex justify-content-end" id="userOptionsTab" role="tablist" style="border: none; width: 30vw;">
-  <a class="nav-links active" id="single-user-tab" href="{{ route('user.add') }}" role="tab"
-    aria-controls="single-user" aria-selected="true">Add Users</a>
-
-  <a class="nav-links" id="bulk-user-tab" href="{{ route('user.reset') }}" role="tab"
-    aria-controls="bulk-user" aria-selected="false">Reset Passwords</a>
-</div> --}}
-
-<style>
-@media screen and (min-width: 768px) {
-  #userOptionsTab {
-    margin-left: auto;
-    margin-right: 20px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  #userOptionsTab {
-    width: 100% !important;
-    margin: 10px 0;
-    justify-content: center !important;
-  }
-}
-</style>
-
 </nav> 
         <h5 style="margin-top: 40px; margin-left:20px">Employee List</h5>
+        @include('layouts.alert')
         <div class="table-responsive">
         <table class="table">
             <thead>
@@ -55,14 +33,6 @@
                     <th>Role</th>
                     <th>CV</th>
                     <th>Certificate</th>
-                    <th>Birth Date</th>
-                    <th>Hire Date</th>
-                    <th>Passport Number</th>
-                    <th>National ID</th>
-                    <th>Branch</th>
-                    <th>Biometric</th>
-                    <th>Gender</th>
-                    <th>Nationality</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -76,7 +46,7 @@
                         <td>{{ $employee->personal_email }}</td>
                         <td>{{ $employee->corporate_email }}</td>
                         <td>{{ $employee->phone_number }}</td>
-                        <td>{{ $employee->profile->whatsapp_number }}</td>
+                        <td>{{ $employee->profile->whatsapp_number ?? '' }}</td>
                         <td>{{ $employee->department->faculty_name_en ?? 'null' }}</td>
                         <td>
                           @if ($employee->profile && $employee->profile->roleInfo)
@@ -85,28 +55,22 @@
                               {{ 'No Role Assigned' }}
                           @endif
                       </td>                        <td>
-                            @if($employee->profile->cv)
+                            @if($employee->profile->cv ?? '')
                                 <a href="{{ asset('storage/' . $employee->profile->cv) }}" target="_blank">View CV</a>
                             @else
                                 No CV uploaded
                             @endif
                         </td>
                         <td>
-                            @if($employee->profile->certificates)
+                            @if($employee->profile->certificates ?? '')
                                 <a href="{{ asset('storage/' . $employee->profile->certificates) }}" target="_blank">View Certificate</a>
                             @else
                                 No Certificate uploaded
                             @endif
                         </td>
-                        <td>{{ $employee->profile->date_of_birth }}</td>
-                        <td>{{ $employee->profile->hire_date }}</td>
-                        <td>{{ $employee->profile->identification_id }}</td>
-                        <td>{{ $employee->profile->identification_id_type  }}</td>
-                        <td>{{ $employee->branch->branch_name_en ?? 'null' }}</td>
-                        <td>{{ $employee->profile->biometric }}</td>
-                        <td>{{ $employee->profile->gender }}</td>
-                        <td>{{ $employee->profile->nationality }}</td>
+                      
                         <td>
+                            <div class="d-flex gap-1">
                             <button style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#editModal" 
                                     data-id="{{ $employee->employee_id }}"
                                     data-full_name_arabic="{{ $employee->full_name_ar }}"
@@ -114,19 +78,19 @@
                                     data-personal_email="{{ $employee->personal_email }}"
                                     data-corporate_email="{{ $employee->corporate_email }}"
                                     data-phone_number="{{ $employee->phone_number }}"
-                                    data-whatsapp_number="{{ $employee->profile->whatsapp_number }}"
+                                    data-whatsapp_number="{{ $employee->profile->whatsapp_number ?? '' }}"
                                     data-department_id="{{ $employee->department->faculty_id ?? 'null'}}"
-                                    data-role="{{ $employee->profile->role }}"
-                                    data-birth_date="{{ $employee->profile->date_of_birth ? \Carbon\Carbon::parse($employee->profile->date_of_birth)->format('Y-m-d') : '' }}"
-                                    data-recruitment_date="{{ $employee->profile->hire_date ? \Carbon\Carbon::parse($employee->profile->hire_date)->format('Y-m-d') : '' }}"
-                                    data-identification_type="{{ $employee->profile->identification_id_type }}"
-                                    data-identification_id="{{ $employee->profile->identification_id }}"
+                                    data-role="{{ $employee->profile->role ?? '' }}"
+                                    data-birth_date="{{ optional($employee->profile)->date_of_birth ? \Carbon\Carbon::parse($employee->profile->date_of_birth)->format('Y-m-d') : '' }}"
+                                    data-recruitment_date="{{ optional($employee->profile)->hire_date ? \Carbon\Carbon::parse($employee->profile->hire_date)->format('Y-m-d') : '' }}"
+                                    data-identification_type="{{ $employee->profile->identification_id_type ?? '' }}"
+                                    data-identification_id="{{ $employee->profile->identification_id ?? ' ' }}"
                                     data-branch_id="{{ $employee->branch->branch_id ?? 'null'}}"
-                                    data-biometric="{{ $employee->profile->biometric }}"
-                                    data-gender="{{ $employee->profile->gender }}"
-                                    data-nationality="{{ $employee->profile->nationality }}"
-                                    data-cv="{{ $employee->profile->cv }}"
-                                    data-certificate="{{ $employee->profile->certificates }}">
+                                    data-biometric="{{ $employee->profile->biometric ?? ''}}"
+                                    data-gender="{{ $employee->profile->gender ?? '' }}"
+                                    data-nationality="{{ $employee->profile->nationality ?? '' }}"
+                                    data-cv="{{ $employee->profile->cv ?? '' }}"
+                                    data-certificate="{{ $employee->profile->certificates ?? '' }}">
                                     <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
 
                             </button>
@@ -141,6 +105,7 @@
                       @method('DELETE')
                       <button type="submit" style="border: none; background-color: transparent;" class=""><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="Edit"></button>
                   </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
