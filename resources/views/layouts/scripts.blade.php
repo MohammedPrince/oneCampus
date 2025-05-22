@@ -327,10 +327,10 @@ function showAlert(message, type = 'success', target = '#alertArea') {
                     <td>
                     <div class="d-flex gap-1">
                         <button class="btn btn-sm editBatchBtn" data-id="${batch.batch_control_id}">
-                        <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
+                        <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
                         </button>
                         <button class="btn btn-sm deleteBatchBtn" data-id="${batch.batch_control_id}">
-                        <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="delete">
+                        <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="delete">
                         </button>
                     </div>
                     </td>
@@ -648,13 +648,12 @@ function showAlert(message, type = 'success', target = '#alertArea') {
                             <td style="text-align: center;">${major.program_duration}</td>
                             <td style="text-align: center;">
                                  <div class="d-flex gap-1">
-                                <button onclick="editMajor(${major.major_id})" style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#Editprogram">
-                                    <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
+                                <button class ="btn btn-sm" onclick="editMajor(${major.major_id})" style="" data-bs-toggle="modal" data-bs-target="#Editprogram">
+                                    <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
                                 </button>
-                           
-                          
-                            <button class="btn  btn-sm delete-major" data-id="${major.major_id}"> <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="Delete" /></button>
+                            <button class="btn btn-sm delete-major" data-id="${major.major_id}"> <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete" /></button>
                        </div>
+                       
                             </td>
                         </tr>
                     `);

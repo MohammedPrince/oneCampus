@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+
 <div id="alertArea" class="my-2"></div>
 
 <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
@@ -91,19 +92,17 @@
                                     data-nationality="{{ $employee->profile->nationality ?? '' }}"
                                     data-cv="{{ $employee->profile->cv ?? '' }}"
                                     data-certificate="{{ $employee->profile->certificates ?? '' }}">
-                                    <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
-
+                                    <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
                             </button>
                                              <!-- Show Button -->
-                 <a href="{{ route('user.show', $employee->employee_id) }}"  style="border: none; background-color: transparent;"><img src="{{ asset('assets/icons/eye.svg') }}" alt="Edit">
+                 <a href="{{ route('user.show', $employee->employee_id) }}"  style="border: none; background-color: transparent;"><img src="{{ asset('assets/icons/eye.svg') }}" class="action-icon" alt="Edit">
                  </a>
-
                   <!-- Delete Form -->
                   <form action="{{ route('employee.destroy', $employee->employee_id) }}" method="POST" class="d-inline"
                         onsubmit="return confirm('Are you sure you want to delete this employee?');">
                       @csrf
                       @method('DELETE')
-                      <button type="submit" style="border: none; background-color: transparent;" class=""><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="Edit"></button>
+                      <button type="submit" style="border: none; background-color: transparent;" class=""><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Edit"></button>
                   </form>
                             </div>
                         </td>

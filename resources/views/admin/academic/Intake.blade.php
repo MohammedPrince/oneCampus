@@ -53,11 +53,11 @@
                         <td style="text-align: center;">{{ $intake->intake_name_ar }}</td>
                         <td style="text-align: center;">
                             <button type="button" class="editIntake" data-id="{{ $intake->intake_id }}" style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#EditIntakeModal">
-                                <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
+                                <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
                             </button>
                           
                              <button class="deleteIntakeBtn" data-id="{{ $intake->intake_id }}" style="border: none; background-color: transparent;">
-                            <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="Delete" />
+                            <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete" />
                             </button>
 
                             </form>

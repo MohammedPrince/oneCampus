@@ -64,14 +64,14 @@
               data-abbr="{{ $faculty->abbreviation }}"
               data-branch="{{ $faculty->branch->branch_id ?? '' }}"
               style="border: none; background-color: transparent;">
-              <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
+              <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
             </button>
             
               <form action="{{ route('faculty.destroy', $faculty->faculty_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this faculty?');" style="display:inline;">
                 @csrf
                 @method('DELETE')
                 <button type="submit" style="border: none; background-color: transparent;">
-                  <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="Delete" />
+                  <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete" />
                 </button>
               </form>
             </td>

@@ -65,14 +65,14 @@
                             style="border: none; background-color: transparent;"
                             data-bs-toggle="modal" 
                             data-bs-target="#EditBranch">
-                            <img src="{{ asset('assets/icons/mage_edit.png') }}" alt="Edit">
+                            <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
                         </button>
 
                         <button 
                         class="delete-branch-btn" 
                         data-id="{{ $branch->branch_id }}" 
                         style="border: none; background-color: transparent;">
-                        <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" alt="Delete" />
+                        <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete" />
                     </button>
 
                         </td>

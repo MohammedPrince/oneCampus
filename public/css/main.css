@@ -18,7 +18,11 @@
     background-color: #e2e6ea;
     color: #000 !important;
 }
-
+  .action-icon {
+    filter: brightness(0) saturate(100%) invert(36%) sepia(86%) saturate(644%) hue-rotate(345deg) brightness(91%) contrast(88%);
+    width: 18px;
+    height: 18px;
+}
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
     background-color: #0d6efd;
     color: white !important;
