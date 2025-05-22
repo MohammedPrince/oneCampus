@@ -102,8 +102,9 @@
                     </div>
                 </div>
                 <!-- Simplified for brevity -->
-                <button type="submit" class="btn btn-outline w-100">Submit</button>
-            </form>
+<div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-outline w-25">Submit</button>
+                            </div>            </form>
         </div>
     </div>
 

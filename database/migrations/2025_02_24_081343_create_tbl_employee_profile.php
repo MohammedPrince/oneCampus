@@ -33,7 +33,7 @@ return new class extends Migration {
             $table->string('address', 191)->nullable();
             $table->string('town', length: 100)->nullable();
             $table->string('state', 100)->nullable();
-            $table->integer('country');
+            $table->integer('country')->nullable();
             $table->string('place_of_residence', length: 191)->nullable();
             $table->string('office_location', 191)->nullable();
 

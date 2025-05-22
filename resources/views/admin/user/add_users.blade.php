@@ -66,12 +66,14 @@
                     <div class="row mb-3">
                       <div class="col-md-6">
                           <label for="fullNameArabic" class="form-label">Full Name (Arabic)</label>
-                          <input type="text" class="form-control" id="full_name_ar" name="full_name_ar" required>
-                          <div class="invalid-feedback">Please enter the full name in Arabic.</div>
+                          <input value="{{ old ('full_name_ar') }}" type="text" class="form-control" id="" name="full_name_ar" required
+                                pattern="[\u0600-\u06FF\s]+" title="Please enter only Arabic letters." dir="rtl">
+                            <div class="invalid-feedback">.الرجاء إدخال الاسم كامل باللغة العربية</div>
                       </div>      
                         <div class="col-md-6">
                             <label for="fullNameEnglish" class="form-label">Full Name (English)</label>
-                            <input type="text" class="form-control" id="full_name_en" name="full_name_en" required>
+                           <input  value="{{ old ('full_name_en') }}" type="text" class="form-control" id="full_name_en" name="full_name_en" required
+                                pattern="[A-Za-z\s]+" title="Please enter only English letters.">
                             <div class="invalid-feedback">Please enter the full name in English.</div>
                         </div>
                     </div>
@@ -79,12 +81,12 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="personalEmail" class="form-label">Personal Email</label>
-                            <input type="email" class="form-control" id="personal_email" name="personal_email" required>
+                            <input  value="{{ old ('personal_email') }}" type="email" class="form-control" id="personal_email" name="personal_email" required>
                             <div class="invalid-feedback">Please enter a valid personal email.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="corporateEmail" class="form-label">Corporate Email</label>
-                            <input type="email" class="form-control" id="corporate_email" name="corporate_email" required>
+                            <input value="{{ old ('corporate_email') }}" type="email" class="form-control" id="corporate_email" name="corporate_email" required>
                             <div class="invalid-feedback">Please enter a valid corporate email.</div>
                         </div>
                     </div>
@@ -92,21 +94,23 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="phoneNumber" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone_number" name="phone_number" required>
+                           <input  value="{{ old ('phone_number') }}" type="tel" class="form-control" id="phone_number" name="phone_number" required
+                               >
                             <div class="invalid-feedback">Please enter a valid phone number.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="whatsAppNumber" class="form-label">WhatsApp Number</label>
-                            <input type="tel" class="form-control" id="whatsapp_number" name="whatsapp_number" required>
+                            <input  value="{{ old ('whatsapp_number') }}" type="tel" class="form-control" id="whatsapp_number" name="whatsapp_number"
+                                required >
                             <div class="invalid-feedback">Please enter a valid WhatsApp number.</div>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="department" class="form-label">Department</label>
-                            <select class="form-select" id="dep" name="department_id" required style="width: 30vw;">
-                                <option value="">Select your Department</option>
+                            <label for="Faculty" class="form-label">Faculty</label>
+                            <select class="form-select"  id="dep" name="department_id" required style="width: 30vw;">
+                                <option value="">Select your Faculty</option>
                                  @if(isset($faculties) && $faculties->isNotEmpty())
                                 @foreach ($faculties as $data )
                                 <option value="{{$data->faculty_id}}">{{$data->faculty_name_en}}</option>
@@ -115,7 +119,7 @@
                                     <option>No Faculty available</option>
                                 @endif       
                             </select>
-                            <div class="invalid-feedback">Please select a department.</div>
+                            <div class="invalid-feedback">Please select a Faculty.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="role" class="form-label">Role</label>
@@ -135,13 +139,13 @@
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="birthDate" class="form-label">Birth Date</label>
-                            <input type="date" class="form-control" id="birth_date" name="birth_date" required>
+                            <label   for="birthDate" class="form-label">Birth Date</label>
+                            <input value="{{ old ('birth_date') }}" type="date" class="form-control" id="birth_date" name="birth_date" required>
                             <div class="invalid-feedback">Please select a birth date.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="recruitmentDate" class="form-label">Recruitment Date</label>
-                            <input type="date" class="form-control" id="hire_date" name="hire_date" required>
+                            <input value="{{ old ('hire_date') }}" type="date" class="form-control" id="hire_date" name="hire_date" required>
                             <div class="invalid-feedback">Please select a recruitment date.</div>
                         </div>
                     </div>
@@ -178,7 +182,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="biometric" class="form-label">Biometric</label>
-                            <input type="text" class="form-control" id="biometric" name="biometric" required>
+                            <input value="{{ old ('biometric') }}" type="text" class="form-control" id="biometric" name="biometric" required>
                             <div class="invalid-feedback">Please enter the biometric details.</div>
                         </div>
                     </div>
@@ -202,11 +206,11 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="cv" class="form-label">CV</label>
-                            <input type="file" class="form-control" id="cv" name="cv" required>
+                            <input value="{{ old ('cv') }}" type="file" class="form-control" id="cv" name="cv" required>
                             <div class="invalid-feedback">Please upload a CV.</div>
                         </div>
                         <div class="col-md-6">
-                            <label for="certificates" class="form-label">Certificates</label>
+                            <label value="{{ old ('certificates') }}" for="certificates" class="form-label">Certificates</label>
                             <input type="file" class="form-control" id="certificates" name="certificates" required>
                             <div class="invalid-feedback">Please upload certificates.</div>
                         </div>
