@@ -18,7 +18,7 @@
 <h2>Certificate Type :</h2>
     <div class="container my-4">
       <!-- Search bar -->
-      <div class="mb-3">
+      {{-- <div class="mb-3">
         <input
           type="text"
           id="tableSearch"
@@ -27,7 +27,7 @@
           onkeyup="filterTable()"
           style="width: 30vw;"
         />
-      </div>
+      </div> --}}
 
       <div class="table-responsive">
         <table class="table">
