@@ -52,9 +52,9 @@
                         <td style="text-align: center;">{{ $branch->branch_address }}</td>
                         <td style="text-align: center;">{{ $branch->branch_city }}</td>
                         <td style="text-align: center;">{{ $branch->country->country_name_en }}</td>
-       
+
                         <td style="text-align: center;">
-                            <button 
+                            <button
                             data-id="{{ $branch->branch_id }}"
                             data-branch_name_ar="{{ $branch->branch_name_ar }}"
                             data-branch_name_en="{{ $branch->branch_name_en }}"
@@ -63,14 +63,14 @@
                             data-branch_address="{{ $branch->branch_address }}"
                             onclick="editBranch(this)"
                             style="border: none; background-color: transparent;"
-                            data-bs-toggle="modal" 
+                            data-bs-toggle="modal"
                             data-bs-target="#EditBranch">
                             <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
                         </button>
 
-                        <button 
-                        class="delete-branch-btn" 
-                        data-id="{{ $branch->branch_id }}" 
+                        <button
+                        class="delete-branch-btn"
+                        data-id="{{ $branch->branch_id }}"
                         style="border: none; background-color: transparent;">
                         <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete" />
                     </button>
@@ -127,7 +127,10 @@
                             <input type="text" name="branch_address" class="form-control" id="edit_address" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline w-100">Update</button>
+                    <center>
+                    <button type="submit" class="btn btn-outline w-50">Update</button>
+
+                    </center>
                 </form>
             </div>
         </div>
@@ -169,7 +172,7 @@
                         @endforeach
                           @else
                             <option>No Country available</option>
-                         @endif     
+                         @endif
                         </select>
                       <div class="invalid-feedback">Please Select Country</div>
 
@@ -189,7 +192,9 @@
 
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline w-100">Add</button>
+                     <center>
+                    <button type="submit" class="btn btn-outline w-50">Add</button>
+                     </center>
                 </form>
             </div>
         </div>

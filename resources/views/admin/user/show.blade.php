@@ -13,13 +13,13 @@
         <tr><th>Corporate Email</th><td>{{ $employee->corporate_email }}</td></tr>
         <tr><th>Phone Number</th><td>{{ $employee->phone_number }}</td></tr>
         <tr><th>WhatsApp Number</th><td>{{ $employee->profile->whatsapp_number }}</td></tr>
-        <tr><th>Department</th><td>{{ $employee->department_id }}</td></tr>
-        <tr><th>Role</th><td>{{ $employee->profile->role }}</td></tr>
+        {{-- <tr><th>Department</th><td>{{ $employee->department_id }}</td></tr>
+        <tr><th>Role</th><td>{{ $employee->profile->role }}</td></tr> --}}
         <tr><th>Birth Date</th><td>{{ $employee->profile->date_of_birth }}</td></tr>
         <tr><th>Recruitment Date</th><td>{{ $employee->profile->hire_date }}</td></tr>
         <tr><th>Passport Number</th><td>{{ $employee->profile->identification_id_type  }}</td></tr>
         <tr><th>National ID</th><td>{{ $employee->profile->identification_id  }}</td></tr>
-        <tr><th>Branch</th><td>{{ $employee->branch_id }}</td></tr>
+        {{-- <tr><th>Branch</th><td>{{ $employee->branch_id }}</td></tr> --}}
         <tr><th>Biometric</th><td>{{ $employee->profile->biometric }}</td></tr>
         <tr><th>Gender</th><td>{{ ucfirst($employee->profile->gender) }}</td></tr>
         <tr><th>Nationality</th><td>{{ $employee->profile->nationality }}</td></tr>

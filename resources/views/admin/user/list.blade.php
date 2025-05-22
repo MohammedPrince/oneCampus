@@ -13,10 +13,10 @@
           <a class="nav-link {{ request()->is('admin/user/reset') ? 'active' : ''}}" href="{{route('user.reset')}}" id="resetPasswordsLink">Reset Passwords</a>
       </div>
     </div>
-  </div> 
- 
+  </div>
 
-</nav> 
+
+</nav>
         <h5 style="margin-top: 40px; margin-left:20px">Employee List</h5>
         @include('layouts.alert')
         <div class="table-responsive">
@@ -39,7 +39,7 @@
             </thead>
             <tbody>
                 @foreach($employees as $employee)
-                 
+
                     <tr>
                         <td>{{ $employee->id }}</td>
                         <td>{{ $employee->full_name_ar }} -- {{ $employee->full_name_en }}</td>
@@ -55,7 +55,7 @@
                           @else
                               {{ 'No Role Assigned' }}
                           @endif
-                      </td>                        
+                      </td>
                       {{-- <td>
                             @if($employee->profile->cv ?? '')
                                 <a href="{{ asset('storage/' . $employee->profile->cv) }}" target="_blank">View CV</a>
@@ -70,10 +70,10 @@
                                 No Certificate uploaded
                             @endif
                         </td> --}}
-                      
+
                         <td>
                             <div class="d-flex gap-1">
-                            <button style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#editModal" 
+                            <button style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#editModal"
                                     data-id="{{ $employee->employee_id }}"
                                     data-full_name_arabic="{{ $employee->full_name_ar }}"
                                     data-full_name_english="{{ $employee->full_name_en }}"
@@ -126,7 +126,7 @@
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" id="editEmployeeId">
-      
+
                 <!-- Full Names -->
                 <div class="row mb-3">
                   <div class="col-md-6">
@@ -140,7 +140,7 @@
                     <div class="invalid-feedback">Please enter the full name in English.</div>
                   </div>
                 </div>
-      
+
                 <!-- Emails -->
                 <div class="row mb-3">
                   <div class="col-md-6">
@@ -154,7 +154,7 @@
                     <div class="invalid-feedback">Please enter a valid corporate email.</div>
                   </div>
                 </div>
-      
+
                 <!-- Phone Numbers -->
                 <div class="row mb-3">
                   <div class="col-md-6">
@@ -166,7 +166,7 @@
                     <input type="tel" class="form-control" id="editWhatsAppNumber" name="whatsapp_number" required>
                   </div>
                 </div>
-      
+
                 <!-- Department and Role -->
                 <div class="row mb-3">
                   <div class="col-md-6">
@@ -178,7 +178,7 @@
                                 @foreach ($faculties as $data )
                                 <option value="{{$data->faculty_id}}">{{$data->faculty_name_en}}</option>
                                 @endforeach
-                          
+
                             </select>
                   </div>
                   <div class="col-md-6">
@@ -190,7 +190,7 @@
                     </select>
                   </div>
                 </div>
-      
+
                 <!-- Dates -->
                 <div class="row mb-3">
                   <div class="col-md-6">
@@ -202,8 +202,8 @@
                     <input type="date" class="form-control" id="editRecruitmentDate" name="hire_date" required>
                   </div>
                 </div>
-      
-             
+
+
                 <!-- Branch & Biometric -->
                 <div class="row mb-3">
                   <div class="col-md-6">
@@ -216,14 +216,14 @@
                             @foreach($branches as $branch)
                             <option value="{{ $branch->branch_id }}">{{ $branch->branch_name_en }}</option>
                             @endforeach
-                        </select> 
+                        </select>
                   </div>
                   <div class="col-md-6">
                     <label for="editBiometric" class="form-label">Biometric</label>
                     <input type="text" class="form-control" id="editBiometric" name="biometric" required>
                   </div>
                 </div>
-      
+
                 <!-- Gender & Nationality -->
                 <div class="row mb-3">
                   <div class="col-md-6">
@@ -238,7 +238,7 @@
                     <input type="text" class="form-control" id="editNationality" name="nationality" required>
                   </div>
                 </div>
-      
+
                             <!-- Identification Fields -->
                 <div class="row mb-3">
                     <div class="col-md-4">
@@ -251,7 +251,7 @@
                     </select>
                     <div class="invalid-feedback">Please select an identification type.</div>
                     </div>
-                
+
                     <div class="col-md-4">
                     <label for="identification_id" class="form-label" id="identificationLabel">National ID</label>
                     <input type="text" class="form-control" id="editidentification_id" name="identification_id" required>
@@ -273,13 +273,16 @@
                     <p class="mt-2">Current Certificate: <span id="currentCertificate"></span></p>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-outline-primary w-100">Save Changes</button>
+                <center>
+                <button type="submit" class="btn btn-outline-primary w-50">Save Changes</button>
+
+                </center>
               </form>
             </div>
           </div>
         </div>
       </div>
-      
+
 
 @endsection
 
