@@ -211,7 +211,9 @@
                             <div class="invalid-feedback">Please upload certificates.</div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline w-100">Submit</button>
+                    <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-outline w-25">Submit</button>
+                            </div>
                 </form>
             </div>
         </div>
