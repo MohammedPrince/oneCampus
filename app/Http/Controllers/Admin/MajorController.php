@@ -23,7 +23,7 @@ class MajorController extends Controller
     {
         $majors = $this->majorService->getAllMajors();
         $faculty = $this->majorService->getAllFaculty();
-        
+
          return view('admin.academic.majors', compact('majors','faculty'));
     }
     public function getMajorData()
@@ -36,10 +36,25 @@ class MajorController extends Controller
         $majors = Major::where('faculty_id', $id)->get();
         return response()->json($majors);
     }
-    
+
     // Store a new major
     public function store(StoreMajorRequest $request)
     {
+        // dd($request->validated());
+    //     $result = $this->majorService->createMajor($request->validated());
+    //     // return response()->json(['message' => 'Major deleted successfully.']);
+    //     if ($result == 'success') {
+    //    return response()->json([
+    //             'message' => 'Major added successfully!',
+    //             'major' => $major
+    //         ], 201);
+    //         // return redirect()->back()->with('success', 'Major added successfully!');
+    //     // return response()->json(['message' => 'Major added successfully!']);
+
+    //     } elseif ($result == 'error') {
+    //         return redirect()->route('admin.academic.major')->with('error', 'Major Not Added!');
+    //     }
+
         try {
             // Call the service method to create the major
             $major = $this->majorService->createMajor($request->validated());
@@ -48,6 +63,7 @@ class MajorController extends Controller
                 'message' => 'Major added successfully!',
                 'major' => $major
             ], 201);
+
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Error creating major: ' . $e->getMessage()

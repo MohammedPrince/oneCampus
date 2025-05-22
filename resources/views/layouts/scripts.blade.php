@@ -8,7 +8,7 @@
             ],
             responsive: true,
             lengthMenu: [
-                [10, 25, 50, -1],
+                [10, 25, 50, -1 ],
                 [10, 25, 50, "All"]
             ],
             language: {
@@ -57,9 +57,9 @@
         if (editEmployeeForm) {
             editEmployeeForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+
                 const formData = new FormData(this);
-                
+
                 $.ajax({
                     url: $(this).attr('action'),
                     type: 'POST',
@@ -305,7 +305,7 @@ $('#addFacultyForm').submit(function (e) {
                 ${message}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>`;
-        
+
         $(target).html(alertHtml);
 
         // Auto-dismiss after 5 seconds
@@ -411,7 +411,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     });
-     
+
     // --------------------------Alert Function----------------
 let alertTimeout;
 
@@ -429,7 +429,7 @@ function showAlert(message, type = 'success', target = '#alertArea') {
             ${message}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>`;
-    
+
     $(target).html(alertHtml);
 
     // Auto-dismiss after 5 seconds
@@ -600,7 +600,7 @@ function showAlert(message, type = 'success', target = '#alertArea') {
             }
         });
     });
-   
+
     $(document).ready(function() {
         // Activate Bootstrap 5 tabs automatically
         var triggerTabList = [].slice.call(document.querySelectorAll('#batch-tab, #control-batch-tab'))
@@ -719,11 +719,11 @@ function showAlert(message, type = 'success', target = '#alertArea') {
     // Handle the Add Major Form
     $('#add-major-form').on('submit', function(event) {
         event.preventDefault();
-        
+
         // Validate form fields
         let isValid = true;
         let errorFields = [];
-        
+
         // Check each required field
         $('#add-major-form [required]').each(function() {
             if (!$(this).val()) {
@@ -763,14 +763,14 @@ function showAlert(message, type = 'success', target = '#alertArea') {
                 $('#add-major-form')[0].reset();
                 $('#add-major-form .is-invalid').removeClass('is-invalid');
                 $('#add-major-form .invalid-feedback').hide();
-                
+
                 showAlert('Major added successfully!', 'success');
                 loadMajors();
 
-                // Reload page after 2 seconds
+                Reload page after 2 seconds
                 setTimeout(() => {
                     window.location.reload();
-                }, 1000);
+                }, 5000);
             },
             error: function(xhr) {
                 console.error('Error:', xhr);
@@ -799,7 +799,7 @@ function showAlert(message, type = 'success', target = '#alertArea') {
         // Validate form fields
         let isValid = true;
         let errorFields = [];
-        
+
         // Check each required field
         $('#edit-major-form [required]').each(function() {
             if (!$(this).val()) {
@@ -840,7 +840,7 @@ function showAlert(message, type = 'success', target = '#alertArea') {
                 $('#edit-major-form')[0].reset();
                 $('#edit-major-form .is-invalid').removeClass('is-invalid');
                 $('#edit-major-form .invalid-feedback').hide();
-                
+
                 $('#Editprogram').modal('hide');
                 showAlert('Major updated successfully!', 'success', '#alertAreaMajors');
                 loadMajors();
@@ -900,7 +900,7 @@ function showAlert(message, type = 'success', target = '#alertArea') {
                                 </button>
                             <button class="btn btn-sm delete-major" data-id="${major.major_id}"> <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete" /></button>
                        </div>
-                       
+
                             </td>
                         </tr>
                     `);
@@ -975,5 +975,5 @@ function showAlert(message, type = 'success', target = '#alertArea') {
         // Initialization code here
         console.log('Student dashboard loaded');
     });
- 
+
 </script>

@@ -37,7 +37,11 @@
                 <h4 class="mb-4">Add New Major</h4>
 
                 <div id="alertArea" class="my-2"></div>
+                {{-- {{ route('admin.academic.major.store') }} --}}
                 <form id="add-major-form" class="row needs-validation" novalidate>
+
+                {{-- <form action="{{ route('admin.academic.major.store') }}" method="POST" class="row needs-validation" novalidate> --}}
+
                     @csrf
                     <div class="row mb-3">
                         <div class="col-md-6">

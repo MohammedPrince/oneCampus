@@ -128,7 +128,7 @@ Route::get('/academic/certificate',action: [AuthController::class,'manageCertifi
 Route::get('/academic/batch',[AuthController::class,'manageBatch'])->name('admin.academic.batch');
 // Route::get('/academic/intake',[AuthController::class,'manageIntake'])->name('admin.academic.intake');
 Route::resource('employee', controller: EmployeeController::class);
-//get branch 
+//get branch
 Route::get('/academic/batch', [BatchController::class, 'getData'])->name('admin.academic.batch');
 //getuserdata
 Route::get('/user/add', [EmployeeController::class, 'getUserData'])->name('user.add');
@@ -156,11 +156,11 @@ Route::prefix('dean')->middleware('role:dean')->group(function () {
 });
 Route::prefix('admission-user')->middleware('role:admission-user')->group(function () {
     Route::get('/', [AuthController::class, 'admissionUser']);
-  
+
 });
 Route::prefix('admission-admin')->middleware('role:admission-admin')->group(function () {
     Route::get('/', [AuthController::class, 'admissionAdmin']);
-  
+
 });
 Route::prefix('registrar')->middleware('role:registrar')->group(function () {
     Route::get('/', [AuthController::class, 'registrar']);
@@ -168,7 +168,7 @@ Route::prefix('registrar')->middleware('role:registrar')->group(function () {
 });
 Route::prefix('exam-officer')->middleware('role:exam-officer')->group(function () {
     Route::get('/', [AuthController::class, 'examOfficer']);
-  
+
 });
 Route::prefix('finance')->middleware('role:finance')->group(function () {
     Route::get('/', [AuthController::class, 'finance']);
