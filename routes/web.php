@@ -98,7 +98,7 @@ Route::delete('/rule/branch/{id}', [BranchController::class, 'destroy'])
   Route::get('academic/major/{id}/edit', [MajorController::class, 'edit'])->name('admin.academic.major.edit');
 
   // Update the major
-  Route::put('academic/major/{id}', [MajorController::class, 'update'])->name('admin.academic.major.update');
+  Route::post('academic/major/update', [MajorController::class, 'update'])->name('admin.academic.major.update');
 
   // Delete a major
   Route::delete('academic/major/delete/{id}', [MajorController::class, 'destroy'])->name('admin.academic.major.destroy');

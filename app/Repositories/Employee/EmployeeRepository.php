@@ -66,7 +66,7 @@ class EmployeeRepository
         return Employee::deleteEmployee($id);
     }
 
-    /**
+    /**-+
      * Get all available roles.
      *
      * @return \Illuminate\Database\Eloquent\Collection

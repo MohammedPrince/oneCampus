@@ -30,6 +30,7 @@ class MajorController extends Controller
     {
         $majors = $this->majorService->getAllMajors();
         return response()->json(['majors' => $majors]);
+
     }
     public function getMajorsByFaculty($id)
     {
@@ -40,35 +41,25 @@ class MajorController extends Controller
     // Store a new major
     public function store(StoreMajorRequest $request)
     {
-        // dd($request->validated());
-    //     $result = $this->majorService->createMajor($request->validated());
-    //     // return response()->json(['message' => 'Major deleted successfully.']);
-    //     if ($result == 'success') {
-    //    return response()->json([
-    //             'message' => 'Major added successfully!',
-    //             'major' => $major
-    //         ], 201);
-    //         // return redirect()->back()->with('success', 'Major added successfully!');
-    //     // return response()->json(['message' => 'Major added successfully!']);
 
-    //     } elseif ($result == 'error') {
-    //         return redirect()->route('admin.academic.major')->with('error', 'Major Not Added!');
-    //     }
+        $data = $request->validated();
+        $this->majorService->createMajor($data);
+        return redirect()->route('admin.academic.major')->with('success', 'Major added successfully!');
 
-        try {
-            // Call the service method to create the major
-            $major = $this->majorService->createMajor($request->validated());
+        // try {
+        //     // Call the service method to create the major
+        //     $major = $this->majorService->createMajor($request->validated());
 
-            return response()->json([
-                'message' => 'Major added successfully!',
-                'major' => $major
-            ], 201);
+        //     return response()->json([
+        //         'message' => 'Major added successfully!',
+        //         'major' => $major
+        //     ], 201);
 
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Error creating major: ' . $e->getMessage()
-            ], 500);
-        }
+        // } catch (\Exception $e) {
+        //     return response()->json([
+        //         'message' => 'Error creating major: ' . $e->getMessage()
+        //     ], 500);
+        // }
     }
 
     // Show the edit form for a specific major
@@ -79,18 +70,21 @@ class MajorController extends Controller
     }
 
     // Update a major
-    public function update(UpdateMajorRequest $request, $id)
+    // public function update(UpdateMajorRequest $request)
+    public function update(Request $request)
     {
-        // Find the major
-        $major = $this->majorService->findMajor($id);
 
-        // Call the service method to update the major
-        $updatedMajor = $this->majorService->updateMajor($major, $request->validated());
+        $major = $this->majorService->findMajor($request->major_id);
 
-        return response()->json([
-            'message' => 'Major updated successfully!',
-            'major' => $updatedMajor
-        ]);
+        $updatedMajor = $this->majorService->updateMajor($major, $request->all());
+
+        return redirect()->route('admin.academic.major')->with('success', 'Major updated successfully!');
+
+
+        // return response()->json([
+        //     'message' => 'Major updated successfully!',
+        //     'major' => $updatedMajor
+        // ]);
     }
 
     // Delete a major
@@ -101,7 +95,8 @@ class MajorController extends Controller
         // dd($major);
         // Call the service method to delete the major
         $this->majorService->deleteMajor($major);
+        return redirect()->route('admin.academic.major')->with('success', 'Major deleted successfully.!');
 
-        return response()->json(['message' => 'Major deleted successfully.']);
+        // return response()->json(['message' => 'Major deleted successfully.']);
     }
 }

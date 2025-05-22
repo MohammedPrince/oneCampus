@@ -1,4 +1,56 @@
+
+
 <script>
+
+    function  Major_data(major) {
+
+        document.getElementById('edit_major_id').value = major.major_id;
+        document.getElementById('edit_major_name_en').value = major.major_name_en;
+        document.getElementById('edit_major_name_ar').value = major.major_name_ar;
+        document.getElementById('edit_major_abbreviation').value = major.major_abbreviation;
+        document.getElementById('edit_major_ministry_code').value = major.major_ministry_code;
+        document.getElementById('edit_program_mode').value = major.major_mode;
+        document.getElementById('edit_credits_required').value = major.credits_required;
+        document.getElementById('edit_degree_type').value = major.degree_type;
+        document.getElementById('edit_faculty_id').value = major.faculty_id;
+        document.getElementById('edit_number_of_semesters').value = major.number_of_semesters;
+        document.getElementById('edit_program_duration').value = major.program_duration;
+
+    }
+
+$(document).on('click', '.delete-major', function() {
+    console.log('Delete button clicked'); // ✅ Debug
+    const majorId = $(this).data('id');
+
+    if (confirm('Are you sure you want to delete this major?')) {
+        console.log('Confirmed delete'); // ✅ Debug
+        $.ajax({
+            url: `/admin/academic/major/delete/${majorId}`,
+            type: 'DELETE',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                showAlert('Major deleted successfully!', 'success', '#alertAreaMajors');
+                loadMajors();
+            },
+            error: function(xhr) {
+                showAlert('Failed to delete major!', 'danger', '#alertAreaMajors');
+                console.log(xhr.responseText); // ✅ Debug
+            }
+        });
+    } else {
+        console.log('Deletion cancelled'); // ✅ Debug
+    }
+});
+</script>
+
+
+
+
+<script>
+
+
     // --------------------------DataTable scripts----------------
     $(document).ready(function() {
         $('table.table').DataTable({
@@ -796,6 +848,7 @@ function showAlert(message, type = 'success', target = '#alertArea') {
         event.preventDefault();
         const majorId = $('#edit_major_id').val();
 
+        alert(majorId);
         // Validate form fields
         let isValid = true;
         let errorFields = [];
@@ -923,6 +976,8 @@ function showAlert(message, type = 'success', target = '#alertArea') {
         loadMajors();
     });
 
+
+
     // Handle Edit Major
     function editMajor(majorId) {
         $.ajax({
@@ -949,27 +1004,30 @@ function showAlert(message, type = 'success', target = '#alertArea') {
             }
         });
     }
-    $(document).on('click', '.delete-major', function() {
-        const majorId = $(this).data('id');
-        if (confirm('Are you sure you want to delete this major?')) {
-            $.ajax({
-                url: `/admin/academic/major/delete/${majorId}`,
-                type: 'DELETE',
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                  showAlert('Major deleted successfully!', 'success', '#alertAreaMajors');
-                    loadMajors(); // Refresh the list
-                },
-                error: function(xhr) {
-                   showAlert('failed to delte major!', 'danger', '#alertAreaMajors');
-                    window.location.reload(); // Refresh the page after adding
 
-                }
-            });
-        }
-    });
+
+
+    // $(document).on('click', '.delete-major', function() {
+    //     const majorId = $(this).data('id');
+    //     if (confirm('Are you sure you want to delete this major?')) {
+    //         $.ajax({
+    //             url: `/admin/academic/major/delete/${majorId}`,
+    //             type: 'DELETE',
+    //             data: {
+    //                 _token: $('meta[name="csrf-token"]').attr('content')
+    //             },
+    //             success: function(response) {
+    //               showAlert('Major deleted successfully!', 'success', '#alertAreaMajors');
+    //                 loadMajors(); // Refresh the list
+    //             },
+    //             error: function(xhr) {
+    //                showAlert('failed to delte major!', 'danger', '#alertAreaMajors');
+    //                 window.location.reload(); // Refresh the page after adding
+
+    //             }
+    //         });
+    //     }
+    // });
     //-----------------------student scripts-----------
     $(document).ready(function() {
         // Initialization code here

@@ -38,9 +38,9 @@
 
                 <div id="alertArea" class="my-2"></div>
                 {{-- {{ route('admin.academic.major.store') }} --}}
-                <form id="add-major-form" class="row needs-validation" novalidate>
+                {{-- <form id="add-major-form" class="row needs-validation" novalidate> --}}
 
-                {{-- <form action="{{ route('admin.academic.major.store') }}" method="POST" class="row needs-validation" novalidate> --}}
+                <form action="{{ route('admin.academic.major.store') }}" method="POST">
 
                     @csrf
                     <div class="row mb-3">
@@ -149,7 +149,7 @@
 
         <!-- Majors Table -->
         <div id="batchcontrol" class="tab-pane fade">
-            <h4>Programs</h4>
+            <h4>Majors</h4>
             <div class="container my-4">
                 <div id="alertAreaMajors" class="my-2"></div> <!-- <- ADD THIS -->
                 <div class="table-responsive">
@@ -168,13 +168,40 @@
                                 <th style="text-align: center;">Number Of Semesters</th>
                                 <th style="text-align: center;">Program Duration</th>
                                 <th style="text-align: center;">ِAction</th>
-
-
                             </tr>
                         </thead>
-                        <tbody id="majors-table-body">
-                            <!-- Rows will be added via AJAX -->
-                        </tbody>
+                        {{-- <tbody id="majors-table-body">
+                        </tbody> --}}
+                        @foreach ($majors as $major)
+    <tr>
+        <td style="text-align: center;">
+            <input type="checkbox" class="select-checkbox" data-id="{{ $major->major_id }}">
+        </td>
+        <td style="text-align: center;">{{ $major->major_name_en }}</td>
+        <td style="text-align: center;">{{ $major->major_name_ar }}</td>
+        <td style="text-align: center;">{{ $major->major_abbreviation }}</td>
+        <td style="text-align: center;">{{ $major->credits_required }}</td>
+        <td style="text-align: center;">{{ $major->major_ministry_code }}</td>
+        <td style="text-align: center;">{{ $major->major_mode }}</td>
+        <td style="text-align: center;">{{ $major->degree_type }}</td>
+        <td style="text-align: center;">
+            {{ $major->faculty->faculty_name_en }}
+        </td>
+        <td style="text-align: center;">{{ $major->number_of_semesters }}</td>
+        <td style="text-align: center;">{{ $major->program_duration }}</td>
+        <td style="text-align: center;">
+            <div class="d-flex gap-1">
+                <button class="btn btn-sm" onclick="Major_data({{ json_encode($major) }})" data-bs-toggle="modal" data-bs-target="#Editprogram">
+                    <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
+                </button>
+                <button class="btn btn-sm delete-major" data-id="{{ $major->major_id }}">
+                    <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete">
+                </button>
+            </div>
+        </td>
+    </tr>
+@endforeach
+
                     </table>
                 </div>
             </div>
@@ -187,12 +214,16 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Program</h5>
+                    <h5 class="modal-title" id="editModalLabel">Edit Major</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="edit-major-form" class="row needs-validation" novalidate>
-                        <input type="hidden" id="edit_major_id">
+                    {{-- /admin/academic/major/update/${majorId} --}}
+                    <form method="POST" action="{{ route('admin.academic.major.update') }}">
+                        @csrf
+
+
+                        <input type="hidden" name="major_id" id="edit_major_id">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="major_name_en" class="form-label">Name In English </label>
@@ -202,13 +233,13 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="major_name_ar" class="form-label">Name In Arabic </label>
-                                <input type="text" class="form-control" id="edit_major_name_ar" name="major_name_ar"
+                                <input type="text"  class="form-control" id="edit_major_name_ar" name="major_name_ar"
                                     required>
                                 <div class="invalid-feedback">Please enter the Program Name In Arabic.</div>
                             </div>
                             <div class="col-md-6">
                                 <label for="abbreviation" class="form-label">Abbreviation</label>
-                                <input type="text" class="form-control" id="edit_major_abbreviation"
+                                <input type="text"  class="form-control" id="edit_major_abbreviation"
                                     name="major_abbreviation" required>
                                 <div class="invalid-feedback">Please enter the Program Abbreviation.</div>
                             </div>
@@ -216,13 +247,13 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="credits_required" class="form-label">Credits Required </label>
-                                <input type="text" class="form-control" id="edit_credits_required"
+                                <input type="text"  class="form-control" id="edit_credits_required"
                                     name="credits_required" required>
                                 <div class="invalid-feedback">Please enter the number of credits required.</div>
                             </div>
                             <div class="col-md-6">
                                 <label for="program_ministry_code" class="form-label">Program Ministry Code </label>
-                                <input type="text" class="form-control" id="edit_major_ministry_code"
+                                <input type="text"  class="form-control" id="edit_major_ministry_code"
                                     name="major_ministry_code" required>
                                 <div class="invalid-feedback">Please enter the Program Ministry Code.</div>
                             </div>
@@ -278,4 +309,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection

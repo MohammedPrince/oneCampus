@@ -34,14 +34,10 @@ class Major extends Model
      */
     public static function createMajor(array $data)
     {
-          $query = self::create($data);
+          return self::create($data);
 
-        // Check if the major was created successfully
-        if ($query) {
-            return $query;
-        } else {
-            return 'error';
-        }
+        // Check if the query was successful
+
         // Uncomment the following line if you want to return the created major instance
 
         // return self::create([
