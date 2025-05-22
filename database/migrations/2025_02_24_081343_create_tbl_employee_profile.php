@@ -30,19 +30,19 @@ return new class extends Migration {
             $table->string('facebook_account', 191)->nullable();
             $table->string('twitter_account', 191)->nullable();
             $table->string('instgram_account', 191)->nullable();
-            $table->string('address', 191);
-            $table->string('town', length: 100);
-            $table->string('state', 100);
+            $table->string('address', 191)->nullable();
+            $table->string('town', length: 100)->nullable();
+            $table->string('state', 100)->nullable();
             $table->integer('country');
-            $table->string('place_of_residence', length: 191);
-            $table->string('office_location', 191);
+            $table->string('place_of_residence', length: 191)->nullable();
+            $table->string('office_location', 191)->nullable();
 
             $table->enum('identification_id_type', ['National ID', 'Passport', 'Driving License', 'Other'])->default('National ID');
             $table->string('identification_id', 50)->unique();
-            $table->date('identification_id_issue_date');
-            $table->date('identification_id_expired_date');
-            $table->string('identification_id_issue_place', 191);
-            $table->string('identification_id_upload', 191);
+            $table->date('identification_id_issue_date')->nullable();
+            $table->date('identification_id_expired_date')->nullable();
+            $table->string('identification_id_issue_place', 191)->nullable();
+            $table->string('identification_id_upload', 191)->nullable();
 
             $table->string('visa_id', 100)->nullable();
             // To ensure proper uniqueness including NULL values
@@ -61,7 +61,7 @@ return new class extends Migration {
 
             $table->date('end_date')->nullable()->default(NULL);
             $table->enum('position_level', ['Entry Level', 'Junior', 'Mid Level', 'Senior', 'Lead', 'Manager', 'Director', 'Other'])->default('Entry Level');
-            $table->decimal('salary', 10, 2)->unsigned(); // Add validation for salary to prevent negative values
+            $table->decimal('salary', 10, 2)->unsigned()->nullable(); // Add validation for salary to prevent negative values
 
             $table->enum('military_code', ['Complete', 'Postponed', 'None'])->default('Complete');
             // Add [marital_status, spouse_nationality mspouse_name] as it's important employee information
