@@ -54,6 +54,13 @@
                             <div class="invalid-feedback">Please enter the Major Name In Arabic.</div>
                         @enderror
                     </div>
+                     <div class="col-md-6">
+                    <label for="major_abbreviation">Abbreviation</label>
+                    <input type="text" name="major_abbreviation" class="form-control @error('major_abbreviation') is-invalid @enderror" value="{{ old('major_abbreviation') }}">
+                    @error('major_abbreviation')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
                 </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
@@ -62,9 +69,11 @@
                             <div class="invalid-feedback">Please enter the number of credits required.</div>
                         </div>
                         <div class="col-md-6">
-                            <label for="program_ministry_code" class="form-label">Program Ministry Code </label>
-                            <input type="text" class="form-control" id="major_ministry_code" name="major_ministry_code" value="{{ old('major_ministry_code') }}"required>
-                            <div class="invalid-feedback">Please enter the Program Ministry Code.</div>
+                             <label for="major_ministry_code">Ministry Code</label>
+                        <input type="text" name="major_ministry_code" class="form-control @error('major_ministry_code') is-invalid @enderror" value="{{ old('major_ministry_code') }}"  required>
+                        @error('major_ministry_code')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                         </div>
                         <div class="col-md-6">
                             <label for="program_mode" class="form-label">Program Mode</label>
@@ -168,7 +177,7 @@
                                 <input type="text" class="form-control" id="edit_major_name_ar" name="major_name_ar" required>
                                 <div class="invalid-feedback">Please enter the Program Name In Arabic.</div>
                             </div>
-                            <div class="col-md-6">
+                              <div class="col-md-6">
                                 <label for="abbreviation" class="form-label">Abbreviation</label>
                                 <input type="text" class="form-control" id="edit_major_abbreviation" name="major_abbreviation" required>
                                 <div class="invalid-feedback">Please enter the Program Abbreviation.</div>
