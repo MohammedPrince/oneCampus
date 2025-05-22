@@ -56,7 +56,7 @@
                     </div>
                      <div class="col-md-6">
                     <label for="major_abbreviation">Abbreviation</label>
-                    <input type="text" name="major_abbreviation" class="form-control @error('major_abbreviation') is-invalid @enderror" value="{{ old('major_abbreviation') }}">
+                    <input type="text" name="major_abbreviation" class="form-control @error('major_abbreviation') is-invalid @enderror" value="{{ old('major_abbreviation') }}" required>
                     @error('major_abbreviation')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
