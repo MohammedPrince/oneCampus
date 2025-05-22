@@ -138,49 +138,126 @@
     });
 
     // --------------------------Department Scripts----------------
-    $(document).ready(function() {
-        // Dynamically fill edit form
-        $('.edit-btn').click(function() {
-            const id = $(this).data('id');
-            $('#editFacultyId').val(id);
-            $('#editFacultyEn').val($(this).data('en'));
-            $('#editFacultyAr').val($(this).data('ar'));
-            $('#editFacultyAbbr').val($(this).data('abbr'));
-            $('#editFacultyBranch').val($(this).data('branch'));
+   $(document).ready(function () {
+    // Existing Edit logic...
 
-            // Set form action
-            const action = "{{ route('faculty.update', ':id') }}".replace(':id', id);
-            $('#editFacultyForm').attr('action', action);
-        });
+    // ========================
+    // Add Faculty AJAX submit
+    // ========================
+$('#addFacultyForm').submit(function (e) {
+        e.preventDefault();
 
-        // AJAX submit
-        $('#editFacultyForm').submit(function(e) {
-            e.preventDefault();
+        const form = $(this);
+        const url = form.attr('action');
+        const data = form.serialize();
 
-            const form = $(this);
-            const url = form.attr('action');
-            const data = form.serialize();
-
-            $.ajax({
-                url: url,
-                type: 'PUT',
-                data: data,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'X-HTTP-Method-Override': 'PUT'
-                },
-                success: function(response) {
-                    showAlert('Faculty updated successfully!');
-                    location.reload(); // Or just update table row
-                },
-                error: function(xhr) {
-                    console.error(xhr);
-                    showAlert('Error updating faculty.','danger');
-                    location.reload();
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                $('#AddFaculty').modal('hide');
+                showAlert('Faculty added successfully!');
+                location.reload(); // Or update table dynamically
+            },
+            error: function (xhr) {
+                console.error(xhr);
+                if (xhr.status === 422) {
+                    // Laravel validation error
+                    const errors = xhr.responseJSON.errors;
+                    let errorMsg = 'Validation Error:\n';
+                    $.each(errors, function (key, messages) {
+                        errorMsg += `- ${messages[0]}\n`;
+                    });
+                    showAlert(errorMsg, 'danger');
+                } else {
+                    showAlert('Error adding faculty.', 'danger');
                 }
-            });
+            }
         });
     });
+  // Delete Faculty via AJAX
+    $('.delete-faculty-btn').on('click', function () {
+        const facultyId = $(this).data('id');
+        const confirmed = confirm("Are you sure you want to delete this faculty?");
+
+        if (!confirmed) return;
+
+        $.ajax({
+            url: `/admin/rule/departments/${facultyId}`, // Or use `route('faculty.destroy', facultyId)` in a Blade script block
+            type: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                showAlert('Faculty deleted successfully!', 'success');
+                location.reload(); // or remove the row from the DOM dynamically
+            },
+            error: function (xhr) {
+                showAlert('Error deleting faculty.', 'danger');
+            }
+        });
+    });
+
+
+    // ========================
+    // Edit Faculty (already added)
+    // ========================
+    $('.edit-btn').click(function () {
+        const id = $(this).data('id');
+        $('#editFacultyId').val(id);
+        $('#editFacultyEn').val($(this).data('en'));
+        $('#editFacultyAr').val($(this).data('ar'));
+        $('#editFacultyAbbr').val($(this).data('abbr'));
+        $('#editFacultyBranch').val($(this).data('branch'));
+
+        const action = "{{ route('faculty.update', ':id') }}".replace(':id', id);
+        $('#editFacultyForm').attr('action', action);
+    });
+
+    $('#editFacultyForm').submit(function (e) {
+        e.preventDefault();
+
+        const form = $(this);
+        const url = form.attr('action');
+        const data = form.serialize();
+
+        $.ajax({
+            url: url,
+            type: 'POST', // Use POST with method spoofing
+            data: data,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'X-HTTP-Method-Override': 'PUT'
+            },
+            success: function (response) {
+                $('#EditFaculty').modal('hide');
+                showAlert('Faculty updated successfully!');
+                location.reload();
+            },
+            error: function (xhr) {
+                console.error(xhr);
+                showAlert('Error updating faculty.', 'danger');
+                location.reload();
+            }
+        });
+    });
+
+    // ========================
+    // Show alert
+    // ========================
+    function showAlert(message, type = 'success') {
+        $('#alertArea').html(`
+            <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        `);
+    }
+});
 
     // --------------------------Branch Scripts----------------
 
@@ -207,24 +284,29 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Remove row from DOM
                     this.closest('tr').remove();
 
-                    // Show success alert
-                    document.getElementById('alertArea').innerHTML = `
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            ${data.message}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>`;
+                    // If modal is open, wait until it's hidden
+                    const modal = document.querySelector('#editBranchModal');
+                    if (modal && $(modal).hasClass('show')) {
+                        $(modal).on('hidden.bs.modal', function () {
+                            showAlert(data.message, 'success');
+                            $(modal).off('hidden.bs.modal'); // Unbind to prevent multiple triggers
+                        });
+                        $(modal).modal('hide'); // Hide modal
+                    } else {
+                        // If no modal open, show alert immediately
+                        showAlert(data.message, 'success');
+                    }
                 } else {
-                    showAlert( 'Failed to delete branch.','danger');
+                    showAlert('Failed to delete branch.', 'danger');
                 }
             })
             .catch(error => {
                 console.error('Delete failed:', error);
-                showAlert('Something went wrong. Check console.','warning');
+                showAlert('Something went wrong. Check console.', 'warning');
             });
         });
     });
 });
-
 
     function editBranch(button) {
         $('#edit_id').val($(button).data('id'));
@@ -241,11 +323,17 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();
             let formData = $(this).serialize();
             $.post("{{ route('admin.rule.branch.store') }}", formData, function(res) {
+                $('#addBranchForm').modal('hide');
                 showAlert('Branch Added Successfully');
-                location.reload();
+               setTimeout(() => {
+    location.reload();
+}, 1500); // W
             }).fail(function(xhr) {
                 console.error(xhr.responseText); // Check for validation or server errors
                 showAlert('Failed to add branch','danger');
+                 setTimeout(() => {
+    location.reload();
+}, 1500); // W
             });
         });
 
@@ -255,8 +343,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let formData = $(this).serialize() + '&_method=PUT';
 
             $.post(`/admin/rule/branch/update/${id}`, formData, function() {
+             $('#editBranchForm').modal('hide');
                 showAlert('Branch Updated Successfully');
-                location.reload();
+                setTimeout(() => {
+    location.reload();
+}, 1500); // W
             }).fail(function() {
                 showAlert('Failed to update branch','danger');
                 location.reload();
@@ -264,37 +355,33 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     });
-        // --------------------------Alert Function----------------
-// function showAlert(message, type = 'success', timeout = 5000) {
-//     const alertHTML = `
-//         <div class="alert alert-${type} alert-dismissible fade show" role="alert">
-//             ${message}
-//             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-//         </div>
-//     `;
+     
+    // --------------------------Alert Function----------------
+let alertTimeout;
 
-//     // Insert the alert into the alert area
-//     $('#alertArea').html(alertHTML);
-
-//     // Auto-dismiss after timeout (if > 0)
-//     if (timeout && timeout > 0) {
-//         setTimeout(() => {
-//             $('.alert').alert('close');
-//         }, timeout);
-//     }
-// }
 function showAlert(message, type = 'success', target = '#alertArea') {
     const allowedTypes = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
     const alertType = allowedTypes.includes(type) ? type : 'success';
 
+    if (alertTimeout) {
+        clearTimeout(alertTimeout);
+        alertTimeout = null;
+    }
+
     const alertHtml = `
-        <div class="alert alert-${alertType} alert-dismissible fade show" role="alert">
+        <div class="alert alert-${alertType} alert-dismissible fade show shadow" role="alert">
             ${message}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>`;
-        
+    
     $(target).html(alertHtml);
+
+    // Optional: auto-dismiss after a longer time
+    // alertTimeout = setTimeout(() => {
+    //     $(target).find('.alert').alert('close');
+    // }, 10000);
 }
+
 
     // --------------------------Batch Scripts----------------
     $(document).ready(function() {

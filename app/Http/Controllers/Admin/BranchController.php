@@ -27,8 +27,10 @@ class BranchController extends Controller
     public function store(StoreBranchRequest $request)
     {
         $this->branchService->store($request->validated());
-        return redirect()->back()->with('success', 'Branch created successfully.');
-    }
+  return response()->json([
+            'success' => true,
+            'message' => 'Branch Addedd successfully.'
+        ]);    }
 
     public function edit($id)
     {
@@ -39,8 +41,10 @@ class BranchController extends Controller
     public function update(UpdateBranchRequest $request, $id)
     {
         $this->branchService->update($id, $request->validated());
-        return redirect()->back()->with('success', 'Branch updated successfully.');
-    }
+  return response()->json([
+            'success' => true,
+            'message' => 'Branch Updated successfully.'
+        ]);    }
 
   public function destroy($id)
 {
@@ -53,7 +57,6 @@ class BranchController extends Controller
         ]);
     }
 
-    return redirect()->back()->with('success', 'Branch deleted successfully.');
 }
 
 }

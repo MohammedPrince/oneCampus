@@ -39,8 +39,14 @@ Route::get('/', function () {
 Route::prefix('test')->group(function () {
     Route::get('/', [TestController::class, 'index'])->name('test');
 });
+// Route::middleware('guest')->group(function () {
+//     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+//     Route::post('/login', [AuthController::class, 'login'])->name('admin.role');;
+// });
+
 Route::get('login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest')->name('login');;
 Route::post('login', [AuthController::class, 'login'])->name('admin.role');
+
 Route::get('register', [AuthController::class, 'showRegister'])->name('admin.register');
 Route::post('authenticate', [AuthController::class, 'register'])->name('admin.authenticate');
 Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
@@ -71,8 +77,9 @@ Route::resource('faculty', FacultyController::class)->names([
     'index' => 'faculty.index',
     'store' => 'faculty.store',
     'update' => 'faculty.update',
-    'destroy' => 'faculty.destroy',
+
 ]);
+Route::delete('/rule/departments/{facultyId}',[FacultyController::class,'destroy']);
 Route::get('/rule/branch', [BranchController::class, 'index'])->name('admin.rule.branch');
 Route::get('/rule/branch/{id}', [BranchController::class, 'edit'])->name('admin.rule.branch.edit');
 Route::post('/rule/branch/store', [BranchController::class, 'store'])->name('admin.rule.branch.store');

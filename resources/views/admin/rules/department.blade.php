@@ -29,7 +29,6 @@
   </div>
 
 <div id="alertArea" class="my-2"></div>
-@include('layouts.alert')
    
   {{-- Faculty Table --}}
   <div class="table-responsive">
@@ -66,13 +65,13 @@
               style="border: none; background-color: transparent;">
               <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
             </button>
-            
-              <form action="{{ route('faculty.destroy', $faculty->faculty_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this faculty?');" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" style="border: none; background-color: transparent;">
-                  <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete" />
-                </button>
+            <button type="button"
+        class="delete-faculty-btn"
+        data-id="{{ $faculty->faculty_id }}"
+        style="border: none; background-color: transparent;">
+    <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete" />
+</button>
+
               </form>
             </td>
             
@@ -92,8 +91,8 @@
         <h5 class="modal-title">Add Faculty</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="POST" action="{{ route('faculty.store') }}" class="row needs-validation" novalidate>
-        @csrf
+<form id="addFacultyForm" method="POST" action="{{ route('faculty.store') }}" onsubmit="return false;">
+    @csrf     
         <div class="modal-body">
           <div class="row mb-3">
             <div class="col-md-6">

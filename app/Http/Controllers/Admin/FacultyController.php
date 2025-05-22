@@ -38,20 +38,20 @@ class FacultyController extends Controller
     public function store(StoreFacultyRequest $request)
     {
         $this->facultyService->store($request->validated());
-        return back()->with('success', 'Faculty created successfully.');
+    return response()->json(['message' => 'Faculty added successfully']);
     }
 
     public function update(UpdateFacultyRequest $request, $id)
     {
         $this->facultyService->update($id, $request->validated());
         
-        return back()->with('success', 'Faculty Updated successfully.');
+    return response()->json(['message' => 'Faculty Updated successfully']);
           
      }
 
-    public function destroy($id): RedirectResponse
+    public function destroy($id)
     {
         $this->facultyService->delete($id);
-        return back()->with('success', 'Faculty deleted successfully.');
+    return response()->json(['message' => 'Faculty Deleted successfully']);
     }
 }
