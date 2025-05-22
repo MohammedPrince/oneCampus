@@ -180,18 +180,8 @@
             class="btn btn-outline mt-3"
             data-i18n="login"
             style="width: 220px;margin-top: 10px;">Login</button>
-
-
         </form>
-
-
-
       </div>
-
-
-
-
-
       <div class="img-container col-8 g-0 d-none d-md-block">
         <img src="{{asset('assets/paintinglogin2.svg')}}"
           alt="..."
@@ -202,6 +192,8 @@
 
     </div>
   </div>
+  <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+
 </body>
 
 </html>
