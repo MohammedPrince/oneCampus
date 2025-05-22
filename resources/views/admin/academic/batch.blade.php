@@ -92,7 +92,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="phoneNumber" class="form-label">Max Semester</label>
-                        <input type="tel" name="max_sem" class="form-control" id="phoneNumber" required>
+                         <input type="number" name="max_sem" class="form-control" id="phoneNumber" max="10" min="1" required>
                         <div class="invalid-feedback">Please enter Max Sem.</div>
                     </div>
                     <div class="col-md-6">
@@ -196,7 +196,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="phoneNumber" class="form-label">Max Semester</label>
-                            <input type="tel" class="form-control" name="max_sem" id="edit_max_sem" required>
+                             <input type="number" class="form-control" name="max_sem" id="edit_max_sem" max="10" min="1" required>
                             <div class="invalid-feedback">Please enter Max Sem.</div>
                         </div>
                         <div class="col-md-6">
