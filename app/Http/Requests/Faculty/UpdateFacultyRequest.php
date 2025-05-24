@@ -14,34 +14,34 @@ class UpdateFacultyRequest extends FormRequest
 
     public function rules(): array
     {
-            $facultyId = $this->route('faculty'); // this is just the ID
+            // $facultyId = $this->route('faculty'); // this is just the ID
 
         return [
             'faculty_name_en' => [
                 'required',
                 'string',
                 'max:100',
-             Rule::unique('tbl_faculty', 'faculty_name_en')
-           ->ignore($facultyId, 'faculty_id')
-           ->whereNull('deleted_at'),
+        //      Rule::unique('tbl_faculty', 'faculty_name_en')
+        // //    ->ignore($facultyId, 'faculty_id')
+        //    ->whereNull('deleted_at'),
             ],
             'faculty_name_ar' => [
                 'required',
                 'regex:/^[\p{Arabic}\s]+$/u',
                 'max:255',
-               Rule::unique('tbl_faculty', 'faculty_name_ar')
-              ->ignore($facultyId, 'faculty_id')
-              ->whereNull('deleted_at'),
+            //    Rule::unique('tbl_faculty', 'faculty_name_ar')
+            // //   ->ignore($facultyId, 'faculty_id')
+            //   ->whereNull('deleted_at'),
             ],
             'abbreviation' => [
                 'required',
                 'string',
                 'max:10',
-                Rule::unique('tbl_faculty', 'abbreviation')
-                ->ignore($facultyId, 'faculty_id')
-                ->whereNull('deleted_at'),
+                // Rule::unique('tbl_faculty', 'abbreviation')
+                // // ->ignore($facultyId, 'faculty_id')
+                // ->whereNull('deleted_at'),
             ],
-            'branch_id' => 'required|exists:tbl_branch,branch_id',
+            'branch_id' => 'required',
             'status'    => 'nullable|boolean',
         ];
     }

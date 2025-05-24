@@ -1,5 +1,7 @@
 @extends('layouts.master')
 @section('content')
+
+
 <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
     <div class="container-fluid">
         <div class="navbar-collapse" id="navbarNavAltMarkup">
@@ -15,27 +17,32 @@
     </div>
 </nav>
 <div class="row nav-tabs custom-tab-container" role="tablist" style="border: none; width: 30vw;">
-    <a class="nav-links active" id="batch-tab" data-bs-toggle="tab" href="#batch" role="tab" aria-controls="batch" aria-selected="true">
-        Batch
+    <a class="nav-links " id="batch-tab" data-bs-toggle="tab" href="#batch" role="tab" aria-controls="batch" aria-selected="true">
+      Add  Batch
     </a>
-    <a class="nav-links" id="control-batch-tab" data-bs-toggle="tab" href="#batchcontrol" role="tab" aria-controls="batchcontrol" aria-selected="false">
-        Batch Control
+    <a class="nav-links active" id="control-batch-tab" data-bs-toggle="tab" href="#batchcontrol" role="tab" aria-controls="batchcontrol" aria-selected="false">
+        Batches
     </a>
 </div>
 <div class="tab-content">
-    <div class="tab-pane fade show active" id="batch" role="tabpanel" aria-labelledby="batch-tab">
+    <div class="tab-pane fade show " id="batch" role="tabpanel" aria-labelledby="batch-tab">
         <div class="container mt-5">
+
             <h4 class="mb-4">Add New Batch</h4>
             <div id="alertArea" class="my-2"></div>
-            <form id="addBatchForm">
+            <form method="POST" action="{{ route('admin.academic.batch.store') }}">
                 @csrf
                 <!-- Form Inputs -->
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="fullNameArabic" class="form-label">Batch</label>
-                        <input type="text"  name ="batch" class="form-control" id="fullNameArabic" required>
-                        <div class="invalid-feedback">Please enter the batch.</div>
+                        <input type="text"  name ="batch" class="form-control @error('batch') is-invalid @enderror" id="fullNameArabic" required>
+                        @error('batch')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      
                     </div>
+
                     <div class="col-md-6">
                         <label for="fullNameArabicStatus" class="form-label">Status</label>
                         <select class="form-select" name="graduate_status" aria-label="Default select example " required>
@@ -44,12 +51,11 @@
                             <option value="2">Undergraduated</option>
 
                         </select>
-
                         <div class="invalid-feedback">Please enter Graduated or not.</div>
                     </div>
                     <div class="col-md-6">
                         <label for="fullNameArabicStatus" class="form-label">Branch</label>
-                        <select class="form-select" name="branch_id" aria-label="Default select example">
+                        <select class="form-select" name="branch_id" aria-label="Default select example" required>
 
                             <option value="1">Please Select a Branch</option>
                              @if(isset($branches) && $branches->isNotEmpty())
@@ -58,7 +64,7 @@
                             @endforeach
                            @else
                            <option>No Branch available</option>
-                          @endif  
+                          @endif
                         </select>
                         <div class="invalid-feedback">Please select the branch .</div>
                     </div>
@@ -75,10 +81,12 @@
                             @endforeach
                            @else
                            <option>No Faculty available</option>
-                           @endif  
+                           @endif
                         </select>
                         <div class="invalid-feedback">Please select a Faculty.</div>
                     </div>
+
+
                     <div class="col-md-6">
                         <label for="role" class="form-label">Major</label>
                         <select class="form-select" name="major_id" id="majorSelect" required>
@@ -87,17 +95,26 @@
                         </select>
                         <div class="invalid-feedback">Please select a Major.</div>
                     </div>
+
+
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="phoneNumber" class="form-label">Max Semester</label>
-                         <input type="number" name="max_sem" class="form-control" id="phoneNumber" max="10" min="1" required>
-                        <div class="invalid-feedback">Please enter Max Sem.</div>
+                        <label for="phoneNumber" class="form-label">Max Semester</label> 
+                         <input type="number"  class="form-control @error('max_sem') is-invalid @enderror " name="max_sem" id="phoneNumber" max="10" min="1" required>
+                          @error('max_sem')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="invalid-feedback">Please enter Max Sem..</div>
                     </div>
                     <div class="col-md-6">
                         <label for="whatsAppNumber" class="form-label">Active Semester</label>
-                        <input type="tel" name="active_sem" class="form-control" id="whatsAppNumber" required>
+                        <input type="number" name="active_sem" class="form-control @error('active_sem') is-invalid @enderror " max="10" min="1" id="whatsAppNumber" required>
+                           @error('active_sem')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+
                         <div class="invalid-feedback">Please enter Active Sem.</div>
                     </div>
                 </div>
@@ -108,7 +125,9 @@
         </div>
     </div>
 
-    <div class="tab-pane fade" id="batchcontrol" role="tabpanel" aria-labelledby="control-batch-tab">
+    <div class="tab-pane fade show active" id="batchcontrol" role="tabpanel" aria-labelledby="control-batch-tab">
+    @include('layouts.alert')
+
         <h4>Batches</h4>
         <div class="container my-4">
         <div id="alertAreaBatches" class="my-2"></div> <!-- <- ADD THIS -->
@@ -117,7 +136,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" id="selectAll"></th>
+                            <th>ID</th>
                             <th>Batch</th>
                             <th>Faculty</th>
                             <th>Major</th>
@@ -126,10 +145,63 @@
                             <th>Max Semester</th>
                             <th>status</th>
                             <th>Actions</th>
-                       
+
                         </tr>
                     </thead>
-                    <tbody id="batchTableBody"></tbody>
+                    {{-- <tbody id="batchTableBody"></tbody> --}}
+
+                    <tbody id="">
+        @if ($batches->isEmpty())
+            <tr>
+                <td colspan="9" style="text-align: center;">No batches available.</td>
+            </tr>
+        @endif
+
+
+        @php
+            $i = 1;
+        @endphp
+        @foreach ($batches as $batch)
+            <tr>
+                <td style="text-align: center;">{{ $i++ }}</td>
+                <td style="text-align: center;">{{ $batch->batch }}</td>
+                <td style="text-align: center;">
+                    {{ $batch->faculty->faculty_name_en ?? 'Faculty data is soft deleted.' }}
+                </td>
+                <td style="text-align: center;">
+                    {{ $batch->major->major_name_en ?? 'Major data is soft deleted.' }}
+                </td>
+                <td style="text-align: center;">
+                    {{ $batch->branch->branch_name_en ?? 'Branch data is soft deleted.' }}
+                </td>
+                <td style="text-align: center;">{{ $batch->active_sem }}</td>
+                <td style="text-align: center;">{{ $batch->max_sem }}</td>
+                <td style="text-align: center;">
+                    @if ($batch->graduate_status == 1)
+                        Graduated
+                    @elseif ($batch->graduate_status == 2)
+                        Undergraduated
+                    @else
+                        Unknown
+                    @endif
+                </td>
+                <td>
+                    <div class="d-flex gap-1">
+                        {{-- onclick="Major_data({{ json_encode($major) }})" data-bs-toggle="modal" data-bs-target="#Editprogram" --}}
+                        <button class="btn btn-sm editBatchBtn" onclick="Batch_data({{ json_encode($batch) }})" data-bs-toggle="modal" data-bs-target="#Editbatch">
+                            <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
+                        </button>
+
+
+                       <a href="{{ route('admin.academic.batch.destroy', $batch->batch_control_id) }}" class="btn btn-sm">
+                        <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" onclick="return confirm('Are you sure you want to delete this batch?')" alt="Delete"></a>
+
+                    </div>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+
                 </table>
             </div>
         </div>
@@ -145,15 +217,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="editBatchForm">
+                {{-- <form id="editBatchForm"> --}}
+                <form method="POST" action="{{ route('admin.academic.batch.update') }}" class="row needs-validation">
                     @csrf
-                    <input type="hidden" id="editBatchId">
+                    <input type="hidden" name = "batch_control_id" id="editBatchId">
                     <!-- Edit Inputs here -->
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="fullNameArabic" class="form-label">Batch</label>
-                            <input type="text" class="form-control" id="edit_batch" name="batch" required>
-                            <div class="invalid-feedback">Please enter the batch.</div>
+                            <input type="text" class="form-control @error('batch') is-invalid @enderror" id="edit_batch" name="batch"  required>
+                            @error('batch')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <label for="fullNameArabicStatus" class="form-label">Status</label>
@@ -166,7 +241,7 @@
                         <div class="col-md-6">
                             <label for="fullNameArabicStatus" class="form-label">Branch</label>
                             <select class="form-select" id="edit_branch_id" name="branch_id" aria-label="Default select example">
-                           
+
                             @foreach ($branches as $data)
                             <option value="{{$data->branch_id}}">{{$data->branch_name_en}}</option>
                             @endforeach
@@ -197,17 +272,25 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="phoneNumber" class="form-label">Max Semester</label>
-                             <input type="number" class="form-control" name="max_sem" id="edit_max_sem" max="10" min="1" required>
+                             <input type="text" class="form-control @error('max_sem') is-invalid @enderror" name="max_sem"  id="edit_max_sem" max="10" min="1" required>
+                            @error('max_sem')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <div class="invalid-feedback">Please enter Max Sem.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="whatsAppNumber" class="form-label">Active Semester</label>
-                            <input type="tel" class="form-control" name="active_sem" id="edit_active_sem" required>
+                            <input type="tel" class="form-control @error('active_sem') is-invalid @enderror" name="active_sem" id="edit_active_sem" required>
+                            @error('active_sem')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <div class="invalid-feedback">Please enter Active Sem.</div>
                         </div>
                     </div>
+<center>
+                    <button type="submit" class="btn btn-outline w-50">Submit</button>
 
-                    <button type="submit" class="btn btn-outline w-100">Update</button>
+</center>
                 </form>
             </div>
         </div>

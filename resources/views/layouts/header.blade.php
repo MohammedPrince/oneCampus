@@ -24,7 +24,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">Profile</a></li>
-            <li><a class="dropdown-item" href="setting.html">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
             <li>
               <div class="d-flex align-items-center justify-content-around px-2">
                 <!-- Theme Toggle Button -->

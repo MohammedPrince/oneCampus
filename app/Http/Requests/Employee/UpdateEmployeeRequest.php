@@ -23,23 +23,23 @@ class UpdateEmployeeRequest extends FormRequest
             'personal_email'   => [
                 'required',
                 'email',
-                Rule::unique('tbl_employee_main_info', 'personal_email')
-                ->ignore($this->route('id'), 'employee_id')
-                ->whereNull('deleted_at'),
+                // Rule::unique('tbl_employee_main_info', 'personal_email')
+                // ->ignore($this->route('id'), 'employee_id')
+                // ->whereNull('deleted_at'),
 
             ],
 
             'corporate_email'  => [
                 'required',
                 'email',
-              Rule::unique('tbl_employee_main_info', 'corporate_email')
-             ->ignore($this->route('id'), 'employee_id')
-             ->whereNull('deleted_at'),
+            //   Rule::unique('tbl_employee_main_info', 'corporate_email')
+            //  ->ignore($this->route('id'), 'employee_id')
+            //  ->whereNull('deleted_at'),
 
             ],
 
-            'phone_number'     => 'required|int|max:15',
-            'whatsapp_number'  => 'required|int|max:15',
+            'phone_number'     => 'required|string|max:12',
+            'whatsapp_number'  => 'required|string|max:12',
             'department_id'    => 'required|int|max:255',
             'role'             => 'required|int|max:255',
             'birth_date'       => 'required|date',
@@ -52,9 +52,9 @@ class UpdateEmployeeRequest extends FormRequest
              'identification_id'  => [
                 'required',
                 'int',
-                Rule::unique('tbl_employee_profile', 'identification_id')
-                ->ignore($profileId, 'employee_profile_id')
-                ->whereNull('deleted_at'),
+                // Rule::unique('tbl_employee_profile', 'identification_id')
+                // ->ignore($profileId, 'employee_profile_id')
+                // ->whereNull('deleted_at'),
             ],
             'cv'              => 'nullable|file|mimes:pdf,doc,docx',
             'certificates'    => 'nullable|file|mimes:pdf,doc,docx',

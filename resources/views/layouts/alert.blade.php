@@ -16,18 +16,18 @@
 
 
 {{-- Yellow alert --}}
-@if(session('error'))
-  <div class="alert alert-warning lert-dismissible fade show" role="alert" >
-    {{ session('error') }}
+@if(session('exist'))
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+    {{ session('exist') }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 @endif
 
 {{-- info alert --}}
 
-@if(session('error'))
+{{-- @if(session('error'))
   <div class="alert alert-primary lert-dismissible fade show" role="alert" >
     {{ session('error') }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
-@endif
+@endif --}}

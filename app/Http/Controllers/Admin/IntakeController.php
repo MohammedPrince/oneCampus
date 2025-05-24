@@ -44,22 +44,28 @@ class IntakeController extends Controller
      */
     public function store(IntakeStoreRequest $request)
     {
+
+
         try {
             $validated = $request->validated();  // Use validated data from IntakeRequest
             $storeIntake = $this->intakeService->createIntake($validated);
             // return back()->with('success', 'Intake added successfully');
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Intake added successfully',
-                'data' => $validated,  // Optionally, send the saved intake data
-            ]);      
+        return redirect()->route('admin.academic.intake')->with('success', 'Intake added successfully!');
+
+            // return response()->json([
+            //     'status' => 'success',
+            //     'message' => 'Intake added successfully',
+            //     'data' => $validated,  // Optionally, send the saved intake data
+            // ]);
           } catch (\Exception $e) {
-    Log::error('Intake save error: ' . $e->getMessage());
-    return back()->with('error', 'An error occurred while saving intake.');
-}
+                //  Log::error('Intake save error: ' . $e->getMessage());
+                //  return back()->with('error', 'An error occurred while saving intake.');
+         return redirect()->route('admin.academic.intake')->with('error', 'An error occurred while saving intake.!');
+
+        }
     }
-    
+
     /**
      * Show the form for editing the specified intake.
      */
@@ -81,23 +87,35 @@ class IntakeController extends Controller
     /**
      * Update the specified intake in the database.
      */
-    public function update(UpdateIntakeRequest $request, $id)
+    public function update(UpdateIntakeRequest $request)
     {
+
+    // $intake = Intake::find($this->route('intake_id'));
+    // $intake = Intake::find($request->input('intake_id'));
+        // dd($request->validated());
+
         try {
             // Get validated data from the request
             $validated = $request->validated();
 
+            $id = $request->validated('intake_id');  // Get the intake ID from the request  
             // Call the service method to update the intake
             $intake = $this->intakeService->updateIntake($id, $validated);
 
+            return redirect()->route('admin.academic.intake')->with('success', 'Intake updated successfully!');
+
             // If update successful, redirect with success message
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Intake updated successfully',
-                'data' => $intake,  // Optionally, send the saved intake data
-            ]);           } catch (\Exception $e) {
+            // return response()->json([
+            //     'status' => 'success',
+            //     'message' => 'Intake updated successfully',
+            //     'data' => $intake,  // Optionally, send the saved intake data
+            // ]);         
+        
+        } catch (\Exception $e) {
             // Handle any errors during the update process
-            return back()->with('error', 'Failed to update intake.');
+            // return back()->with('error', 'Failed to update intake.');
+            return redirect()->route('admin.academic.intake')->with('error', 'An error occurred while updating intake.');
+
         }
     }
 
@@ -110,22 +128,21 @@ class IntakeController extends Controller
             // Call the service method to delete the intake
             $deleted = $this->intakeService->deleteIntake($id);
 
-            if ($deleted) {   
-           return response()->json([
-                'status' => 'success',
-                'message' => 'Intake Deleted Successfully',
-                'data' => $deleted,  // Optionally, send the saved intake data
-            ]);              }
+            if ($deleted) {
+
+           return redirect()->route('admin.academic.intake')->with('success', 'Intake deleted successfully!');
+                // return response()->json([
+                //     'status' => 'success',
+                //     'message' => 'Intake deleted successfully',
+                 // ]);
+        }
             // If intake not found, redirect with error message
-            return response()->json([
-                'status' => 'Error',
-                'message' => 'Intake Not Found',
-                'data' => $deleted,  // Optionally, send the saved intake data
-            ]);           } catch (\Exception $e) {
+            return redirect()->route('admin.academic.intake')->with('error', 'Intake not found or already deleted!');
+        } catch (\Exception $e) {
             // Handle errors during the deletion process
-            return response()->json([
-                    'status' => 'error',
-                    'message' => 'Failed to delete intake.',
-                ]);        }
+            Log::error('Intake deletion error: ' . $e->getMessage());
+            return redirect()->route('admin.academic.intake')->with('error', 'An error occurred while deleting intake.');
+
+            }
     }
 }

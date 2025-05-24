@@ -8,6 +8,7 @@ use App\Http\Requests\Branch\UpdateBranchRequest;
 use App\Services\Branch\BranchService;
 use Illuminate\Http\Request;
 
+
 class BranchController extends Controller
 {
     protected $branchService;
@@ -26,11 +27,27 @@ class BranchController extends Controller
 
     public function store(StoreBranchRequest $request)
     {
-        $this->branchService->store($request->validated());
-  return response()->json([
-            'success' => true,
-            'message' => 'Branch Addedd successfully.'
-        ]);    }
+
+        // echo "done";
+        $result = $this->branchService->store($request->validated());
+
+        if($result){
+            return redirect()->route('admin.rule.branch')->with('success', 'Branch added successfully!');
+
+        }else{
+            return redirect()->route('admin.rule.branch')->with('error', 'Branch Not added!');
+            
+        }
+
+
+        // return redirect()->route('admin.rule.branch')->with('success', 'Branch added successfully!');
+        
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'Branch Addedd successfully.'
+        // ]);   
+    
+    }
 
     public function edit($id)
     {
@@ -38,24 +55,38 @@ class BranchController extends Controller
         return response()->json($branch);
     }
 
-    public function update(UpdateBranchRequest $request, $id)
+    public function update(UpdateBranchRequest $request)
     {
-        $this->branchService->update($id, $request->validated());
-  return response()->json([
-            'success' => true,
-            'message' => 'Branch Updated successfully.'
-        ]);    }
+        // echo "done";
+        $id = $request->validated('branch_id');
+
+        // dd($request->validated());  
+
+        $result = $this->branchService->update($id, $request->validated());
+
+        if($result){
+            return redirect()->route('admin.rule.branch')->with('success', 'Branch updated successfully!');
+        }else{
+            return redirect()->route('admin.rule.branch')->with('error', 'Branch Not updated!');
+        }
+
+    }
 
   public function destroy($id)
 {
-    $this->branchService->delete($id);
 
-    if (request()->expectsJson()) {
-        return response()->json([
-            'success' => true,
-            'message' => 'Branch deleted successfully.'
-        ]);
-    }
+   $result = $this->branchService->delete($id);
+
+   if($result){
+
+        return redirect()->route('admin.rule.branch')->with('success', 'Branch Deleted successfully!');
+
+   }else{
+        return redirect()->route('admin.rule.branch')->with('success', 'Branch Not Deleted !');
+
+
+   }
+
 
 }
 

@@ -40,11 +40,11 @@ class StoreMajorRequest extends FormRequest
                 'max:255',
                 Rule::unique('tbl_major', 'major_ministry_code')->whereNull('deleted_at'),
             ],
-            'major_mode' => 'required|integer',
+            'major_mode' => 'required|between:1,10',
             'degree_type' => 'required|string',
             'faculty_id' => 'required|exists:tbl_faculty,faculty_id',
-            'number_of_semesters' => 'required|integer',
-            'program_duration' => 'required|integer',
+            'number_of_semesters' => 'required|between:1,10',
+            'program_duration' => 'required|between:1,10',
         ];
     }
       public function messages()
@@ -52,6 +52,10 @@ class StoreMajorRequest extends FormRequest
         return [
             'major_name_ar.required' => 'Major name in Arabic is required.',
             'major_name_en.required' => 'Major name in English is required.',
+
+            // 'major_mode.between' => 'Major mode is required.',
+
+
             // Add more messages if needed
         ];
     }

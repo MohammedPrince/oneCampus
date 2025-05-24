@@ -36,23 +36,6 @@ class Major extends Model
     {
           return self::create($data);
 
-        // Check if the query was successful
-
-        // Uncomment the following line if you want to return the created major instance
-
-        // return self::create([
-        //     'major_name_en' => $data['major_name_en'],
-        //     'major_name_ar' => $data['major_name_ar'],
-        //     'major_abbreviation' => $data['major_abbreviation'],
-        //     'credits_required' => $data['credits_required'],
-        //     'major_ministry_code' => $data['major_ministry_code'],
-        //     'major_mode' => $data['major_mode'],
-        //     'degree_type' => $data['degree_type'],
-        //     'faculty_id' => $data['faculty_id'],
-        //     'number_of_semesters' => $data['number_of_semesters'],
-        //     'program_duration' => $data['program_duration'],
-        //     'status' => $data['status']
-        // ]);
     }
 
     /**

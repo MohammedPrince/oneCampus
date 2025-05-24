@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Batch\BatchStoreRequest;
+use App\Http\Requests\Batch\BatchUpdateRequest;     
 use App\Models\BatchControl;
 use App\Services\Batch\BatchService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+
 
 class BatchController extends Controller
 {
@@ -20,8 +23,10 @@ class BatchController extends Controller
     public function getData(){
     $branches = $this->batchService->getAllBranch(); // Assuming this method exists in your BatchService
     $faculties = $this->batchService->getAllFaculty();
+    $batches = $this->batchService->getAllBatches(); // Assuming this method exists in your BatchService
 
-    return view('admin.academic.batch',compact('branches','faculties'));
+
+    return view('admin.academic.batch',compact('branches','faculties' , 'batches'));
     }
     public function index(): JsonResponse
     {
@@ -70,23 +75,52 @@ class BatchController extends Controller
 }
 
 
-    public function store(BatchStoreRequest $request): JsonResponse
+    public function store(BatchStoreRequest $request)
+    // public function store(Request $request)
     {
+
+        // dd($request->validated());
+
         $batch = $this->batchService->createBatch($request->validated());
-        return response()->json($batch, 201);
+
+        if ($batch == "exists") {
+            return redirect()->route('admin.academic.batch')->with('exist', 'Batch with the same details already exists.');
+        }
+        return redirect()->route('admin.academic.batch')->with('success', 'Batch added successfully!');
+
+
     }
 
-    public function update(BatchStoreRequest $request, int $id): JsonResponse
+    public function update(BatchUpdateRequest $request)
     {
+
+
+
+        $id = $request->validated('batch_control_id'); // Type cast the id to integer if it is a string
+
+        // echo $id;   
         $updated = $this->batchService->updateBatch($id, $request->validated());
-        return $updated ? response()->json(['message' => 'Batch updated successfully'])
-                        : response()->json(['message' => 'Batch not found'], 404);
+
+        return redirect()->route('admin.academic.batch')->with('success', 'Batch updated successfully!');
+
+        // return $updated ? response()->json(['message' => 'Batch updated successfully'])
+        //                 : response()->json(['message' => 'Batch not found'], 404);
     }
 
-    public function destroy(int $id): JsonResponse
+    public function destroy(int $id)
     {
+
+
         $deleted = $this->batchService->deleteBatch($id);
-        return $deleted ? response()->json(['message' => 'Batch deleted successfully'])
-                        : response()->json(['message' => 'Batch not found'], 404);
+        if ($deleted) {
+            return redirect()->route('admin.academic.batch')->with('success', 'Batch deleted successfully!');
+        }else {
+            return redirect()->route('admin.academic.batch')->with('error', 'Batch not found!');
+        }
+
+
+        // return redirect()->route('admin.academic.batch')->with('success', 'Batch deleted successfully!');
+        // return redirect()->route('admin.academic.batch')->with('error', 'Batch not found!');
+
     }
 }

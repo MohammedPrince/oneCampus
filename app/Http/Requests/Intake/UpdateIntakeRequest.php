@@ -21,15 +21,21 @@ class UpdateIntakeRequest extends FormRequest
      */
     public function rules(): array
     {
-    $intake = Intake::find($this->route('id'));
+
+        
+   
 
     return [
+        'intake_id' => [
+            'required',
+            'integer',
+        ],
         'intake_name_en' => [
             'required',
             'string',
             'max:255',
             Rule::unique('tbl_intake', 'intake_name_en')
-                ->ignore($intake?->intake_id, 'intake_id')
+                
                 ->whereNull('deleted_at')
         ],
         'intake_name_ar' => [
@@ -37,7 +43,7 @@ class UpdateIntakeRequest extends FormRequest
             'regex:/^[\p{Arabic}\s]+$/u',
             'max:255',
             Rule::unique('tbl_intake', 'intake_name_ar')
-                ->ignore($intake?->intake_id, 'intake_id')
+                
                 ->whereNull('deleted_at')
         ],
     ];
@@ -51,7 +57,7 @@ class UpdateIntakeRequest extends FormRequest
         return [
             'intake_name_en.required' => 'The English intake name is required.',
             'intake_name_ar.required' => 'The Arabic intake name is required.',
-           
+
         ];
     }
 }

@@ -23,9 +23,9 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Full Name</th>
-                    {{-- <th>Full Name (Arabic)</th> --}}
+                    <th>ID</th>
+                    <th>Full Name (Arabic)</th>
+                    <th>Full Name (English)</th>
                     {{-- <th>Personal Email</th> --}}
                     <th>Email</th>
                     {{-- <th>Phone Number</th> --}}
@@ -38,12 +38,13 @@
                 </tr>
             </thead>
             <tbody>
+                  @php $i = 1; @endphp
                 @foreach($employees as $employee)
 
                     <tr>
-                        <td>{{ $employee->id }}</td>
-                        <td>{{ $employee->full_name_ar }} -- {{ $employee->full_name_en }}</td>
-                        {{-- <td>{{ $employee-> }}</td> --}}
+                        <td>{{ $i++ }}</td>
+                        <td>{{ $employee->full_name_ar }} </td>
+                        <td>{{ $employee->full_name_en }}</td>
                         {{-- <td>{{ $employee->personal_email }}</td> --}}
                         <td>{{ $employee->corporate_email }}</td>
                         {{-- <td>{{ $employee->phone_number }}</td> --}}
@@ -122,21 +123,32 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form class="row needs-validation" method="POST" action="" id="editEmployeeForm" enctype="multipart/form-data" novalidate>
+              {{-- <form class="row needs-validation" method="POST" action="" id="editEmployeeForm" enctype="multipart/form-data" novalidate> --}}
+                {{-- admin/user --}}
+                <form action="{{ route('user.update', $employee->employee_id ) }}" method="POST"  enctype="multipart/form-data" >
+                {{-- <form action="{{ route('employee.update', $employee->employee_id) }}" method="POST" id="editEmployeeForm" enctype="multipart/form-data" class="row needs-validation" novalidate> --}}
                 @csrf
-                @method('PUT')
+                {{-- @method('PUT') --}}
                 <input type="hidden" name="id" id="editEmployeeId">
 
                 <!-- Full Names -->
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <label for="editFullNameArabic" class="form-label">Full Name (Arabic)</label>
-                    <input type="text" class="form-control" id="editFullNameArabic" name="full_name_ar" required>
+                    <input type="text" class="form-control @error('full_name_ar') is-invalid @enderror" id="editFullNameArabic" name="full_name_ar" required>
+                      @error('full_name_ar')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                     <div class="invalid-feedback">Please enter the full name in Arabic.</div>
                   </div>
+
+
                   <div class="col-md-6">
                     <label for="editFullNameEnglish" class="form-label">Full Name (English)</label>
-                    <input type="text" class="form-control" id="editFullNameEnglish" name="full_name_en" required>
+                    <input type="text" class="form-control @error('full_name_en') is-invalid @enderror" id="editFullNameEnglish" name="full_name_en" required>
+                      @error('full_name_en')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                     <div class="invalid-feedback">Please enter the full name in English.</div>
                   </div>
                 </div>
@@ -144,13 +156,21 @@
                 <!-- Emails -->
                 <div class="row mb-3">
                   <div class="col-md-6">
-                    <label for="editPersonalEmail" class="form-label">Personal Email</label>
-                    <input type="email" class="form-control" id="editPersonalEmail" name="personal_email" required>
+                    <label for="editPersonalEmail" class="form-label ">Personal Email</label>
+                    <input type="email" class="form-control @error('personal_email') is-invalid @enderror" id="editPersonalEmail" name="personal_email" required>
+                      @error('personal_email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                     <div class="invalid-feedback">Please enter a valid personal email.</div>
                   </div>
+
+
                   <div class="col-md-6">
                     <label for="editCorporateEmail" class="form-label">Corporate Email</label>
-                    <input type="email" class="form-control" id="editCorporateEmail" name="corporate_email" required>
+                    <input type="email" class="form-control @error('corporate_email') is-invalid @enderror" id="editCorporateEmail" name="corporate_email" required>
+                      @error('corporate_email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                     <div class="invalid-feedback">Please enter a valid corporate email.</div>
                   </div>
                 </div>
@@ -159,11 +179,24 @@
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <label for="editPhoneNumber" class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" id="editPhoneNumber" name="phone_number" required>
+                    <input type="tel" class="form-control @error('phone_number') is-invalid @enderror"
+       id="editPhoneNumber" name="phone_number"
+       pattern="\d*" inputmode="numeric" required>
+
+                      @error('phone_number')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                    <div class="invalid-feedback">Please enter a valid phone number.</div>
                   </div>
+
+
                   <div class="col-md-6">
                     <label for="editWhatsAppNumber" class="form-label">WhatsApp Number</label>
-                    <input type="tel" class="form-control" id="editWhatsAppNumber" name="whatsapp_number" required>
+                    <input type="tel" class="form-control @error('whatsapp_number') is-invalid @enderror"  pattern="\d*" inputmode="numeric" id="editWhatsAppNumber" name="whatsapp_number" required>
+                      @error('whatsapp_number')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                    <div class="invalid-feedback">Please enter a valid WhatsApp number.</div>
                   </div>
                 </div>
 
@@ -195,11 +228,20 @@
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <label for="editBirthDate" class="form-label">Birth Date</label>
-                    <input type="date" class="form-control" id="editBirthDate" name="birth_date" required>
+                    <input type="date" class="form-control @error('birth_date') is-invalid @enderror" id="editBirthDate" name="birth_date" required>
+                        @error('birth_date')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                    <div class="invalid-feedback">Please enter the birth date.</div>
                   </div>
+
                   <div class="col-md-6">
                     <label for="editRecruitmentDate" class="form-label">Recruitment Date</label>
-                    <input type="date" class="form-control" id="editRecruitmentDate" name="hire_date" required>
+                    <input type="date" class="form-control @error('hire_date') is-invalid @enderror" id="editRecruitmentDate" name="hire_date" required>
+                      @error('hire_date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                    <div class="invalid-feedback">Please enter the recruitment date.</div>
                   </div>
                 </div>
 
@@ -218,9 +260,15 @@
                             @endforeach
                         </select>
                   </div>
+
+
                   <div class="col-md-6">
                     <label for="editBiometric" class="form-label">Biometric</label>
-                    <input type="text" class="form-control" id="editBiometric" name="biometric" required>
+                    <input type="text" class="form-control @error('biometric') is-invalid @enderror" id="editBiometric" name="biometric" required>
+                      @error('biometric')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                    <div class="invalid-feedback">Please enter a biometric number.</div>
                   </div>
                 </div>
 
@@ -232,10 +280,17 @@
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                     </select>
+                    <div class="invalid-feedback">Please select a gender.</div>
                   </div>
+
+
                   <div class="col-md-6">
                     <label for="editNationality" class="form-label">Nationality</label>
-                    <input type="text" class="form-control" id="editNationality" name="nationality" required>
+                    <input type="text" class="form-control @error('nationality') is-invalid @enderror" id="editNationality" name="nationality" required>
+                      @error('nationality')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                    <div class="invalid-feedback">Please enter a nationality.</div>
                   </div>
                 </div>
 
@@ -254,7 +309,10 @@
 
                     <div class="col-md-4">
                     <label for="identification_id" class="form-label" id="identificationLabel">National ID</label>
-                    <input type="text" class="form-control" id="editidentification_id" name="identification_id" required>
+                    <input type="text" class="form-control @error('identification_id') is-invalid @enderror" id="editidentification_id" name="identification_id" required>
+                      @error('identification_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                     <div class="invalid-feedback">Please enter an identification number.</div>
                     </div>
                 </div>
@@ -274,7 +332,7 @@
                     </div>
                 </div>
                 <center>
-                <button type="submit" class="btn btn-outline-primary w-50">Save Changes</button>
+                <button type="submit" class="btn btn-outline-primary w-50">Submit</button>
 
                 </center>
               </form>

@@ -26,6 +26,12 @@ class FacultyRepository
         return $faculty->update($data);
     }
 
+    public function update_data(array $data)
+    {
+        $faculty = Faculty::findOrFail($data['faculty_id']);
+        return $faculty->update($data);
+    }
+
     public function delete(int $id)
     {
         $faculty = Faculty::findOrFail($id);

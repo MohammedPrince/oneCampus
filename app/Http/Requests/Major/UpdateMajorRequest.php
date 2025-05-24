@@ -16,7 +16,7 @@ class UpdateMajorRequest extends FormRequest
     {
         // $majorId = $this->major->major_id ?? null;
         return [
-            
+
             'major_id' => 'required|integer',
 
             'major_name_en' => [
@@ -48,15 +48,12 @@ class UpdateMajorRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                // Rule::unique('tbl_major', 'major_ministry_code')
-                //     ->ignore($majorId, 'major_id')
-                //     ->whereNull('deleted_at'),
             ],
-            'major_mode' => 'required|integer',
+            'major_mode' => 'required|numeric|between:1,10',
             'degree_type' => 'required|integer',
             'faculty_id' => 'required|exists:tbl_faculty,faculty_id',
-            'number_of_semesters' => 'required|integer',
-            'program_duration' => 'required|integer',
+            'number_of_semesters' => 'required|numeric|between:1,10',
+            'program_duration' => 'required|numeric|between:1,10',
 
         ];
     }

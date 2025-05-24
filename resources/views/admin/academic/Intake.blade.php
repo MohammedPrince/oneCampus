@@ -9,8 +9,8 @@
             <div class="navbar-nav justify-content-center w-100">
                 <a class="nav-link {{ request()->is('admin/academic/certificate') ? 'active' : ''}}" href="{{route('admin.academic.certificate')}}">Certificate</a>
                 <a class="nav-link {{ request()->is('admin/academic/major') ? 'active' : ''}}" href="{{route('admin.academic.major')}}">Majors</a>
-                <a class="nav-link {{ request()->is('admin/academic/batch') ? 'active' : ''}}" href="{{route('admin.academic.batch')}}">Batches</a>  
-                <a class="nav-link {{ request()->is('admin/academic/intake') ? 'active' : ''}}" href="{{route('admin.academic.intake')}}">Intake</a>  
+                <a class="nav-link {{ request()->is('admin/academic/batch') ? 'active' : ''}}" href="{{route('admin.academic.batch')}}">Batches</a>
+                <a class="nav-link {{ request()->is('admin/academic/intake') ? 'active' : ''}}" href="{{route('admin.academic.intake')}}">Intake</a>
                <a class="nav-link {{ request()->is('admin/rule/departments') ? 'active' : ''}}" href="{{route('admin.rule.dept')}}" data-page="department">Faculty</a>
               <a class="nav-link {{ request()->is('admin/rule/branch') ? 'active' : ''}}" href="{{route('admin.rule.branch')}}" data-page="branches">Branches</a>
             </div>
@@ -19,10 +19,15 @@
 </nav>
 
 <div class="row">
+    @include('layouts.alert')
+
     <div class="col-4">
         <h2>Intake:</h2>
+
     </div>
+
     <div class="col-4">
+
         <button style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#AddIntakeModal">
             <img src="{{asset('assets/icons/add.svg')}}" alt="add">
         </button>
@@ -37,7 +42,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th style="text-align: center;"><input type="checkbox" id="selectAll"></th>
+
                     <th style="text-align: center;">Id</th>
                     <th style="text-align: center;">Intake Description (English)</th>
                     <th style="text-align: center;">Intake Description (Arabic)</th>
@@ -47,22 +52,23 @@
             <tbody id="tableBody">
                 @foreach ($intakes as $intake)
                     <tr id="intakeRow-{{ $intake->intake_id  }}">
-                        <td style="text-align: center;"><input type="checkbox" class="employeeCheckbox"></td>
+
                         <td style="text-align: center;">{{ $intake->intake_id  }}</td>
                         <td style="text-align: center;">{{ $intake->intake_name_en }}</td>
                         <td style="text-align: center;">{{ $intake->intake_name_ar }}</td>
                         <td style="text-align: center;">
-                            <button type="button" class="editIntake" data-id="{{ $intake->intake_id }}" style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#EditIntakeModal">
+                            <button type="button" class="editIntake" onclick="Intake_data({{ json_encode($intake) }})" style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#EditIntakeModal">
                                 <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
                             </button>
-                          
-                             <button class="deleteIntakeBtn" data-id="{{ $intake->intake_id }}" style="border: none; background-color: transparent;">
-                            <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete" />
-                            </button>
+
+                            {{-- academic/intake/{id} --}}
+
+                            <a href="{{ route('admin.academic.intake.destroy', $intake->intake_id) }}"><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" onclick="return confirm('Are you sure you want to delete this Intake?')" class="action-icon" alt="Delete"></a>
+
 
                             </form>
                         </td>
-                     
+
                     </tr>
                 @endforeach
             </tbody>
@@ -80,25 +86,35 @@
             </div>
 
             <div class="modal-body">
-                <form class="row needs-validation" novalidate id="addIntakeForm">
+
+
+                  <form class="row needs-validation" action="{{ route('admin.academic.intake.store') }}" method="POST">
+
+                {{-- <form class="row needs-validation" novalidate id="addIntakeForm"> --}}
                   @csrf
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="intakeNameEn" class="form-label">Intake (English)</label>
-                            <input type="text" class="form-control" id="intakeNameEn" name="intake_name_en" required>
+                            <input type="text" class="form-control @error('intake_name_en') is-invalid @enderror" id="intakeNameEn" name="intake_name_en" required>
+                            @error('intake_name_en')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <div class="invalid-feedback">Please enter the Intake (English).</div>
                         </div>
                         <div class="col-md-6">
                             <label for="intakeNameAr" class="form-label">Intake (Arabic)</label>
-                            <input type="text" class="form-control" id="intakeNameAr" name="intake_name_ar" required>
+                            <input type="text" class="form-control @error('intake_name_ar') is-invalid @enderror" id="intakeNameAr" name="intake_name_ar" required>
+                            @error('intake_name_ar')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <div class="invalid-feedback">Please enter the Intake (Arabic).</div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <button type="submit" class="btn btn-outline" style="margin: 1px; width: 15vw;">Add</button>
-                        </div>
-                    </div>
+                    <center>
+
+                            <button type="submit" class="btn btn-outline" style="margin: 1px; width: 15vw;">Submit</button>
+
+                    </center>
                 </form>
             </div>
         </div>
@@ -114,28 +130,37 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row needs-validation" novalidate id="editIntakeForm">
+                {{-- academic/intake/update --}}
+                <form  action="{{ route('admin.academic.intake.update') }}" method="POST">
+
+                {{-- <form class="row needs-validation" novalidate id="editIntakeForm"> --}}
                   @csrf
-                  @method('PUT')
-                    <input type="hidden" id="editintakeId">
+                  {{-- @method('PUT') --}}
+                    <input type="hidden"  name="intake_id" id="editintakeId">
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="intakeNameEn" class="form-label">Intake (English)</label>
-                            <input type="text" class="form-control" id="editintakeNameEn" name="intake_name_en" required>
+                            <input type="text" class="form-control @error('intake_name_en') is-invalid @enderror" id="editintakeNameEn" name="intake_name_en" required>
+                            @error('intake_name_en')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <div class="invalid-feedback">Please enter the Intake (English).</div>
                         </div>
                         <div class="col-md-6">
                             <label for="intakeNameAr" class="form-label">Intake (Arabic)</label>
-                            <input type="text" class="form-control" id="editintakeNameAr" name="intake_name_ar" required>
+                            <input type="text" class="form-control @error('intake_name_ar') is-invalid @enderror" id="editintakeNameAr" name="intake_name_ar" required>
+                            @error('intake_name_ar')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <div class="invalid-feedback">Please enter the Intake (Arabic).</div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <button type="submit" class="btn btn-outline" style="margin: 1px; width: 15vw;">Update</button>
-                        </div>
-                      
-                    </div>
+     <center>
+
+                            <button type="submit" class="btn btn-outline" style="margin: 1px; width: 15vw;" id="updateIntakeBtn">Submit</button>
+     </center>
+
+
                 </form>
             </div>
         </div>

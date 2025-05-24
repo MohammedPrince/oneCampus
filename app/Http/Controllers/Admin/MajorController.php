@@ -38,6 +38,9 @@ class MajorController extends Controller
         return response()->json($majors);
     }
 
+
+
+
     // Store a new major
     public function store(StoreMajorRequest $request)
     {
@@ -74,6 +77,8 @@ class MajorController extends Controller
     public function update(Request $request)
     {
 
+        // dd($request->validated());    
+
         $major = $this->majorService->findMajor($request->major_id);
 
         $updatedMajor = $this->majorService->updateMajor($major, $request->all());
@@ -92,11 +97,15 @@ class MajorController extends Controller
     {
         // Find the major
         $major = $this->majorService->findMajor($id);
-        // dd($major);
-        // Call the service method to delete the major
-        $this->majorService->deleteMajor($major);
-        return redirect()->route('admin.academic.major')->with('success', 'Major deleted successfully.!');
 
-        // return response()->json(['message' => 'Major deleted successfully.']);
+        // Call the service method to delete the major
+        $result = $this->majorService->deleteMajor($major);
+
+        if (!$result) {
+        return redirect()->route('admin.academic.major')->with('error', 'Major Not Deleted !');
+        }
+        return redirect()->route('admin.academic.major')->with('success', 'Major deleted successfully!');
     }
+
+
 }

@@ -38,20 +38,58 @@ class FacultyController extends Controller
     public function store(StoreFacultyRequest $request)
     {
         $this->facultyService->store($request->validated());
-    return response()->json(['message' => 'Faculty added successfully']);
+        return back()->with('success', 'Faculty added successfully');
+        return redirect()->route('admin.rule.dept')->with('success', 'Faculty added successfully!');
+        // return response()->json(['message' => 'Faculty added successfully']);
     }
 
-    public function update(UpdateFacultyRequest $request, $id)
+    public function update(UpdateFacultyRequest $request , $id)
     {
-        $this->facultyService->update($id, $request->validated());
-        
-    return response()->json(['message' => 'Faculty Updated successfully']);
-          
+
+        // return redirect()->route('admin.rule.dept')->with('success', 'Faculty updated successfully!');
+
+
+
+        // echo $id;
+        // dd($request->validated());
+        $result = $this->facultyService->update($id, $request->validated());
+        if ($result){
+        return redirect()->route('admin.rule.dept')->with('success', 'Faculty updated successfully!');
+
+        }else{
+        return redirect()->route('admin.rule.dept')->with('error', 'Faculty  Not updated!');
+    
+        }
+
+    // return response()->json(['message' => 'Faculty Updated successfully']);
+
      }
+
+
+
+
 
     public function destroy($id)
     {
-        $this->facultyService->delete($id);
-    return response()->json(['message' => 'Faculty Deleted successfully']);
+        // echo $id;
+        $faculty =  $this->facultyService->delete($id);
+
+        if($faculty) {
+
+         return redirect()->route('admin.rule.dept')->with('success', 'Faculty deleted successfully!');
+
+        }else {
+         return redirect()->route('admin.rule.dept')->with('error', 'Faculty not found!');
+
+        }
+
+    // return response()->json(['message' => 'Faculty Deleted successfully']);
     }
+
+
+
+   public function show(){
+
+
+   }
 }

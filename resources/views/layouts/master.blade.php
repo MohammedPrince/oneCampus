@@ -28,6 +28,8 @@
 
     </div>
     <!-- Core Libraries -->
+    {{-- <script src="{{ asset('js/jquery-3.6.0.min_new.js') }}"></script> --}}
+    {{-- Depended Select --}}
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
     <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>

@@ -22,11 +22,17 @@ class FacultyServices
         return $this->facultyRepo->create($data);
     }
 
+
+
     public function update(int $id, array $data)
     {
         return $this->facultyRepo->update($id, $data);
     }
 
+    public function update_data(array $data)
+    {
+        return $this->facultyRepo->update_data($data);
+    }
     public function delete(int $id)
     {
         return $this->facultyRepo->delete($id);

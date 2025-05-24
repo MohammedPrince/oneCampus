@@ -18,8 +18,11 @@
 
 <div class="">
     <div class="row">
+    @include('layouts.alert')
+
         <div class="col-4">
-            <h2>Branches :</h2>
+            <h4>Branches :</h2>
+
         </div>
         <div class="col-4">
             <button style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#AddBranch">
@@ -34,7 +37,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th style="text-align: center;"><input type="checkbox" id="selectAll"></th>
+                        <th style="text-align: center;">ID</th>
                         <th style="text-align: center;">Name (English)</th>
                         <th style="text-align: center;">Name (Arabic)</th>
                         <th style="text-align: center;">Address</th>
@@ -44,9 +47,11 @@
                     </tr>
                 </thead>
                 <tbody id="tableBody">
+                    @php  $i = 1;   @endphp
                     @foreach ($branches as $branch)
+
                     <tr>
-                        <td style="text-align: center;"><input type="checkbox" class="employeeCheckbox" /></td>
+                        <td style="text-align: center;">{{ $i++}}</td>
                         <td style="text-align: center;">{{ $branch->branch_name_ar }}</td>
                         <td style="text-align: center;">{{ $branch->branch_name_en }}</td>
                         <td style="text-align: center;">{{ $branch->branch_address }}</td>
@@ -55,25 +60,21 @@
 
                         <td style="text-align: center;">
                             <button
-                            data-id="{{ $branch->branch_id }}"
-                            data-branch_name_ar="{{ $branch->branch_name_ar }}"
-                            data-branch_name_en="{{ $branch->branch_name_en }}"
-                            data-branch_country="{{ $branch->country_id }}"
-                            data-branch_city="{{ $branch->branch_city }}"
-                            data-branch_address="{{ $branch->branch_address }}"
-                            onclick="editBranch(this)"
+                            onclick="Branch_data({{ json_encode($branch) }})"
                             style="border: none; background-color: transparent;"
                             data-bs-toggle="modal"
                             data-bs-target="#EditBranch">
                             <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
                         </button>
 
-                        <button
+                        {{-- /admin/rule/branch/${branchId} --}}
+                        <a href="{{ route('admin.branch.destroy',  $branch->branch_id) }}"><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" onclick="return confirm('Are you sure you want to delete this branch ? ')" style="border: none; background-color: transparent;" class="action-icon" alt="Delete"></a>
+                        {{-- <button
                         class="delete-branch-btn"
                         data-id="{{ $branch->branch_id }}"
                         style="border: none; background-color: transparent;">
                         <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete" />
-                    </button>
+                    </button> --}}
 
                         </td>
                     </tr>
@@ -93,17 +94,27 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="editBranchForm" class="row needs-validation" novalidate>
+                    {{-- admin/rule/branch/update --}}
+
+                <form method="POST" action="{{ route('admin.rule.branch.update') }}" >
                     @csrf
-                    <input type="hidden" name="id" id="edit_id">
+                    <input type="hidden" name="branch_id" id="edit_id">
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="form-label">Branch Name (Arabic)</label>
-                            <input type="text" name="branch_name_ar" class="form-control" id="edit_name_ar" required>
+                            <input type="text" name="branch_name_ar" class="form-control  @error('branch_name_ar') is-invalid @enderror " id="edit_name_ar" required>
+                            @error('branch_name_ar')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="invalid-feedback">Please enter the Branch (Arabic).</div>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Branch Name (English)</label>
-                            <input type="text" name="branch_name_en" class="form-control" id="edit_name_en" required>
+                            <input type="text" name="branch_name_en" class="form-control  @error('branch_name_en') is-invalid @enderror  " id="edit_name_en" required>
+                            @error('branch_name_en')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="invalid-feedback">Please enter the Branch (English).</div>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -115,20 +126,30 @@
                         <option value="{{ $data->country_id }}">{{ $data->country_name_ar }}</option>
                         @endforeach
                         </select>
+
+
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">City</label>
-                            <input type="text" name="branch_city" class="form-control" id="edit_city" required>
+                            <input type="text" name="branch_city" class="form-control   @error('branch_city') is-invalid @enderror  " id="edit_city" required>
+                            @error('branch_city')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="invalid-feedback">Please enter the City.</div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <label class="form-label">Address</label>
-                            <input type="text" name="branch_address" class="form-control" id="edit_address" required>
+                            <input type="text" name="branch_address" class="form-control  @error('branch_address') is-invalid @enderror  " id="edit_address" required>
+                            @error('branch_address')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="invalid-feedback">Please enter the Address.</div>
                         </div>
                     </div>
                     <center>
-                    <button type="submit" class="btn btn-outline w-50">Update</button>
+                    <button type="submit" class="btn btn-outline w-50">Submit</button>
 
                     </center>
                 </form>
@@ -146,19 +167,26 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            
+
             <div class="modal-body">
-                <form id="addBranchForm" class="row needs-validation" novalidate>
+
+                <form  action="{{ route('admin.rule.branch.store') }}" method="POST" class="row needs-validation">
                     @csrf
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="form-label">Branch Name (Arabic)</label>
-                            <input type="text" name="branch_name_ar" class="form-control" required>
+                            <input type="text" name="branch_name_ar" class="form-control @error('branch_name_ar') is-invalid @enderror " required>
+                            @error('branch_name_ar')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <div class="invalid-feedback">Please enter the Branch (Arabic).</div>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Branch Name (English)</label>
-                            <input type="text" name="branch_name_en" class="form-control" id="edit_name_en" required>
+                            <input type="text" name="branch_name_en" class="form-control @error('branch_name_en') is-invalid @enderror " id="edit_name_en" required>
+                            @error('branch_name_en')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <div class="invalid-feedback">Please enter the Branch (English).</div>
 
                         </div>
@@ -166,7 +194,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                     <label class="form-label">Country</label>
-                    <select class="form-select" name="country_id" id="edit_country" required>
+                    <select class="form-select  " name="country_id" id="edit_country" required>
                         <option value="">Select Country</option>
                         @if(isset($country) && $country->isNotEmpty())
                         @foreach($country as $data)
@@ -181,7 +209,10 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">City</label>
-                            <input type="text" name="branch_city" class="form-control" required>
+                            <input type="text" name="branch_city" class="form-control @error('branch_city') is-invalid @enderror " required>
+                            @error('branch_city')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <div class="invalid-feedback">Please enter the City Name</div>
 
                         </div>
@@ -189,7 +220,10 @@
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <label class="form-label">Address</label>
-                            <input type="text" name="branch_address" class="form-control" required>
+                            <input type="text" name="branch_address" class="form-control @error('branch_address') is-invalid @enderror " " required>
+                                @error('branch_address')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <div class="invalid-feedback">Please enter the Address</div>
 
                         </div>

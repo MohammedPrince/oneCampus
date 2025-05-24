@@ -55,14 +55,17 @@ class EmployeeController extends Controller
 
     public function update(UpdateEmployeeRequest $request, $id)
     {
-        $data = $request->validated();
-        if ($request->hasFile('cv')) {
-            $data['cv'] = $request->file('cv')->store('employee_cvs');
-        }
+    
 
-        if ($request->hasFile('certificates')) {
-            $data['certificates'] = $request->file('certificates')->store('employee_certificates');
-        }
+        $data = $request->validated();
+        // dd($data);
+        // if ($request->hasFile('cv')) {
+        //     $data['cv'] = $request->file('cv')->store('employee_cvs');
+        // }
+
+        // if ($request->hasFile('certificates')) {
+        //     $data['certificates'] = $request->file('certificates')->store('employee_certificates');
+        // }
 
         $this->employeeService->updateEmployee($data, $id);
         return redirect()->route('user.list')->with('success', 'Employee added successfully!');

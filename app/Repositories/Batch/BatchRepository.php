@@ -30,7 +30,27 @@ class BatchRepository
 
     public function create(array $data)
     {
-        return BatchControl::create($data);
+        // return BatchControl::create($data);
+
+    $exists = BatchControl::where('batch', $data['batch'])
+                ->where('faculty_id', $data['faculty_id'])
+                ->where('major_id', $data['major_id'])
+                ->where('branch_id', $data['branch_id'])
+                ->where('graduate_status', $data['graduate_status'])
+                ->where('max_sem', $data['max_sem'])
+                ->where('active_sem', $data['active_sem'])
+                ->exists();
+
+    if ($exists) {
+        return "exists";
+    }else{
+
+        $batch = BatchControl::create($data);
+        return $batch;
+    }
+
+
+
     }
 
     public function update(int $id, array $data): bool
