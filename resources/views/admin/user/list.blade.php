@@ -125,7 +125,8 @@
             <div class="modal-body">
               {{-- <form class="row needs-validation" method="POST" action="" id="editEmployeeForm" enctype="multipart/form-data" novalidate> --}}
                 {{-- admin/user --}}
-                <form action="{{ route('user.update', $employee->employee_id ) }}" method="POST"  enctype="multipart/form-data" >
+
+                <form action="{{ route('user.update') }}" method="POST"  enctype="multipart/form-data" >
                 {{-- <form action="{{ route('employee.update', $employee->employee_id) }}" method="POST" id="editEmployeeForm" enctype="multipart/form-data" class="row needs-validation" novalidate> --}}
                 @csrf
                 {{-- @method('PUT') --}}

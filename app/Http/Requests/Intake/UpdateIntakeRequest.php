@@ -22,8 +22,8 @@ class UpdateIntakeRequest extends FormRequest
     public function rules(): array
     {
 
-        
-   
+
+
 
     return [
         'intake_id' => [
@@ -34,17 +34,17 @@ class UpdateIntakeRequest extends FormRequest
             'required',
             'string',
             'max:255',
-            Rule::unique('tbl_intake', 'intake_name_en')
-                
-                ->whereNull('deleted_at')
+        //     Rule::unique('tbl_intake', 'intake_name_en')
+        //    ->ignore($intake_name_en?->intake_id, 'intake_id')
+        //         ->whereNull('deleted_at')
         ],
         'intake_name_ar' => [
             'required',
             'regex:/^[\p{Arabic}\s]+$/u',
             'max:255',
-            Rule::unique('tbl_intake', 'intake_name_ar')
-                
-                ->whereNull('deleted_at')
+            // Rule::unique('tbl_intake', 'intake_name_ar')
+            //     ->ignore($intake?->intake_id, 'intake_id')
+            //     ->whereNull('deleted_at')
         ],
     ];
     }

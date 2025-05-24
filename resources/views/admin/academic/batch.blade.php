@@ -40,7 +40,7 @@
                         @error('batch')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                      
+
                     </div>
 
                     <div class="col-md-6">
@@ -101,7 +101,7 @@
 
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="phoneNumber" class="form-label">Max Semester</label> 
+                        <label for="phoneNumber" class="form-label">Max Semester</label>
                          <input type="number"  class="form-control @error('max_sem') is-invalid @enderror " name="max_sem" id="phoneNumber" max="10" min="1" required>
                           @error('max_sem')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -136,15 +136,15 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Batch</th>
-                            <th>Faculty</th>
-                            <th>Major</th>
-                            <th>Branch</th>
-                            <th>Active Semester</th>
-                            <th>Max Semester</th>
-                            <th>status</th>
-                            <th>Actions</th>
+                            <th style="text-align: center;">ID</th>
+                            <th style="text-align: center;">Batch</th>
+                            <th style="text-align: center;">Faculty</th>
+                            <th style="text-align: center;">Major</th>
+                            {{-- <th>Branch</th> --}}
+                            <th style="text-align: center;">Active Semester</th>
+                            <th style="text-align: center;">Max Semester</th>
+                            <th style="text-align: center;">status</th>
+                            <th style="text-align: center;">Actions</th>
 
                         </tr>
                     </thead>
@@ -171,9 +171,9 @@
                 <td style="text-align: center;">
                     {{ $batch->major->major_name_en ?? 'Major data is soft deleted.' }}
                 </td>
-                <td style="text-align: center;">
+                {{-- <td style="text-align: center;">
                     {{ $batch->branch->branch_name_en ?? 'Branch data is soft deleted.' }}
-                </td>
+                </td> --}}
                 <td style="text-align: center;">{{ $batch->active_sem }}</td>
                 <td style="text-align: center;">{{ $batch->max_sem }}</td>
                 <td style="text-align: center;">
@@ -185,7 +185,7 @@
                         Unknown
                     @endif
                 </td>
-                <td>
+                <td style="text-align: center;">
                     <div class="d-flex gap-1">
                         {{-- onclick="Major_data({{ json_encode($major) }})" data-bs-toggle="modal" data-bs-target="#Editprogram" --}}
                         <button class="btn btn-sm editBatchBtn" onclick="Batch_data({{ json_encode($batch) }})" data-bs-toggle="modal" data-bs-target="#Editbatch">

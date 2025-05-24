@@ -174,9 +174,9 @@
                                 <th style="text-align: center;">Name In English</th>
                                 <th style="text-align: center;">Name In Arabic</th>
                                 <th style="text-align: center;">Abbreviation</th>
-                                <th style="text-align: center;">Credits Required</th>
+                                {{-- <th style="text-align: center;">Credits Required</th>
                                 <th style="text-align: center;">Program Ministry Code</th>
-                                <th style="text-align: center;">Program Mode</th>
+                                <th style="text-align: center;">Program Mode</th> --}}
                                 <th style="text-align: center;">Degree Type</th>
                                 <th style="text-align: center;">Faculty</th>
                                 <th style="text-align: center;">Number Of Semesters</th>
@@ -201,9 +201,9 @@
         <td style="text-align: center;">{{ $major->major_name_en }}</td>
         <td style="text-align: center;">{{ $major->major_name_ar }}</td>
         <td style="text-align: center;">{{ $major->major_abbreviation }}</td>
-        <td style="text-align: center;">{{ $major->credits_required }}</td>
+        {{-- <td style="text-align: center;">{{ $major->credits_required }}</td>
         <td style="text-align: center;">{{ $major->major_ministry_code }}</td>
-        <td style="text-align: center;">{{ $major->major_mode }}</td>
+        <td style="text-align: center;">{{ $major->major_mode }}</td> --}}
         <td style="text-align: center;">{{ $major->degree_type }}</td>
         <td style="text-align: center;">
             {{ $major->faculty->faculty_name_en ?? "Faculty data is soft deleted." }}

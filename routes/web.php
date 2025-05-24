@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\PasswordResetController;
 use App\Http\Controllers\TestController;
 
 use App\Http\Middleware\CheckRole;
-use App\Http\Middleware\LoginCheck; 
+use App\Http\Middleware\LoginCheck;
 
 
 //Clear All route
@@ -70,7 +70,7 @@ Route::get('user/add',[AuthController::class,'addUser'])->name('user.add');
 Route::get('user/list',[EmployeeController::class,'index'])->name('user.list');
 Route::get('user/edit/{id}', [EmployeeController::class, 'edit'])->name('user.edit');
 // Route::put('/user/{id}', [EmployeeController::class, 'update'])->name('user.update');
-Route::post('/user/{id}', [EmployeeController::class, 'update'])->name('user.update');
+Route::post('/user/update', [EmployeeController::class, 'update'])->name('user.update');
 Route::delete('user/delete/{id}', [EmployeeController::class, 'destroy'])->name('user.delete');
 Route::get('user/show/{employee_id}', [EmployeeController::class, 'show'])->name('user.show');
 Route::get('user/reset',[AuthController::class,'userReset'])->name('user.reset');
@@ -124,7 +124,7 @@ Route::get('/rule/branch/update/{id}', [BranchController::class, 'destroy'])
   Route::get('/academic/faculty/{id}/majors', [MajorController::class, 'getMajorsByFaculty'])->name('admin.faculty.major.id');
 
 
-  
+
   // Route (in your routes/web.php)
     Route::get('/faculty', function () {
         return response()->json(\App\Models\Faculty::all());

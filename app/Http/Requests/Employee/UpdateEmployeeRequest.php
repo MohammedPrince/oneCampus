@@ -15,8 +15,9 @@ class UpdateEmployeeRequest extends FormRequest
     public function rules()
     {
         $employee = \App\Models\EmployeeMainInfo::with('profile')->find($this->route('id'));
-        $profileId = optional($employee->profile)->employee_profile_id;
+        // $profileId = optional($employee->profile)->employee_profile_id;
         return [
+            'id'            => 'required|int|max:255',
             'full_name_ar'     => 'required|regex:/^[\p{Arabic}\s]+$/u|max:255',
             'full_name_en'     => 'required|string|max:255',
 

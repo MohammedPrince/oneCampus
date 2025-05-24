@@ -17,7 +17,7 @@ class EmployeeController extends Controller
     public function __construct(EmployeeServices $employeeService)
     {
         $this->employeeService = $employeeService;
-    }    
+    }
     public function uploadEmployees(BulkRequest $request)
     {
         $validated = $request->validated(); // Optional: Already runs `validate()` implicitly
@@ -27,7 +27,7 @@ class EmployeeController extends Controller
         return redirect()->route('user.list')->with('success', 'File Uploaded successfully!');
     }
     public function getUserData(){
-     $faculties = $this->employeeService->getFaculty();   
+     $faculties = $this->employeeService->getFaculty();
      $roles = $this->employeeService->getRoles();
      $branches = $this->employeeService->getAllBranch(); // Assuming this method exists in your BatchService
 
@@ -53,11 +53,14 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
-    public function update(UpdateEmployeeRequest $request, $id)
+    public function update(UpdateEmployeeRequest $request)
     {
-    
+
 
         $data = $request->validated();
+        $id = $data['id'];
+
+
         // dd($data);
         // if ($request->hasFile('cv')) {
         //     $data['cv'] = $request->file('cv')->store('employee_cvs');

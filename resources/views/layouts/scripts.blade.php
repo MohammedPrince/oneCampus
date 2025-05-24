@@ -81,34 +81,34 @@
 
 
 
-            function  User_data(user) {
-                document.getElementById('editEmployeeId').value = user.employee_id;
-                document.getElementById('editFullNameArabic').value = user.full_name_arabic;
-                document.getElementById('editFullNameEnglish').value = user.full_name_english;
-                document.getElementById('editPersonalEmail').value = user.personal_email;
-                document.getElementById('editCorporateEmail').value = user.corporate_email;
-                document.getElementById('editPhoneNumber').value = user.phone_number;
-                document.getElementById('editWhatsAppNumber').value = user.whatsapp_number;
-                document.getElementById('editDepartment').value = user.department_id;
-                document.getElementById('editidentification_id').value = user.identification_id;
-                document.getElementById('editidentification_type').value = user.identification_type.toLowerCase();
-                document.getElementById('editRole').value = user.role;
-                document.getElementById('editBirthDate').value = user.birth_date;
-                document.getElementById('editRecruitmentDate').value = user.recruitment_date;
-                document.getElementById('editBranch').value = user.branch_id;
-                document.getElementById('editBiometric').value = user.biometric;
-                document.getElementById('editGender').value = user.gender;
-                document.getElementById('editNationality').value = user.nationality;
-                document.getElementById('editReligion').value = user.religion;
-                document.getElementById('editBloodType').value = user.blood_type;
-                document.getElementById('editMaritalStatus').value = user.marital_status;
-                document.getElementById('editEmergencyContact').value = user.emergency_contact;
-                document.getElementById('editEmergencyContactRelationship').value = user.emergency_contact_relationship;
-                document.getElementById('editEmergencyContactNumber').value = user.emergency_contact_number;
-                document.getElementById('editEmergencyContactAddress').value = user.emergency_contact_address;
-                document.getElementById('editEmergencyContactCity').value = user.emergency_contact_city;
-                document.getElementById('editEmergencyContactCountry').value = user.emergency_contact_country;
-            }
+            // function  User_data(user) {
+            //     document.getElementById('editEmployeeId').value = user.employee_id;
+            //     document.getElementById('editFullNameArabic').value = user.full_name_arabic;
+            //     document.getElementById('editFullNameEnglish').value = user.full_name_english;
+            //     document.getElementById('editPersonalEmail').value = user.personal_email;
+            //     document.getElementById('editCorporateEmail').value = user.corporate_email;
+            //     document.getElementById('editPhoneNumber').value = user.phone_number;
+            //     document.getElementById('editWhatsAppNumber').value = user.whatsapp_number;
+            //     document.getElementById('editDepartment').value = user.department_id;
+            //     document.getElementById('editidentification_id').value = user.identification_id;
+            //     document.getElementById('editidentification_type').value = user.identification_type.toLowerCase();
+            //     document.getElementById('editRole').value = user.role;
+            //     document.getElementById('editBirthDate').value = user.birth_date;
+            //     document.getElementById('editRecruitmentDate').value = user.recruitment_date;
+            //     document.getElementById('editBranch').value = user.branch_id;
+            //     document.getElementById('editBiometric').value = user.biometric;
+            //     document.getElementById('editGender').value = user.gender;
+            //     document.getElementById('editNationality').value = user.nationality;
+            //     document.getElementById('editReligion').value = user.religion;
+            //     document.getElementById('editBloodType').value = user.blood_type;
+            //     document.getElementById('editMaritalStatus').value = user.marital_status;
+            //     document.getElementById('editEmergencyContact').value = user.emergency_contact;
+            //     document.getElementById('editEmergencyContactRelationship').value = user.emergency_contact_relationship;
+            //     document.getElementById('editEmergencyContactNumber').value = user.emergency_contact_number;
+            //     document.getElementById('editEmergencyContactAddress').value = user.emergency_contact_address;
+            //     document.getElementById('editEmergencyContactCity').value = user.emergency_contact_city;
+            //     document.getElementById('editEmergencyContactCountry').value = user.emergency_contact_country;
+            // }
 
 
 
@@ -192,6 +192,92 @@
             row.style.display = rowText.includes(searchInput) ? "" : "none";
         });
     }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+        var editModal = document.getElementById('editModal');
+        if (editModal) {
+            editModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget;
+
+                // Getting all values
+                var employeeId = button.getAttribute('data-id');
+                var fullNameArabic = button.getAttribute('data-full_name_arabic');
+                var fullNameEnglish = button.getAttribute('data-full_name_english');
+                var personalEmail = button.getAttribute('data-personal_email');
+                var corporateEmail = button.getAttribute('data-corporate_email');
+                var phoneNumber = button.getAttribute('data-phone_number');
+                var whatsappNumber = button.getAttribute('data-whatsapp_number');
+                var department = button.getAttribute('data-department_id');
+                var role = button.getAttribute('data-role');
+                var birthDate = button.getAttribute('data-birth_date');
+                var recruitmentDate = button.getAttribute('data-recruitment_date');
+                var identificationType = button.getAttribute('data-identification_type');
+                var identificationId = button.getAttribute('data-identification_id');
+                var branch = button.getAttribute('data-branch_id');
+                var biometric = button.getAttribute('data-biometric');
+                var gender = button.getAttribute('data-gender');
+                var Nationality = button.getAttribute('data-nationality');
+                var cv = button.getAttribute('data-cv');
+                var certificate = button.getAttribute('data-certificate');
+
+                // Assign values to modal form
+                document.getElementById('editEmployeeId').value = employeeId;
+                document.getElementById('editFullNameArabic').value = fullNameArabic;
+                document.getElementById('editFullNameEnglish').value = fullNameEnglish;
+                document.getElementById('editPersonalEmail').value = personalEmail;
+                document.getElementById('editCorporateEmail').value = corporateEmail;
+                document.getElementById('editPhoneNumber').value = phoneNumber;
+                document.getElementById('editWhatsAppNumber').value = whatsappNumber;
+                document.getElementById('editDepartment').value = department;
+                document.getElementById('editidentification_id').value = identificationId;
+                document.getElementById('editidentification_type').value = identificationType
+                    .toLowerCase();
+                document.getElementById('editRole').value = role;
+                document.getElementById('editBirthDate').value = birthDate;
+                document.getElementById('editRecruitmentDate').value = recruitmentDate;
+                document.getElementById('editBranch').value = branch;
+                document.getElementById('editBiometric').value = biometric;
+                document.getElementById('editGender').value = gender.toLowerCase();
+                document.getElementById('editNationality').value = Nationality;
+
+
+                console.log('Raw Identification Type:', identificationType); // Debugging
+
+                // Set identification type and move to top
+                var $select = $('#editidentification_type');
+                var selectedValue = identificationType.trim();
+
+                // Find and select the option, then move it to the top
+                var $selectedOption = $select.find('option').filter(function() {
+                    return $(this).val().trim().toLowerCase() === selectedValue.toLowerCase();
+                });
+
+                if ($selectedOption.length) {
+                    $selectedOption.prop('selected', true);
+                    $selectedOption.detach();
+                    $select.prepend($selectedOption);
+                }
+
+                // Update label for identification
+                $('#identificationLabel').text(selectedValue);
+
+                document.getElementById('currentCV').innerText = cv ? cv : 'No CV uploaded';
+                document.getElementById('currentCertificate').innerText = certificate ? certificate :
+                    'No Certificate uploaded';
+                console.log('Identification Type:', identificationType);
+
+                $('#editEmployeeForm').attr('action', '{{ url('admin/user') }}/' + employeeId);
+            });
+        }
+
+
+        // Label update on dropdown change
+        $('#editidentification_type').on('change', function() {
+            $('#identificationLabel').text($(this).val());
+        });
+    });
+
 
 
 
