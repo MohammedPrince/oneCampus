@@ -9,13 +9,13 @@ use App\Models\EmployeeMainInfo;
 use App\Models\EmployeeProfile;
 use App\Models\Faculty;
 
-class EmployeeRepository 
+class EmployeeRepository
 {
     public function getAll()
     {
   $employees = EmployeeMainInfo::with(['branch', 'department', 'profile.roleInfo'])
     ->get();
-   
+
   return $employees;
     }
     public function getFaculty(){
@@ -39,6 +39,54 @@ class EmployeeRepository
     {
         // Calls the Employee model's method to create both main info and profile data.
         return Employee::createEmployeeData($data);
+
+        
+        //  $cvPath = null;
+        // $certificatesPath = null;
+
+        // // Check if 'cv' exists and is a valid file upload
+        // if (isset($validatedData['cv']) && $validatedData['cv'] instanceof \Illuminate\Http\UploadedFile && $validatedData['cv']->isValid()) {
+        //     $cvPath = $validatedData['cv']->store('documents', 'public');
+        // }
+
+        // // Check if 'certificates' exists and is a valid file upload
+        // if (isset($validatedData['certificates']) && $validatedData['certificates'] instanceof \Illuminate\Http\UploadedFile && $validatedData['certificates']->isValid()) {
+        //     $certificatesPath = $validatedData['certificates']->store('documents', 'public');
+        // }
+
+        // // First, create the main employee record (employee_main_info)
+        // $employeeMainInfo = EmployeeMainInfo::create([
+        //     'full_name_ar'     => $validatedData['full_name_ar'],
+        //     'full_name_en'     => $validatedData['full_name_en'],
+        //     'personal_email'   => $validatedData['personal_email'],
+        //     'corporate_email'  => $validatedData['corporate_email'],
+        //     'phone_number'     => $validatedData['phone_number'],
+        //     'department_id'       => $validatedData['department_id'],
+        //     'branch_id'           => $validatedData['branch_id'],
+        //     'user_id'          =>Auth::id()
+        // ]);
+        // $latestId = DB::getPdo()->lastInsertId();
+
+        // // Then, create the employee profile record (employee_profile)
+        // $employeeProfile = EmployeeProfile::create([
+        //     'employee_id' => $latestId,
+        //     'nationality'        => $validatedData['nationality'],
+        //     'whatsapp_number'    => $validatedData['whatsapp_number'] ?? null,
+        //     'date_of_birth'       => $validatedData['birth_date'],
+        //     'role'             => $validatedData['role'],
+        //     'biometric'        => $validatedData['biometric'],
+        //     'gender'           => $validatedData['gender'],
+        //     'hire_date' => $validatedData['hire_date'],
+        //     'identification_id_type' => $validatedData['identification_type'],  // Enum value ('National ID', 'Passport', etc.)
+        //     'identification_id' => $validatedData['identification_id'],  // The identification number input by the user
+        //     'cv'               => $cvPath,
+        //     'certificates'     => $certificatesPath,
+
+        // ]);
+
+        // // Return the employee profile and employee main info as a response
+        // return $employeeMainInfo;
+
     }
 
     /**

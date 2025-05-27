@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Batch\BatchStoreRequest;
-use App\Http\Requests\Batch\BatchUpdateRequest;     
+use App\Http\Requests\Batch\BatchUpdateRequest;
 use App\Models\BatchControl;
 use App\Services\Batch\BatchService;
 use Illuminate\Http\JsonResponse;
@@ -98,7 +98,7 @@ class BatchController extends Controller
 
         $id = $request->validated('batch_control_id'); // Type cast the id to integer if it is a string
 
-        // echo $id;   
+        // echo $id;
         $updated = $this->batchService->updateBatch($id, $request->validated());
 
         return redirect()->route('admin.academic.batch')->with('success', 'Batch updated successfully!');

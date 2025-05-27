@@ -35,7 +35,7 @@ Route::get('/clear-all', function () {
 
 Route::get('/', function () {
     return view('login');
-});
+})->middleware('loginCheck');
 
 
 Route::prefix('test')->group(function () {
