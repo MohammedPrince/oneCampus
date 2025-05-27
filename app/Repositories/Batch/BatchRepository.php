@@ -8,12 +8,12 @@ use App\Models\Faculty;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 
-class BatchRepository 
+class BatchRepository
 {
     public function getAll(): Collection
     {
         $batches = BatchControl::with(['faculty', 'major', 'branch'])->get();
-       
+
         return $batches;
 
     }

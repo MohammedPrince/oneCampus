@@ -2,21 +2,21 @@
 
 @section('content')
 
-<div id="alertArea" class="my-2"></div>
+{{-- <div id="alertArea" class="my-2"></div> --}}
 
 <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
   <div class="container-fluid">
     <div class="navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav justify-content-end w100">
+      <div class="navbar-nav justify-content-center w-100">
           <a class="nav-link {{ request()->is('admin/user/list') ? 'active' : ''}}" href="{{route('user.list')}}" id="usersLink" aria-current="page">Users</a>
            <a class="nav-link {{ request()->is('admin/user/add') ? 'active' : ''}}" href="{{route('user.add')}}" id="addUsersLink">Add Users</a>
           <a class="nav-link {{ request()->is('admin/user/reset') ? 'active' : ''}}" href="{{route('user.reset')}}" id="resetPasswordsLink">Reset Passwords</a>
       </div>
     </div>
   </div>
-
-
 </nav>
+
+
         <h5 style="margin-top: 40px; margin-left:20px">Employee List</h5>
         @include('layouts.alert')
         <div class="table-responsive">

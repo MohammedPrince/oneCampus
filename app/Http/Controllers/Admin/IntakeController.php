@@ -98,7 +98,7 @@ class IntakeController extends Controller
             // Get validated data from the request
             $validated = $request->validated();
 
-            $id = $request->validated('intake_id');  // Get the intake ID from the request  
+            $id = $request->validated('intake_id');  // Get the intake ID from the request
             // Call the service method to update the intake
             $intake = $this->intakeService->updateIntake($id, $validated);
 
@@ -109,8 +109,8 @@ class IntakeController extends Controller
             //     'status' => 'success',
             //     'message' => 'Intake updated successfully',
             //     'data' => $intake,  // Optionally, send the saved intake data
-            // ]);         
-        
+            // ]);
+
         } catch (\Exception $e) {
             // Handle any errors during the update process
             // return back()->with('error', 'Failed to update intake.');
