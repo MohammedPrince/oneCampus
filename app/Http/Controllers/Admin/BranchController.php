@@ -28,25 +28,19 @@ class BranchController extends Controller
     public function store(StoreBranchRequest $request)
     {
 
-        // echo "done";
+        $validated = $request->validated();
+
         $result = $this->branchService->store($request->validated());
 
-        if($result){
-            return redirect()->route('admin.rule.branch')->with('success', 'Branch added successfully!');
+        if($result == "exists"){
+            return redirect()->route('admin.rule.branch')->with('exist', 'Branch with the same details already exists.');
 
         }else{
-            return redirect()->route('admin.rule.branch')->with('error', 'Branch Not added!');
+            // echo"ddd";
+            return redirect()->route('admin.rule.branch')->with('success', value: 'Branch added successfully!');
             
         }
 
-
-        // return redirect()->route('admin.rule.branch')->with('success', 'Branch added successfully!');
-        
-        // return response()->json([
-        //     'success' => true,
-        //     'message' => 'Branch Addedd successfully.'
-        // ]);   
-    
     }
 
     public function edit($id)

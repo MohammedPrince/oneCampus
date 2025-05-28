@@ -12,9 +12,16 @@ class Major extends Model
     protected $table = 'tbl_major';
     protected $primaryKey='major_id';
     protected $fillable = [
-        'major_name_en', 'major_name_ar', 'major_abbreviation', 'credits_required',
-        'major_ministry_code', 'major_mode','degree_type', 'faculty_id',
-        'number_of_semesters', 'program_duration', 'status'
+        'major_name_en', 
+        'major_name_ar', 
+        'major_abbreviation', 
+        'credits_required',
+        'major_ministry_code', 
+        'major_mode','degree_type', 
+        'faculty_id',
+        'number_of_semesters', 
+        'program_duration', 
+        'status'
     ];
 
     public function batchControls()
@@ -34,7 +41,7 @@ class Major extends Model
      */
     public static function createMajor(array $data)
     {
-          return self::create($data);
+        return self::create($data);
 
     }
 

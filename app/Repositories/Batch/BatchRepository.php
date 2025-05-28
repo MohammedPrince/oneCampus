@@ -32,7 +32,7 @@ class BatchRepository
     {
         // return BatchControl::create($data);
 
-    $exists = BatchControl::where('batch', $data['batch'])
+    $exists = BatchControl::where('batch',  $data['batch'])
                 ->where('faculty_id', $data['faculty_id'])
                 ->where('major_id', $data['major_id'])
                 ->where('branch_id', $data['branch_id'])

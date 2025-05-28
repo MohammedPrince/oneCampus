@@ -76,10 +76,8 @@ class BatchController extends Controller
 
 
     public function store(BatchStoreRequest $request)
-    // public function store(Request $request)
-    {
 
-        // dd($request->validated());
+    {
 
         $batch = $this->batchService->createBatch($request->validated());
 
@@ -98,13 +96,10 @@ class BatchController extends Controller
 
         $id = $request->validated('batch_control_id'); // Type cast the id to integer if it is a string
 
-        // echo $id;
         $updated = $this->batchService->updateBatch($id, $request->validated());
 
         return redirect()->route('admin.academic.batch')->with('success', 'Batch updated successfully!');
 
-        // return $updated ? response()->json(['message' => 'Batch updated successfully'])
-        //                 : response()->json(['message' => 'Batch not found'], 404);
     }
 
     public function destroy(int $id)

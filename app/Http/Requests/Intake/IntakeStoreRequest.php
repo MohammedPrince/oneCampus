@@ -21,29 +21,20 @@ class IntakeStoreRequest extends FormRequest
     public function rules(): array
     {
    return [
+
         'intake_name_en' => [
             'required',
             'string',
+            'regex:/^[A-Za-z\s]+$/', 
             'max:255',
-            \Illuminate\Validation\Rule::unique('tbl_intake', 'intake_name_en')->whereNull('deleted_at')
         ],
         'intake_name_ar' => [
             'required',
             'regex:/^[\p{Arabic}\s]+$/u',
             'max:255',
-            \Illuminate\Validation\Rule::unique('tbl_intake', 'intake_name_ar')->whereNull('deleted_at')
         ],
     ];
-    }
 
-    /**
-     * Custom messages (optional).
-     */
-    public function messages(): array
-    {
-        return [
-            'intake_name_en.required' => 'The English name is required.',
-            'intake_name_ar.required' => 'The Arabic name is required.',
-        ];
-    }
+}
+
 }

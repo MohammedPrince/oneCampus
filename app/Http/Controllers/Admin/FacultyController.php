@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Faculty\StoreFacultyRequest;
+use App\Http\Requests\Faculty\FacultyStoreRequest;
 use App\Http\Requests\Faculty\UpdateFacultyRequest;
 use App\Models\Branch;
 use App\Services\Faculty\FacultyServices;
@@ -35,20 +35,27 @@ class FacultyController extends Controller
         ]);
     }
 
-    public function store(StoreFacultyRequest $request)
+    public function store(FacultyStoreRequest $request)
     {
-        $this->facultyService->store($request->validated());
-        return back()->with('success', 'Faculty added successfully');
+    $validated = $request->validated();
+    $result = $this->facultyService->store($validated);
+
+        
+    if ($result == "exists") {
+        return redirect()->route('admin.rule.dept')->with('exist', 'Faculty with the same details already exists.');
+
+    }else{
+
         return redirect()->route('admin.rule.dept')->with('success', 'Faculty added successfully!');
-        // return response()->json(['message' => 'Faculty added successfully']);
+    }
+
+
     }
 
     public function update(UpdateFacultyRequest $request , $id)
     {
 
         // return redirect()->route('admin.rule.dept')->with('success', 'Faculty updated successfully!');
-
-
 
         // echo $id;
         // dd($request->validated());

@@ -174,21 +174,22 @@
                     @csrf
                     <div class="row mb-3">
                         <div class="col-md-6">
+                            <label class="form-label">Branch Name (English)</label>
+                            <input type="text" name="branch_name_en" class="form-control @error('branch_name_en') is-invalid @enderror " id="edit_name_en" required>
+                            @error('branch_name_en')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="invalid-feedback">Please enter the Branch (English).</div>
+                            
+                        </div>
+                        
+                        <div class="col-md-6">
                             <label class="form-label">Branch Name (Arabic)</label>
                             <input type="text" name="branch_name_ar" class="form-control @error('branch_name_ar') is-invalid @enderror " required>
                             @error('branch_name_ar')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                             <div class="invalid-feedback">Please enter the Branch (Arabic).</div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Branch Name (English)</label>
-                            <input type="text" name="branch_name_en" class="form-control @error('branch_name_en') is-invalid @enderror " id="edit_name_en" required>
-                            @error('branch_name_en')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <div class="invalid-feedback">Please enter the Branch (English).</div>
-
                         </div>
                     </div>
                     <div class="row mb-3">

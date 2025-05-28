@@ -18,27 +18,26 @@ class StoreMajorRequest extends FormRequest
             'major_name_en' => [
                 'required',
                 'string',
+                'regex:/^[a-zA-Z\s]+$/',
                 'max:255',
-                Rule::unique('tbl_major', 'major_name_en')->whereNull('deleted_at'),
             ],
+
             'major_name_ar' => [
                 'required',
                 'regex:/^[\p{Arabic}\s]+$/u',
                 'max:255',
-                Rule::unique('tbl_major', 'major_name_ar')->whereNull('deleted_at'),
             ],
-            'major_abbreviation' => [
+            'major_abbreviation' => [   
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('tbl_major', 'major_abbreviation')->whereNull('deleted_at'),
             ],
             'credits_required' => 'required|integer',
+            
             'major_ministry_code' => [
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('tbl_major', 'major_ministry_code')->whereNull('deleted_at'),
             ],
             'major_mode' => 'required|between:1,10',
             'degree_type' => 'required|string',
@@ -47,16 +46,14 @@ class StoreMajorRequest extends FormRequest
             'program_duration' => 'required|between:1,10',
         ];
     }
-      public function messages()
+    public function messages()
     {
         return [
-            'major_name_ar.required' => 'Major name in Arabic is required.',
-            'major_name_en.required' => 'Major name in English is required.',
-
-            // 'major_mode.between' => 'Major mode is required.',
-
-
+            'major_name_ar.required' => 'major_name_ar must be in Arabic characters.',
+            'major_name_en.required' => 'major_name_en must be in English characters.',
             // Add more messages if needed
         ];
     }
+    
+
 }

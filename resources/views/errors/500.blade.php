@@ -1,22 +1,25 @@
-@extends('layouts.master')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/logo.svg') }}">
+    <title>OneCampus</title>
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/campuslogin.css') }}">
+</head>
 
-@section('content')
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Server Error</div>
-                <div class="card-body text-center">
-                    <h1 class="display-1">500</h1>
-                    <p class="lead">Oops! Something went wrong on our servers.</p>
-                    <img src="{{ asset('assets/icons/500.svg') }}" alt="500 Error" class="img-fluid mb-4" style="max-height: 200px;">
-                    <div>
-                        <a href="{{ route('dashboard') }}" class="btn btn-primary">Return to Dashboard</a>
-                        <button onclick="window.location.reload()" class="btn btn-secondary ml-2">Try Again</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+<body>
+    <!-- Bottom-right image -->
+    <img src="{{ asset('assets/bottomleft.svg') }}" class="bottom-left" alt="bottomleft" draggable="false">
+    <!-- Top-left image -->
+    <img src="{{ asset('assets/topright.svg') }}" class="top-right" alt="topright" draggable="false">
+
+    <div class="text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <h1 class="display-1">500 ❗</h1>
+        <p class="lead" >Oops! Something went wrong on our server.</p>
+        <p>We're working to fix this issue. Please try again later.</p>
     </div>
-</div>
-@endsection
+</body>
+</html>

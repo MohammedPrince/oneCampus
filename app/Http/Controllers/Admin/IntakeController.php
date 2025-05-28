@@ -45,26 +45,17 @@ class IntakeController extends Controller
     public function store(IntakeStoreRequest $request)
     {
 
+    $validated = $request->validated();
+    $result = $this->intakeService->createIntake($validated);
 
-        try {
-            $validated = $request->validated();  // Use validated data from IntakeRequest
-            $storeIntake = $this->intakeService->createIntake($validated);
-            // return back()->with('success', 'Intake added successfully');
+    if ($result == "exists") {
+        return redirect()->route('admin.academic.intake')->with('exist', 'Intake with the same details already exists.');
+    }else{
 
         return redirect()->route('admin.academic.intake')->with('success', 'Intake added successfully!');
-
-            // return response()->json([
-            //     'status' => 'success',
-            //     'message' => 'Intake added successfully',
-            //     'data' => $validated,  // Optionally, send the saved intake data
-            // ]);
-          } catch (\Exception $e) {
-                //  Log::error('Intake save error: ' . $e->getMessage());
-                //  return back()->with('error', 'An error occurred while saving intake.');
-         return redirect()->route('admin.academic.intake')->with('error', 'An error occurred while saving intake.!');
-
-        }
     }
+}
+
 
     /**
      * Show the form for editing the specified intake.

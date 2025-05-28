@@ -163,74 +163,49 @@
 
             <h4>Majors</h4>
             <div class="container my-4">
-                <div id="alertAreaMajors" class="my-2"></div> <!-- <- ADD THIS -->
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
-                                {{-- <th style="text-align: center;"><input type="checkbox" id="selectAll"></th> --}}
                                 <th style="text-align: center;">ID</th>
-
                                 <th style="text-align: center;">Name In English</th>
                                 <th style="text-align: center;">Name In Arabic</th>
                                 <th style="text-align: center;">Abbreviation</th>
-                                {{-- <th style="text-align: center;">Credits Required</th>
-                                <th style="text-align: center;">Program Ministry Code</th>
-                                <th style="text-align: center;">Program Mode</th> --}}
                                 <th style="text-align: center;">Degree Type</th>
                                 <th style="text-align: center;">Faculty</th>
                                 <th style="text-align: center;">Number Of Semesters</th>
                                 <th style="text-align: center;">Program Duration</th>
                                 <th style="text-align: center;">ِAction</th>
+                                {{-- <th style="text-align: center;"><input type="checkbox" id="selectAll"></th> --}}
+                                {{-- <th style="text-align: center;">Credits Required</th>
+                                <th style="text-align: center;">Program Ministry Code</th>
+                                <th style="text-align: center;">Program Mode</th> --}}
                             </tr>
                         </thead>
-                        {{-- <tbody id="majors-table-body">
-                        </tbody> --}}
 
+                        <tbody id="tableBody">
 
+                            @php $i = 1; @endphp
+                            @foreach ($majors as $major)
 
-                        @if (isset($majors) && $majors->isNotEmpty())
-                            @php  $i = 1;   @endphp
-                        @foreach ($majors as $major)
-                        <tbody>
-    <tr>
-        {{-- <td style="text-align: center;">
-            <input type="checkbox" class="select-checkbox" data-id="{{ $major->major_id }}">
-        </td> --}}
-        <td>{{ $i++ }}</td>
-        <td style="text-align: center;">{{ $major->major_name_en }}</td>
-        <td style="text-align: center;">{{ $major->major_name_ar }}</td>
-        <td style="text-align: center;">{{ $major->major_abbreviation }}</td>
-        {{-- <td style="text-align: center;">{{ $major->credits_required }}</td>
-        <td style="text-align: center;">{{ $major->major_ministry_code }}</td>
-        <td style="text-align: center;">{{ $major->major_mode }}</td> --}}
-        <td style="text-align: center;">{{ $major->degree_type }}</td>
-        <td style="text-align: center;">
-            {{ $major->faculty->faculty_name_en ?? "Faculty data is soft deleted." }}
-        </td>
-        <td style="text-align: center;">{{ $major->number_of_semesters }}</td>
-        <td style="text-align: center;">{{ $major->program_duration }}</td>
-        <td style="text-align: center;">
-            <div class="d-flex gap-1">
-                <button class="btn btn-sm" onclick="Major_data({{ json_encode($major) }})" data-bs-toggle="modal" data-bs-target="#Editprogram">
-                    <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
-                </button>
+                        <tr>
+                            <td style="text-align: center;">{{ $i++ }}</td>
+                            <td style="text-align: center;">{{ $major->major_name_en }}</td>
+                            <td style="text-align: center;">{{ $major->major_name_ar }}</td>
+                            <td style="text-align: center;">{{ $major->major_abbreviation }}</td>
+                            <td style="text-align: center;">{{ $major->degree_type }}</td>
+                            <td style="text-align: center;">{{ $major->faculty->faculty_name_en ?? "Faculty data is soft deleted." }}</td>
+                            <td style="text-align: center;">{{ $major->number_of_semesters }}</td>
+                            <td style="text-align: center;">{{ $major->program_duration }}</td>
+                            <td style="text-align: center;"> <div class="d-flex gap-1"><button class="btn btn-sm" onclick="Major_data({{ json_encode($major) }})" data-bs-toggle="modal" data-bs-target="#Editprogram"><img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit"> </button> <a href="{{ route('admin.academic.major.destroy', $major->major_id) }}" onclick="return confirm('Are you sure you want to delete this major?')" class="btn btn-sm"><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete"></a></div></td>
+                            {{-- <td style="text-align: center;"><input type="checkbox" class="select-checkbox" data-id="{{ $major->major_id }}"></td> --}}
+                            {{-- <td style="text-align: center;">{{ $major->credits_required }}</td>
+                            <td style="text-align: center;">{{ $major->major_ministry_code }}</td>
+                            <td style="text-align: center;">{{ $major->major_mode }}</td> --}}
+                        </tr>
 
-                <a href="{{ route('admin.academic.major.destroy', $major->major_id) }}" onclick="return confirm('Are you sure you want to delete this major?')" class="btn btn-sm"><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete"></a>
-
-                {{-- <button class="btn btn-sm delete-major" data-id="{{ $major->major_id }}">
-                    <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete">
-                </button> --}}
-            </div>
-        </td>
-    </tr>
-@endforeach
-                        @else
-                            <tr>
-                                <td colspan="12" style="text-align: center;">No Majors available</td>
-                            </tr>
-                        @endif
-                        </tbody>
+                        @endforeach
+                    </tbody>
 
                     </table>
                 </div>
@@ -262,7 +237,7 @@
                                     @error('major_name_en')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                <div class="invalid-feedback">Please enter the Program Name In English.</div>
+                                <div class="invalid-feedback">Please enter the Major Name In English.</div>
                             </div>
                             <div class="col-md-6">
                                 <label for="major_name_ar" class="form-label">Name In Arabic </label>
@@ -271,7 +246,7 @@
                                     @error('major_name_ar')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                <div class="invalid-feedback">Please enter the Program Name In Arabic.</div>
+                                <div class="invalid-feedback">Please enter the Major Name In Arabic.</div>
                             </div>
                             <div class="col-md-6">
                                 <label for="abbreviation" class="form-label">Abbreviation</label>
@@ -280,7 +255,7 @@
                                     @error('major_abbreviation')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                <div class="invalid-feedback">Please enter the Program Abbreviation.</div>
+                                <div class="invalid-feedback">Please enter the Major Abbreviation.</div>
                             </div>
                         </div>
                         <div class="row mb-3">

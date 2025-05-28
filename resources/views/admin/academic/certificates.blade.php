@@ -25,7 +25,7 @@
     </div>
     <div class="card-body">
         <table class="table table-bordered table-striped">
-                 <thead>
+                <thead>
                 <tr>
                     <th style="text-align: center;">ID</th>
                     <th style="text-align: center;">Name (Arabic)</th>

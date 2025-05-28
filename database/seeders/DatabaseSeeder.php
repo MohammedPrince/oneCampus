@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             BranchSeeder::class,
             BatchSeeder::class
 
-          
+
 
         ]);
     }

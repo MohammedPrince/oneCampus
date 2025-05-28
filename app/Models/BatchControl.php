@@ -24,6 +24,7 @@ class BatchControl extends Model
         'max_sem',
         'graduate_status',
     ];
+    
     public function branch()
     {
         return $this->belongsTo(Branch::class,'branch_id');

@@ -26,15 +26,15 @@
                     <th>ID</th>
                     <th>Full Name (Arabic)</th>
                     <th>Full Name (English)</th>
-                    {{-- <th>Personal Email</th> --}}
                     <th>Email</th>
-                    {{-- <th>Phone Number</th> --}}
                     <th>Phone</th>
                     <th>Department</th>
                     <th>Role</th>
+                    <th>Actions</th>
+                    {{-- <th>Personal Email</th> --}}
+                    {{-- <th>Phone Number</th> --}}
                     {{-- <th>CV</th> --}}
                     {{-- <th>Certificate</th> --}}
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,9 +45,7 @@
                         <td>{{ $i++ }}</td>
                         <td>{{ $employee->full_name_ar }} </td>
                         <td>{{ $employee->full_name_en }}</td>
-                        {{-- <td>{{ $employee->personal_email }}</td> --}}
                         <td>{{ $employee->corporate_email }}</td>
-                        {{-- <td>{{ $employee->phone_number }}</td> --}}
                         <td>{{ $employee->profile->whatsapp_number ?? '' }}</td>
                         <td>{{ $employee->department->faculty_name_en ?? 'null' }}</td>
                         <td>
@@ -57,6 +55,8 @@
                               {{ 'No Role Assigned' }}
                           @endif
                       </td>
+                        {{-- <td>{{ $employee->personal_email }}</td> --}}
+                        {{-- <td>{{ $employee->phone_number }}</td> --}}
                       {{-- <td>
                             @if($employee->profile->cv ?? '')
                                 <a href="{{ asset('storage/' . $employee->profile->cv) }}" target="_blank">View CV</a>

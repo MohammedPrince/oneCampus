@@ -42,28 +42,30 @@ class MajorController extends Controller
 
 
     // Store a new major
+    // public function store(StoreMajorRequest $request)
+    // {
+
+    //     $major = $this->majorService->createMajor($request->validated());
+    //     if($major == "exists"){
+    //     return redirect()->route('admin.academic.major')->with('exists', 'Majorwith the same details already exists.');
+    //     }
+    //     return redirect()->route('admin.academic.major')->with('success', 'Major added successfully!');        
+    // }
+
     public function store(StoreMajorRequest $request)
-    {
+{
+    $result = $this->majorService->createMajor($request->validated());
 
-        $data = $request->validated();
-        $this->majorService->createMajor($data);
-        return redirect()->route('admin.academic.major')->with('success', 'Major added successfully!');
-
-        // try {
-        //     // Call the service method to create the major
-        //     $major = $this->majorService->createMajor($request->validated());
-
-        //     return response()->json([
-        //         'message' => 'Major added successfully!',
-        //         'major' => $major
-        //     ], 201);
-
-        // } catch (\Exception $e) {
-        //     return response()->json([
-        //         'message' => 'Error creating major: ' . $e->getMessage()
-        //     ], 500);
-        // }
+    if ($result == "exists") {
+        return redirect()->route('admin.academic.major')
+            ->with('exist', 'Major with the same details already exists.');
     }
+
+    return redirect()->route('admin.academic.major')
+        ->with('success', 'Major added successfully!');
+}
+
+
 
     // Show the edit form for a specific major
     public function edit($id)

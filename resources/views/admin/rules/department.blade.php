@@ -43,64 +43,22 @@
           <th style="text-align: center;">Name (Arabic)</th>
           <th style="text-align: center;">Abbreviation</th>
           <th style="text-align: center;">Branch</th>
-          {{-- <th style="text-align: center;">Status</th> --}}
           <th style="text-align: center;">Action</th>
+          {{-- <th style="text-align: center;">Status</th> --}}
         </tr>
       </thead>
+                        @php $i = 1; @endphp
+
+
       <tbody id="tableBody">
-        @if($faculties->isEmpty())
-        <tr>
-          <td colspan="6" style="text-align: center;">No data available</td>
-        </tr>
-        @endif
-        {{-- Loop through faculties --}}
-        @php
-          $i = 1;
-        @endphp
         @foreach($faculties as $faculty)
         <tr>
-          <td style="text-align: center;">{{ $i++   }}</td>
+          <td style="text-align: center;">{{ $i++ }}</td>
           <td style="text-align: center;">{{ $faculty->faculty_name_en }}</td>
           <td style="text-align: center;">{{ $faculty->faculty_name_ar }}</td>
           <td style="text-align: center;">{{ $faculty->abbreviation }}</td>
           <td style="text-align: center;">{{ $faculty->branch->branch_name_ar ?? 'Null' }}</td>
-
-          <td style="text-align: center;">
-            <button class="edit-btn"
-              data-bs-toggle="modal"
-              data-bs-target="#EditFaculty"
-              onclick="Faculty_data({{ json_encode($faculty) }})"
-              {{-- data-id="{{ $faculty->faculty_id }}"
-              data-en="{{ $faculty->faculty_name_en }}"
-              data-ar="{{ $faculty->faculty_name_ar }}"
-              data-abbr="{{ $faculty->abbreviation }}"
-              data-branch="{{ $faculty->branch->branch_id ?? '' }}" --}}
-              style="border: none; background-color: transparent;">
-              <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
-            </button>
-
-
-            <a href="{{ route('admin.rule.departments.destroy',  $faculty->faculty_id) }}"><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" onclick="return confirm('Are you sure you want to delete this faculty?')" style="border: none; background-color: transparent;" class="action-icon" alt="Delete"></a>
-            {{-- delete --}}
-
-
-            {{-- <button type="button"
-              class="delete-faculty-btn"
-              data-id="{{ $faculty->faculty_id }}"
-              style="border: none; background-color: transparent;">
-              <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete" />
-
-    {{-- <button type="button"
-        class="delete-faculty-btn"
-        data-id="{{ $faculty->faculty_id }}"
-        style="border: none; background-color: transparent;">
-    <img src="{{ asset('assets/icons/trash-fill (1).svg') }}" class="action-icon" alt="Delete" />
-</button> --}}
-
-              </form>
-            </td>
-
-          </td>
+          <td style="text-align: center;"><button class="edit-btn"data-bs-toggle="modal"data-bs-target="#EditFaculty"onclick="Faculty_data({{ json_encode($faculty) }})"style="border: none; background-color: transparent;"><img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit"></button> <a href="{{ route('admin.rule.departments.destroy',  $faculty->faculty_id) }}"><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" onclick="return confirm('Are you sure you want to delete this faculty?')" style="border: none; background-color: transparent;" class="action-icon" alt="Delete"></a></td>
         </tr>
         @endforeach
       </tbody>
@@ -125,17 +83,17 @@
               <input type="text" class="form-control @error('faculty_name_en') is-invalid @enderror"  name="faculty_name_en" required>
               @error('faculty_name_en')
                 <div class="invalid-feedback">{{ $message }}</div>
-
               @enderror
               <div class="invalid-feedback">Please enter the Faculty (English).</div>
             </div>
+
+            
             <div class="col-md-6">
               <label class="form-label">Faculty Name (Arabic)</label>
               <input type="text"  class="form-control @error('faculty_name_ar') is-invalid @enderror" name="faculty_name_ar" required>
               @error('faculty_name_ar')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-
              <div class="invalid-feedback">Please enter the Faculty (Arabic).</div>
             </div>
           </div>

@@ -22,7 +22,18 @@ class BranchRepository
 
     public function create(array $data): mixed
     {
-        return Branch::createBranch($data);
+
+            $exists = Branch::where('branch_name_ar', $data['branch_name_ar'])
+            ->where('branch_name_en', $data['branch_name_en'])
+            ->exists();
+
+        if ($exists) {
+            return "exists";
+        } else {
+            Branch::create($data);
+            return "success";
+        }
+    
     }
 
     public function update(int $id, array $data)

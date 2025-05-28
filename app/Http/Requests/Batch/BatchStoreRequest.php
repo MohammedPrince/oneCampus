@@ -12,7 +12,7 @@ class BatchStoreRequest extends FormRequest
     {
         return [
             
- 
+
             'batch' => "required|string|max:255",
             'branch_id' => 'required|integer',
             'faculty_id' => 'required|integer',
@@ -22,7 +22,6 @@ class BatchStoreRequest extends FormRequest
             'graduate_status' => 'required|in:1,2',
         ];
     }
+
 }
-// 'max_sem' => 'required|numeric|between:1,10',
-//             'active_sem' => 'required|numeric|between:1,10',
 

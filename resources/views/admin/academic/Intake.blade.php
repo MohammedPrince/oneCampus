@@ -20,14 +20,10 @@
 
 <div class="row">
     @include('layouts.alert')
-
     <div class="col-4">
         <h2>Intake:</h2>
-
     </div>
-
     <div class="col-4">
-
         <button style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#AddIntakeModal">
             <img src="{{asset('assets/icons/add.svg')}}" alt="add">
         </button>
@@ -35,38 +31,29 @@
 </div>
 
 <div class="container my-4">
-            <div id="alertArea" class="my-2"></div>
-
+        <div id="alertArea" class="my-2"></div>
     <!-- Table for displaying intakes -->
     <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
-
-                    <th style="text-align: center;">Id</th>
+                    <th style="text-align: center;">ID</th>
                     <th style="text-align: center;">Intake Description (English)</th>
                     <th style="text-align: center;">Intake Description (Arabic)</th>
                     <th style="text-align: center;">Action</th>
                 </tr>
             </thead>
+
             <tbody id="tableBody">
+                            @php $i = 1; @endphp
+
                 @foreach ($intakes as $intake)
                     <tr id="intakeRow-{{ $intake->intake_id  }}">
-
-                        <td style="text-align: center;">{{ $intake->intake_id  }}</td>
+                        <td style="text-align: center;">{{ $i++ }}</td>
                         <td style="text-align: center;">{{ $intake->intake_name_en }}</td>
                         <td style="text-align: center;">{{ $intake->intake_name_ar }}</td>
-                        <td style="text-align: center;">
-                            <button type="button" class="editIntake" onclick="Intake_data({{ json_encode($intake) }})" style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#EditIntakeModal">
-                                <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
-                            </button>
-
-                            {{-- academic/intake/{id} --}}
-
-                            <a href="{{ route('admin.academic.intake.destroy', $intake->intake_id) }}"><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" onclick="return confirm('Are you sure you want to delete this Intake?')" class="action-icon" alt="Delete"></a>
-
-
-                            </form>
+                        <td style="text-align: center;"><button type="button" class="editIntake" onclick="Intake_data({{ json_encode($intake) }})" style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#EditIntakeModal"><img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit"></button><a href="{{ route('admin.academic.intake.destroy', $intake->intake_id) }}"><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" onclick="return confirm('Are you sure you want to delete this Intake?')" class="action-icon" alt="Delete"></a>
+                    
                         </td>
 
                     </tr>
@@ -101,6 +88,8 @@
                             @enderror
                             <div class="invalid-feedback">Please enter the Intake (English).</div>
                         </div>
+
+                        
                         <div class="col-md-6">
                             <label for="intakeNameAr" class="form-label">Intake (Arabic)</label>
                             <input type="text" class="form-control @error('intake_name_ar') is-invalid @enderror" id="intakeNameAr" name="intake_name_ar" required>
@@ -111,9 +100,7 @@
                         </div>
                     </div>
                     <center>
-
-                            <button type="submit" class="btn btn-outline" style="margin: 1px; width: 15vw;">Submit</button>
-
+                        <button type="submit" class="btn btn-outline" style="margin: 1px; width: 15vw;">Submit</button>
                     </center>
                 </form>
             </div>
@@ -132,7 +119,11 @@
             <div class="modal-body">
                 {{-- academic/intake/update --}}
                 <form  action="{{ route('admin.academic.intake.update') }}" method="POST">
-
+   {{-- @if(session('exist'))
+        <div class="alert alert-warning">
+            {{ session('exist') }}
+        </div>
+    @endif --}}
                 {{-- <form class="row needs-validation" novalidate id="editIntakeForm"> --}}
                   @csrf
                   {{-- @method('PUT') --}}

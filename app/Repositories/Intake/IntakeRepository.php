@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Repositories\Intake;
+use App\Models\IntakeControl;
+
+
+
 
 use App\Models\Intake;
 
@@ -28,7 +32,23 @@ class IntakeRepository
      */
     public function create(array $data)
     {
-        return Intake::create($data);
+
+
+// dd($data);
+        // Check for duplicate first
+$exists = Intake::where('intake_name_en', $data['intake_name_en'])
+    ->where('intake_name_ar', $data['intake_name_ar'])
+    ->exists();
+
+    if ($exists) {
+        return "exists";
+    }else{
+        // Create intake only if not exists
+        Intake::create($data);
+        return "success";
+
+    }
+
     }
 
     /**

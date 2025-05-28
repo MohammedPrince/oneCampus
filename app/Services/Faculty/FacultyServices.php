@@ -27,6 +27,7 @@ class FacultyServices
     public function update(int $id, array $data)
     {
         return $this->facultyRepo->update($id, $data);
+   
     }
 
     public function update_data(array $data)
