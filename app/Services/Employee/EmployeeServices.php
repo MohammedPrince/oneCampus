@@ -37,7 +37,19 @@ class EmployeeServices
 
     public function updateEmployee(array $data, $id)
     {
-        return $this->employeeRepo->update($data, $id);
+            $employee = EmployeeMainInfo::findOrFail($id);
+    $employee->update($data);
+
+    if (isset($data['cv']) || isset($data['certificates'])) {
+        $employee->profile()->update([
+            'cv' => $data['cv'] ?? $employee->profile->cv,
+            'certificates' => $data['certificates'] ?? $employee->profile->certificates,
+        ]);
+    }
+
+    return $employee->fresh();
+
+        // return $this->employeeRepo->update($data, $id);
     }
 
     public function deleteEmployee($id)

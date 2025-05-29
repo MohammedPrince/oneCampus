@@ -55,22 +55,7 @@
                               {{ 'No Role Assigned' }}
                           @endif
                       </td>
-                        {{-- <td>{{ $employee->personal_email }}</td> --}}
-                        {{-- <td>{{ $employee->phone_number }}</td> --}}
-                      {{-- <td>
-                            @if($employee->profile->cv ?? '')
-                                <a href="{{ asset('storage/' . $employee->profile->cv) }}" target="_blank">View CV</a>
-                            @else
-                                No CV uploaded
-                            @endif
-                        </td> --}}
-                        {{-- <td>
-                            @if($employee->profile->certificates ?? '')
-                                <a href="{{ asset('storage/' . $employee->profile->certificates) }}" target="_blank">View Certificate</a>
-                            @else
-                                No Certificate uploaded
-                            @endif
-                        </td> --}}
+
 
                         <td>
                             <div class="d-flex gap-1">
@@ -96,7 +81,7 @@
                                     data-certificate="{{ $employee->profile->certificates ?? '' }}">
                                     <img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit">
                             </button>
-                                             <!-- Show Button -->
+                                  <!-- Show Button -->
                  <a href="{{ route('user.show', $employee->employee_id) }}"  style="border: none; background-color: transparent;"><img src="{{ asset('assets/icons/eye.svg') }}" class="action-icon" alt="Edit">
                  </a>
                   <!-- Delete Form -->
@@ -180,9 +165,7 @@
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <label for="editPhoneNumber" class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control @error('phone_number') is-invalid @enderror"
-       id="editPhoneNumber" name="phone_number"
-       pattern="\d*" inputmode="numeric" required>
+                    <input type="tel" class="form-control @error('phone_number') is-invalid @enderror" id="editPhoneNumber" name="phone_number" pattern="\d*" inputmode="numeric" required>
 
                       @error('phone_number')
                                 <div class="invalid-feedback">{{ $message }}</div>

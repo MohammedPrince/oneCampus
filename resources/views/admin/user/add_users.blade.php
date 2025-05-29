@@ -1,92 +1,75 @@
 @extends('layouts.master')
 
 @section('content')
-     <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
+    <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
         <div class="container-fluid">
-          <div class="navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav justify-content-center w-100">
-                <a class="nav-link {{ request()->is('admin/user/list') ? 'active' : ''}}" href="{{route('user.list')}}" id="usersLink" aria-current="page">Users</a>
-                <a class="nav-link {{ request()->is('admin/user/add') ? 'active' : ''}}" href="{{route('user.add')}}" id="addUsersLink">Add Users</a>
-                <a class="nav-link {{ request()->is('admin/user/reset') ? 'active' : ''}}" href="{{route('user.reset')}}" id="resetPasswordsLink">Reset Passwords</a>
+            <div class="navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav justify-content-center w-100">
+                    <a class="nav-link {{ request()->is('admin/user/list') ? 'active' : '' }}" href="{{ route('user.list') }}"
+                        id="usersLink" aria-current="page">Users</a>
+                    <a class="nav-link {{ request()->is('admin/user/add') ? 'active' : '' }}" href="{{ route('user.add') }}"
+                        id="addUsersLink">Add Users</a>
+                    <a class="nav-link {{ request()->is('admin/user/reset') ? 'active' : '' }}"
+                        href="{{ route('user.reset') }}" id="resetPasswordsLink">Reset Passwords</a>
+                </div>
             </div>
-          </div>
         </div>
-    </nav>  
+    </nav>
 
-    {{-- <div class="row nav-tabs d-flex justify-content-end" id="userOptionsTab" role="tablist" style="border: none; width: 30vw;">
-        <a class="nav-links active" id="single-user-tab" href="{{ route('user.add') }}" role="tab"
-          aria-controls="single-user" aria-selected="true">Add Users</a>
-      
-        <a class="nav-links" id="bulk-user-tab" href="{{ route('user.reset') }}" role="tab"
-          aria-controls="bulk-user" aria-selected="false">Reset Passwords</a>
-      </div> --}}
-      
-      {{-- <style>
-      @media screen and (min-width: 768px) {
-        #userOptionsTab {
-          margin-left: auto;
-          margin-right: 20px;
-        }
-      }
-      
-      @media screen and (max-width: 767px) {
-        #userOptionsTab {
-          width: 100% !important;
-          margin: 10px 0;
-          justify-content: center !important;
-        }
-      }
-      </style> --}}
-
-    
     <div class="row nav-tabs" id="userOptionsTab" role="tablist" style="border: none; width: 30vw;">
         <a class="nav-links active" id="single-user-tab" data-bs-toggle="tab" href="#single-user" role="tab"
-          aria-controls="single-user" aria-selected="true">Single User</a>
-  
+            aria-controls="single-user" aria-selected="true">Single User</a>
+
         <a class="nav-links" id="bulk-user-tab" data-bs-toggle="tab" href="#bulk-user" role="tab"
-          aria-controls="bulk-user" aria-selected="false">Add Bulk</a>
-    </div>  
+            aria-controls="bulk-user" aria-selected="false">Add Bulk</a>
+    </div>
 
     <div class="tab-content mt-4">
         <!-- Single User Form -->
         <div class="tab-pane fade show active" id="single-user" role="tabpanel" aria-labelledby="single-user-tab">
             <div class="container">
                 @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <h3 class="mb-4">Add New Employee</h3>
-                <form method="POST" action="{{ route('employee.store') }}" class="row needs-validation" enctype="multipart/form-data" novalidate>
+                <form method="POST" action="{{ route('employee.store') }}" class="row needs-validation"
+                    enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="row mb-3">
-                      <div class="col-md-6">
-                          <label for="fullNameArabic" class="form-label">Full Name (Arabic)</label>
-                          <input value="{{ old ('full_name_ar') }}" type="text" class="form-control" id="" name="full_name_ar" required
-                                pattern="[\u0600-\u06FF\s]+" title="Please enter only Arabic letters." dir="rtl">
-                            <div class="invalid-feedback">.الرجاء إدخال الاسم كامل باللغة العربية</div>
-                      </div>      
                         <div class="col-md-6">
-                            <label for="fullNameEnglish" class="form-label">Full Name (English)</label>
-                           <input  value="{{ old ('full_name_en') }}" type="text" class="form-control" id="full_name_en" name="full_name_en" required
-                                pattern="[A-Za-z\s]+" title="Please enter only English letters.">
+                            <label for="fullNameArabic" class="form-label">Full Name (English)</label>
+                            <input value="{{ old('full_name_en') }}" type="text" class="form-control" id="full_name_en"
+                                name="full_name_en" required pattern="[A-Za-z\s]+"
+                                title="Please enter only English letters." placeholder="Ghazi Abdalla Omer Mustafa">
                             <div class="invalid-feedback">Please enter the full name in English.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="fullNameEnglish" class="form-label">Full Name (Arabic)</label>
+                            <input value="{{ old('full_name_ar') }}" type="text" class="form-control" id="full_name_ar" name="full_name_ar" required pattern="[\u0600-\u06FF\s]+"
+                                title="Please enter only Arabic letters." dir="rtl" placeholder="غازي عبدالله عمر مصطفي ">
+                            <div class="invalid-feedback">.الرجاء إدخال الاسم كامل باللغة العربية</div>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="personalEmail" class="form-label">Personal Email</label>
-                            <input  value="{{ old ('personal_email') }}" type="email" class="form-control" id="personal_email" name="personal_email" required>
+                            <input value="{{ old('personal_email') }}" type="email" class="form-control"
+                                id="personal_email" name="personal_email" placeholder = "ghazi@mail.com" required>
                             <div class="invalid-feedback">Please enter a valid personal email.</div>
                         </div>
+
                         <div class="col-md-6">
                             <label for="corporateEmail" class="form-label">Corporate Email</label>
-                            <input value="{{ old ('corporate_email') }}" type="email" class="form-control" id="corporate_email" name="corporate_email" required>
+                            <input value="{{ old('corporate_email') }}" type="email" class="form-control"
+                                id="corporate_email" name="corporate_email" placeholder = "ghazi@fu.edu.sd" required>
                             <div class="invalid-feedback">Please enter a valid corporate email.</div>
                         </div>
                     </div>
@@ -94,14 +77,15 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="phoneNumber" class="form-label">Phone Number</label>
-                           <input  value="{{ old ('phone_number') }}" type="tel" class="form-control" id="phone_number" name="phone_number" required
-                               >
+                            <input value="{{ old('phone_number') }}" type="tel" class="form-control" id="phone_number"
+                                name="phone_number" placeholder = "0123456789" required>
                             <div class="invalid-feedback">Please enter a valid phone number.</div>
                         </div>
+
                         <div class="col-md-6">
                             <label for="whatsAppNumber" class="form-label">WhatsApp Number</label>
-                            <input  value="{{ old ('whatsapp_number') }}" type="tel" class="form-control" id="whatsapp_number" name="whatsapp_number"
-                                required >
+                            <input value="{{ old('whatsapp_number') }}" type="tel" class="form-control"
+                                id="whatsapp_number" name="whatsapp_number" placeholder = "0123456789" required>
                             <div class="invalid-feedback">Please enter a valid WhatsApp number.</div>
                         </div>
                     </div>
@@ -109,29 +93,30 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="Faculty" class="form-label">Faculty</label>
-                            <select class="form-select"  id="dep" name="department_id" required style="width: 30vw;">
+                            <select class="form-select" id="dep" name="department_id" required style="width: 31vw;">
                                 <option value="">Select your Faculty</option>
-                                 @if(isset($faculties) && $faculties->isNotEmpty())
-                                @foreach ($faculties as $data )
-                                <option value="{{$data->faculty_id}}">{{$data->faculty_name_en}}</option>
-                                @endforeach
+                                @if (isset($faculties) && $faculties->isNotEmpty())
+                                    @foreach ($faculties as $data)
+                                        <option value="{{ $data->faculty_id }}">{{ $data->faculty_name_en }}</option>
+                                    @endforeach
                                 @else
                                     <option>No Faculty available</option>
-                                @endif       
+                                @endif
                             </select>
                             <div class="invalid-feedback">Please select a Faculty.</div>
                         </div>
+                        
                         <div class="col-md-6">
                             <label for="role" class="form-label">Role</label>
-                            <select class="form-select" id="role" name="role" required style="width: 30vw;">
+                            <select class="form-select" id="role" name="role" required style="width: 31vw;">
                                 <option value="">Select your role</option>
-                                @if(isset($roles) && $roles->isNotEmpty())
+                                @if (isset($roles) && $roles->isNotEmpty())
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->id }}">{{ $role->name }}</option>
                                     @endforeach
                                 @else
                                     <option>No roles available</option>
-                                @endif                    
+                                @endif
                             </select>
                             <div class="invalid-feedback">Please select a role.</div>
                         </div>
@@ -139,50 +124,59 @@
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label   for="birthDate" class="form-label">Birth Date</label>
-                            <input value="{{ old ('birth_date') }}" type="date" class="form-control" id="birth_date" name="birth_date" required>
+                            <label for="birthDate" class="form-label">Birth Date</label>
+                            <input value="{{ old('birth_date') }}" type="date" class="form-control" id="birth_date"
+                                name="birth_date" required>
                             <div class="invalid-feedback">Please select a birth date.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="recruitmentDate" class="form-label">Recruitment Date</label>
-                            <input value="{{ old ('hire_date') }}" type="date" class="form-control" id="hire_date" name="hire_date" required>
+                            <input value="{{ old('hire_date') }}" type="date" class="form-control" id="hire_date"
+                                name="hire_date" required>
                             <div class="invalid-feedback">Please select a recruitment date.</div>
                         </div>
                     </div>
+                    
                     <div class="row mb-3">
-                        <div class="col-md-4">
-                            <label for="identificationType" class="form-label">Identification Type</label>
-                            <select class="form-control" id="identification_type" name="identification_type" required>
-                                <option value="NationalID"selected>National ID</option>
+                        <div class="col-md-6">
+                            <label for="identification_type" class="form-label">Identification Type</label>
+                            <select class="form-control" id="identification_type" name="identification_type"  required>
+                                <option value="">Select type...</option>
                                 <option value="Passport">Passport</option>
+                                <option value="NationalID">National ID</option>
                                 <option value="Driving License">Driving License</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <div class="invalid-feedback">Please select an identification type.</div>     </div>
-                        <div class="col-md-4">
-                            <label for="identificationNumber" class="form-label" id="identificationLabel">National ID</label>
-                            <input type="text" class="form-control" id="identification_id" name="identification_id" required>
-                            <div class="invalid-feedback">Please enter an identification number.</div>  </div>
+                            <div class="invalid-feedback">Please select an identification type.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="identificationNumber" class="form-label" id="identificationLabel">Identification ID</label>
+                            <input type="text" class="form-control" id="identification_id" name="identification_id"
+                                required>
+                            <div class="invalid-feedback">Please enter an identification number.</div>
+                        </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="branch" class="form-label">Branch</label>
                             <select class="form-select" id="branch_id" name="branch_id" required style="width: 30vw;">
-                            <option value="">Select Branch</option>
-                           @if(isset($branches) && $branches->isNotEmpty())
-                            @foreach($branches as $branch)
-                            <option value="{{ $branch->branch_id }}">{{ $branch->branch_name_en }}</option>
-                            @endforeach
-                            @else
-                                <option>No Branch available</option>
-                            @endif       
-                        </select>                            
-                        <div class="invalid-feedback">Please enter the branch.</div>
+                                <option value="">Select Branch</option>
+                                @if (isset($branches) && $branches->isNotEmpty())
+                                    @foreach ($branches as $branch)
+                                        <option value="{{ $branch->branch_id }}">{{ $branch->branch_name_en }}</option>
+                                    @endforeach
+                                @else
+                                    <option>No Branch available</option>
+                                @endif
+                            </select>
+                            <div class="invalid-feedback">Please enter the branch.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="biometric" class="form-label">Biometric</label>
-                            <input value="{{ old ('biometric') }}" type="text" class="form-control" id="biometric" name="biometric" required>
+                            <input value="{{ old('biometric') }}" type="text" class="form-control" id="biometric"
+                                name="biometric" required>
                             <div class="invalid-feedback">Please enter the biometric details.</div>
                         </div>
                     </div>
@@ -197,27 +191,30 @@
                             </select>
                             <div class="invalid-feedback">Please select a gender.</div>
                         </div>
+                        
                         <div class="col-md-6">
                             <label for="nationality" class="form-label">Nationality</label>
-                            <input type="text" class="form-control" id="nationality" name="nationality" required>
+                            <input type="text" class="form-control" id="nationality" name="nationality" placeholder = "Sudanees"required>
                             <div class="invalid-feedback">Please enter a nationality.</div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="cv" class="form-label">CV</label>
-                            <input value="{{ old ('cv') }}" type="file" class="form-control" id="cv" name="cv" required>
+                            <input value="{{ old('cv') }}" type="file" class="form-control" id="cv"
+                                name="cv" required>
                             <div class="invalid-feedback">Please upload a CV.</div>
                         </div>
                         <div class="col-md-6">
-                            <label value="{{ old ('certificates') }}" for="certificates" class="form-label">Certificates</label>
+                            <label value="{{ old('certificates') }}" for="certificates"
+                                class="form-label">Certificates</label>
                             <input type="file" class="form-control" id="certificates" name="certificates" required>
                             <div class="invalid-feedback">Please upload certificates.</div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-outline w-25">Submit</button>
-                            </div>
+                        <button type="submit" class="btn btn-outline w-25">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -231,7 +228,8 @@
                     @csrf
                     <div class="mb-3">
                         <label for="bulkUploadFile" class="form-label">Upload your CSV here...</label>
-                        <input type="file" class="form-control w-50" id="bulkUploadFile" name="bulk_file" style="text-align: center; vertical-align: middle; padding-bottom: 4vh;" required>
+                        <input type="file" class="form-control w-50" id="bulkUploadFile" name="bulk_file"
+                            style="text-align: center; vertical-align: middle; padding-bottom: 4vh;" required>
                         <div class="invalid-feedback">Please upload a CSV file.</div>
                     </div>
 
@@ -239,8 +237,7 @@
                 </form>
             </div>
         </div>
-    </div>  
-    
+    </div>
+
 
 @endsection
-

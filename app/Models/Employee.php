@@ -49,8 +49,10 @@ class Employee extends Model
     public static function createEmployeeData(array $validatedData)
     {
         // Initialize paths as null in case no file is uploaded
-        $cvPath = null;
-        $certificatesPath = null;
+            // Use the precomputed paths from the controller
+        $cvPath = $validatedData['cv'] ?? null;
+        $certificatesPath = $validatedData['certificates'] ?? null;
+
 
         // Check if 'cv' exists and is a valid file upload
         if (isset($validatedData['cv']) && $validatedData['cv'] instanceof \Illuminate\Http\UploadedFile && $validatedData['cv']->isValid()) {

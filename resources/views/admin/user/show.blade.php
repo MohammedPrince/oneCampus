@@ -82,10 +82,28 @@
         <td>National ID</td>
         <td>{{ $employee->profile->identification_id  }}</td>
     </tr>
-        {{-- <tr>
-        <td>Branch</td>
-        <td>{{ $employee->branch_id }}</td>
-    </tr> --}}
+        <tr>
+        <td>cv</td>
+        <td>
+        
+        <a href="{{ asset('storage/' . $employee->profile->cv) }}" target="_blank">
+    View CV (PDF)
+</a>
+      
+        </td>
+    </tr>
+
+        <tr>
+        <td>Certificate</td>
+        <td>
+    
+          <a href="{{ asset('storage/' . $employee->profile->certificates) }}" target="_blank">
+    View CV (PDF)
+</a>
+     
+        </td>
+    </tr>
+
         <tr>
         <td>Biometric</td>
         <td>{{ $employee->profile->biometric }}</td>

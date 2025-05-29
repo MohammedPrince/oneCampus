@@ -40,39 +40,64 @@ class EmployeeController extends Controller
         return view('admin.user.list', compact('employees','roles'));
     }
 
-    public function store(EmployeeRequest $request)
-    {
-        $data = $request->validated();
-        $this->employeeService->createEmployee($data);
-        return redirect()->route('user.list')->with('success', 'Employee added successfully!');
+public function store(EmployeeRequest $request)
+{
+    $data = $request->validated();
+
+    $employeeName = strtolower(str_replace(' ', '_', $data['full_name_en']));
+
+    // Cv code
+    if ($request->hasFile('cv')) {
+        $cvFile = $request->file('cv');
+        $cvFileName = $employeeName . '_cv.' . $cvFile->getClientOriginalExtension();
+        $data['cv'] = $cvFile->storeAs('employee_cvs', $cvFileName, 'public');
     }
 
-    public function edit($id)
-    {
-        $employee = $this->employeeService->getEmployee($id);
-        return response()->json($employee);
+    //  certificate code
+    if ($request->hasFile('certificates')) {
+        $certificateFile = $request->file('certificates');
+        $certificateFileName = $employeeName . '_certificate.' . $certificateFile->getClientOriginalExtension();
+        $data['certificates'] = $certificateFile->storeAs('employee_certificates', $certificateFileName, 'public');
     }
+
+    $this->employeeService->createEmployee($data);
+    
+    return redirect()->route(route: 'user.list')->with('success', 'Employee added successfully!');
+}
 
     public function update(UpdateEmployeeRequest $request)
     {
-
-
         $data = $request->validated();
         $id = $data['id'];
 
+        $employeeName = strtolower(str_replace(' ', '_', $data['full_name_en']));
 
-        // dd($data);
-        // if ($request->hasFile('cv')) {
-        //     $data['cv'] = $request->file('cv')->store('employee_cvs');
-        // }
+        if ($request->hasFile('cv')) {
+            $cvFile = $request->file('cv');
+            $cvFileName = $employeeName . '_cv.' . $cvFile->getClientOriginalExtension();
+            $data['cv'] = $cvFile->storeAs('employee_cvs', $cvFileName, 'public');
+        }
 
-        // if ($request->hasFile('certificates')) {
-        //     $data['certificates'] = $request->file('certificates')->store('employee_certificates');
-        // }
+        if ($request->hasFile('certificates')) {
+            $certificateFile = $request->file('certificates');
+            $certificateFileName = $employeeName . '_certificate.' . $certificateFile->getClientOriginalExtension();
+            $data['certificates'] = $certificateFile->storeAs('employee_certificates', $certificateFileName, 'public');
+        }
 
         $this->employeeService->updateEmployee($data, $id);
-        return redirect()->route('user.list')->with('success', 'Employee added successfully!');
+        
+        return redirect()->route('user.list')->with('success', 'Employee updated successfully!');
     }
+
+
+
+        public function edit($id)
+        {
+            $employee = $this->employeeService->getEmployee($id);
+            return response()->json($employee);
+        }
+
+
 
     public function destroy($id)
     {
