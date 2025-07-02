@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('tbl_faculty', function (Blueprint $table) {
             $table->id('faculty_id');
-            $table->string('faculty_name', 100);
-            $table->string('abbreviation', 10);
-            $table->string('faculty_name_ar',100 );
-            $table->foreignId('branch_id');
-            $table->tinyInteger('status')->default(1);
+            $table->string('faculty_name_en', 100); // Computer Science
+            $table->string('faculty_name_ar',100 ); // علوم الحاسوب
+            $table->string('abbreviation', 10); // CS
+            $table->foreignId('branch_id'); // Khartoum
+            $table->tinyInteger('status')->default(1); // 1 for active, 0 for inactive
             $table->timestamps();
             $table->softDeletes();
 

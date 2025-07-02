@@ -18,10 +18,20 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'role_id'=> 1
         ]);
 
         $this->call([
             RoleTableSeeder::class,
+            CountrySeeder::class,
+            FacultySeeder::class,
+            IntakeSeeder::class,
+            MajorSeeder::class,
+            BranchSeeder::class,
+            BatchSeeder::class
+
+
+
         ]);
     }
 }

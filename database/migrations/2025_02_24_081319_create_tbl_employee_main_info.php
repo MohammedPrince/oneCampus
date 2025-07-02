@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tbl_employee_main_info', function (Blueprint $table) {
             $table->id('employee_id');
+<<<<<<< HEAD
 
             $table->string('first_name', 30);
             $table->string('second_name', 30);
@@ -31,6 +32,26 @@ return new class extends Migration
             $table->integer('department_id');
             $table->integer('user_id');
             
+=======
+            $table->string('full_name_en');
+            $table->string('first_name', 30)->nullable();
+            $table->string('second_name', 30)->nullable();
+            $table->string('third_name', 30)->nullable();
+            $table->string('last_name', 30)->nullable();
+            $table->string('full_name_ar');
+            $table->string('first_name_ar', 30)->nullable();
+            $table->string('second_name_ar', 30)->nullable();
+            $table->string('third_name_ar', 30)->nullable();
+            $table->string('last_name_ar', 30)->nullable();
+            $table->integer('phone_number');
+            $table->string('employee_photo')->nullable();
+            $table->enum('status', ['Active', 'Inactive', 'Resigned'])->default('Active');
+            $table->string('corporate_email')->unique();
+            $table->string('personal_email', 191)->unique();
+            $table->foreignId('branch_id');
+            $table->integer('department_id');
+            $table->integer('user_id');
+>>>>>>> d1eb4034234ab8e531076a2c6ec2fb80ac5f32e0
             $table->timestamps();
             $table->softDeletes();
         });

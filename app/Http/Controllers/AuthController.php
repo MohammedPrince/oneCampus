@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-  public $test;
-  public function __construct(UserServices $interface)
-  {
-      $this->test = $interface;
-  }
+   protected $test;
+
+    public function __construct(UserServices $test)
+    {
+        $this->test = $test;
+    }
     public function showLogin(Request $request){
         return view('login');
     }
@@ -23,11 +24,29 @@ class AuthController extends Controller
         $role = $this->test->showRole();
         return view('register',compact('role'));
     }
-    public function register( Request $request){
-        
-       $this->test->store($request->all());   
-        return redirect('/login');
+  public function register(Request $request)
+{
+    // Validate the request
+    $validated = $request->validate([
+        'name' => 'required|string|max:255|unique:users,name',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:6|confirmed',
+        'role' => 'required|exists:tbl_roles,id',
+    ]);
+
+    // Attempt to register the user via service
+    $result = $this->test->store($validated);
+
+    if (!$result['success']) {
+        return redirect()->back()
+            ->withInput()
+            ->withErrors(['error' => $result['message']]);
     }
+
+    return redirect('/login')
+        ->with('success', 'Registration successful! Please login.');
+}
+
 
     public function login(Request $request)
     {
@@ -41,50 +60,48 @@ class AuthController extends Controller
        
     ]);
 
-    if (Auth::attempt($credentials)) {
-        //  dd(Auth::user()->name);
-          if(Auth::user()->role_id == 1){
-              // dd(Auth::user()->name);
-               return redirect()->intended('admin/user/list');
-            }elseif(Auth::user()->role_id == 2 ){
-              return redirect()->intended('/student');
-            }
-            elseif(Auth::user()->role_id == 3 ){
-                return redirect()->intended('/parent');
-              }
-              elseif(Auth::user()->role_id == 4 ){
-                return view('/agent');
-              }
-              elseif(Auth::user()->role_id == 5 ){
-                return redirect()->intended('/clinic');
-              }
-              elseif(Auth::user()->role_id == 6 ){
-                return redirect()->intended('/dean');
-              }
-              elseif(Auth::user()->role_id == 7 ){
-                return redirect()->intended('/admission-user');
-              }
-              elseif(Auth::user()->role_id == 8 ){
-                return redirect()->intended('/admission-admin');
-              }
-              elseif(Auth::user()->role_id == 9 ){
-                return redirect()->intended('/registrar');
-              }
-              elseif(Auth::user()->role_id == 10 ){
-                return redirect()->intended('/exam-officer');
-              }
-              elseif(Auth::user()->role_id == 11 ){
-                return redirect()->intended('/finance');
-              }else{
-              return redirect('/login')->with('error','not avaliable name');
-            }    }
-            else{
-              // return redirect()->intended('/finance');
-              return redirect('/')->with('error','Please Enter The Correct Credentials');
-              }}
-      public function logout(Request $request){
-        Auth::logout();
-    return redirect('/login');
+  if (Auth::attempt($credentials)) {
+  if(Auth::user()->role_id == 1){
+        return redirect()->intended('admin/user/list');
+    }elseif(Auth::user()->role_id == 2 ){
+      return redirect()->intended('/student');
+    }
+    elseif(Auth::user()->role_id == 3 ){
+        return redirect()->intended('/parent');
+      }
+      elseif(Auth::user()->role_id == 4 ){
+        return view('/agent');
+      }
+      elseif(Auth::user()->role_id == 5 ){
+        return redirect()->intended('/clinic');
+      }
+      elseif(Auth::user()->role_id == 6 ){
+        return redirect()->intended('/dean');
+      }
+      elseif(Auth::user()->role_id == 7 ){
+        return redirect()->intended('/admission-user');
+      }
+      elseif(Auth::user()->role_id == 8 ){
+        return redirect()->intended('/admission-admin');
+      }
+      elseif(Auth::user()->role_id == 9 ){
+        return redirect()->intended('/registrar');
+      }
+      elseif(Auth::user()->role_id == 10 ){
+        return redirect()->intended('/exam-officer');
+      }
+      elseif(Auth::user()->role_id == 11 ){
+        return redirect()->intended('/finance');
+      }else{
+      return redirect('/login')->with('error','not avaliable name');
+    }    }
+    else{
+      // return redirect()->intended('/finance');
+      return redirect('/')->with('error','Please Enter The Correct Credentials');
+      }}
+  public function logout(Request $request){
+    Auth::logout();
+   return redirect('/login');
     }
     public function index(){
         return view('dashboard');
@@ -151,5 +168,9 @@ public function manageMajor(){
 }
 public function manageBatch(){
   return view('admin.academic.batch');
+}
+public function manageIntake(){
+  return view('admin.academic.intake');
+
 }
 }

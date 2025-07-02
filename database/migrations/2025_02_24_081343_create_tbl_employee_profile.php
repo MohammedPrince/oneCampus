@@ -4,8 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+<<<<<<< HEAD
 return new class extends Migration
 {
+=======
+return new class extends Migration {
+>>>>>>> d1eb4034234ab8e531076a2c6ec2fb80ac5f32e0
     /**
      * Run the migrations.
      */
@@ -18,6 +22,10 @@ return new class extends Migration
             // - onDelete('restrict') prevents deletion of referenced records
             // - onUpdate('cascade') automatically updates references when parent record is updated
             // $table->foreignId('employee_id')->constrained('tbl_employee_main_info', 'employee_id')->onDelete('cascade')->onUpdate('cascade');
+<<<<<<< HEAD
+=======
+            $table->foreignId('employee_id');
+>>>>>>> d1eb4034234ab8e531076a2c6ec2fb80ac5f32e0
 
             $table->enum('gender', ['Male', 'Female']);
             $table->enum('blood_group', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']);
@@ -26,6 +34,7 @@ return new class extends Migration
             $table->enum('religious', ['Islam', 'Christianity', 'Judaism', 'Hinduism', 'Buddhism', 'Sikhism', 'Other'])->default('Islam');
             $table->date('date_of_birth');
 
+<<<<<<< HEAD
             $table->string('whatsapp_number', 15)->nullable();
             $table->string('personal_email', 255)->unique();
             $table->string('facebook_account', 255)->nullable()->unique();
@@ -44,6 +53,25 @@ return new class extends Migration
             $table->date('identification_id_expired_date');
             $table->string('identification_id_issue_place', 255);
             $table->string('identification_id_upload', 255);
+=======
+            $table->integer('whatsapp_number')->nullable();
+            $table->string('facebook_account', 191)->nullable();
+            $table->string('twitter_account', 191)->nullable();
+            $table->string('instgram_account', 191)->nullable();
+            $table->string('address', 191)->nullable();
+            $table->string('town', length: 100)->nullable();
+            $table->string('state', 100)->nullable();
+            $table->integer('country')->nullable();
+            $table->string('place_of_residence', length: 191)->nullable();
+            $table->string('office_location', 191)->nullable();
+
+            $table->enum('identification_id_type', ['National ID', 'Passport', 'Driving License', 'Other'])->default('National ID');
+            $table->string('identification_id', 50)->unique();
+            $table->date('identification_id_issue_date')->nullable();
+            $table->date('identification_id_expired_date')->nullable();
+            $table->string('identification_id_issue_place', 191)->nullable();
+            $table->string('identification_id_upload', 191)->nullable();
+>>>>>>> d1eb4034234ab8e531076a2c6ec2fb80ac5f32e0
 
             $table->string('visa_id', 100)->nullable();
             // To ensure proper uniqueness including NULL values
@@ -51,6 +79,7 @@ return new class extends Migration
             $table->enum('visa_type', ['Tourist', 'Business', 'Student', 'Work', 'Transit', 'Temp', 'Other'])->default('Work'); //  visa_expired_date to be nullable since visa is optional
             $table->date('visa_expired_date')->nullable();
 
+<<<<<<< HEAD
             $table->enum('employment_type', ['Full-Time', 'Part-Time', 'Contract'])->default('Full-Time');
             $table->date('hire_date');
             $table->date('end_date')->nullable()->default(NULL);
@@ -58,6 +87,22 @@ return new class extends Migration
             $table->decimal('salary', 10, 2)->unsigned(); // Add validation for salary to prevent negative values
             $table->enum('military_code', ['Complete', 'Postponed', 'None'])->default('Complete');
 
+=======
+
+            $table->string('role');
+            $table->string('certificates')->nullable(); // file path
+            $table->string('cv')->nullable(); // file path
+
+            $table->enum('employment_type', ['Full-Time', 'Part-Time', 'Contract'])->default('Full-Time');
+            $table->string('biometric');
+            $table->date('hire_date');
+
+            $table->date('end_date')->nullable()->default(NULL);
+            $table->enum('position_level', ['Entry Level', 'Junior', 'Mid Level', 'Senior', 'Lead', 'Manager', 'Director', 'Other'])->default('Entry Level');
+            $table->decimal('salary', 10, 2)->unsigned()->nullable(); // Add validation for salary to prevent negative values
+
+            $table->enum('military_code', ['Complete', 'Postponed', 'None'])->default('Complete');
+>>>>>>> d1eb4034234ab8e531076a2c6ec2fb80ac5f32e0
             // Add [marital_status, spouse_nationality mspouse_name] as it's important employee information
             $table->enum('marital_status', ['Single', 'Married', 'Divorced', 'Widowed'])->default('Single');
             $table->enum('employment_status', ['Active', 'Inactive', 'Resigned', 'Retired', 'Terminated', 'Other'])->default('Active');
