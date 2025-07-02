@@ -1,55 +1,3 @@
-<<<<<<< HEAD
-<div class="nav light-mode">
-  <a href="#"> <img src="/public/assets/logowithname.svg" alt="Logo" draggable="false" class="logo"></a>
-  <div class="mb-3" >
-   <input
-     type="text"
-     id="tableSearch"
-     class="form-control"
-     placeholder="Search..."
-     onkeyup=""
-     style="margin :5px; width : 30vw; height :4vh; margin-top:1vh ; margin-left:-31vw;"
-     
-   />
- </div>
-  <div class="nav-icons">
-   <img src="/public/assets/icons/bell.svg" alt="Bell Icon">
-   <!-- Profile Dropdown -->
-   <div class="dropdown">
-     <img
-       src="/public/assets/icons/profile.svg"
-       alt="Profile Icon"
-       id="profileIcon"
-       style="cursor: pointer;"
-       data-bs-toggle="dropdown"
-     />
-     <ul class="dropdown-menu dropdown-menu-end shadow">
-       <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">Profile</a></li>
-       <li><a class="dropdown-item" href="#">Settings</a></li>
-       <li>
-         <div class="d-flex align-items-center justify-content-around px-2">
-           <!-- Theme Toggle Button -->
-          
-           
-           <!-- Divider -->
-           
-           
-           <!-- Logout Button -->
-           <a href='{{route('logout')}}'>
-           <button  type="submit"class="icon-button" style="border: none; background-color: transparent;margin-left: -2vw;">
-             <img src="/public/assets/icons/logout.svg" alt="Logout" class="nav-icon" style="width: 20px;" draggable="false">
-           </button>
-           </a>
-         </div>
-       </li>
-     </ul>
-   </div>
- </div>
- </div>
- <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-  <div class="modal-dialog w-50">
-      <div class="modal-content">
-=======
 
 <nav class="navbar navbar-expand-md navbar-light " id="top-navbar" style="background-color: white;">
   <div class="container-fluid">
@@ -102,7 +50,6 @@
 <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
->>>>>>> d1eb4034234ab8e531076a2c6ec2fb80ac5f32e0
           <!-- Profile Form -->
           <div id="profileForm">
               <div class="modal-header">
