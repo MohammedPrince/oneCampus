@@ -12,6 +12,10 @@ class Role extends Model
 
     protected $table = 'tbl_roles';
 
+    public function profiles()
+    {
+        return $this->hasMany(EmployeeProfile::class, 'role');
+    }
     public function users()
     {
         return $this->hasMany(User::class);

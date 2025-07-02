@@ -1,188 +1,208 @@
 @extends('layouts.master')
+
 @section('content')
-    <nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
-        <div class="container-fluid">
-          <div class="navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav justify-content-center w-100">
-              <a class="nav-link {{ request()->is('admin/rule/list') ? 'active' : ''}}" href="{{route('admin.rule.list')}}" data-page="roles">Rules</a>
-              <a class="nav-link {{ request()->is('admin/rule/dept') ? 'active' : ''}}" href="{{route('admin.rule.dept')}}" data-page="department">Departments</a>
+<nav class="navbar navbar-expand justify-content-center" style="background-color: transparent;">
+  <div class="container-fluid">
+    <div class="navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav justify-content-center w-100">
+         <a class="nav-link {{ request()->is('admin/academic/certificate') ? 'active' : '' }}" href="{{ route('admin.academic.certificate') }}">Certificate</a>
+                <a class="nav-link {{ request()->is('admin/academic/major') ? 'active' : '' }}" href="{{ route('admin.academic.major') }}">Majors</a>
+                <a class="nav-link {{ request()->is('admin/academic/batch') ? 'active' : '' }}" href="{{ route('admin.academic.batch') }}">Batches</a>
+                <a class="nav-link {{ request()->is('admin/academic/intake') ? 'active' : '' }}" href="{{ route('admin.academic.intake') }}">Intake</a>
+              <a class="nav-link {{ request()->is('admin/rule/departments') ? 'active' : ''}}" href="{{route('admin.rule.dept')}}" data-page="department">Faculty</a>
               <a class="nav-link {{ request()->is('admin/rule/branch') ? 'active' : ''}}" href="{{route('admin.rule.branch')}}" data-page="branches">Branches</a>
-              <a class="nav-link {{ request()->is('admin/rule/identity') ? 'active' : ''}}" href="{{route('admin.rule.identity')}}" data-page="identity">Identity Attributes</a>
-        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="">
+  <div class="row">
+    @include('layouts.alert')
+
+    <div class="col-4">
+      <h2>Faculties:</h2>
+
+    </div>
+    <div class="col-4">
+      <button style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#AddFaculty">
+        <img src="{{ asset('assets/icons/add.svg') }}" alt="add">
+      </button>
+    </div>
+  </div>
+
+<div id="alertArea" class="my-2"></div>
+
+  {{-- Faculty Table --}}
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th style="text-align: center;">ID</th>
+          <th style="text-align: center;">Name (English)</th>
+          <th style="text-align: center;">Name (Arabic)</th>
+          <th style="text-align: center;">Abbreviation</th>
+          <th style="text-align: center;">Branch</th>
+          <th style="text-align: center;">Action</th>
+          {{-- <th style="text-align: center;">Status</th> --}}
+        </tr>
+      </thead>
+                        @php $i = 1; @endphp
+
+
+      <tbody id="tableBody">
+        @foreach($faculties as $faculty)
+        <tr>
+          <td style="text-align: center;">{{ $i++ }}</td>
+          <td style="text-align: center;">{{ $faculty->faculty_name_en }}</td>
+          <td style="text-align: center;">{{ $faculty->faculty_name_ar }}</td>
+          <td style="text-align: center;">{{ $faculty->abbreviation }}</td>
+          <td style="text-align: center;">{{ $faculty->branch->branch_name_ar ?? 'Null' }}</td>
+          <td style="text-align: center;"><button class="edit-btn"data-bs-toggle="modal"data-bs-target="#EditFaculty"onclick="Faculty_data({{ json_encode($faculty) }})"style="border: none; background-color: transparent;"><img src="{{ asset('assets/icons/mage_edit.png') }}" class="action-icon" alt="Edit"></button> <a href="{{ route('admin.rule.departments.destroy',  $faculty->faculty_id) }}"><img src="{{ asset('assets/icons/trash-fill (1).svg') }}" onclick="return confirm('Are you sure you want to delete this faculty?')" style="border: none; background-color: transparent;" class="action-icon" alt="Delete"></a></td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{{-- Add Faculty Modal --}}
+<div class="modal fade" id="AddFaculty" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog" style="width: 50vw;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Faculty</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+<form  method="POST" action="{{ route('faculty.store') }}">
+    @csrf
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Faculty Name (English)</label>
+              <input type="text" class="form-control @error('faculty_name_en') is-invalid @enderror"  name="faculty_name_en" required>
+              @error('faculty_name_en')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
+              <div class="invalid-feedback">Please enter the Faculty (English).</div>
+            </div>
+
+            
+            <div class="col-md-6">
+              <label class="form-label">Faculty Name (Arabic)</label>
+              <input type="text"  class="form-control @error('faculty_name_ar') is-invalid @enderror" name="faculty_name_ar" required>
+              @error('faculty_name_ar')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+             <div class="invalid-feedback">Please enter the Faculty (Arabic).</div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Abbreviation</label>
+              <input type="text" class="form-control @error('abbreviation') is-invalid @enderror" name="abbreviation" required>
+                @error('abbreviation')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+              <div class="invalid-feedback">Please enter the Abbreviation.</div>
+
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Branch</label>
+              <select class="form-select" name="branch_id" id="AddFacultyBranch" required>
+                <option value="">Select Branch</option>
+                 @if(isset($branches) && $branches->isNotEmpty())
+                @foreach($branches as $branch)
+                <option value="{{ $branch->branch_id }}">{{ $branch->branch_name_ar }}</option>
+                @endforeach
+                   @else
+                  <option>No Branch available</option>
+                @endif
+              </select>
+             <div class="invalid-feedback">Please Select Branch</div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <button type="submit" class="btn btn-outline w-50">Submit</button>
           </div>
         </div>
-      </nav>
-    <div class="">
-      <div class="row">
-        <div class="col-4">
-          <h2>Faculties :</h2>
-        </div>
-        <div class="col-4">
-          <button style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#Addfaculty"> <img src="{{asset('assets/icons/add.svg')}}" alt="add"> </button>
-        </div>
-       
+      </form>
+    </div>
+  </div>
+</div>
+
+{{-- Edit Faculty Modal --}}
+
+<div class="modal fade" id="EditFaculty" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog" style="width: 50vw;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Faculty</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-    <div class="">
-      <!-- Search bar -->
-      <div class="mb-3">
-        <input
-          type="text"
-          id="tableSearch"
-          class="form-control"
-          placeholder="Search..."
-          onkeyup="filterTable()"
-          style="width: 30vw;"
-        />
-      </div>
+      {{-- The ID will be dynamically injected into this action --}}
+      @php
+        $facultyId = $faculty->faculty_id ?? '';
+      @endphp
+      {{-- admin.update.dep --}}
+      <form method="POST"  action="{{route('admin.update.dep', $facultyId) }}">
+        {{-- CSRF token for form submission --}}
+        @csrf
+        {{-- @method('PUT')  --}}
+      {{-- Use PUT method for update --}}
 
-      <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th style="text-align: center;"><input type="checkbox" id="selectAll"></th>
-                    <th style="text-align: center;">Name (English)</th>
-                    <th style="text-align: center;">Name (Arabic)</th>
-                    <th style="text-align: center;">Abbreviation</th>
-                    <th style="text-align: center;">branch</th>
-                    <th style="text-align: center;">status</th>
-                    <th style="text-align: center;">Edit</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-                <tr>
-                    <td style="text-align: center;"><input type="checkbox" class="employeeCheckbox" /></td>
-                    <td style="text-align: center;">Information Technology</td>
-                    <td style="text-align: center;">تقنية المعلومات</td>
-                    <td style="text-align: center;">IT</td>
-                    <td style="text-align: center;">All Branches</td>
-                    <td style="text-align: center; justify-items: center; align-items: center;" >
-                        <div class="outerDivFull" >
-                            <div class="switchToggle">
-                                <input type="checkbox" id="switch" style="width: 30vw;">
-                                <label for="switch">Toggle</label>
-                            </div>
-                            
-                            
-                            
-                            </div>
-                            
-                      
-                </td>
-                    <td style="text-align: center;"> 
-                        <button onclick="" style="border: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#EditFac">
-                            <img src="{{asset('assets/icons/mage_edit.png')}}" alt="Edit">
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    </div>
-  </div>
   
-  <div class="modal fade" id="EditFac" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true" s>
-    <div class="modal-dialog" role="document" style="width: 50vw;">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel">Add Faculty</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+        <input type="hidden" name="faculty_id" id="editFacultyId">
+
         <div class="modal-body">
-          <form class="row needs-validation" novalidate> <!-- Full Name -->
-            <div class="row mb-3">
-              <div class="col-md-6"> <label for="fullNameArabic" class="form-label">Faculty Name (Arabic)</label>
-                <input type="text" class="form-control" id="fullNameArabic" required>
-                <div class="invalid-feedback">Please enter the name in Arabic.</div>
-              </div>
-              <div class="col-md-6" > <label for="fullNameEnglish" class="form-label">Faculty Name (English)</label>
-                <input type="text" class="form-control" id="fullNameEnglish" required>
-                <div class="invalid-feedback">Please enter the name in English.</div>
-              </div>
-            </div> 
-            <!-- Emails -->
-            <div class="row mb-3">
-              <div class="col-md-6"> <label for="fullNameArabic" class="form-label">Abbreviation</label>
-                <input type="text" class="form-control" id="fullNameArabic" required>
-                <div class="invalid-feedback">Please enter the Abbreviation.</div>
-              </div>
-              <div class="col-md-6"> <label for="department" class="form-label">Branch</label> 
-                  
-                <select class="form-select" id="dep" required>
-                <option value="">Select Branch </option>
-                <option value="Chairman">All</option>
-                <option value="President">Khartoum</option>
-                <option value="VPAA">Egypt</option>
-                
-            </select>
-                <div class="invalid-feedback">Please select a Branch.</div>
-              </div>
-                
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Faculty Name (Arabic)</label>
+              <input type="text" class="form-control @error('faculty_name_ar') is-invalid @enderror" name="faculty_name_ar" id="editFacultyAr" required>
+              @error('faculty_name_ar')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="invalid-feedback">Please enter the Faclty (Arabic).</div>
             </div>
-            <!-- Phone Numbers -->
-             <div class="row align-content-center justify-content-center">
-              <button type="submit" class="btn btn-outline w-50">Submit</button>
-             </div>
-             
-          </form>
+            <div class="col-md-6">
+              <label class="form-label">Faculty Name (English)</label>
+              <input type="text" class="form-control  @error('faculty_name_en') is-invalid @enderror " name="faculty_name_en" id="editFacultyEn" required>
+                 @error('faculty_name_en')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="invalid-feedback">Please enter the Faclty (English).</div>
+            </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Abbreviation</label>
+              <input type="text" class="form-control  @error('abbreviation') is-invalid @enderror " name="abbreviation" id="editFacultyAbbr" required>
+                     @error('abbreviation')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="invalid-feedback">Please enter the Abbreviation.</div>
+           
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Branch</label>
+              <select class="form-select" name="branch_id" id="editFacultyBranch" required>
+                <option value="">Select Branch</option>
+                @foreach($branches as $branch)
+                  <option value="{{ $branch->branch_id }}"> {{ $branch->branch_name_ar }} </option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+            <button type="submit" class="btn btn-outline w-50">Submit</button>
+          </div>
         </div>
-      </div>
-  
-      
+      </form>
     </div>
   </div>
-  <div class="modal fade" id="Addfaculty" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true" s>
-    <div class="modal-dialog" role="document" style="width: 50vw;">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel">Edit Faculty</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form class="row needs-validation" novalidate> <!-- Full Name -->
-            <div class="row mb-3">
-              <div class="col-md-6"> <label for="fullNameArabic" class="form-label">Faculty Name (Arabic)</label>
-                <input type="text" class="form-control" id="fullNameArabic" required>
-                <div class="invalid-feedback">Please enter the name in Arabic.</div>
-              </div>
-              <div class="col-md-6" > <label for="fullNameEnglish" class="form-label">Faculty Name (English)</label>
-                <input type="text" class="form-control" id="fullNameEnglish" required>
-                <div class="invalid-feedback">Please enter the name in English.</div>
-              </div>
-            </div> 
-            <!-- Emails -->
-            <div class="row mb-3">
-              <div class="col-md-6"> <label for="fullNameArabic" class="form-label">Abbreviation</label>
-                <input type="text" class="form-control" id="fullNameArabic" required>
-                <div class="invalid-feedback">Please enter the Abbreviation.</div>
-              </div>
-              <div class="col-md-6"> <label for="department" class="form-label">Branch</label> 
-                  
-                <select class="form-select" id="dep" required>
-                <option value="">Select Branch </option>
-                <option value="Chairman">All</option>
-                <option value="President">Khartoum</option>
-                <option value="VPAA">Egypt</option>
-                
-            </select>
-                <div class="invalid-feedback">Please select a Branch.</div>
-              </div>
-                
-            </div>
-            <!-- Phone Numbers -->
-             <div class="row align-content-center justify-content-center">
-              <button type="submit" class="btn btn-outline w-50">Submit</button>
-             </div>
-             
-          </form>
-        </div>
-      </div>
-  
-      
-    </div>
-  </div>
+</div>
 @endsection
-
-
-  

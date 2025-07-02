@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('tbl_batch_control', function (Blueprint $table) {
             $table->id('batch_control_id');
-            $table->foreignId('branch_id');
-            $table->foreignId('faculty_id');
-            $table->foreignId('major_id');
-            $table->string('batch', 20);
-            $table->integer('active_sem');
-            $table->integer('max_sem');
-            $table->tinyInteger('graduate_status')->default(1);
+
+            $table->string('batch', 20);//2016
+            $table->foreignId('branch_id');//khartoum
+            $table->foreignId('faculty_id'); //computer science
+            $table->foreignId('major_id');//sci
+            $table->integer('max_sem');//10
+            $table->integer('active_sem');//6
+            $table->enum('graduate_status', ['1', '2'])->default('1'); // 1 = not graduated, 2 = graduated
+            // $table->tinyInteger('graduate_status')->default(1);
+
             $table->timestamps();
             $table->softDeletes();
         });

@@ -7,9 +7,8 @@
       <div class="navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav justify-content-center w-100">
           <a class="nav-link {{ request()->is('admin/rule/list') ? 'active' : ''}}" href="{{route('admin.rule.list')}}" data-page="roles">Rules</a>
-              <a class="nav-link {{ request()->is('admin/rule/dept') ? 'active' : ''}}" href="{{route('admin.rule.dept')}}" data-page="department">Departments</a>
+              <a class="nav-link {{ request()->is('admin/rule/departments') ? 'active' : ''}}" href="{{route('admin.rule.dept')}}" data-page="department">Departments</a>
               <a class="nav-link {{ request()->is('admin/rule/branch') ? 'active' : ''}}" href="{{route('admin.rule.branch')}}" data-page="branches">Branches</a>
-              <a class="nav-link {{ request()->is('admin/rule/identity') ? 'active' : ''}}" href="{{route('admin.rule.identity')}}" data-page="identity">Identity Attributes</a>
         </div>
       </div>
     </div>
