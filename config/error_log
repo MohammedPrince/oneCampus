@@ -1,0 +1,56 @@
+[21-Feb-2025 14:06:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/app.php on line 16
+[22-Feb-2025 15:11:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/app.php on line 16
+[10-May-2025 12:06:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/app.php on line 16
+[15-Jun-2025 09:53:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/database.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/database.php on line 19
+[15-Jun-2025 09:54:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/app.php on line 16
+[18-Jun-2025 08:45:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/database.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/database.php on line 19
+[18-Jun-2025 08:46:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/app.php on line 16
+[20-Jun-2025 05:47:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/database.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/database.php on line 19
+[20-Jun-2025 05:48:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/app.php on line 16
+[23-Jun-2025 16:18:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/database.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/database.php on line 19
+[23-Jun-2025 16:18:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/mail.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/mail.php on line 17
+[23-Jun-2025 16:18:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/services.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/services.php on line 18
+[30-Jun-2025 15:43:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/database.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/database.php on line 19
+[30-Jun-2025 15:44:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/fuedusd/public_html/repositories/onecampus/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/fuedusd/public_html/repositories/onecampus/config/app.php on line 16

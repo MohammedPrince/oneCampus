@@ -140,3 +140,4 @@ Stack trace:
 #0 /home/fuedusd/public_html/repositories/onecampus/index.php(21): require_once()
 #1 {main}
   thrown in /home/fuedusd/public_html/repositories/onecampus/public/index.php on line 56
+[30-Jun-2025 01:58:16 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/fuedusd/public_html/repositories/onecampus/index.php on line 10
